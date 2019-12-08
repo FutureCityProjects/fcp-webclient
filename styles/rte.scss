@@ -1,0 +1,21 @@
+/**
+ * Styles for the rich text editor (currently Quill)
+ */
+.quill {
+  display: block;
+}
+
+.ql-container {
+   height: auto !important;
+}
+
+// for displaying the formatted content
+.ql-size-small {
+  font-size: 0.8em;
+}
+.ql-size-large {
+  font-size: 1.4em;
+}
+.ql-size-huge {
+   font-size: 2em;
+}

@@ -1,0 +1,17 @@
+{
+  "title": {
+    "400": "400 Ungültige Anfrage",
+    "403": "403 Zugriff verweigert",
+    "404": "404 Nicht gefunden",
+    "500": "500 Interner Fehler"
+  },
+  "explanation": {
+    "400": "Die Anfrage bzw. angegebene URL ist ungültig, bitte prüfen.",
+    "403": "Du hast keine Berechtigung für die angefragte Seite oder den Inhalt. Bist du mit dem richtigen Benutzerkonto eingeloggt?",
+    "404": "Die angefragte Seite oder der Inhalt wurde nicht gefunden. Bitte kontaktiere <0>den Support</0> wenn du denkst etwas ist kaputt.",
+    "500": "Es ist ein interner Fehler aufgetreten. Bitte <0>kontaktiere den Support</0> wenn das Problem weiter besteht."
+  },
+  "param": {
+    "invalidId": "Die angegebene ID ist ungültig, Ganzzahl >= 0 erforderlich."
+  }
+}
