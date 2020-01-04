@@ -14,7 +14,8 @@ export interface IViolation {
 }
 
 export class HydraClient {
-  protected axios: AxiosInstance
+  // @todo public to allow setting interceptors, create an addInterceptor() instead?
+  public axios: AxiosInstance
 
   constructor(baseURL: string) {
     this.axios = axios.create({
@@ -26,38 +27,34 @@ export class HydraClient {
     })
   }
 
-  public get = (url: string, params: object = {}, auth: string = "", config: AxiosRequestConfig = {}) => {
+  public get = (url: string, params: object = {}, config: AxiosRequestConfig = {}) => {
     config.method = "get"
     config.params = params
 
-    return this.request(url, auth, config)
+    return this.request(url, config)
   }
 
-  public post = (url: string, data: object, auth: string = "", config: AxiosRequestConfig = {}) => {
+  public post = (url: string, data: object, config: AxiosRequestConfig = {}) => {
     config.method = "post"
     config.data = JSON.stringify(data)
 
-    return this.request(url, auth, config)
+    return this.request(url, config)
   }
 
-  public put = (url: string, data: object, auth: string = "", config: AxiosRequestConfig = {}) => {
+  public put = (url: string, data: object, config: AxiosRequestConfig = {}) => {
     config.method = "put"
     config.data = JSON.stringify(data)
 
-    return this.request(url, auth, config)
+    return this.request(url, config)
   }
 
-  public request = (url: string, auth: string = "", config: AxiosRequestConfig = {}) => {
+  public request = (url: string, config: AxiosRequestConfig = {}) => {
     const axiosConfig = {
       ...config,
       url,
     }
 
-    if (auth.length) {
-      axiosConfig.headers = axiosConfig.headers || {}
-      axiosConfig.headers.Authorization = `Bearer ${auth}`
-    }
-
+    // the Authorization header is added via interceptor
     return this.axios.request(axiosConfig)
       .then((response: AxiosResponse) => this.normalize(response.data))
       .catch(this.handleError)

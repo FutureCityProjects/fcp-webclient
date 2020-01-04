@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from "redux-saga/effects"
+import { call, put, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
 import { IProcess } from "api/schema"
@@ -10,7 +10,6 @@ import {
   loadCurrentProcessSuccessAction,
   ProcessActionTypes,
 } from "redux/actions/processes"
-import { selectAuthToken } from "redux/reducer/auth"
 import { RequestError } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
@@ -29,8 +28,7 @@ export function* processesWatcherSaga() {
 function* createProcessSaga(action: ICreateProcessAction) {
   const { success, setErrors, setSubmitting } = action.actions
   try {
-    const token = yield select(selectAuthToken)
-    yield call(apiClient.createProcess, action.process, token)
+    yield call(apiClient.createProcess, action.process)
     yield call(success)
   } catch (err) {
     // @todo log RequestError for monitoring
@@ -52,8 +50,7 @@ function* createProcessSaga(action: ICreateProcessAction) {
 function* updateProcessSaga(action: IUpdateProcessAction) {
   const { success, setErrors, setSubmitting } = action.actions
   try {
-    const token = yield select(selectAuthToken)
-    yield call(apiClient.updateProcess, action.process, token)
+    yield call(apiClient.updateProcess, action.process)
     yield call(success)
   } catch (err) {
     // @todo log RequestError for monitoring
@@ -74,8 +71,7 @@ function* updateProcessSaga(action: IUpdateProcessAction) {
  */
 function* loadCurrentProcessSaga(action: ILoadCurrentProcessAction) {
   try {
-    const token = yield select(selectAuthToken)
-    const process: IProcess = yield call(apiClient.getCurrentProcess, token)
+    const process: IProcess = yield call(apiClient.getCurrentProcess)
     yield put(loadCurrentProcessSuccessAction(process))
 
     if (action.resolve) {

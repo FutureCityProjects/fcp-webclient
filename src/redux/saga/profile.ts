@@ -7,7 +7,7 @@ import {
   loadCurrentUserSuccessAction,
   ProfileActionTypes,
 } from "redux/actions/profile"
-import { selectAuthToken, selectUsername } from "redux/reducer/auth"
+import { selectUsername } from "redux/reducer/auth"
 import { RequestError } from "services/requestError"
 
 export function* profileWatcherSaga() {
@@ -16,9 +16,8 @@ export function* profileWatcherSaga() {
 
 function* loadCurrentUserSaga() {
   try {
-    const token = yield select(selectAuthToken)
     const username = yield select(selectUsername)
-    const user: IUser = yield call(apiClient.getUserByUsername, username, token)
+    const user: IUser = yield call(apiClient.getUserByUsername, username)
     yield put(loadCurrentUserSuccessAction(user))
   } catch (err) {
     // @todo log RequestError for monitoring

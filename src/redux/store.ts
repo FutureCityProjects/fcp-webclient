@@ -2,15 +2,18 @@ import { MakeStoreOptions } from "next-redux-wrapper"
 import { applyMiddleware, createStore, Store } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
 import createSagaMiddleware, { Task } from "redux-saga"
+
+import apiClient from "api/client"
 import { refreshTokenAction } from "./actions/auth"
 import { sagaStarted } from "./actions/saga"
 import rootReducer from "./reducer"
+import { selectAuthToken } from "./reducer/auth"
 import rootSaga from "./saga"
 
 export type AppState = ReturnType<typeof rootReducer>
 
 export type SagaStore = Store<AppState> & {
-  sagaTask?: Task;
+  sagaTask?: Task
 }
 
 /**
@@ -44,6 +47,27 @@ export const makeStore = (initialState: AppState, options: MakeStoreOptions): Sa
     // no token exists
     store.dispatch(refreshTokenAction())
   }
+
+  /**
+   * Connect store and the apiClient to inject the JWT
+   * @todo is there a better place for this?
+   */
+  apiClient.axios.interceptors.request.use((request) => {
+    // this endpoint does not work when an (expired) token is present in the headers
+    if (request.url === "/authentication_token") {
+      return
+    }
+
+    const token = selectAuthToken(store.getState())
+    if (!token) {
+      return request
+    }
+
+    request.headers = request.headers || {}
+    request.headers.Authorization = `Bearer ${token}`
+
+    return request
+  })
 
   return store
 }

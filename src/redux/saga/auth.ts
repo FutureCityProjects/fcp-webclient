@@ -109,8 +109,7 @@ export function* refreshTokenSaga() {
  */
 export function* doRefresh() {
   try {
-    const oldToken = yield select(selectAuthToken)
-    const newToken = yield call(apiClient.refreshAuthToken, oldToken)
+    const newToken = yield call(apiClient.refreshAuthToken)
     yield call(saveToken, newToken)
     yield put(refreshTokenAction())
 

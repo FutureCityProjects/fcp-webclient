@@ -1,4 +1,4 @@
-import { call, put, select, takeLatest } from "redux-saga/effects"
+import { call, put, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
 import { IHydraCollection, IUser } from "api/schema"
@@ -11,7 +11,6 @@ import {
   loadUserSuccessAction,
   UserActionTypes,
 } from "redux/actions/users"
-import { selectAuthToken } from "redux/reducer/auth"
 import { RequestError } from "services/requestError"
 
 export function* usersWatcherSaga() {
@@ -22,8 +21,7 @@ export function* usersWatcherSaga() {
 
 function* loadUserByIdSaga(action: ILoadUserByIdAction) {
   try {
-    const token = yield select(selectAuthToken)
-    const user: IUser = yield call(apiClient.getUser, action.id, token)
+    const user: IUser = yield call(apiClient.getUser, action.id)
     yield put(loadUserSuccessAction(user))
   } catch (err) {
     // @todo log RequestError for monitoring
@@ -34,8 +32,7 @@ function* loadUserByIdSaga(action: ILoadUserByIdAction) {
 
 function* loadUserByUsernameSaga(action: ILoadUserByUsernameAction) {
   try {
-    const token = yield select(selectAuthToken)
-    const user: IUser = yield call(apiClient.getUserByUsername, action.username, token)
+    const user: IUser = yield call(apiClient.getUserByUsername, action.username)
     yield put(loadUserSuccessAction(user))
   } catch (err) {
     // @todo log RequestError for monitoring
@@ -46,8 +43,7 @@ function* loadUserByUsernameSaga(action: ILoadUserByUsernameAction) {
 
 function* loadUsersSaga() {
   try {
-    const token = yield select(selectAuthToken)
-    const users: IHydraCollection<IUser> = yield call(apiClient.getUsers, token)
+    const users: IHydraCollection<IUser> = yield call(apiClient.getUsers)
     yield put(loadUsersSuccessAction(users))
   } catch (err) {
     // @todo log RequestError for monitoring
