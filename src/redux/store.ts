@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from "axios"
 import { MakeStoreOptions } from "next-redux-wrapper"
 import { applyMiddleware, createStore, Store } from "redux"
 import { composeWithDevTools } from "redux-devtools-extension"
@@ -13,7 +14,7 @@ import rootSaga from "./saga"
 export type AppState = ReturnType<typeof rootReducer>
 
 export type SagaStore = Store<AppState> & {
-  sagaTask?: Task
+  sagaTask?: Task,
 }
 
 /**
@@ -52,10 +53,10 @@ export const makeStore = (initialState: AppState, options: MakeStoreOptions): Sa
    * Connect store and the apiClient to inject the JWT
    * @todo is there a better place for this?
    */
-  apiClient.axios.interceptors.request.use((request) => {
+  apiClient.axios.interceptors.request.use((request: AxiosRequestConfig): AxiosRequestConfig => {
     // this endpoint does not work when an (expired) token is present in the headers
     if (request.url === "/authentication_token") {
-      return
+      return request
     }
 
     const token = selectAuthToken(store.getState())

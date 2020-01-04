@@ -1,5 +1,15 @@
 {
   "goto": {
     "home": "zur Startseite"
+  },
+  "RTE": {
+    "bold": "Fett",
+    "bullet": "Liste",
+    "clean": "Formatierung entfernen",
+    "italic": "Kursiv",
+    "link": "Hyperlink",
+    "ordered": "Nummerierte Liste",
+    "size": "Schriftgröße",
+    "underline": "Unterstrichen"
   }
 }

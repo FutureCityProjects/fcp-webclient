@@ -4,7 +4,6 @@
   * component files .jsx benennen
   * icons als echte .svg ins public dir (caching, served by nginx -> performance)
   * src/assets/icons vs src/components/ui-components/icons ?
-  * Tooltips for the RTE (https://codepen.io/quill/pen/ozYEro, https://github.com/quilljs/quill/issues/650)
   * storing the JWT in localstorage and cookie is discouraged due to XSS vulnerability but how do we send
     it to the server otherwise? Samesite & httponly cookie? No session sync via localstorage but only logout sync? @see https://blog.hasura.io/best-practices-of-using-jwt-with-graphql/#jwt_security
   * include Alerts, e.g. like https://github.com/bbortt/qdrakeboo/blob/master/source/frontend/next-js-web-ui/app/state/reducer/alert.reducer.js
