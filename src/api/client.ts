@@ -1,4 +1,13 @@
-import { ICredentials, IHydraCollection, IProcess, IProject, IProjectMembership, IUser, IRegistration } from "api/schema"
+import {
+  ICredentials,
+  IHydraCollection,
+  IProcess,
+  IProject,
+  IProjectCreation,
+  IProjectMembership,
+  IRegistration,
+  IUser,
+} from "api/schema"
 import { HydraClient } from "services/hydraClient"
 import { FCP_API_ENTRYPOINT } from "../../config"
 
@@ -15,40 +24,22 @@ export class FCPClient extends HydraClient {
   }
   /* #endregion */
 
-  /* #region User */
-  public getUser = (id: number): Promise<IUser> => {
-    return this.get(`/users/${id}`)
-  }
-
-  public getUserByUsername = (username: string): Promise<IUser> => {
-    return this.getUsers({ username }).then((users) => {
-      return users["hydra:member"].length ? users["hydra:member"][0] : null
-    })
-  }
-
-  public getUsers = (query: any = {}): Promise<IHydraCollection<IUser>> => {
-    return this.get("/users", query)
-  }
-
-  public createUser = (user: IUser): Promise<IUser> => {
-    return this.post("/users", user)
-  }
-
-  public registerUser = (user: IRegistration): Promise<IUser> => {
-    return this.post("/users/register", user)
-  }
-  /* #endregion */
-
   /* #region Process */
   // @todo update when multi-processes are implemented
   public getCurrentProcess = (): Promise<IProcess> => {
-    return this.getProcesses().then((processes) => {
-      return processes["hydra:member"].length ? processes["hydra:member"][0] : null
-    })
+    return this.getProcesses().then((processes) => processes["hydra:member"].shift())
   }
 
-  public getProcesses = (): Promise<IHydraCollection<IProcess>> => {
-    return this.get("/processes")
+  public getProcessBySlug = (slug: string): Promise<IProcess> => {
+    return this.getProcesses({ slug }).then((processes) => processes["hydra:member"].shift())
+  }
+
+  public getProcess = (id: number): Promise<IProcess> => {
+    return this.get(`/processes/${id}`)
+  }
+
+  public getProcesses = (query: any = {}): Promise<IHydraCollection<IProcess>> => {
+    return this.get("/processes", query)
   }
 
   public createProcess = (process: IProcess): Promise<IProcess> => {
@@ -58,24 +49,26 @@ export class FCPClient extends HydraClient {
   public updateProcess = (process: IProcess): Promise<IProcess> => {
     return this.put(process["@id"], process)
   }
+
+  public deleteProcess = (process: IProcess): Promise<void> => {
+    return this.delete(process["@id"])
+  }
   /* #endregion */
 
   /* #region Project */
-  public getProject = (id: number): Promise<IProject> => {
-    return this.get(`/projects/${id}`)
+  public getProjectBySlug = (slug: string): Promise<IProject> => {
+    return this.getProjects({ slug }).then((projects) => projects["hydra:member"].shift())
   }
 
-  public getProjectBySlug = (slug: string): Promise<IProject> => {
-    return this.getProjects({ slug }).then((projects) => {
-      return projects["hydra:member"].length ? projects["hydra:member"][0] : null
-    })
+  public getProject = (id: number): Promise<IProject> => {
+    return this.get(`/projects/${id}`)
   }
 
   public getProjects = (query: any = {}): Promise<IHydraCollection<IProject>> => {
     return this.get("/projects", query)
   }
 
-  public createProject = (project: IProject): Promise<IProject> => {
+  public createProject = (project: IProjectCreation | IProject): Promise<IProject> => {
     return this.post("/projects", project)
   }
 
@@ -99,6 +92,36 @@ export class FCPClient extends HydraClient {
 
   public deleteProjectMembership = (projectMembership: IProjectMembership): Promise<void> => {
     return this.delete(projectMembership["@id"])
+  }
+  /* #endregion */
+
+  /* #region User */
+  public getUserByUsername = (username: string): Promise<IUser> => {
+    return this.getUsers({ username }).then((users) => users["hydra:member"].shift())
+  }
+
+  public getUser = (id: number): Promise<IUser> => {
+    return this.get(`/users/${id}`)
+  }
+
+  public getUsers = (query: any = {}): Promise<IHydraCollection<IUser>> => {
+    return this.get("/users", query)
+  }
+
+  public createUser = (user: IUser): Promise<IUser> => {
+    return this.post("/users", user)
+  }
+
+  public registerUser = (user: IRegistration): Promise<IUser> => {
+    return this.post("/users/register", user)
+  }
+
+  public updateUser = (user: IUser): Promise<IUser> => {
+    return this.put(user["@id"], user)
+  }
+
+  public deleteUser = (user: IUser): Promise<void> => {
+    return this.delete(user["@id"])
   }
   /* #endregion */
 }

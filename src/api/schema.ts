@@ -1,4 +1,4 @@
-export enum SELF_ASSESSMENT {
+export enum SelfAssessment {
   SELF_ASSESSMENT_0_PERCENT = 0,
   SELF_ASSESSMENT_25_PERCENT = 25,
   SELF_ASSESSMENT_50_PERCENT = 50,
@@ -12,6 +12,7 @@ export interface ICredentials {
 }
 
 export interface INumericIdentifierModel {
+  [prop: string]: any
   id?: number
 }
 
@@ -65,7 +66,7 @@ export interface IFund extends INumericIdentifierModel {
 export interface IFundApplication extends INumericIdentifierModel {
   "@id"?: string
   concretizations?: string[]
-  concretizationSelfAssessment?: SELF_ASSESSMENT
+  concretizationSelfAssessment?: SelfAssessment
   fund?: IFund
   id?: number
   juryComment?: string
@@ -146,7 +147,7 @@ export interface IProject extends INumericIdentifierModel {
   name?: string
   picture?: string
   process?: IProcess | string
-  profileSelfAssessment?: SELF_ASSESSMENT
+  profileSelfAssessment?: SelfAssessment
   progress?: ProjectProgress
   resultingProjects?: IProject[]
   shortDescription?: string
@@ -159,6 +160,17 @@ export interface IProject extends INumericIdentifierModel {
 export const emptyIdea: IProject = {
   progress: ProjectProgress.IDEA,
   shortDescription: "",
+}
+
+export interface IProjectCreation extends IProject {
+  motivation: string,
+  skills: string,
+}
+
+export const emptyProject: IProjectCreation = {
+  motivation: "",
+  progress: ProjectProgress.CREATING_PROFILE,
+  skills: "",
 }
 
 export interface IProjectMembership {

@@ -11,33 +11,33 @@ import Redirect from "components/common/Redirect"
 import { withAuth } from "components/hoc/withAuth"
 import Layout from "components/Layout"
 import ProcessForm from "components/process/ProcessForm"
-import { loadCurrentProcessAction, loadCurrentProcessSuccessAction, updateProcessAction } from "redux/actions/processes"
+import { loadCurrentProcessAction } from "redux/actions/currentProcess"
+import { updateModelAction } from "redux/helper/actions"
 import { selectCurrentProcess } from "redux/reducer/currentProcess"
+import { Scope } from "redux/reducer/data"
 import { AppState } from "redux/store"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  onSubmit: (process, { props, ...actions }) => {
-    console.log(props)
+  onSubmit: (process, actions) => {
     // add another action additionally to the formik defaults (setErrors, setSubmitting, reset, ...)
     actions.success = () => {
-      // update the current process and redirect to the display page
-      dispatch(loadCurrentProcessSuccessAction(process))
       Router.push("/process")
     }
-    dispatch(updateProcessAction({ process, actions }))
+    dispatch(updateModelAction(Scope.PROCESS, "processManagement", process, actions))
   },
 })
 
 const mapStateToProps = (state: AppState) => ({
-  process: state.currentProcess,
+  process: selectCurrentProcess(state),
+  request: state.processManagement.request,
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const Page: I18nPage<PageProps> = ({ onSubmit, process }) => {
-  if (process.loadingError || !process.model) {
+const Page: I18nPage<PageProps> = ({ onSubmit, process, request }) => {
+  if (request.loadingError || !process) {
     return <Redirect route="/process" />
   }
 
@@ -45,9 +45,9 @@ const Page: I18nPage<PageProps> = ({ onSubmit, process }) => {
     <Row>
       <Col>
         <h1>Prozess bearbeiten</h1>
-        {process.isLoading
+        {request.isLoading
           ? <Spinner />
-          : <ProcessForm onSubmit={onSubmit} process={process.model} />
+          : <ProcessForm onSubmit={onSubmit} process={process} />
         }
       </Col>
     </Row>

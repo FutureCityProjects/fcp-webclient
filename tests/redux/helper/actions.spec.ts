@@ -11,6 +11,7 @@ import {
   updateModelAction,
   updateModelSuccessAction,
 } from "redux/helper/actions"
+import { Scope } from "redux/reducer/data"
 
 describe("setLoadingAction", () => {
   it("creates an action", () => {
@@ -31,10 +32,10 @@ describe("setLoadingAction", () => {
 
 describe("loadCollectionAction", () => {
   it("creates an action", () => {
-    const action = loadCollectionAction("user", { id: 12 })
+    const action = loadCollectionAction(Scope.USER, "current_user", { id: 12 })
     expect(action.type).toBe("LOAD_USER_COLLECTION")
     expect(action.criteria).toStrictEqual({ id: 12 })
-    expect(action.scope).toBe("user")
+    expect(action.scope).toBe("current_user")
   })
 })
 
@@ -49,10 +50,10 @@ describe("loadCollectionSuccessAction", () => {
 
 describe("loadModelAction", () => {
   it("creates an action", () => {
-    const action = loadModelAction("user", { id: 12 })
+    const action = loadModelAction(Scope.USER, "current_user", { id: 12 })
     expect(action.type).toBe("LOAD_USER")
     expect(action.criteria).toStrictEqual({ id: 12 })
-    expect(action.scope).toBe("user")
+    expect(action.scope).toBe("current_user")
   })
 })
 
@@ -67,11 +68,11 @@ describe("loadModelSuccessAction", () => {
 
 describe("createModelAction", () => {
   it("creates an action", () => {
-    const action = createModelAction("user", { id: 12 }, { success: true })
+    const action = createModelAction(Scope.USER, "current_user", { id: 12 }, { success: true })
     expect(action.type).toBe("CREATE_USER")
     expect(action.model).toStrictEqual({ id: 12 })
     expect(action.actions).toStrictEqual({ success: true })
-    expect(action.scope).toBe("user")
+    expect(action.scope).toBe("current_user")
   })
 })
 
@@ -86,11 +87,11 @@ describe("createModelSuccessAction", () => {
 
 describe("updateModelAction", () => {
   it("creates an action", () => {
-    const action = updateModelAction("user", { id: 12 }, { success: true })
+    const action = updateModelAction(Scope.USER, "current_user", { id: 12 }, { success: true })
     expect(action.type).toBe("UPDATE_USER")
     expect(action.model).toStrictEqual({ id: 12 })
     expect(action.actions).toStrictEqual({ success: true })
-    expect(action.scope).toBe("user")
+    expect(action.scope).toBe("current_user")
   })
 })
 
@@ -105,11 +106,11 @@ describe("updateModelSuccessAction", () => {
 
 describe("deleteModelAction", () => {
   it("creates an action", () => {
-    const action = deleteModelAction("user", { id: 12 }, { success: true })
+    const action = deleteModelAction(Scope.USER, "current_user", { id: 12 }, { success: true })
     expect(action.type).toBe("DELETE_USER")
     expect(action.model).toStrictEqual({ id: 12 })
     expect(action.actions).toStrictEqual({ success: true })
-    expect(action.scope).toBe("user")
+    expect(action.scope).toBe("current_user")
   })
 })
 

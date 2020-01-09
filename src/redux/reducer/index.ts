@@ -2,26 +2,24 @@ import { combineReducers } from "redux"
 
 import authReducer from "./auth"
 import currentProcessReducer from "./currentProcess"
+import currentUserReducer from "./currentUser"
+import dataReducer from "./data"
 import newIdeaReducer from "./newIdea"
+import newProjectReducer from "./newProject"
 import notificationsReducer from "./notifications"
-import profileReducer from "./profile"
-import projectsReducer from "./projects"
+import processManagementReducer from "./processManagement"
 import registrationReducer from "./registration"
 import sagaReducer from "./saga"
-import singleProcessReducer from "./singleProcess"
-import singleUserReducer from "./singleUser"
-import usersReducer from "./users"
 
 export default combineReducers({
   auth: authReducer,
   currentProcess: currentProcessReducer,
+  currentUser: currentUserReducer,
+  data: dataReducer,
   newIdea: newIdeaReducer,
+  newProject: newProjectReducer,
   notifications: notificationsReducer,
-  profile: profileReducer,
-  projects: projectsReducer,
+  processManagement: processManagementReducer,
   registration: registrationReducer,
   saga: sagaReducer,
-  singleProcess: singleProcessReducer,
-  singleUser: singleUserReducer,
-  users: usersReducer,
 })

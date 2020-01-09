@@ -14,6 +14,8 @@
   * confirm password field on registration form
   * accept AGB checkbox on registration form
   * accept privacy declaration on registration form
+  * when a logged out user creates a new project and without registering/logging in tries to 
+    create another project the first one is overwritten -> show warning instead, only one Project in state.newProject
   * Logout: add option to give a reason why the user was logged out (user was inactive | token refresh   
     failed), if a reason was given redirect to the /login page and show the reason, else redirect to the
     start page -> user logged out manually

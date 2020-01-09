@@ -4,7 +4,7 @@ import { IUser } from "api/schema"
 import { RegistrationActions, RegistrationActionTypes } from "redux/actions/registration"
 import { scopedSetLoadingReducer } from "redux/helper/reducers"
 import { AppState } from "redux/store"
-import { selectUserById } from "./users"
+import { Scope, selectById } from "./data"
 
 const registrationReducer =
   (state: number = null, action: RegistrationActions): number => {
@@ -31,4 +31,4 @@ export default combineReducers({
  * @returns IUser
  */
 export const selectRegisteredUser = (state: AppState): IUser =>
-  state.registration.user ? selectUserById(state, state.registration.user) : null
+  state.registration.user ? selectById(Scope.USER, state.registration.user, state) : null

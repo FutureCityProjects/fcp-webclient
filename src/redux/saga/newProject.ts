@@ -3,48 +3,48 @@ import { all, call, put, select, takeLatest } from "redux-saga/effects"
 import apiClient from "api/client"
 import { IProcess, IProject, ProjectProgress } from "api/schema"
 import { AuthActionTypes } from "redux/actions/auth"
-import { ICreateIdeaAction, resetNewIdeaAction } from "redux/actions/newIdea"
+import { ICreateProjectAction, resetNewProjectAction } from "redux/actions/newProject"
 import { addNotificationAction } from "redux/actions/notifications"
 import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
 import { createModelAction, createModelSuccessAction } from "redux/helper/actions"
 import { selectCurrentProcess } from "redux/reducer/currentProcess"
 import { Scope } from "redux/reducer/data"
-import { selectNewIdea } from "redux/reducer/newIdea"
+import { selectNewProject } from "redux/reducer/newProject"
 import { loadCurrentProcessSaga } from "redux/saga/currentProcess"
 import { SubmissionError } from "services/submissionError"
 
-export function* newIdeaWatcherSaga() {
+export function* newProjectWatcherSaga() {
   yield all([
-    takeLatest("CREATE_IDEA", createIdeaSaga),
-    takeLatest(AuthActionTypes.LOGIN_SUCCESSFUL, createSavedIdeaSaga),
+    takeLatest("CREATE_PROJECT", createProjectSaga),
+    takeLatest(AuthActionTypes.LOGIN_SUCCESSFUL, createSavedProjectSaga),
     takeLatest(RegistrationActionTypes.SET_REGISTERED_USER, postRegistrationSaga),
   ])
 }
 
 /**
- * Create a new project idea for an already logged in user.
+ * Create a new project for an already logged in user.
  *
- * @param action ICreateIdeaAction
+ * @param action ICreateProjectAction
  */
-function* createIdeaSaga(action: ICreateIdeaAction) {
+function* createProjectSaga(action: ICreateProjectAction) {
   // inject the current process, it's required
   let process: IProcess = yield select(selectCurrentProcess)
   if (!process) {
     yield call(loadCurrentProcessSaga)
     process = yield select(selectCurrentProcess)
   }
-  action.idea.process = process["@id"]
+  action.project.process = process["@id"]
 
-  yield put(createModelAction(Scope.PROJECT, "new_idea", action.idea, action.actions))
+  yield put(createModelAction(Scope.PROJECT, "new_project", action.project, action.actions))
 }
 
 /**
  * After the user logged in: check if we have a previously entered but
- * not submitted project idea, if yes push it to the API now.
+ * not submitted project, if yes push it to the API now.
  */
-function* createSavedIdeaSaga() {
-  const newIdea = yield select(selectNewIdea)
-  if (!newIdea) {
+function* createSavedProjectSaga() {
+  const newProject = yield select(selectNewProject)
+  if (!newProject) {
     return
   }
 
@@ -55,12 +55,12 @@ function* createSavedIdeaSaga() {
       yield call(loadCurrentProcessSaga)
       process = yield select(selectCurrentProcess)
     }
-    newIdea.process = process["@id"]
+    newProject.process = process["@id"]
 
-    const savedIdea: IProject = yield call(apiClient.createProject, newIdea)
-    yield put(createModelSuccessAction(Scope.PROJECT, savedIdea))
-    yield put(addNotificationAction("message.projectIdea.saved", "success"))
-    yield put(resetNewIdeaAction())
+    const savedProject: IProject = yield call(apiClient.createProject, newProject)
+    yield put(createModelSuccessAction(Scope.PROJECT, savedProject))
+    yield put(addNotificationAction("message.newProject.saved", "success"))
+    yield put(resetNewProjectAction())
   } catch (err) {
     if (err instanceof SubmissionError) {
       // we have no form where we could show individual messages per property, also the
@@ -74,7 +74,7 @@ function* createSavedIdeaSaga() {
 }
 
 /**
- * After a user registered successfully check if a new project idea was created with it,
+ * After a user registered successfully check if a new project was created with it,
  * if yes update the store and add notification.
  *
  * @param action ISetRegisteredUserAction
@@ -88,10 +88,9 @@ function* postRegistrationSaga(action: ISetRegisteredUserAction) {
 
   for (const key in createdProjects) {
     if (createdProjects.hasOwnProperty(key)) {
-      const project = createdProjects[key]
-      if (project.progress === ProjectProgress.IDEA) {
-        yield put(addNotificationAction("message.projectIdea.saved", "success"))
-        yield put(resetNewIdeaAction())
+      if (createdProjects[key].progress === ProjectProgress.CREATING_PROFILE) {
+        yield put(addNotificationAction("message.newProject.saved", "success"))
+        yield put(resetNewProjectAction())
         yield put(createModelSuccessAction("project", createdProjects[key]))
       }
     }

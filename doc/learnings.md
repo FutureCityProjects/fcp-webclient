@@ -14,3 +14,12 @@
 ## Redux-Saga
   * When takeLatest() is used the execution of a running saga is cancelled if the same saga is triggered   again, so there is no guarantee each line of code is run, e.g if the token-refresh saga calls 
     ``yield put(refreshTokenAction())`` to restart itself, every line afterwards is never executed.
+
+## Github
+  * Wenn man auf "keep email private" umstellt und vorher schon einen nicht gepushten Commit 
+    erstellt hat kann dieser nicht mehr gepushed werden da er auf die alte (private) Email verweist.
+    * `git log --first-parent --no-merges` um die letzten commits mit der jeweiligen Email anzuzeigen
+    * `git config --show-origin --get-regexp "user.*"` um die aktuelle User-Config anzuzeigen
+    * `git commit --amend --reset-author` um den letzten commit erneut abzusetzen mit neuem Autor
+    * `git config user.email 114239+j-schumann@users.noreply.github.com` um für das lokale Repo 
+      die öffentliche Github-Adresse einzustellen, nicht mit `--global` da ja andere Repositories nicht zwingend bei Github liegen müssen

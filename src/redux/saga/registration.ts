@@ -3,7 +3,6 @@ import { all, call, put, select, takeLatest } from "redux-saga/effects"
 import apiClient from "api/client"
 import { IProcess, IRegistration, IUser } from "api/schema"
 import { AuthActionTypes } from "redux/actions/auth"
-import { loadCurrentProcessAction } from "redux/actions/processes"
 import {
   IRegisterUserAction,
   RegistrationActionTypes,
@@ -12,10 +11,11 @@ import {
 } from "redux/actions/registration"
 import { createModelSuccessAction, setLoadingAction } from "redux/helper/actions"
 import { selectCurrentProcess } from "redux/reducer/currentProcess"
+import { Scope } from "redux/reducer/data"
 import { selectNewIdea } from "redux/reducer/newIdea"
 import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
-import { loadCurrentProcessSaga } from "./processes"
+import { loadCurrentProcessSaga } from "./currentProcess"
 
 export function* registrationWatcherSaga() {
   yield all([
@@ -41,18 +41,31 @@ function* registerUserSaga(action: IRegisterUserAction) {
       // inject the current process, it's required
       let process: IProcess = yield select(selectCurrentProcess)
       if (!process) {
-        yield call(loadCurrentProcessSaga, loadCurrentProcessAction())
+        yield call(loadCurrentProcessSaga)
         process = yield select(selectCurrentProcess)
       }
 
       newIdea.process = process["@id"]
-      registration.createdProjects = [newIdea]
+      registration.createdProjects = [...registration.createdProjects, newIdea]
     }
 
-    // @todo check for newProject
+    // @todo add additional action preUserRegister that we can intercept in extra sagas
+    // to add the project there
+    const newProject = yield select(selectNewIdea)
+    if (newProject) {
+      // inject the current process, it's required
+      let process: IProcess = yield select(selectCurrentProcess)
+      if (!process) {
+        yield call(loadCurrentProcessSaga)
+        process = yield select(selectCurrentProcess)
+      }
+
+      newProject.process = process["@id"]
+      registration.createdProjects = [...registration.createdProjects, newProject]
+    }
 
     const newUser: IUser = yield call(apiClient.registerUser, registration)
-    yield put(createModelSuccessAction("user", newUser))
+    yield put(createModelSuccessAction(Scope.USER, newUser))
     yield put(setLoadingAction("registration", false))
     yield put(setRegisteredUserAction(newUser))
     yield call(success)

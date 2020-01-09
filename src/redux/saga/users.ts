@@ -1,53 +1,129 @@
-import { call, put, takeLatest } from "redux-saga/effects"
+import hasProp from "lodash/has"
+import { all, call, put, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
 import { IHydraCollection, IUser } from "api/schema"
 import {
-  ILoadUserByIdAction,
-  ILoadUserByUsernameAction,
-  loadUserFailedAction,
-  loadUsersFailedAction,
-  loadUsersSuccessAction,
-  loadUserSuccessAction,
-  UserActionTypes,
-} from "redux/actions/users"
+  createModelSuccessAction,
+  deleteModelSuccessAction,
+  ILoadByAction,
+  IModelFormAction,
+  loadCollectionSuccessAction,
+  loadModelSuccessAction,
+  setLoadingAction,
+  updateModelSuccessAction,
+} from "redux/helper/actions"
+import { Scope } from "redux/reducer/data"
 import { RequestError } from "services/requestError"
+import { SubmissionError } from "services/submissionError"
 
 export function* usersWatcherSaga() {
-  yield takeLatest(UserActionTypes.LOAD_USER_BY_ID, loadUserByIdSaga)
-  yield takeLatest(UserActionTypes.LOAD_USER_BY_USERNAME, loadUserByUsernameSaga)
-  yield takeLatest(UserActionTypes.LOAD_USERS, loadUsersSaga)
+  yield all([
+    takeLatest("CREATE_USER", createUserSaga),
+    takeLatest("UPDATE_USER", updateUserSaga),
+    takeLatest("DELETE_USER", deleteUserSaga),
+    takeLatest("LOAD_USER", loadUserSaga),
+    takeLatest("LOAD_USER_COLLECTION", loadUserCollectionSaga),
+  ])
 }
 
-function* loadUserByIdSaga(action: ILoadUserByIdAction) {
+function* loadUserSaga(action: ILoadByAction) {
   try {
-    const user: IUser = yield call(apiClient.getUser, action.id)
-    yield put(loadUserSuccessAction(user))
+    yield put(setLoadingAction(action.scope, true))
+
+    let user: IUser = null
+    if (hasProp(action.criteria, "id")) {
+      user = yield call(apiClient.getUser, action.criteria.id)
+    } else if (hasProp(action.criteria, "username")) {
+      user = yield call(apiClient.getUserByUsername, action.criteria.username)
+    } else {
+      throw new Error("Unknown criteria when loading user")
+    }
+
+    yield put(loadModelSuccessAction(Scope.USER, user))
+    yield put(setLoadingAction(action.scope, false))
   } catch (err) {
     // @todo log RequestError for monitoring
     const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(loadUserFailedAction(msg))
+    yield put(setLoadingAction(action.scope, false, msg))
   }
 }
 
-function* loadUserByUsernameSaga(action: ILoadUserByUsernameAction) {
+function* loadUserCollectionSaga(action: ILoadByAction) {
   try {
-    const user: IUser = yield call(apiClient.getUserByUsername, action.username)
-    yield put(loadUserSuccessAction(user))
+    yield put(setLoadingAction(action.scope, true))
+    const users: IHydraCollection<IUser> = yield call(apiClient.getUsers, action.criteria)
+    yield put(loadCollectionSuccessAction(Scope.USER, users))
+    yield put(setLoadingAction(action.scope, false))
   } catch (err) {
     // @todo log RequestError for monitoring
     const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(loadUserFailedAction(msg))
+    yield put(setLoadingAction(action.scope, false, msg))
   }
 }
 
-function* loadUsersSaga() {
+function* createUserSaga(action: IModelFormAction<IUser>) {
+  const { success, setErrors, setSubmitting } = action.actions
   try {
-    const users: IHydraCollection<IUser> = yield call(apiClient.getUsers)
-    yield put(loadUsersSuccessAction(users))
+    yield put(setLoadingAction(action.scope, true))
+    const user: IUser = yield call(apiClient.createUser, action.model)
+    yield put(createModelSuccessAction(Scope.USER, user))
+    yield put(setLoadingAction(action.scope, false))
+    yield call(success)
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(loadUsersFailedAction(msg))
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
+    }
+
+    yield call(setSubmitting, false)
+  }
+}
+
+function* updateUserSaga(action: IModelFormAction<IUser>) {
+  const { success, setErrors, setSubmitting } = action.actions
+  try {
+    yield put(setLoadingAction(action.scope, true))
+    const user: IUser = yield call(apiClient.updateUser, action.model)
+    yield put(updateModelSuccessAction(Scope.USER, user))
+    yield put(setLoadingAction(action.scope, false))
+    yield call(success)
+  } catch (err) {
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
+    }
+
+    yield call(setSubmitting, false)
+  }
+}
+
+function* deleteUserSaga(action: IModelFormAction<IUser>) {
+  const { success, setErrors, setSubmitting } = action.actions
+  try {
+    yield put(setLoadingAction(action.scope, true))
+    yield call(apiClient.deleteUser, action.model)
+    yield put(deleteModelSuccessAction(Scope.USER, action.model))
+    yield put(setLoadingAction(action.scope, false))
+    yield call(success)
+  } catch (err) {
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
+    }
+
+    yield call(setSubmitting, false)
   }
 }

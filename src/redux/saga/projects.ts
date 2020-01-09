@@ -13,6 +13,7 @@ import {
   setLoadingAction,
   updateModelSuccessAction,
 } from "redux/helper/actions"
+import { Scope } from "redux/reducer/data"
 import { RequestError } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
@@ -39,7 +40,7 @@ function* loadProjectSaga(action: ILoadByAction) {
       throw new Error("Unknown criteria when loading project")
     }
 
-    yield put(loadModelSuccessAction("project", project))
+    yield put(loadModelSuccessAction(Scope.PROJECT, project))
     yield put(setLoadingAction(action.scope, false))
   } catch (err) {
     // @todo log RequestError for monitoring
@@ -52,7 +53,7 @@ function* loadProjectCollectionSaga(action: ILoadByAction) {
   try {
     yield put(setLoadingAction(action.scope, true))
     const projects: IHydraCollection<IProject> = yield call(apiClient.getProjects, action.criteria)
-    yield put(loadCollectionSuccessAction("project", projects))
+    yield put(loadCollectionSuccessAction(Scope.PROJECT, projects))
     yield put(setLoadingAction(action.scope, false))
   } catch (err) {
     // @todo log RequestError for monitoring
@@ -64,19 +65,19 @@ function* loadProjectCollectionSaga(action: ILoadByAction) {
 function* createProjectSaga(action: IModelFormAction<IProject>) {
   const { success, setErrors, setSubmitting } = action.actions
   try {
-    yield put(setLoadingAction("project", true))
+    yield put(setLoadingAction(action.scope, true))
     const project: IProject = yield call(apiClient.createProject, action.model)
-    yield put(createModelSuccessAction("project", project))
-    yield put(setLoadingAction("project", false))
+    yield put(createModelSuccessAction(Scope.PROJECT, project))
+    yield put(setLoadingAction(action.scope, false))
     yield call(success)
   } catch (err) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, { ...err.errors })
-      yield put(setLoadingAction("project", false))
+      yield put(setLoadingAction(action.scope, false))
     } else {
       // @todo log RequestError for monitoring
-      yield call(setErrors, { project: err.message })
-      yield put(setLoadingAction("project", false, err.message))
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
     }
 
     yield call(setSubmitting, false)
@@ -86,15 +87,20 @@ function* createProjectSaga(action: IModelFormAction<IProject>) {
 function* updateProjectSaga(action: IModelFormAction<IProject>) {
   const { success, setErrors, setSubmitting } = action.actions
   try {
+    yield put(setLoadingAction(action.scope, true))
     const project: IProject = yield call(apiClient.updateProject, action.model)
-    yield put(updateModelSuccessAction("project", project))
+    yield put(updateModelSuccessAction(Scope.PROJECT, project))
+    yield put(setLoadingAction(action.scope, false))
     yield call(success)
   } catch (err) {
-    // @todo log RequestError for monitoring
-    yield call(setErrors, err instanceof SubmissionError
-      ? { ...err.errors }
-      : { project: err.message },
-    )
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
+    }
 
     yield call(setSubmitting, false)
   }
@@ -103,15 +109,20 @@ function* updateProjectSaga(action: IModelFormAction<IProject>) {
 function* deleteProjectSaga(action: IModelFormAction<IProject>) {
   const { success, setErrors, setSubmitting } = action.actions
   try {
+    yield put(setLoadingAction(action.scope, true))
     yield call(apiClient.deleteProject, action.model)
-    yield put(deleteModelSuccessAction("project", action.model))
+    yield put(deleteModelSuccessAction(Scope.PROJECT, action.model))
+    yield put(setLoadingAction(action.scope, false))
     yield call(success)
   } catch (err) {
-    // @todo log RequestError for monitoring
-    yield call(setErrors, err instanceof SubmissionError
-      ? { ...err.errors }
-      : { project: err.message },
-    )
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
+    }
 
     yield call(setSubmitting, false)
   }

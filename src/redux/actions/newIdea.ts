@@ -3,7 +3,6 @@ import { IProject } from "api/schema"
 export enum NewIdeaActionTypes {
   CREATE_IDEA = "CREATE_IDEA",
   SET_NEW_IDEA = "SET_NEW_IDEA",
-  SET_IDEA_CREATED = "SET_IDEA_CREATED",
   RESET_NEW_IDEA = "RESET_NEW_IDEA",
 }
 
@@ -22,10 +21,6 @@ export interface ICreateIdeaAction extends INewIdeaAction {
   type: NewIdeaActionTypes.CREATE_IDEA
 }
 
-export interface ISetIdeaCreatedAction extends INewIdeaAction {
-  type: NewIdeaActionTypes.SET_IDEA_CREATED
-}
-
 export interface IResetNewIdeaAction extends INewIdeaAction {
   type: NewIdeaActionTypes.RESET_NEW_IDEA
 }
@@ -33,7 +28,6 @@ export interface IResetNewIdeaAction extends INewIdeaAction {
 export type NewIdeaActions =
   ISetNewIdeaAction
   | ICreateIdeaAction
-  | ISetIdeaCreatedAction
   | IResetNewIdeaAction
 
 export const setNewIdeaAction = (idea: IProject): ISetNewIdeaAction => ({
@@ -45,10 +39,6 @@ export const createIdeaAction = (idea: IProject, actions: any): ICreateIdeaActio
   actions,
   idea,
   type: NewIdeaActionTypes.CREATE_IDEA,
-})
-
-export const setIdeaCreatedAction = (): ISetIdeaCreatedAction => ({
-  type: NewIdeaActionTypes.SET_IDEA_CREATED,
 })
 
 export const resetNewIdeaAction = (): IResetNewIdeaAction => ({

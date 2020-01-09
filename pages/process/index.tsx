@@ -10,32 +10,33 @@ import Redirect from "components/common/Redirect"
 import { withAuth } from "components/hoc/withAuth"
 import Layout from "components/Layout"
 import ProcessView from "components/process/ProcessView"
-import { loadCurrentProcessAction } from "redux/actions/processes"
+import { loadCurrentProcessAction } from "redux/actions/currentProcess"
 import { selectCurrentProcess } from "redux/reducer/currentProcess"
 import { AppState } from "redux/store"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
 const mapStateToProps = (state: AppState) => ({
-  process: state.currentProcess,
+  process: selectCurrentProcess(state),
+  request: state.currentProcess.request,
 })
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const Page: I18nPage<PageProps> = ({ process }) => {
-  if (!process.isLoading && !process.model) {
+const Page: I18nPage<PageProps> = ({ process, request }) => {
+  if (!request.isLoading && !process) {
     return <Redirect route="/process/create" />
   }
 
-  if (process.isLoading) {
+  if (request.isLoading) {
     return <Layout title="...loading"><Spinner /></Layout>
   }
 
   return <Layout>
     <Row>
       <Col>
-        {process.loadingError && <p className="text-danger">{process.loadingError}</p>}
-        {process.model && <ProcessView process={process.model} />}
+        {request.loadingError && <p className="text-danger">{request.loadingError}</p>}
+        {process && <ProcessView process={process} />}
       </Col>
     </Row>
     <Row>

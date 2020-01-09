@@ -1,5 +1,6 @@
 import { IHydraCollection } from "api/schema"
 import { Action } from "redux"
+import { Scope } from "redux/reducer/data"
 
 export interface IScopeAction extends Action {
   scope: string
@@ -28,21 +29,22 @@ export interface ILoadByAction extends IScopeAction {
   criteria: IFilterCriteria,
 }
 
-export const loadModelAction = (scope: string, criteria: IFilterCriteria): ILoadByAction => {
+export const loadModelAction = (modelScope: Scope, requestScope: string, criteria: IFilterCriteria): ILoadByAction => {
   return {
     criteria,
-    scope,
-    type: `LOAD_${scope.toUpperCase()}`,
+    scope: requestScope,
+    type: `LOAD_${modelScope.toUpperCase()}`,
   }
 }
 
-export const loadCollectionAction = (scope: string, criteria: IFilterCriteria): ILoadByAction => {
-  return {
-    criteria,
-    scope,
-    type: `LOAD_${scope.toUpperCase()}_COLLECTION`,
+export const loadCollectionAction =
+  (modelScope: Scope, requestScope: string, criteria: IFilterCriteria): ILoadByAction => {
+    return {
+      criteria,
+      scope: requestScope,
+      type: `LOAD_${modelScope.toUpperCase()}_COLLECTION`,
+    }
   }
-}
 
 export interface IModelAction<T> extends IScopeAction {
   model: T,
@@ -60,14 +62,15 @@ export interface IModelFormAction<T> extends IModelAction<T> {
   actions: any
 }
 
-export const createModelAction = (scope: string, model: any, actions: any): IModelFormAction<any> => {
-  return {
-    actions,
-    model,
-    scope,
-    type: `CREATE_${scope.toUpperCase()}`,
+export const createModelAction =
+  (modelScope: string, requestScope: string, model: any, actions: any): IModelFormAction<any> => {
+    return {
+      actions,
+      model,
+      scope: requestScope,
+      type: `CREATE_${modelScope.toUpperCase()}`,
+    }
   }
-}
 
 export const createModelSuccessAction = (scope: string, model: any): IModelAction<any> => {
   return {
@@ -77,14 +80,15 @@ export const createModelSuccessAction = (scope: string, model: any): IModelActio
   }
 }
 
-export const updateModelAction = (scope: string, model: any, actions: any): IModelFormAction<any> => {
-  return {
-    actions,
-    model,
-    scope,
-    type: `UPDATE_${scope.toUpperCase()}`,
+export const updateModelAction =
+  (modelScope: string, requestScope: string, model: any, actions: any): IModelFormAction<any> => {
+    return {
+      actions,
+      model,
+      scope: requestScope,
+      type: `UPDATE_${modelScope.toUpperCase()}`,
+    }
   }
-}
 
 export const updateModelSuccessAction = (scope: string, model: any): IModelAction<any> => {
   return {
@@ -94,14 +98,15 @@ export const updateModelSuccessAction = (scope: string, model: any): IModelActio
   }
 }
 
-export const deleteModelAction = (scope: string, model: any, actions: any): IModelFormAction<any> => {
-  return {
-    actions,
-    model,
-    scope,
-    type: `DELETE_${scope.toUpperCase()}`,
+export const deleteModelAction =
+  (modelScope: string, requestScope: string, model: any, actions: any): IModelFormAction<any> => {
+    return {
+      actions,
+      model,
+      scope: requestScope,
+      type: `DELETE_${modelScope.toUpperCase()}`,
+    }
   }
-}
 
 export const deleteModelSuccessAction = (scope: string, model: any): IModelAction<any> => {
   return {

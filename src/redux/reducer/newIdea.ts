@@ -4,27 +4,14 @@ import { emptyIdea, IProject } from "api/schema"
 import { NewIdeaActions, NewIdeaActionTypes } from "redux/actions/newIdea"
 import { scopedSetLoadingReducer } from "redux/helper/reducers"
 
-interface INewIdeaState {
-  created: boolean
-  data: IProject
-}
-
-const intitialNewIdeaState: INewIdeaState = {
-  created: false,
-  data: emptyIdea,
-}
-
 const newIdeaReducer =
-  (state: INewIdeaState = intitialNewIdeaState, action: NewIdeaActions): INewIdeaState => {
+  (state: IProject = emptyIdea, action: NewIdeaActions): IProject => {
     switch (action.type) {
       case NewIdeaActionTypes.SET_NEW_IDEA:
-        return { ...state, data: action.idea }
-
-      case NewIdeaActionTypes.SET_IDEA_CREATED:
-        return { ...state, created: true }
+        return action.idea
 
       case NewIdeaActionTypes.RESET_NEW_IDEA:
-        return intitialNewIdeaState
+        return emptyIdea
 
       default:
         return state
@@ -41,7 +28,5 @@ export default combineReducers({
  *
  * @returns IProject|null
  */
-export const selectNewIdea = (state: { newIdea: { idea: INewIdeaState } }): IProject =>
-  state.newIdea.idea.data.shortDescription
-    ? state.newIdea.idea.data
-    : null
+export const selectNewIdea = (state: { newIdea: { idea: IProject } }): IProject =>
+  state.newIdea.idea.shortDescription ? state.newIdea.idea : null

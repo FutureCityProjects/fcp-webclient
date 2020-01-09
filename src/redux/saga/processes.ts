@@ -1,91 +1,129 @@
-import { call, put, takeLatest } from "redux-saga/effects"
+import hasProp from "lodash/has"
+import { all, call, put, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
-import { IProcess } from "api/schema"
+import { IHydraCollection, IProcess } from "api/schema"
 import {
-  ICreateProcessAction,
-  ILoadCurrentProcessAction,
-  IUpdateProcessAction,
-  loadCurrentProcessFailedAction,
-  loadCurrentProcessSuccessAction,
-  ProcessActionTypes,
-} from "redux/actions/processes"
+  createModelSuccessAction,
+  deleteModelSuccessAction,
+  ILoadByAction,
+  IModelFormAction,
+  loadCollectionSuccessAction,
+  loadModelSuccessAction,
+  setLoadingAction,
+  updateModelSuccessAction,
+} from "redux/helper/actions"
+import { Scope } from "redux/reducer/data"
 import { RequestError } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
 export function* processesWatcherSaga() {
-  yield takeLatest(ProcessActionTypes.CREATE_PROCESS, createProcessSaga)
-  yield takeLatest(ProcessActionTypes.UPDATE_PROCESS, updateProcessSaga)
-  yield takeLatest(ProcessActionTypes.LOAD_CURRENT_PROCESS, loadCurrentProcessSaga)
+  yield all([
+    takeLatest("CREATE_PROCESS", createProcessSaga),
+    takeLatest("UPDATE_PROCESS", updateProcessSaga),
+    takeLatest("DELETE_PROCESS", deleteProcessSaga),
+    takeLatest("LOAD_PROCESS", loadProcessSaga),
+    takeLatest("LOAD_PROCESS_COLLECTION", loadProcessCollectionSaga),
+  ])
 }
 
-/**
- * Handles the submission of the form to create a process.
- * Uses Formik actions to return state to the form component.
- *
- * @param action ICreateProcessAction
- */
-function* createProcessSaga(action: ICreateProcessAction) {
-  const { success, setErrors, setSubmitting } = action.actions
+function* loadProcessSaga(action: ILoadByAction) {
   try {
-    yield call(apiClient.createProcess, action.process)
-    yield call(success)
-  } catch (err) {
-    // @todo log RequestError for monitoring
-    yield call(setErrors, err instanceof SubmissionError
-      ? { ...err.errors }
-      : { process: err.message },
-    )
+    yield put(setLoadingAction(action.scope, true))
 
-    yield call(setSubmitting, false)
-  }
-}
-
-/**
- * Handles the submission of the form to edit a process.
- * Uses Formik actions to return state to the form component.
- *
- * @param action IUpdateProcessAction
- */
-function* updateProcessSaga(action: IUpdateProcessAction) {
-  const { success, setErrors, setSubmitting } = action.actions
-  try {
-    yield call(apiClient.updateProcess, action.process)
-    yield call(success)
-  } catch (err) {
-    // @todo log RequestError for monitoring
-    yield call(setErrors, err instanceof SubmissionError
-      ? { ...err.errors }
-      : { process: err.message },
-    )
-
-    yield call(setSubmitting, false)
-  }
-}
-
-/**
- * Loads the current process for use in the application.
- * Supports resolving/rejecting a Promise to allow redirects when a|no process is found.
- *
- * @param action ILoadCurrentProcessAction
- */
-export function* loadCurrentProcessSaga(action: ILoadCurrentProcessAction) {
-  try {
-    const process: IProcess = yield call(apiClient.getCurrentProcess)
-    yield put(loadCurrentProcessSuccessAction(process))
-
-    if (action.resolve) {
-      yield call(action.resolve, process)
+    let process: IProcess = null
+    if (hasProp(action.criteria, "id")) {
+      process = yield call(apiClient.getProcess, action.criteria.id)
+    } else if (hasProp(action.criteria, "slug")) {
+      process = yield call(apiClient.getProcessBySlug, action.criteria.slug)
+    } else {
+      throw new Error("Unknown criteria when loading process")
     }
+
+    yield put(loadModelSuccessAction(Scope.PROCESS, process))
+    yield put(setLoadingAction(action.scope, false))
   } catch (err) {
     // @todo log RequestError for monitoring
     const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(loadCurrentProcessFailedAction(msg))
+    yield put(setLoadingAction(action.scope, false, msg))
+  }
+}
 
-    if (action.reject) {
-      yield call(action.reject, err)
+function* loadProcessCollectionSaga(action: ILoadByAction) {
+  try {
+    yield put(setLoadingAction(action.scope, true))
+    const processs: IHydraCollection<IProcess> = yield call(apiClient.getProcesses, action.criteria)
+    yield put(loadCollectionSuccessAction(Scope.PROCESS, processs))
+    yield put(setLoadingAction(action.scope, false))
+  } catch (err) {
+    // @todo log RequestError for monitoring
+    const msg = err instanceof RequestError ? "message.requestError" : err.message
+    yield put(setLoadingAction(action.scope, false, msg))
+  }
+}
+
+function* createProcessSaga(action: IModelFormAction<IProcess>) {
+  const { success, setErrors, setSubmitting } = action.actions
+  try {
+    yield put(setLoadingAction(action.scope, true))
+    const process: IProcess = yield call(apiClient.createProcess, action.model)
+    yield put(createModelSuccessAction(Scope.PROCESS, process))
+    yield put(setLoadingAction(action.scope, false))
+    yield call(success)
+  } catch (err) {
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
     } else {
-      throw err
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
     }
+
+    yield call(setSubmitting, false)
+  }
+}
+
+function* updateProcessSaga(action: IModelFormAction<IProcess>) {
+  const { success, setErrors, setSubmitting } = action.actions
+  try {
+    yield put(setLoadingAction(action.scope, true))
+    const process: IProcess = yield call(apiClient.updateProcess, action.model)
+    yield put(updateModelSuccessAction(Scope.PROCESS, process))
+    yield put(setLoadingAction(action.scope, false))
+    yield call(success)
+  } catch (err) {
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
+    }
+
+    yield call(setSubmitting, false)
+  }
+}
+
+function* deleteProcessSaga(action: IModelFormAction<IProcess>) {
+  const { success, setErrors, setSubmitting } = action.actions
+  try {
+    yield put(setLoadingAction(action.scope, true))
+    yield call(apiClient.deleteProcess, action.model)
+    yield put(deleteModelSuccessAction(Scope.PROCESS, action.model))
+    yield put(setLoadingAction(action.scope, false))
+    yield call(success)
+  } catch (err) {
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, { ...err.errors })
+      yield put(setLoadingAction(action.scope, false))
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+      yield put(setLoadingAction(action.scope, false, err.message))
+    }
+
+    yield call(setSubmitting, false)
   }
 }

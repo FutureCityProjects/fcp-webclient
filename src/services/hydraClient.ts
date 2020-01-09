@@ -62,15 +62,14 @@ export class HydraClient {
 
     // the Authorization header is added via interceptor
     return this.axios.request(axiosConfig)
-      .then((response: AxiosResponse) => this.normalize(response.data))
+      // @todo we don't want to flatten nested documents, some properties are only readable
+      // as subresource, remove the normalize completely?
+      // .then((response: AxiosResponse) => this.normalize(response.data))
+      .then((response: AxiosResponse) => response.data)
       .catch(this.handleError)
   }
 
   protected normalize = (data: any) => {
-    // @todo we don't want to flatten nested documents, some properties are only readable
-    // as subresource, remove the normalize completely?
-    return data
-
     if (hasProp(data, "hydra:member")) {
       // Normalize items in collections
       data["hydra:member"] = data["hydra:member"].map((item: any) => this.normalize(item))
