@@ -17,7 +17,8 @@ import { AppState } from "redux/store"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  onSubmit: (process, actions) => {
+  onSubmit: (process, { props, ...actions }) => {
+    console.log(props)
     // add another action additionally to the formik defaults (setErrors, setSubmitting, reset, ...)
     actions.success = () => {
       // update the current process and redirect to the display page

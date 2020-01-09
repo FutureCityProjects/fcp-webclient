@@ -16,8 +16,9 @@ module.exports = withBundleAnalyzer(withCSS(withSass({
     AUTH_IDLE_TIMEOUT: process.env.AUTH_IDLE_TIMEOUT,
     AUTH_LOCALSTORAGE_NAME: process.env.AUTH_LOCALSTORAGE_NAME,
     AUTH_REFRESH_THRESHOLD: process.env.AUTH_REFRESH_THRESHOLD,
-    FCP_API_ENTRYPOINT: process.env.FCP_API_ENTRYPOINT,
+    BASE_URL: process.env.BASE_URL,
     CLIENT_ENV: process.env.NODE_ENV,
+    FCP_API_ENTRYPOINT: process.env.FCP_API_ENTRYPOINT,
   },
 
   onDemandEntries: {

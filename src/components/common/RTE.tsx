@@ -109,7 +109,7 @@ class RTE extends React.Component<IProps> {
           {...this.props}
         />
       </>
-      : <div />
+      : <textarea />
   }
 }
 

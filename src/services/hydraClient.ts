@@ -48,6 +48,12 @@ export class HydraClient {
     return this.request(url, config)
   }
 
+  public delete = (url: string, config: AxiosRequestConfig = {}) => {
+    config.method = "delete"
+
+    return this.request(url, config)
+  }
+
   public request = (url: string, config: AxiosRequestConfig = {}) => {
     const axiosConfig = {
       ...config,
@@ -61,6 +67,10 @@ export class HydraClient {
   }
 
   protected normalize = (data: any) => {
+    // @todo we don't want to flatten nested documents, some properties are only readable
+    // as subresource, remove the normalize completely?
+    return data
+
     if (hasProp(data, "hydra:member")) {
       // Normalize items in collections
       data["hydra:member"] = data["hydra:member"].map((item: any) => this.normalize(item))
@@ -85,7 +95,7 @@ export class HydraClient {
         throw Error(msg)
       }
 
-      const errors = { _error: msg }
+      const errors = {} // @todo do we ever need the general error when violations exist? { _error: msg }
       json.violations.map((violation: IViolation) => {
         this.addViolationToErrors(violation, errors, this.parsePropertyPath(violation.propertyPath))
       })

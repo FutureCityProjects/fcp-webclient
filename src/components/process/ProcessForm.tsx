@@ -15,10 +15,10 @@ interface IProps {
 const ProcessForm = ({ onSubmit, process = {
   criteria: null,
   description: "",
+  goals: [],
   imprint: "",
   name: "",
   region: "",
-  targets: [],
 } }: IProps) => {
   return <Formik<IProcess> initialValues={process} onSubmit={onSubmit}>
     {({
@@ -41,7 +41,7 @@ const ProcessForm = ({ onSubmit, process = {
             <FormikInput name="region" required value={values.region} />
           </div>
           <FieldArray
-            name="targets"
+            name="goals"
             component={FormikFieldArray}
           />
           <FieldArray

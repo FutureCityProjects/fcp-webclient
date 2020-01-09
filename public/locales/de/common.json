@@ -2,6 +2,11 @@
   "goto": {
     "home": "zur Startseite"
   },
+  "message": {
+    "projectIdea": {
+      "saved": "Deine Projektidee wurde gespeichert!"
+    }
+  },
   "RTE": {
     "bold": "Fett",
     "bullet": "Liste",

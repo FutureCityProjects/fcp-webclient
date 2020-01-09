@@ -69,7 +69,7 @@ function* updateProcessSaga(action: IUpdateProcessAction) {
  *
  * @param action ILoadCurrentProcessAction
  */
-function* loadCurrentProcessSaga(action: ILoadCurrentProcessAction) {
+export function* loadCurrentProcessSaga(action: ILoadCurrentProcessAction) {
   try {
     const process: IProcess = yield call(apiClient.getCurrentProcess)
     yield put(loadCurrentProcessSuccessAction(process))

@@ -10,15 +10,15 @@ export default function ProcessView({ process }: IProps) {
   return <>
     <h1>Prozess: {process.name}</h1>
     <h3>Description</h3>
-    <p><div dangerouslySetInnerHTML={{ __html: process.description }} /></p>
+    <div className=""><div dangerouslySetInnerHTML={{ __html: process.description }} /></div>
 
     <h3>Region</h3>
     <p>{process.region}</p>
 
-    <h3>Targets</h3>
-    {process.targets
+    <h3>Goals</h3>
+    {process.goals
       ? <ul>
-        {process.targets.map((target, index) => <li key={index}>{target}</li>)}
+        {process.goals.map((goal, index) => <li key={index}>{goal}</li>)}
       </ul>
       : <p>--none--</p>
     }
@@ -32,6 +32,6 @@ export default function ProcessView({ process }: IProps) {
     }
 
     <h3>Imprint</h3>
-    <p><div dangerouslySetInnerHTML={{ __html: process.imprint }} /></p>
+    <div className=""><div dangerouslySetInnerHTML={{ __html: process.imprint }} /></div>
   </>
 }

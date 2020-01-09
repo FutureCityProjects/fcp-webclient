@@ -1,9 +1,15 @@
 // Set the environment variables shown below to configure the app.
-// FCP_API_ENTRYPOINT is the only required option.
+// FCP_API_ENTRYPOINT & BASE_URL are the only required options.
 // Via next.config.js these options are also exposed to the client side so access is isomorphic.
 
 export const FCP_API_ENTRYPOINT = process.env.FCP_API_ENTRYPOINT
   ? process.env.FCP_API_ENTRYPOINT
+  : "https://example.net/api"
+
+// under which URL is this client running?
+// used to generate URLs to send to the API to be sent via email, e.g. for validations
+export const BASE_URL = process.env.BASE_URL
+  ? process.env.BASE_URL
   : "https://example.net/api"
 
 // cookie name used to send the JWT to the server for server-side rendering

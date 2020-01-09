@@ -91,9 +91,12 @@ export const updateProcessAction =
     type: ProcessActionTypes.UPDATE_PROCESS,
   })
 
-export const loadCurrentProcessAction = (): ILoadCurrentProcessAction => ({
-  type: ProcessActionTypes.LOAD_CURRENT_PROCESS,
-})
+export const loadCurrentProcessAction =
+  (promise: { resolve: any, reject: any } = null): ILoadCurrentProcessAction => ({
+    reject: promise ? promise.reject : null,
+    resolve: promise ? promise.resolve : null,
+    type: ProcessActionTypes.LOAD_CURRENT_PROCESS,
+  })
 
 export const loadCurrentProcessSuccessAction = (process: IProcess): ILoadCurrentProcessSuccessAction => ({
   process,

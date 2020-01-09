@@ -13,5 +13,14 @@
   },
   "param": {
     "invalidId": "Die angegebene ID ist ungültig, Ganzzahl >= 0 erforderlich."
+  },
+  "validate": {
+    "general": {
+      "notBlank": "Dies ist ein Pflichtfeld.",
+      "submissionFailed": "Das Speichern eines Objektes schlug fehl.",
+      "tooLong": "Der eingegbene Text ist zu lang.",
+      "tooShort": "Der eingegbene Text ist zu kurz."
+    },
+    "project": {}
   }
 }

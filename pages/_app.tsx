@@ -8,6 +8,7 @@ import IdleTimer from "react-idle-timer"
 import { connect, Provider } from "react-redux"
 import { AnyAction, Dispatch } from "redux"
 
+import ToastContainer from "components/common/ToastContainer"
 import withServerResponse from "components/hoc/withServerResponse"
 import { localStorageChangedAction, setAuthAction, userIsIdleAction } from "redux/actions/auth"
 import { makeStore } from "redux/store"
@@ -110,6 +111,7 @@ class FCPApp extends App<Props> {
           : <></>
         }
         <NextNprogress />
+        <ToastContainer />
         <Component {...pageProps} />
       </Provider>
     )

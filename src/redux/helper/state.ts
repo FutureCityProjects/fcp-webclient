@@ -1,4 +1,18 @@
-import { IHydraCollection } from "api/schema"
+import { IHydraCollection, INumericIdentifierModel } from "api/schema"
+
+export interface IRequestState {
+  isLoading: boolean,
+  loadingError: string,
+}
+export const initialRequestState: IRequestState = {
+  isLoading: false,
+  loadingError: null,
+}
+
+export interface IIndexedCollectionState<T extends INumericIdentifierModel> {
+  [id: number]: T
+}
+export const initialIndexedCollectionState: IIndexedCollectionState<any> = {}
 
 // abstraction for staste that represents a single object received from the API
 export interface IModelState<T> {
