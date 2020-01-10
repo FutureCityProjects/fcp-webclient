@@ -141,7 +141,7 @@ export interface IProject extends INumericIdentifierModel {
   description?: string
   goal?: string
   id?: number
-  inspiration?: IProject
+  inspiration?: IProject | string
   isLocked?: boolean
   memberships?: IProjectMembership[]
   name?: string

@@ -10,24 +10,25 @@ import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
 import Layout from "components/Layout"
 import { List } from "components/user/List"
-import { loadUsersAction } from "redux/actions/users"
-import { selectUsers } from "redux/reducer/users"
+import { loadCollectionAction } from "redux/helper/actions"
+import { Scope, selectCollection } from "redux/reducer/data"
 import { AppState } from "redux/store"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { REQUEST_ERRORS } from "services/requestError"
 
 const mapStateToProps = (state: AppState) => ({
-  users: state.users,
+  request: state.userManagement.request,
+  users: selectCollection(Scope.USER, state),
 })
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const Page: I18nPage<PageProps> = ({ users }: PageProps) => {
-  if (!users.isLoading && users.loadingError) {
+const Page: I18nPage<PageProps> = ({ request, users }: PageProps) => {
+  if (!request.isLoading && request.loadingError) {
     let code: number = 500
     let error: string = null
-    switch (users.loadingError) {
+    switch (request.loadingError) {
       case REQUEST_ERRORS.BAD_REQUEST:
         code = 400
         break
@@ -37,7 +38,7 @@ const Page: I18nPage<PageProps> = ({ users }: PageProps) => {
         break
 
       default:
-        error = users.loadingError
+        error = request.loadingError
         break
     }
     return <StatusCode statusCode={code}>
@@ -48,9 +49,9 @@ const Page: I18nPage<PageProps> = ({ users }: PageProps) => {
   return <Layout>
     <Row>
       <Col>
-        {users.isLoading
+        {request.isLoading
           ? <Spinner />
-          : <List users={users.collection["hydra:member"] || []} />
+          : <List users={users} />
         }
       </Col>
     </Row>
@@ -58,8 +59,8 @@ const Page: I18nPage<PageProps> = ({ users }: PageProps) => {
 }
 
 Page.getInitialProps = async ({ store }: NextJSContext) => {
-  if (!selectUsers(store.getState()).length) {
-    store.dispatch(loadUsersAction())
+  if (selectCollection(Scope.USER, store.getState()).length <= 0) {
+    store.dispatch(loadCollectionAction(Scope.USER, "userManagement"))
   }
 
   const props = mapStateToProps(store.getState())

@@ -4,13 +4,16 @@
   * refactor form error messages: before submit display only errors from touched fields
     (client validation), after submit from all fields (server validation, e.g. empty field is
     required, formik setState?)
+  * Redirects von der Login-Seite nach expired auth führen dann zur falschen URL: /user/[id]
+  * UserManagement lädt nicht die Liste aller User wenn schon/nur der eingeloggte User in der
+    Liste ist
   * multipage wizard: https://github.com/vincentntang/multistep-wizard-formik-yup-reactstrap
   * css ins scss statt inline -> einfacher weiterzuverwenden
   * component files .jsx benennen
   * icons als echte .svg ins public dir (caching, served by nginx -> performance)
   * src/assets/icons vs src/components/ui-components/icons ?
-  * storing the JWT in localstorage and cookie is discouraged due to XSS vulnerability but how do we send
-    it to the server otherwise? Samesite & httponly cookie? No session sync via localstorage but only logout sync? @see https://blog.hasura.io/best-practices-of-using-jwt-with-graphql/#jwt_security
+  * storing the JWT in localstorage and cookie is discouraged due to XSS vulnerability but how
+    do we send it to the server otherwise? Samesite & httponly cookie? No session sync via localstorage but only logout sync? @see https://blog.hasura.io/best-practices-of-using-jwt-with-graphql/#jwt_security
   * confirm password field on registration form
   * accept AGB checkbox on registration form
   * accept privacy declaration on registration form

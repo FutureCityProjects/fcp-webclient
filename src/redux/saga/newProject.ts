@@ -3,7 +3,7 @@ import { all, call, put, select, takeLatest } from "redux-saga/effects"
 import apiClient from "api/client"
 import { IProcess, IProject, ProjectProgress } from "api/schema"
 import { AuthActionTypes } from "redux/actions/auth"
-import { ICreateProjectAction, resetNewProjectAction } from "redux/actions/newProject"
+import { ICreateProjectAction, NewProjectActionTypes, resetNewProjectAction } from "redux/actions/newProject"
 import { addNotificationAction } from "redux/actions/notifications"
 import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
 import { createModelAction, createModelSuccessAction } from "redux/helper/actions"
@@ -15,7 +15,7 @@ import { SubmissionError } from "services/submissionError"
 
 export function* newProjectWatcherSaga() {
   yield all([
-    takeLatest("CREATE_PROJECT", createProjectSaga),
+    takeLatest(NewProjectActionTypes.CREATE_NEW_PROJECT, createProjectSaga),
     takeLatest(AuthActionTypes.LOGIN_SUCCESSFUL, createSavedProjectSaga),
     takeLatest(RegistrationActionTypes.SET_REGISTERED_USER, postRegistrationSaga),
   ])
@@ -35,7 +35,7 @@ function* createProjectSaga(action: ICreateProjectAction) {
   }
   action.project.process = process["@id"]
 
-  yield put(createModelAction(Scope.PROJECT, "new_project", action.project, action.actions))
+  yield put(createModelAction(Scope.PROJECT, "create_project_request", action.project, action.actions))
 }
 
 /**

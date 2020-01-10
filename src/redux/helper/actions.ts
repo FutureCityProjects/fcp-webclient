@@ -38,7 +38,7 @@ export const loadModelAction = (modelScope: Scope, requestScope: string, criteri
 }
 
 export const loadCollectionAction =
-  (modelScope: Scope, requestScope: string, criteria: IFilterCriteria): ILoadByAction => {
+  (modelScope: Scope, requestScope: string, criteria: IFilterCriteria = {}): ILoadByAction => {
     return {
       criteria,
       scope: requestScope,

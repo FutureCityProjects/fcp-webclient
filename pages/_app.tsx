@@ -47,7 +47,9 @@ class FCPApp extends App<Props> {
         // required for restricted pages to work client-side without
         // having to read the cookie again
         const auth = new AuthToken(token)
-        ctx.store.dispatch(setAuthAction(auth.jwt))
+        if (!auth.isExpired) {
+          ctx.store.dispatch(setAuthAction(auth.jwt))
+        }
       }
     }
 

@@ -13,6 +13,7 @@ import { createModelSuccessAction, setLoadingAction } from "redux/helper/actions
 import { selectCurrentProcess } from "redux/reducer/currentProcess"
 import { Scope } from "redux/reducer/data"
 import { selectNewIdea } from "redux/reducer/newIdea"
+import { selectNewProject } from "redux/reducer/newProject"
 import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
 import { loadCurrentProcessSaga } from "./currentProcess"
@@ -34,6 +35,8 @@ function* registerUserSaga(action: IRegisterUserAction) {
       ...action.user,
     }
 
+    registration.createdProjects = []
+
     // @todo add additional action preUserRegister that we can intercept in extra sagas
     // to add the idea there
     const newIdea = yield select(selectNewIdea)
@@ -46,12 +49,12 @@ function* registerUserSaga(action: IRegisterUserAction) {
       }
 
       newIdea.process = process["@id"]
-      registration.createdProjects = [...registration.createdProjects, newIdea]
+      registration.createdProjects.push(newIdea)
     }
 
     // @todo add additional action preUserRegister that we can intercept in extra sagas
     // to add the project there
-    const newProject = yield select(selectNewIdea)
+    const newProject = yield select(selectNewProject)
     if (newProject) {
       // inject the current process, it's required
       let process: IProcess = yield select(selectCurrentProcess)
@@ -61,7 +64,7 @@ function* registerUserSaga(action: IRegisterUserAction) {
       }
 
       newProject.process = process["@id"]
-      registration.createdProjects = [...registration.createdProjects, newProject]
+      registration.createdProjects.push(newProject)
     }
 
     const newUser: IUser = yield call(apiClient.registerUser, registration)

@@ -64,6 +64,7 @@ function* loadProjectCollectionSaga(action: ILoadByAction) {
 
 function* createProjectSaga(action: IModelFormAction<IProject>) {
   const { success, setErrors, setSubmitting } = action.actions
+
   try {
     yield put(setLoadingAction(action.scope, true))
     const project: IProject = yield call(apiClient.createProject, action.model)

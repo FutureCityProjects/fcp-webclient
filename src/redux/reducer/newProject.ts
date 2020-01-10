@@ -19,8 +19,9 @@ const newProjectReducer =
   }
 
 export default combineReducers({
+  creation: scopedSetLoadingReducer("create_project_request"),
+  inspiration: scopedSetLoadingReducer("inspiration_request"),
   project: newProjectReducer,
-  request: scopedSetLoadingReducer("new_project"),
 })
 
 /**

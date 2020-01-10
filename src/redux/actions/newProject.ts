@@ -1,7 +1,9 @@
 import { IProjectCreation } from "api/schema"
 
 export enum NewProjectActionTypes {
-  CREATE_PROJECT = "CREATE_PROJECT",
+  // don't use "CREATE_PROJECT", it collides with the general data acions
+  CREATE_NEW_PROJECT = "CREATE_NEW_PROJECT",
+
   SET_NEW_PROJECT = "SET_NEW_PROJECT",
   RESET_NEW_PROJECT = "RESET_NEW_PROJECT",
 }
@@ -18,7 +20,7 @@ export interface ISetNewProjectAction extends INewProjectAction {
 export interface ICreateProjectAction extends INewProjectAction {
   actions: any
   project: IProjectCreation
-  type: NewProjectActionTypes.CREATE_PROJECT
+  type: NewProjectActionTypes.CREATE_NEW_PROJECT
 }
 
 export interface IResetNewProjectAction extends INewProjectAction {
@@ -38,7 +40,7 @@ export const setNewProjectAction = (project: IProjectCreation): ISetNewProjectAc
 export const createProjectAction = (project: IProjectCreation, actions: any): ICreateProjectAction => ({
   actions,
   project,
-  type: NewProjectActionTypes.CREATE_PROJECT,
+  type: NewProjectActionTypes.CREATE_NEW_PROJECT,
 })
 
 export const resetNewProjectAction = (): IResetNewProjectAction => ({

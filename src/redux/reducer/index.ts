@@ -10,6 +10,7 @@ import notificationsReducer from "./notifications"
 import processManagementReducer from "./processManagement"
 import registrationReducer from "./registration"
 import sagaReducer from "./saga"
+import userManagementReducer from "./userManagement"
 
 export default combineReducers({
   auth: authReducer,
@@ -22,4 +23,5 @@ export default combineReducers({
   processManagement: processManagementReducer,
   registration: registrationReducer,
   saga: sagaReducer,
+  userManagement: userManagementReducer,
 })

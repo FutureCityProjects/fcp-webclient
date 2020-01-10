@@ -2,7 +2,7 @@ import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
 import React, { useState } from "react"
 import { connect, ConnectedProps } from "react-redux"
-import { Card, CardBody, CardHeader, CardText, Col, Row } from "reactstrap"
+import { Card, CardBody, CardHeader, CardText, Col, Row, Spinner } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
 import { IProjectCreation } from "api/schema"
@@ -12,7 +12,9 @@ import Layout from "components/Layout"
 import ProjectCreationForm from "components/project/ProjectCreationForm"
 import Link from "next/link"
 import { createProjectAction, setNewProjectAction } from "redux/actions/newProject"
+import { loadModelAction } from "redux/helper/actions"
 import { selectIsAuthenticated } from "redux/reducer/auth"
+import { Scope, selectById } from "redux/reducer/data"
 import { AppState } from "redux/store"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
@@ -21,21 +23,30 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   setNewProject: (project: IProjectCreation) => dispatch(setNewProjectAction(project)),
 })
 
-const mapStateToProps = (state: AppState) => ({
+const mapStateToProps = (state: AppState, { inspirationId }) => ({
+  creationRequest: state.newProject.creation,
+  inspiration: selectById(Scope.PROJECT, inspirationId, state),
+  inspirationRequest: state.newProject.inspiration,
   isAuthenticated: selectIsAuthenticated(state),
   project: state.newProject.project, // do not use selectNewIdea(), we want the empty state here,
-  request: state.newProject.request,
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  id: any,
+  inspirationId: any,
 }
 
 const Page: I18nPage<PageProps> = (props) => {
-  if (!props.id || props.id <= 0) {
+  if (!props.inspirationId || props.inspirationId <= 0) {
     return <StatusCode statusCode={400}>
       <ErrorPage statusCode={400} error={"_error:param.invalidId"} />
+    </StatusCode>
+  }
+
+  // @todo custom error message "inspiration not found" etc.
+  if (!props.inspiration && !props.inspirationRequest.isLoading) {
+    return <StatusCode statusCode={404}>
+      <ErrorPage statusCode={404} error={props.inspirationRequest.loadingError} />
     </StatusCode>
   }
 
@@ -43,6 +54,8 @@ const Page: I18nPage<PageProps> = (props) => {
   const [projectCreated, setProjectCreated] = useState(false)
 
   const onSubmit = (project: IProjectCreation, actions: any) => {
+    project.inspiration = props.inspiration["@id"]
+
     if (props.isAuthenticated) {
       actions.success = () => {
         setProjectCreated(true)
@@ -67,10 +80,26 @@ const Page: I18nPage<PageProps> = (props) => {
     <Row>
       <Col sm={8}>
         <Card>
+          <CardHeader>Deine Inspiration</CardHeader>
+          <CardBody>
+            {props.inspirationRequest.isLoading ? <Spinner />
+              : <CardText>
+                {props.inspiration.shortDescription}
+              </CardText>
+            }
+          </CardBody>
+        </Card>
+      </Col>
+    </Row>
+
+    <Row>
+      <Col sm={8}>
+        <Card>
           <CardHeader>Angaben zu dir</CardHeader>
           <CardBody>
             {!projectSaved && !projectCreated && <>
-              {props.request.loadingError && <p className="text-danger">Error: {props.request.loadingError}</p>}
+              {props.creationRequest.loadingError
+                && <p className="text-danger">Error: {props.creationRequest.loadingError}</p>}
               <ProjectCreationForm onSubmit={onSubmit} project={props.project} />
             </>}
 
@@ -109,9 +138,15 @@ const Page: I18nPage<PageProps> = (props) => {
   </Layout>
 }
 
-Page.getInitialProps = ({ store }: NextJSContext) => {
-  const props = mapStateToProps(store.getState())
-  return { ...props, namespacesRequired: includeDefaultNamespaces() }
+Page.getInitialProps = ({ store, query }: NextJSContext) => {
+  const inspirationId = parseInt(query.inspiration as string, 10)
+
+  if (inspirationId > 0 && !selectById(Scope.PROJECT, inspirationId, store.getState())) {
+    store.dispatch(loadModelAction(Scope.PROJECT, "inspiration_request", { id: inspirationId }))
+  }
+
+  const props = mapStateToProps(store.getState(), { inspirationId })
+  return { ...props, inspirationId, namespacesRequired: includeDefaultNamespaces() }
 }
 
 export default connector(withTranslation("common")(Page))

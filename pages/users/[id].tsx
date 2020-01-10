@@ -10,14 +10,15 @@ import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
 import Layout from "components/Layout"
 import { Show } from "components/user/Show"
-import { loadUserByIdAction } from "redux/actions/users"
-import { selectUserById } from "redux/reducer/singleUser"
-import { AppState, SagaStore } from "redux/store"
+import { loadModelAction } from "redux/helper/actions"
+import { Scope, selectById } from "redux/reducer/data"
+import { AppState } from "redux/store"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { REQUEST_ERRORS } from "services/requestError"
 
-const mapStateToProps = (state: AppState) => ({
-  user: state.singleUser,
+const mapStateToProps = (state: AppState, { id }) => ({
+  request: state.userManagement.request,
+  user: selectById(Scope.USER, id, state),
 })
 
 const connector = connect(mapStateToProps)
@@ -25,37 +26,50 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   id: any,
 }
 
-const Page: I18nPage<PageProps> = ({ id, user }) => {
+const Page: I18nPage<PageProps> = ({ id, request, user }) => {
   if (!id || id <= 0) {
     return <StatusCode statusCode={400}>
       <ErrorPage statusCode={400} error={"_error:param.invalidId"} />
     </StatusCode>
   }
 
-  if (!user.isLoading && user.loadingError) {
-    const code = user.loadingError === REQUEST_ERRORS.NOT_FOUND ? 404 : 500
+  if (!request.isLoading && request.loadingError) {
+    let code: number = 500
+    let error: string = null
+    switch (request.loadingError) {
+      case REQUEST_ERRORS.BAD_REQUEST:
+        code = 400
+        break
+
+      case REQUEST_ERRORS.NOT_FOUND:
+        code = 404
+        break
+
+      default:
+        error = request.loadingError
+        break
+    }
     return <StatusCode statusCode={code}>
-      <ErrorPage statusCode={code} error={user.loadingError !== REQUEST_ERRORS.NOT_FOUND && user.loadingError} />
+      <ErrorPage statusCode={code} error={error} />
     </StatusCode>
   }
 
   return <Layout>
-    {user.isLoading
+    {request.isLoading
       ? <Spinner />
-      : user.model ? <Show user={user.model} /> : <p>no user?</p>
+      : <Show user={user} />
     }
   </Layout>
 }
 
-Page.getInitialProps = (ctx: NextJSContext) => {
-  const id = parseInt(ctx.query.id as string, 10)
-  const store: SagaStore = ctx.store
+Page.getInitialProps = ({ store, query }: NextJSContext) => {
+  const id = parseInt(query.id as string, 10)
 
-  if (id > 0 && !selectUserById(id, store.getState())) {
-    store.dispatch(loadUserByIdAction(id))
+  if (id > 0 && !selectById(Scope.USER, id, store.getState())) {
+    store.dispatch(loadModelAction(Scope.USER, "userManagement", { id }))
   }
 
-  const state = mapStateToProps(store.getState())
+  const state = mapStateToProps(store.getState(), { id })
   return { ...state, id, namespacesRequired: includeDefaultNamespaces() }
 }
 

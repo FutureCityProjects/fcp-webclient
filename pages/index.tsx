@@ -16,6 +16,9 @@ function Page({ t }: IProps) {
     <Link href="/idea/create">
       <a title="Neue Idee eintragen">Neue Projektidee</a>
     </Link>
+    <Link href="/project/create?inspiration=14">
+      <a title="Idee übernehmen">Neues Projekt</a>
+    </Link>
   </Layout>
 }
 
