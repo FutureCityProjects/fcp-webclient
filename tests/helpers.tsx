@@ -3,8 +3,8 @@ import React from "react"
 import { Provider } from "react-redux"
 import { createStore } from "redux"
 
-import rootReducer from "../src/redux/reducer"
-import { AppState, SagaStore } from "../src/redux/store"
+import rootReducer, { AppState } from "../src/redux/reducer"
+import { SagaStore } from "../src/redux/store"
 
 export const getInitialState = (): AppState => rootReducer(undefined, { type: null })
 

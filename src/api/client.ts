@@ -1,5 +1,8 @@
 import {
   ICredentials,
+  IFund,
+  IFundApplication,
+  IFundConcretization,
   IHydraCollection,
   IProcess,
   IProject,
@@ -21,6 +24,70 @@ export class FCPClient extends HydraClient {
   public refreshAuthToken = (): Promise<string> => {
     return this.get("/refresh_token")
       .then((res) => res.token)
+  }
+  /* #endregion */
+
+  /* #region Fund */
+  public getFundBySlug = (slug: string): Promise<IFund> => {
+    return this.getFunds({ slug }).then((funds) => funds["hydra:member"].shift())
+  }
+
+  public getFund = (id: number): Promise<IFund> => {
+    return this.get(`/funds/${id}`)
+  }
+
+  public getFunds = (query: any = {}): Promise<IHydraCollection<IFund>> => {
+    return this.get("/funds", query)
+  }
+
+  public createFund = (fund: IFund): Promise<IFund> => {
+    return this.post("/funds", fund)
+  }
+
+  public updateFund = (fund: IFund): Promise<IFund> => {
+    return this.put(fund["@id"], fund)
+  }
+
+  public deleteFund = (concretization: IFundConcretization): Promise<void> => {
+    return this.delete(concretization["@id"])
+  }
+
+  public createFundConcretization = (concretization: IFundConcretization): Promise<IFundConcretization> => {
+    return this.post("/fund_concretizations", concretization)
+  }
+
+  public updateFundConcretization = (concretization: IFundConcretization): Promise<IFundConcretization> => {
+    return this.put(concretization["@id"], concretization)
+  }
+
+  public deleteFundConcretization = (concretization: IFundConcretization): Promise<void> => {
+    return this.delete(concretization["@id"])
+  }
+
+  public acitvateFund = (fund: IFund): Promise<IFund> => {
+    return this.post(fund["@id"] + "/activate", {})
+  }
+  /* #endregion */
+
+  /* #region FundApplication */
+  public getFundApplication = (id: number): Promise<IFundApplication> => {
+    return this.get(`/fund_applications/${id}`)
+  }
+
+  public getFundApplications = (query: any = {}): Promise<IHydraCollection<IFundApplication>> => {
+    return this.get("/fund_applications", query)
+  }
+
+  public createFundApplication = (fundApplication: IFundApplication): Promise<IFundApplication> => {
+    return this.post("/fund_applications", fundApplication)
+  }
+
+  public updateFundApplication = (fundApplication: IFundApplication): Promise<IFundApplication> => {
+    return this.put(fundApplication["@id"], fundApplication)
+  }
+
+  public deleteFundApplication = (fundApplication: IFundApplication): Promise<void> => {
+    return this.delete(fundApplication["@id"])
   }
   /* #endregion */
 
@@ -122,6 +189,16 @@ export class FCPClient extends HydraClient {
 
   public deleteUser = (user: IUser): Promise<void> => {
     return this.delete(user["@id"])
+  }
+  /* #endregion */
+
+  /* #region Validation */
+  public confirmValidation = (id: string, token: string): Promise<boolean> => {
+    return this.post(`/validations/${id}/confirm`, { token })
+  }
+
+  public resetPassword = (id: string, token: string, password: string): Promise<boolean> => {
+    return this.post(`/validations/${id}/confirm`, { token, password })
   }
   /* #endregion */
 }

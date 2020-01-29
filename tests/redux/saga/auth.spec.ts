@@ -6,22 +6,31 @@ import { throwError } from "redux-saga-test-plan/providers"
 import { call } from "redux-saga/effects"
 
 import apiClient from "api/client"
-import { loginAction, loginFailedAction, loginSuccessfulAction, refreshTokenAction, setAuthAction } from "redux/actions/auth"
+import { loginAction, logoutAction, refreshTokenAction, setAuthAction } from "redux/actions/auth"
+import { loadingSuccessAction, setLoadingAction } from "redux/helper/actions"
+import { scopedRequestReducer } from "redux/helper/reducers"
+import { initialRequestState } from "redux/helper/state"
 import authReducer from "redux/reducer/auth"
-import { initialAuthState } from "redux/reducer/auth"
-import { loginSaga, loginSuccessfulSaga, logoutSaga, saveToken } from "redux/saga/auth"
+import { loginSaga, logoutSaga, saveToken } from "redux/saga/auth"
+import { getCurrentUser } from "redux/saga/currentUser"
 import { AuthToken } from "services/authToken"
 import { removeStorageItem, setStorageItem } from "services/localStorage"
 import { AUTH_COOKIE_NAME, AUTH_LOCALSTORAGE_NAME } from "../../../config"
 
 describe("Auth:loginSaga", () => {
   const credentials = { username: "test@example.net", password: "secret" }
-  const action = loginAction(credentials)
+  const successHandler = () => ({})
+  const errorHandler = () => ({})
+  const submittingHandler = () => ({})
+  const action = loginAction(credentials,
+    { success: successHandler, setErrors: errorHandler, setSubmitting: submittingHandler })
   const token = "test123"
 
-  it("requests token, stores the token in state & cookie, triggeres refresh", () => {
+  it("requests token, stores the token in state & cookie, triggers refresh", () => {
+    expectSaga.DEFAULT_TIMEOUT = 15000
+
     return expectSaga(loginSaga, action)
-      .withState(initialAuthState)
+      .withState(null)
       .withReducer(authReducer)
       .provide([
         [call(apiClient.requestAuthToken, credentials), token],
@@ -29,19 +38,21 @@ describe("Auth:loginSaga", () => {
         // mock those calls, they would error server-side
         [matchers.call.fn(Cookie.set), true],
         [matchers.call.fn(setStorageItem), true],
+        [matchers.call.fn(getCurrentUser), null],
       ])
+      .put(setLoadingAction("login", true))
       .call(apiClient.requestAuthToken, credentials)
       .call(saveToken, token)
-      .put(loginSuccessfulAction())
+      .put(loadingSuccessAction("login", token))
+      .call(getCurrentUser)
+      .call(successHandler, null)
       .put(refreshTokenAction())
       .hasFinalState({
-        ...initialAuthState,
-        token: {
-          encoded: token,
-          expiresAt: 0,
-          roles: [],
-          username: "",
-        },
+        encoded: token,
+        expiresAt: 0,
+        id: null,
+        roles: [],
+        username: "",
       })
       .run()
   })
@@ -50,15 +61,17 @@ describe("Auth:loginSaga", () => {
     const message = "Bad Credentials."
 
     return expectSaga(loginSaga, action)
-      .withState(initialAuthState)
-      .withReducer(authReducer)
+      .withState(initialRequestState)
+      .withReducer(scopedRequestReducer("login"))
       .provide([
         [matchers.call.fn(apiClient.requestAuthToken), throwError(new Error(message))],
       ])
-      .put(loginFailedAction(message))
+      .call(errorHandler, { _error: message })
+      .put(setLoadingAction("login", false))
+      .call(submittingHandler, false)
       .hasFinalState({
-        ...initialAuthState,
-        error: message,
+        ...initialRequestState,
+        loadingError: null,
       })
       .run()
   })
@@ -83,32 +96,6 @@ describe("Auth:loginSaga", () => {
   */
 })
 
-describe("Auth:loginSuccessfulSaga", () => {
-  it("redirects to the dashboard", () => {
-    const action = loginSuccessfulAction()
-
-    return expectSaga(loginSuccessfulSaga, action)
-      .provide([
-        // mock this call, it would error server-side
-        [matchers.call.fn(Router.push), true],
-      ])
-      .call(Router.push, "/dashboard")
-      .run()
-  })
-
-  it("redirects to the requested URL if given", () => {
-    const action = loginSuccessfulAction("/users")
-
-    return expectSaga(loginSuccessfulSaga, action)
-      .provide([
-        // mock this call, it would error server-side
-        [matchers.call.fn(Router.push), true],
-      ])
-      .call(Router.push, "/users")
-      .run()
-  })
-})
-
 describe("Auth:saveTokenSaga", () => {
   it("saves token in cookie and localstorage", () => {
     const token = "test123"
@@ -129,7 +116,8 @@ describe("Auth:saveTokenSaga", () => {
 
 describe("Auth:logoutSaga", () => {
   it("removes cookie, syncs localstorage and redirects to the homepage", () => {
-    return expectSaga(logoutSaga)
+    const action = logoutAction()
+    return expectSaga(logoutSaga, action)
       .provide([
         // mock those calls, they would error server-side
         [matchers.call.fn(Cookie.remove), true],

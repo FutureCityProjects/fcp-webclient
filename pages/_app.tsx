@@ -2,6 +2,7 @@ import ServerCookie from "next-cookies"
 import withReduxSaga from "next-redux-saga"
 import withRedux, { AppProps as ReduxProps, NextJSAppContext } from "next-redux-wrapper"
 import App, { AppProps } from "next/app"
+import Router from "next/router"
 import NextNprogress from "nextjs-progressbar"
 import React from "react"
 import IdleTimer from "react-idle-timer"
@@ -19,6 +20,19 @@ import { AUTH_COOKIE_NAME, AUTH_IDLE_TIMEOUT, AUTH_LOCALSTORAGE_NAME } from "../
 type Props = AppProps & ReduxProps & {
   authStorageChanged: any,
   isIdle: any,
+}
+
+// @todo fixes additional page specific CSS not loading (dev only)
+// @see https://github.com/zeit/next-plugins/issues/282
+if (process.env.NODE_ENV !== "production") {
+  Router.events.on("routeChangeComplete", () => {
+    const path = "/_next/static/css/styles.chunk.css"
+    const chunksNodes: NodeListOf<HTMLLinkElement> = document.querySelectorAll(`link[href*="${path}"]:not([rel=preload])`)
+    if (chunksNodes.length) {
+      const timestamp = new Date().valueOf()
+      chunksNodes[0].href = `${path}?ts=${timestamp}`
+    }
+  })
 }
 
 // extend the default App with properties including the Redux store,
@@ -40,12 +54,11 @@ class FCPApp extends App<Props> {
 
       const token = ServerCookie(ctx)[AUTH_COOKIE_NAME]
       if (token) {
-        // Save auth in the store for use while rendering and transport
-        // to the client. We do this here and not in the withAuth-HOC to
-        // have the auth data available on every page, e.g. to show login
-        // status in the menu, not only on restricted pages. This is also
-        // required for restricted pages to work client-side without
-        // having to read the cookie again
+        // Save auth in the store for use while rendering and transport to the client.
+        // We do this here and not in the withAuth-HOC to have the auth data available on every
+        // page, e.g. to show login status in the menu, not only on restricted pages.
+        // This is also/ required for restricted pages to work client-side without having to
+        // read the cookie again
         const auth = new AuthToken(token)
         if (!auth.isExpired) {
           ctx.store.dispatch(setAuthAction(auth.jwt))

@@ -1,4 +1,4 @@
-import { SAGA_STARTED, SagaAction } from "../actions/saga"
+import { SagaAction, SAGA_STARTED } from "redux/actions/saga"
 
 export interface ISagaState {
   ran: boolean,

@@ -1,5 +1,5 @@
+import uniqueId from "lodash/uniqueId"
 import { ToastOptions } from "react-toastify"
-import uuidv4 from "uuid/v4"
 
 import { NotificationActions, NotificationActionTypes } from "../actions/notifications"
 
@@ -17,7 +17,7 @@ const notificationReducer =
   (state: NotificationState = intitialNotificationState, action: NotificationActions): NotificationState => {
     switch (action.type) {
       case NotificationActionTypes.ADD_NOTIFICATION:
-        const id = uuidv4()
+        const id: string = uniqueId()
         return [...state, { content: action.content, id, options: action.options }]
 
       case NotificationActionTypes.REMOVE_NOTIFICATION:

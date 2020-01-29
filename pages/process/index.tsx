@@ -1,62 +1,61 @@
 import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
-import Link from "next/link"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
-import { Button, Col, Row, Spinner } from "reactstrap"
+import { Col, Row, Spinner } from "reactstrap"
 
-import { ROLES } from "api/schema"
+import { UserRole } from "api/schema"
+import BaseLayout from "components/BaseLayout"
+import PageError from "components/common/PageError"
 import Redirect from "components/common/Redirect"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { withAuth } from "components/hoc/withAuth"
-import Layout from "components/Layout"
 import ProcessView from "components/process/ProcessView"
 import { loadCurrentProcessAction } from "redux/actions/currentProcess"
-import { selectCurrentProcess } from "redux/reducer/currentProcess"
-import { AppState } from "redux/store"
+import { AppState } from "redux/reducer"
+import { selectCurrentProcess } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
+import { Routes } from "services/routes"
 
 const mapStateToProps = (state: AppState) => ({
   process: selectCurrentProcess(state),
-  request: state.currentProcess.request,
+  request: state.requests.processLoading,
 })
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const Page: I18nPage<PageProps> = ({ process, request }) => {
+// @todo move to /management/processes for multi-mandant
+const ProcessDetailPage: I18nPage<PageProps> = ({ process, request, t }) => {
   if (!request.isLoading && !process) {
-    return <Redirect route="/process/create" />
+    return <Redirect route={Routes.PROCESS_CREATE} />
   }
 
-  if (request.isLoading) {
-    return <Layout title="...loading"><Spinner /></Layout>
-  }
-
-  return <Layout>
+  return <BaseLayout pageTitle={t("page.process.index.title")}>
     <Row>
-      <Col>
-        {request.loadingError && <p className="text-danger">{request.loadingError}</p>}
+      <Col sm={8}>
+        <h1>{t("page.process.index.heading")}</h1>
+        <p><TranslatedHtml content="page.process.index.intro" /></p>
+
+        <PageError error={request.loadingError} />
+        {request.isLoading && <Spinner />}
         {process && <ProcessView process={process} />}
       </Col>
     </Row>
-    <Row>
-      <Col>
-        <hr />
-        <Link href="/process/edit">
-          <Button>Prozess bearbeiten</Button>
-        </Link>
-      </Col>
-    </Row>
-  </Layout >
+  </BaseLayout>
 }
 
-Page.getInitialProps = async ({ store }: NextJSContext) => {
+ProcessDetailPage.getInitialProps = async ({ store }: NextJSContext) => {
   if (!selectCurrentProcess(store.getState())) {
     store.dispatch(loadCurrentProcessAction())
   }
 
-  const props = mapStateToProps(store.getState())
-  return { ...props, namespacesRequired: includeDefaultNamespaces() }
+  return { namespacesRequired: includeDefaultNamespaces() }
 }
 
-export default withAuth(connector(withTranslation(["common", "_error"])(Page)), ROLES.ROLE_PROCESS_OWNER)
+export default withAuth(
+  connector(
+    withTranslation(includeDefaultNamespaces())(ProcessDetailPage),
+  ),
+  UserRole.PROCESS_OWNER,
+)

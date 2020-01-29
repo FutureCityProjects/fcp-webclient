@@ -1,27 +1,26 @@
+import { withCallback } from "redux-saga-callback"
 import { all, call, put, select, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
 import { IProcess, IRegistration, IUser } from "api/schema"
-import { AuthActionTypes } from "redux/actions/auth"
 import {
   IRegisterUserAction,
   RegistrationActionTypes,
-  resetRegistrationAction,
   setRegisteredUserAction,
 } from "redux/actions/registration"
 import { createModelSuccessAction, setLoadingAction } from "redux/helper/actions"
-import { selectCurrentProcess } from "redux/reducer/currentProcess"
-import { Scope } from "redux/reducer/data"
+import { AppState } from "redux/reducer"
+import { EntityType } from "redux/reducer/data"
 import { selectNewIdea } from "redux/reducer/newIdea"
 import { selectNewProject } from "redux/reducer/newProject"
+import { Routes } from "services/routes"
 import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
-import { loadCurrentProcessSaga } from "./currentProcess"
+import { getCurrentProcess } from "./currentProcess"
 
 export function* registrationWatcherSaga() {
   yield all([
-    takeLatest(RegistrationActionTypes.REGISTER_USER, registerUserSaga),
-    takeLatest(AuthActionTypes.LOGIN_SUCCESSFUL, resetRegistrationSaga),
+    takeLatest(RegistrationActionTypes.REGISTER_USER, withCallback(registerUserSaga)),
   ])
 }
 
@@ -29,9 +28,12 @@ function* registerUserSaga(action: IRegisterUserAction) {
   const { success, setErrors, setSubmitting } = action.actions
 
   try {
-    yield put(setLoadingAction("registration", true))
+    yield put(setLoadingAction("user_operation", true))
+    // the API uses {{param}} as placeholder while Next uses [param]:
+    const route = Routes.CONFIRM_ACCOUNT.replace(/\[/g, "{{").replace(/\]/g, "}}")
+
     const registration: IRegistration = {
-      validationUrl: BASE_URL + "validation/confirm?id={{id}}&token={{token}}&type={{type}}",
+      validationUrl: BASE_URL + route,
       ...action.user,
     }
 
@@ -41,13 +43,15 @@ function* registerUserSaga(action: IRegisterUserAction) {
     // to add the idea there
     const newIdea = yield select(selectNewIdea)
     if (newIdea) {
-      // inject the current process, it's required
-      let process: IProcess = yield select(selectCurrentProcess)
+      const process: IProcess = yield call(getCurrentProcess)
       if (!process) {
-        yield call(loadCurrentProcessSaga)
-        process = yield select(selectCurrentProcess)
+        const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+        yield put(setLoadingAction("new_idea", false, err))
+        yield put(setLoadingAction("user_operation", false, err))
+        return null
       }
 
+      // inject the current process, it's required
       newIdea.process = process["@id"]
       registration.createdProjects.push(newIdea)
     }
@@ -56,39 +60,37 @@ function* registerUserSaga(action: IRegisterUserAction) {
     // to add the project there
     const newProject = yield select(selectNewProject)
     if (newProject) {
-      // inject the current process, it's required
-      let process: IProcess = yield select(selectCurrentProcess)
+      const process: IProcess = yield call(getCurrentProcess)
       if (!process) {
-        yield call(loadCurrentProcessSaga)
-        process = yield select(selectCurrentProcess)
+        const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+        yield put(setLoadingAction("new_idea", false, err))
+        yield put(setLoadingAction("user_operation", false, err))
+        return null
       }
 
+      // inject the current process, it's required
       newProject.process = process["@id"]
       registration.createdProjects.push(newProject)
     }
 
     const newUser: IUser = yield call(apiClient.registerUser, registration)
-    yield put(createModelSuccessAction(Scope.USER, newUser))
-    yield put(setLoadingAction("registration", false))
+    yield put(createModelSuccessAction(EntityType.USER, newUser))
+    yield put(setLoadingAction("user_operation", false))
     yield put(setRegisteredUserAction(newUser))
     yield call(success)
+
+    return newUser
   } catch (err) {
     if (err instanceof SubmissionError) {
-      yield call(setErrors, { ...err.errors })
-      yield put(setLoadingAction("registration", false))
+      yield call(setErrors, err.errors)
     } else {
       // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
-      yield put(setLoadingAction("registration", false, err.message))
     }
 
+    yield put(setLoadingAction("user_operation", false))
     yield call(setSubmitting, false)
-  }
-}
 
-/**
- * After the user logged in remove the reference to a previous registration
- */
-function* resetRegistrationSaga() {
-  yield put(resetRegistrationAction())
+    return null
+  }
 }

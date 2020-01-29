@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Router, withRouter } from "next/router"
-import React, { FunctionComponent } from "react"
+import React from "react"
 
 interface IProps {
   as?: string
@@ -9,7 +9,7 @@ interface IProps {
   activeClassName?: string
 }
 
-const ActiveLink: FunctionComponent<IProps> = ({ router, children, href, ...props }) => {
+const ActiveLink: React.FC<IProps> = ({ router, children, href, ...props }) => {
   const child = React.Children.only(children) as React.ReactElement<any>
 
   const activeClassName = props.activeClassName ? props.activeClassName : "active"

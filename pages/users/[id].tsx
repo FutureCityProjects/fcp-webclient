@@ -4,21 +4,23 @@ import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Spinner } from "reactstrap"
 
-import { ROLES } from "api/schema"
+import { UserRole } from "api/schema"
+import BaseLayout from "components/BaseLayout"
 import StatusCode from "components/common/StatusCode"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
-import Layout from "components/Layout"
 import { Show } from "components/user/Show"
 import { loadModelAction } from "redux/helper/actions"
-import { Scope, selectById } from "redux/reducer/data"
-import { AppState } from "redux/store"
+import { AppState } from "redux/reducer"
+import { EntityType, selectById } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { REQUEST_ERRORS } from "services/requestError"
 
 const mapStateToProps = (state: AppState, { id }) => ({
-  request: state.userManagement.request,
-  user: selectById(Scope.USER, id, state),
+  // @todo use custom reducer to keep track of the loaded users to know if we loaded with
+  // admin privileges or if the user was in state from a public page etc.
+  request: state.requests.userLoading,
+  user: selectById(state, EntityType.USER, id),
 })
 
 const connector = connect(mapStateToProps)
@@ -26,10 +28,10 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   id: any,
 }
 
-const Page: I18nPage<PageProps> = ({ id, request, user }) => {
+const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
   if (!id || id <= 0) {
     return <StatusCode statusCode={400}>
-      <ErrorPage statusCode={400} error={"_error:param.invalidId"} />
+      <ErrorPage statusCode={400} error={"failure.invalidRequest"} />
     </StatusCode>
   }
 
@@ -54,23 +56,28 @@ const Page: I18nPage<PageProps> = ({ id, request, user }) => {
     </StatusCode>
   }
 
-  return <Layout>
+  return <BaseLayout pageTitle="Benutzerliste">
     {request.isLoading
       ? <Spinner />
       : <Show user={user} />
     }
-  </Layout>
+  </BaseLayout>
 }
 
-Page.getInitialProps = ({ store, query }: NextJSContext) => {
+UserDetailPage.getInitialProps = ({ store, query }: NextJSContext) => {
   const id = parseInt(query.id as string, 10)
 
-  if (id > 0 && !selectById(Scope.USER, id, store.getState())) {
-    store.dispatch(loadModelAction(Scope.USER, "userManagement", { id }))
+  // @todo use custom reducer to keep track of users loaded with admin privileges
+  if (id > 0 && !selectById(store.getState(), EntityType.USER, id)) {
+    store.dispatch(loadModelAction(EntityType.USER, { id }, "user_management"))
   }
 
-  const state = mapStateToProps(store.getState(), { id })
-  return { ...state, id, namespacesRequired: includeDefaultNamespaces() }
+  return { id, namespacesRequired: includeDefaultNamespaces() }
 }
 
-export default withAuth(connector(withTranslation("common")(Page)), ROLES.ROLE_ADMIN)
+export default withAuth(
+  connector(
+    withTranslation(includeDefaultNamespaces())(UserDetailPage),
+  ),
+  UserRole.ADMIN,
+)

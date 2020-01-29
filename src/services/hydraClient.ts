@@ -105,9 +105,9 @@ export class HydraClient {
     if (err.request) {
       // `err.request` is an instance of XMLHttpRequest in the browser and an instance of
       // http.ClientRequest in node.js
-      // console.log(err.request)
+      // console.log("failed request:", err.request)
 
-      throw new RequestError("The request was made, but no response was received")
+      throw new RequestError("failure.noNetworkResponse")
     }
 
     throw new RequestError("Something happened in setting up the request that triggered an Error")

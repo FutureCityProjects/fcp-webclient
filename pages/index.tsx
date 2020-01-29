@@ -1,34 +1,32 @@
 import { WithTranslation } from "next-i18next"
-import React from "react"
-
-import Layout from "components/Layout"
 import Link from "next/link"
-import { withTranslation } from "services/i18n"
-import { includeDefaultNamespaces } from "services/i18n"
+import React from "react"
+import { Button } from "reactstrap"
 
-interface IProps extends WithTranslation {
-  message: string
+import BaseLayout from "components/BaseLayout"
+import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
+import { Routes } from "services/routes"
+
+type PageProps = WithTranslation
+
+const FrontPage: I18nPage<PageProps> = () => {
+  return <BaseLayout pageTitle="Home" isFrontPage={true}>
+    <div className="home-content">
+      <h1 role="heading" aria-level={2} className="title">Gemeinsam Dresden nachhaltig gestalten</h1>
+      <span aria-label="quote" className="quote">"Deine Plattform für nachhaltige Stadtentwicklung"</span>
+
+      <Link href={Routes.MARKETPLACE}>
+        <Button aria-label="marketplace" color="dark">
+          <span className="button-title">zum Marktplatz</span>
+          Hier findest du alle Ideen und laufende Projekte
+        </Button>
+      </Link>
+    </div>
+  </BaseLayout>
 }
 
-function Page({ t }: IProps) {
-  return <Layout title="start">
-    <p>{t("home")}</p>
-    <Link href="/idea/create">
-      <a title="Neue Idee eintragen">Neue Projektidee</a>
-    </Link>
-    <Link href="/project/create?inspiration=14">
-      <a title="Idee übernehmen">Neues Projekt</a>
-    </Link>
-  </Layout>
-}
+FrontPage.getInitialProps = async () => ({
+  namespacesRequired: includeDefaultNamespaces(),
+})
 
-Page.getInitialProps = async () => {
-  const message = "Something unexpected happened!"
-
-  return {
-    message,
-    namespacesRequired: includeDefaultNamespaces(),
-  }
-}
-
-export default withTranslation("common")(Page)
+export default withTranslation(includeDefaultNamespaces())(FrontPage)

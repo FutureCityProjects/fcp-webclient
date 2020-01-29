@@ -6,24 +6,26 @@ import apiClient from "api/client"
 import {
   AuthActionTypes,
   ILoginAction,
-  ILoginSuccessfulAction,
-  loginFailedAction,
-  loginSuccessfulAction,
+  ILogoutAction,
   logoutAction,
   refreshTokenAction,
   setAuthAction,
 } from "redux/actions/auth"
+import { clearStoreAction } from "redux/actions/general"
+import { addNotificationAction } from "redux/actions/notifications"
+import { loadingSuccessAction, setLoadingAction } from "redux/helper/actions"
 import { selectAuthExpiresIn, selectAuthToken, selectIsAuthenticated } from "redux/reducer/auth"
 import { AuthToken } from "services/authToken"
 import { getStorageItem, removeStorageItem, setStorageItem } from "services/localStorage"
-import { RequestError } from "services/requestError"
+import { Routes } from "services/routes"
+import { SubmissionError } from "services/submissionError"
 import { AUTH_COOKIE_NAME, AUTH_LOCALSTORAGE_NAME, AUTH_REFRESH_THRESHOLD } from "../../../config"
+import { getCurrentUser } from "./currentUser"
 
 export function* authWatcherSaga() {
   yield all([
     takeLatest(AuthActionTypes.LOCAL_STORAGE_CHANGED, localStorageChangedSaga),
     takeLatest(AuthActionTypes.LOGIN, loginSaga),
-    takeEvery(AuthActionTypes.LOGIN_SUCCESSFUL, loginSuccessfulSaga),
     takeEvery(AuthActionTypes.LOGOUT, logoutSaga),
 
     // we use takeLatest to allow restart of the countdown when the token was refreshed by another tab
@@ -33,35 +35,54 @@ export function* authWatcherSaga() {
   ])
 }
 
+/**
+ * exported for the tests
+ */
 export function* loginSaga(action: ILoginAction) {
+  const { success, setErrors, setSubmitting } = action.actions
   try {
+    yield put(setLoadingAction("login", true))
     const encoded = yield call(apiClient.requestAuthToken, action.credentials)
-
     yield call(saveToken, encoded)
+    yield put(loadingSuccessAction("login", encoded))
 
-    // notify the UI
-    yield put(loginSuccessfulAction(action.redirectBack))
+    // enforce loading the current user, we need him to decide where to redirect after the login
+    const user = yield call(getCurrentUser)
+
+    yield call(success, user)
 
     // trigger the refresh mechanism
     yield put(refreshTokenAction())
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestFailed" : err.message
-    yield put(loginFailedAction(msg))
+    if (err instanceof SubmissionError) {
+      yield call(setErrors, err.errors)
+    } else {
+      // @todo log RequestError for monitoring
+      yield call(setErrors, { _error: err.message })
+    }
+
+    yield put(setLoadingAction("login", false))
+    yield call(setSubmitting, false)
   }
 }
 
-export function* loginSuccessfulSaga(action: ILoginSuccessfulAction) {
-  yield call(Router.push, action.redirectBack || "/dashboard")
-}
-
-export function* logoutSaga() {
+/**
+ * exported for the tests
+ */
+export function* logoutSaga(action: ILogoutAction) {
   yield call(Cookie.remove, AUTH_COOKIE_NAME)
 
   yield call(removeStorageItem, AUTH_LOCALSTORAGE_NAME)
 
   // @todo get redirect url from store|config|env
-  yield call(Router.push, "/")
+  yield call(Router.push, action.message ? Routes.LOGIN : Routes.HOME)
+
+  // remove all data from the store. To keep the state consistent we also need  to clear all
+  // dependent states, like IDs of all projects shown in the marketplace.
+  yield put(clearStoreAction())
+
+  // only after the store was cleared add new state
+  yield put(addNotificationAction(action.message || "message.auth.logout", "info"))
 }
 
 export function* refreshTokenSaga() {
@@ -116,12 +137,13 @@ export function* doRefresh() {
     // attention: no code after put(), we use takeLatest which cancels the execution when
     // the same refresh saga is started again
   } catch (err) {
-    // @todo log the error, different handling for network error and 401?
     // tslint:disable-next-line: no-console
     console.log("WARNING: Token refresh failed, maybe user locked meanwhile, logging out...")
+    // @todo log the error, different handling for network error and 401?
+    // tslint:disable-next-line: no-console
+    console.log(err)
 
-    // @todo give logout reason to show as message
-    yield put(logoutAction())
+    yield put(logoutAction("message.auth.refreshFailed"))
   }
 }
 
@@ -155,8 +177,7 @@ export function* saveToken(encodedToken: string) {
 export function* userIsIdleSaga() {
   const isAuthenticated = yield select(selectIsAuthenticated)
   if (isAuthenticated) {
-    // @todo give logout reason to show as message
-    yield put(logoutAction())
+    yield put(logoutAction("message.auth.idleLogout"))
   }
 }
 
@@ -182,7 +203,6 @@ export function* localStorageChangedSaga() {
     // restart the refresh mechanism if we received a (new) token
     yield put(refreshTokenAction())
   } else if (storeAuth) {
-    // @todo give logout reason to show as message
-    yield put(logoutAction())
+    yield put(logoutAction("Logout in anderem Browser-Tab"))
   }
 }

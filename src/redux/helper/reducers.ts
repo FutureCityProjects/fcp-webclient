@@ -1,8 +1,10 @@
 import { INumericIdentifierModel } from "api/schema"
+import { EntityType } from "redux/reducer/data"
 import {
+  IEntityAction,
   ILoadCollectionSuccessAction,
+  ILoadingSuccessAction,
   IModelAction,
-  IScopeAction,
   ISetLoadingAction,
 } from "./actions"
 import {
@@ -12,35 +14,43 @@ import {
   IRequestState,
 } from "./state"
 
-export const scopedSetLoadingReducer = (scope: string) => {
-  const setLoadingReducer = (state: IRequestState = initialRequestState, action: ISetLoadingAction) => {
-    switch (action.type) {
-      case "SET_LOADING_" + scope.toUpperCase():
-        return { ...state, isLoading: action.loading, loadingError: action.error }
+export const scopedRequestReducer = (scope: string) => {
+  const requestReducer =
+    (state: IRequestState = initialRequestState, action: ISetLoadingAction | ILoadingSuccessAction) => {
+      switch (action.type) {
+        case "SET_LOADING_" + scope.toUpperCase():
+          return {
+            ...state,
+            isLoading: (action as ISetLoadingAction).loading,
+            loadingError: (action as ISetLoadingAction).error,
+          }
 
-      default:
-        return state
+        case "LOADING_" + scope.toUpperCase() + "_SUCCESS":
+          return { ...state, isLoading: false, loadingError: null }
+
+        default:
+          return state
+      }
     }
-  }
 
-  return setLoadingReducer
+  return requestReducer
 }
 
-export function scopedObjectReducer<T extends INumericIdentifierModel>(scope: string) {
+export function scopedObjectReducer<T extends INumericIdentifierModel>(entityType: EntityType) {
   const objectReducer = (
     state: IIndexedCollectionState<T> = initialIndexedCollectionState,
-    action: IScopeAction,
+    action: IEntityAction,
   ) => {
     switch (action.type) {
-      case `LOAD_${scope.toUpperCase()}_SUCCESS`:
+      case `LOAD_${entityType.toUpperCase()}_SUCCESS`:
       // no break
-      case `CREATE_${scope.toUpperCase()}_SUCCESS`:
+      case `CREATE_${entityType.toUpperCase()}_SUCCESS`:
       // no break
-      case `UPDATE_${scope.toUpperCase()}_SUCCESS`:
+      case `UPDATE_${entityType.toUpperCase()}_SUCCESS`:
         const singleModel = (action as IModelAction<T>).model
         return { ...state, [singleModel.id]: singleModel }
 
-      case `DELETE_${scope.toUpperCase()}_SUCCESS`:
+      case `DELETE_${entityType.toUpperCase()}_SUCCESS`:
         const deletedModel = (action as IModelAction<T>).model
         const reduced: IIndexedCollectionState<T> = {}
         Object.values(state).forEach((value) => {
@@ -49,7 +59,7 @@ export function scopedObjectReducer<T extends INumericIdentifierModel>(scope: st
         })
         return reduced
 
-      case `LOAD_${scope.toUpperCase()}_COLLECTION_SUCCESS`:
+      case `LOAD_${entityType.toUpperCase()}_COLLECTION_SUCCESS`:
         const newCollection: IIndexedCollectionState<T> = {}
         const data = (action as ILoadCollectionSuccessAction<T>).collection
         data["hydra:member"].forEach((element: T) => {

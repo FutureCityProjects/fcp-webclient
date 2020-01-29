@@ -4,8 +4,6 @@ import { IWebToken } from "redux/helper/state"
 export enum AuthActionTypes {
   LOCAL_STORAGE_CHANGED = "LOCAL_STORAGE_CHANGED",
   LOGIN = "LOGIN",
-  LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL",
-  LOGIN_FAILED = "LOGIN_FAILED",
   LOGOUT = "LOGOUT",
   REFRESH_TOKEN = "REFRESH_TOKEN",
   SET_AUTH = "SET_AUTH",
@@ -21,22 +19,13 @@ export interface ILocalStorageChangedAction extends IAuthAction {
 }
 
 export interface ILoginAction extends IAuthAction {
+  actions: any
   credentials: ICredentials
-  redirectBack?: string
   type: AuthActionTypes.LOGIN
 }
 
-export interface ILoginSuccessfulAction extends IAuthAction {
-  redirectBack?: string
-  type: AuthActionTypes.LOGIN_SUCCESSFUL
-}
-
-export interface ILoginFailedAction extends IAuthAction {
-  type: AuthActionTypes.LOGIN_FAILED
-  error: string
-}
-
 export interface ILogoutAction extends IAuthAction {
+  message?: string
   type: AuthActionTypes.LOGOUT
 }
 
@@ -56,16 +45,14 @@ export interface IUserIsIdleAction extends IAuthAction {
 export type AuthActions =
   ILocalStorageChangedAction
   | ILoginAction
-  | ILoginSuccessfulAction
-  | ILoginFailedAction
   | ILogoutAction
   | ISetAuthAction
   | IRefreshTokenAction
   | IUserIsIdleAction
 
-export const loginAction = (credentials: ICredentials, redirectBack?: string): ILoginAction => ({
+export const loginAction = (credentials: ICredentials, actions: any): ILoginAction => ({
+  actions,
   credentials,
-  redirectBack,
   type: AuthActionTypes.LOGIN,
 })
 
@@ -73,17 +60,8 @@ export const localStorageChangedAction = (): ILocalStorageChangedAction => ({
   type: AuthActionTypes.LOCAL_STORAGE_CHANGED,
 })
 
-export const loginSuccessfulAction = (redirectBack?: string): ILoginSuccessfulAction => ({
-  redirectBack,
-  type: AuthActionTypes.LOGIN_SUCCESSFUL,
-})
-
-export const loginFailedAction = (error: string): ILoginFailedAction => ({
-  error,
-  type: AuthActionTypes.LOGIN_FAILED,
-})
-
-export const logoutAction = (): ILogoutAction => ({
+export const logoutAction = (message?: string): ILogoutAction => ({
+  message,
   type: AuthActionTypes.LOGOUT,
 })
 

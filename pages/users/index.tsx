@@ -4,27 +4,28 @@ import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
 
-import { ROLES } from "api/schema"
+import { UserRole } from "api/schema"
+import BaseLayout from "components/BaseLayout"
 import StatusCode from "components/common/StatusCode"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
-import Layout from "components/Layout"
 import { List } from "components/user/List"
 import { loadCollectionAction } from "redux/helper/actions"
-import { Scope, selectCollection } from "redux/reducer/data"
-import { AppState } from "redux/store"
+import { AppState } from "redux/reducer"
+import { EntityType, selectCollection } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { REQUEST_ERRORS } from "services/requestError"
 
 const mapStateToProps = (state: AppState) => ({
-  request: state.userManagement.request,
-  users: selectCollection(Scope.USER, state),
+  // @todo user custom reducer to track users loaded with admin privileges
+  request: state.requests.usersLoading,
+  users: selectCollection(state, EntityType.USER),
 })
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const Page: I18nPage<PageProps> = ({ request, users }: PageProps) => {
+const UserAdministrationPage: I18nPage<PageProps> = ({ request, users }: PageProps) => {
   if (!request.isLoading && request.loadingError) {
     let code: number = 500
     let error: string = null
@@ -46,7 +47,7 @@ const Page: I18nPage<PageProps> = ({ request, users }: PageProps) => {
     </StatusCode>
   }
 
-  return <Layout>
+  return <BaseLayout pageTitle="Benutzerdetails">
     <Row>
       <Col>
         {request.isLoading
@@ -55,16 +56,22 @@ const Page: I18nPage<PageProps> = ({ request, users }: PageProps) => {
         }
       </Col>
     </Row>
-  </Layout>
+  </BaseLayout>
 }
 
-Page.getInitialProps = async ({ store }: NextJSContext) => {
-  if (selectCollection(Scope.USER, store.getState()).length <= 0) {
-    store.dispatch(loadCollectionAction(Scope.USER, "userManagement"))
+UserAdministrationPage.getInitialProps = async ({ store }: NextJSContext) => {
+  // @todo custom reducer to track the management list, else
+  // only the current user will be shown
+  if (selectCollection(store.getState(), EntityType.USER).length <= 0) {
+    store.dispatch(loadCollectionAction(EntityType.USER, {}, "user_management"))
   }
 
-  const props = mapStateToProps(store.getState())
-  return { ...props, namespacesRequired: includeDefaultNamespaces() }
+  return { namespacesRequired: includeDefaultNamespaces() }
 }
 
-export default withAuth(connector(withTranslation("common")(Page)), ROLES.ROLE_ADMIN)
+export default withAuth(
+  connector(
+    withTranslation(includeDefaultNamespaces())(UserAdministrationPage),
+  ),
+  UserRole.ADMIN,
+)

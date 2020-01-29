@@ -2,6 +2,7 @@ import Link from "next/link"
 import React, { FunctionComponent } from "react"
 
 import { IUser } from "api/schema"
+import { Routes, routeWithParams } from "services/routes"
 
 interface IProps {
   user: IUser
@@ -9,7 +10,7 @@ interface IProps {
 
 export const ListItem: FunctionComponent<IProps> = ({ user }: IProps) => (
   <tr>
-    <th scope="row"><Link href="/users/[id]" as={user["@id"]}>
+    <th scope="row"><Link href={Routes.USER_DETAILS} as={routeWithParams(Routes.USER_DETAILS, { id: user.id })}>
       <a>
         {user["@id"]}
       </a>
@@ -18,7 +19,7 @@ export const ListItem: FunctionComponent<IProps> = ({ user }: IProps) => (
     <td>{user.roles.join(", ")}</td>
     <td>{user.username}</td>
     <td>
-      <Link href="/users/[id]" as={user["@id"]}>
+      <Link href={Routes.USER_DETAILS} as={routeWithParams(Routes.USER_DETAILS, { id: user.id })}>
         <a>
           Show
         </a>

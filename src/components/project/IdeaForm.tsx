@@ -1,16 +1,11 @@
-import { Form, Formik, getIn } from "formik"
-import { WithTranslation } from "next-i18next"
+import { Field, Form, Formik } from "formik"
 import React from "react"
 import { Button, FormGroup, Spinner } from "reactstrap"
 
 import { IProject } from "api/schema"
-import FormikInput from "components/common/FormikInput"
-import { withTranslation } from "services/i18n"
-
-interface IProps extends WithTranslation {
-  onSubmit: any
-  idea: IProject
-}
+import FormikInput from "components/common/form/FormikInput"
+import GeneralFormError from "components/common/form/GeneralFormError"
+import { useTranslation } from "services/i18n"
 
 const validate = (values: IProject) => {
   const errors: { [key: string]: string } = {}
@@ -26,7 +21,14 @@ const validate = (values: IProject) => {
   return errors
 }
 
-const IdeaForm = ({ onSubmit, idea, t }: IProps) => {
+interface IProps {
+  onSubmit: any
+  idea: IProject
+}
+
+const IdeaForm = ({ onSubmit, idea }: IProps) => {
+  const { t } = useTranslation()
+
   return <Formik<IProject>
     initialValues={idea}
     onSubmit={onSubmit}
@@ -39,29 +41,29 @@ const IdeaForm = ({ onSubmit, idea, t }: IProps) => {
       isSubmitting,
       values,
     }) => {
-      return (
-        <Form onSubmit={handleSubmit}>
-          {getIn(errors, "_error") && <p className="text-danger">Form Error: {t(getIn(errors, "_error"))}</p>}
-          <div>
-            <FormikInput
-              help="Was willst du erreichen? Was soll getan werden?"
-              label=""
-              name="shortDescription"
-              placeholder="Kurze Beschreibung, 10-280 Zeichen"
-              required
-              type="textarea"
-              value={values.shortDescription}
-            />
-          </div>
-          <FormGroup>
-            <Button type="submit" disabled={isSubmitting}>
-              Absenden {isSubmitting && <Spinner />}
-            </Button>
-          </FormGroup>
-        </Form>
-      )
+      return <Form onSubmit={handleSubmit}>
+        <GeneralFormError errors={errors} values={values} />
+
+        <Field component={FormikInput}
+          help="form.idea.shortDescription.help"
+          label="form.idea.shortDescription.label"
+          name="shortDescription"
+          placeholder="form.idea.shortDescription.placeholder"
+          required
+          type="textarea"
+          value={values.shortDescription}
+        />
+
+        <FormGroup>
+          <Button color="primary" type="submit" disabled={isSubmitting}>
+            {t("form.submit")} {isSubmitting && <Spinner />}
+          </Button>
+        </FormGroup>
+
+        <p className="text-danger">{t("form.requiredFieldsHint")}</p>
+      </Form>
     }}
   </Formik>
 }
 
-export default withTranslation(["common", "_error"])(IdeaForm)
+export default IdeaForm

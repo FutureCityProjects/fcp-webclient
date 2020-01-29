@@ -1,13 +1,13 @@
-import { Form, Formik, getIn } from "formik"
-import { WithTranslation } from "next-i18next"
+import { Field, Form, Formik } from "formik"
 import React from "react"
 import { Button, FormGroup, Spinner } from "reactstrap"
 
 import { IProjectCreation } from "api/schema"
-import FormikInput from "components/common/FormikInput"
-import { withTranslation } from "services/i18n"
+import FormikInput from "components/common/form/FormikInput"
+import GeneralFormError from "components/common/form/GeneralFormError"
+import { useTranslation } from "services/i18n"
 
-interface IProps extends WithTranslation {
+interface IProps {
   onSubmit: any
   project: IProjectCreation
 }
@@ -34,11 +34,14 @@ const validate = (values: IProjectCreation) => {
   return errors
 }
 
-const ProjectCreationForm = ({ onSubmit, project, t }: IProps) => {
+const ProjectCreationForm = ({ onSubmit, project }: IProps) => {
+  const { t } = useTranslation()
+
   return <Formik<IProjectCreation>
     initialValues={project}
     onSubmit={onSubmit}
     validate={validate}
+    validateOnBlur={false}
     validateOnChange={false}
   >
     {({
@@ -49,34 +52,39 @@ const ProjectCreationForm = ({ onSubmit, project, t }: IProps) => {
     }) => {
       return (
         <Form onSubmit={handleSubmit}>
-          {getIn(errors, "_error") && <p className="text-danger">Form Error: {t(getIn(errors, "_error"))}</p>}
-          <FormikInput
-            help="Was motiviert dich diese Idee umzusetzen?"
-            label="Motivation"
+          <GeneralFormError errors={errors} values={values} />
+
+          <Field component={FormikInput}
+            help="form.project.create.motivation.help"
+            label="form.project.create.motivation.label"
             name="motivation"
-            placeholder="mindestens 10 Zeichen"
+            placeholder="form.project.create.motivation.placeholder"
             required
             type="textarea"
             value={values.motivation}
           />
-          <FormikInput
-            help="Welche deiner Fähigkeiten willst du in das neue Projekt einbringen?"
-            label="Fähigkeiten"
+
+          <Field component={FormikInput}
+            help="form.project.create.skills.help"
+            label="form.project.create.skills.label"
             name="skills"
-            placeholder="mindestens 10 Zeichen"
+            placeholder="form.project.create.skills.placeholder"
             required
             type="textarea"
             value={values.skills}
           />
+
           <FormGroup>
             <Button type="submit" disabled={isSubmitting}>
-              Absenden {isSubmitting && <Spinner />}
+              {t("form.submit")} {isSubmitting && <Spinner />}
             </Button>
           </FormGroup>
+
+          <p className="text-danger">{t("form.requiredFieldsHint")}</p>
         </Form>
       )
     }}
   </Formik>
 }
 
-export default withTranslation(["common", "_error"])(ProjectCreationForm)
+export default ProjectCreationForm

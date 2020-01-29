@@ -1,13 +1,12 @@
-import { WithTranslation } from "next-i18next"
 import React, { useEffect } from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { toast, ToastContainer as WrappedTC } from "react-toastify"
 import { AnyAction, Dispatch } from "redux"
 
 import { removeNotificationAction } from "redux/actions/notifications"
+import { AppState } from "redux/reducer"
 import { INotification } from "redux/reducer/notifications"
-import { AppState } from "redux/store"
-import { withTranslation } from "services/i18n"
+import { useTranslation } from "services/i18n"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   removeNotification: (id: string) => dispatch(removeNotificationAction(id)),
@@ -16,7 +15,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 const mapStateToProps = (state: AppState) => ({ notifications: state.notifications })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
-type Props = ConnectedProps<typeof connector> & WithTranslation
+type Props = ConnectedProps<typeof connector>
 
 /**
  * Wrap the react-toastify container to get our notifications from the redux store
@@ -24,12 +23,17 @@ type Props = ConnectedProps<typeof connector> & WithTranslation
  *
  * @param Props
  */
-const ToastContainer = ({ notifications, removeNotification, t }: Props) => {
+const ToastContainer = ({ notifications, removeNotification }: Props) => {
+  const { t } = useTranslation()
+
   useEffect(() => {
-    notifications.forEach((notification: INotification) => {
-      toast(t(notification.content), notification.options)
-      removeNotification(notification.id)
-    })
+    // toasts are not renderes SSR -> execute on client only to keep notifications in state
+    if (process.browser) {
+      notifications.forEach((notification: INotification) => {
+        toast(t(notification.content), notification.options)
+        removeNotification(notification.id)
+      })
+    }
   })
 
   return (
@@ -37,4 +41,4 @@ const ToastContainer = ({ notifications, removeNotification, t }: Props) => {
   )
 }
 
-export default connector(withTranslation(["common", "_error"])(ToastContainer))
+export default connector(ToastContainer)

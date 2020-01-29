@@ -7,15 +7,15 @@ import createSagaMiddleware, { Task } from "redux-saga"
 import apiClient from "api/client"
 import { refreshTokenAction } from "./actions/auth"
 import { sagaStarted } from "./actions/saga"
-import rootReducer from "./reducer"
+import rootReducer, { AppState } from "./reducer"
 import { selectAuthToken } from "./reducer/auth"
 import rootSaga from "./saga"
-
-export type AppState = ReturnType<typeof rootReducer>
 
 export type SagaStore = Store<AppState> & {
   sagaTask?: Task,
 }
+
+let axiosInterceptor = null
 
 /**
  * Creates a new Redux store, used by next-redux-wrapper,
@@ -49,11 +49,19 @@ export const makeStore = (initialState: AppState, options: MakeStoreOptions): Sa
     store.dispatch(refreshTokenAction())
   }
 
+  // @todo for next.js SSR (dev only?): the axios instance is re-used for multiple requests (why?)
+  // thus adding more interceptors, keeping the ones with outdated stores and thus outdated
+  // tokens, letting requests fail with "JWT expired"
+  if (axiosInterceptor !== null) {
+    apiClient.axios.interceptors.request.eject(axiosInterceptor)
+    axiosInterceptor = null
+  }
+
   /**
    * Connect store and the apiClient to inject the JWT
    * @todo is there a better place for this?
    */
-  apiClient.axios.interceptors.request.use((request: AxiosRequestConfig): AxiosRequestConfig => {
+  axiosInterceptor = apiClient.axios.interceptors.request.use((request: AxiosRequestConfig): AxiosRequestConfig => {
     // this endpoint does not work when an (expired) token is present in the headers
     if (request.url === "/authentication_token") {
       return request

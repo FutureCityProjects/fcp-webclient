@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode"
 import { IWebToken } from "redux/helper/state"
 
 export interface IDecodedToken {
+  readonly id: number
   readonly username: string
   readonly exp: number
   readonly roles: string[],
@@ -12,7 +13,7 @@ export class AuthToken {
   public readonly decodedToken: IDecodedToken
 
   constructor(readonly token?: string) {
-    this.decodedToken = { username: "", exp: 0, roles: [] }
+    this.decodedToken = { username: "", exp: 0, id: null, roles: [] }
     try {
       if (token) { this.decodedToken = jwtDecode(token) }
       // tslint:disable-next-line: no-empty
@@ -39,6 +40,7 @@ export class AuthToken {
     return {
       encoded: this.token,
       expiresAt: this.decodedToken.exp,
+      id: this.decodedToken.id,
       roles: this.decodedToken.roles,
       username: this.decodedToken.username,
     }

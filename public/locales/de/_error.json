@@ -11,16 +11,47 @@
     "404": "Die angefragte Seite oder der Inhalt wurde nicht gefunden. Bitte kontaktiere <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn du denkst etwas ist kaputt.",
     "500": "Es ist ein interner Fehler aufgetreten. Bitte <a href=\"mailto:admin@zukunftsstadt.de\">den Support</a> wenn das Problem weiter besteht."
   },
-  "param": {
-    "invalidId": "Die angegebene ID ist ungültig, Ganzzahl >= 0 erforderlich."
+  "failure": {
+    "fundApplication": {
+      "notFound": "Der angefragte Förderantrag wurde leider nicht gefunden.",
+    },
+    "invalidRequest": "Die Anfrage ist leider ungültig, ist die URL korrekt?",
+    "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort",
+    "notLoggedIn": "Du bist nicht (mehr) eingeloggt!"
   },
   "validate": {
+    "fund": {
+      "activationNotPossible": "Der Fördertopf konnte nicht aktiviert werden.<br />Dies kann mehrere Ursachen haben: <ul><li>der Fördertopf ist bereits aktiviert (oder abgeschlossen)</li><li>es ist keine Zuspitzung angegeben</li><li>der Antragszeitraum ist nicht vollständig konfiguriert sein oder liegt nicht in der Zukunft</li></ul>"
+    },
     "general": {
       "notBlank": "Dies ist ein Pflichtfeld.",
+      "outOfRange": "Der Wert liegt ausserhalb des zulässigen Bereichs.",
       "submissionFailed": "Das Speichern eines Objektes schlug fehl.",
       "tooLong": "Der eingegbene Text ist zu lang.",
       "tooShort": "Der eingegbene Text ist zu kurz."
     },
-    "project": {}
+    "project": {},
+    "registration": {
+      "acceptTerms": "Ohne Zustimmung ist leider keine Registrierung möglich."
+    },
+    "user": {
+      "repeatPassword": {
+        "notMatching": "Die Passwörter stimmen nicht überein."
+      },
+      "username": {
+        "notValid": "Dieser Benutzername ist nicht zulässig."
+      }
+    }
+  },
+  "validation": {
+    "account": {
+      "notFound": "Es wurde kein zu den Angaben passendes Konto gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte registriere dich erneut!</li></ol>"
+    },
+    "changeEmail": {
+      "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Änderung erneut!</li></ol>"
+    },
+    "resetPassword": {
+      "notFound": "Es wurde keine zu den Angaben passende Anfrage gefunden, dies kann zwei Ursachen haben:<br /><ol><li>Die Angaben sind nicht korrekt oder unvollständig, bitte prüfe die URL oder gib den Identifikator &amp; den Sicherheitscode manuell ein.</li><li>Die Bestätigungsfrist ist bereits abgelaufen, bitte beantrage die Zurücksetzung deines Passworts erneut!</li></ol>"
+    }
   }
 }

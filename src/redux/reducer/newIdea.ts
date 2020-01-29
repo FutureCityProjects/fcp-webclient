@@ -1,8 +1,6 @@
-import { combineReducers } from "redux"
-
 import { emptyIdea, IProject } from "api/schema"
 import { NewIdeaActions, NewIdeaActionTypes } from "redux/actions/newIdea"
-import { scopedSetLoadingReducer } from "redux/helper/reducers"
+import { AppState } from "redux/reducer"
 
 const newIdeaReducer =
   (state: IProject = emptyIdea, action: NewIdeaActions): IProject => {
@@ -18,15 +16,13 @@ const newIdeaReducer =
     }
   }
 
-export default combineReducers({
-  idea: newIdeaReducer,
-  request: scopedSetLoadingReducer("new_idea"),
-})
+
+export default newIdeaReducer
 
 /**
  * Selector to retrieve the new project idea entered by the user.
  *
  * @returns IProject|null
  */
-export const selectNewIdea = (state: { newIdea: { idea: IProject } }): IProject =>
-  state.newIdea.idea.shortDescription ? state.newIdea.idea : null
+export const selectNewIdea = (state: AppState): IProject =>
+  state.newIdea.shortDescription ? state.newIdea : null

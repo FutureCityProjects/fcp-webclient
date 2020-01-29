@@ -6,62 +6,69 @@ import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
-import { ROLES } from "api/schema"
+import { UserRole } from "api/schema"
+import BaseLayout from "components/BaseLayout"
 import Redirect from "components/common/Redirect"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { withAuth } from "components/hoc/withAuth"
-import Layout from "components/Layout"
 import ProcessForm from "components/process/ProcessForm"
 import { loadCurrentProcessAction } from "redux/actions/currentProcess"
 import { createModelAction } from "redux/helper/actions"
-import { selectCurrentProcess } from "redux/reducer/currentProcess"
-import { Scope } from "redux/reducer/data"
-import { AppState } from "redux/store"
+import { AppState } from "redux/reducer"
+import { selectCurrentProcess } from "redux/reducer/data"
+import { EntityType } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
+import { Routes } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   onSubmit: (process, actions) => {
-    // add another action additionally to the formik defaults (setErrors, setSubmitting, reset, ...)
     actions.success = () => {
-      Router.push("/process")
+      Router.push(Routes.PROCESS_OVERVIEW)
     }
-    dispatch(createModelAction(Scope.PROCESS, "processManagement", process, actions))
+    dispatch(createModelAction(EntityType.PROCESS, process, actions))
   },
 })
 
 const mapStateToProps = (state: AppState) => ({
-  process: state.currentProcess,
-  request: state.processManagement.request,
+  process: selectCurrentProcess(state),
+  request: state.requests.processLoading,
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const Page: I18nPage<PageProps> = ({ onSubmit, process, request }) => {
+// @todo move to /management/processes for multi-mandant
+const ProcessCreationPage: I18nPage<PageProps> = ({ onSubmit, process, request, t }) => {
   if (process || request.loadingError) {
-    return <Redirect route="/process" />
+    return <Redirect route={Routes.PROCESS_OVERVIEW} />
   }
 
-  return <Layout>
+  return <BaseLayout pageTitle={t("page.process.create.title")}>
     <Row>
-      <Col>
-        <h1>Prozess definieren</h1>
-        <p>Es muss erst ein Prozess definiert werden bevor die Plattform benutzbar ist.</p>
+      <Col sm={8}>
+        <h1>{t("page.process.create.heading")}</h1>
+        <p><TranslatedHtml content="page.process.create.intro" /></p>
+
         {request.isLoading
           ? <Spinner />
           : <ProcessForm onSubmit={onSubmit} />
         }
       </Col>
     </Row>
-  </Layout>
+  </BaseLayout>
 }
 
-Page.getInitialProps = ({ store }: NextJSContext) => {
+ProcessCreationPage.getInitialProps = ({ store }: NextJSContext) => {
   if (!selectCurrentProcess(store.getState())) {
     store.dispatch(loadCurrentProcessAction())
   }
 
-  const props = mapStateToProps(store.getState())
-  return { ...props, namespacesRequired: includeDefaultNamespaces() }
+  return { namespacesRequired: includeDefaultNamespaces() }
 }
 
-export default withAuth(connector(withTranslation("common")(Page)), ROLES.ROLE_PROCESS_OWNER)
+export default withAuth(
+  connector(
+    withTranslation(includeDefaultNamespaces())(ProcessCreationPage),
+  ),
+  UserRole.PROCESS_OWNER,
+)

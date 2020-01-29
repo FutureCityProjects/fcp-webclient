@@ -3,19 +3,20 @@ import Router from "next/router"
 import React, { Component } from "react"
 import { ProviderProps } from "react-redux"
 
-import { ROLES } from "api/schema"
+import { UserRole } from "api/schema"
 import ErrorPage from "components/ErrorPage"
+import { AppState } from "redux/reducer"
 import { selectHasRole, selectIsAuthenticated } from "redux/reducer/auth"
-import { AppState } from "redux/store"
+import { includeDefaultNamespaces } from "services/i18n"
+import { Routes } from "services/routes"
 
 interface IProps extends ProviderProps {
   hasRequiredRole: boolean
 }
 
-export function withAuth(WrappedComponent: any, requiredRole: ROLES) {
-  return class extends Component<IProps> {
+export function withAuth(WrappedComponent: any, requiredRole: UserRole) {
+  return class WithAuth extends Component<IProps> {
     public static async getInitialProps(ctx: NextJSContext) {
-
       // the FCPApp fills the state.auth server-side if there
       // is an auth cookie, so we can simply check the state here
       const state: AppState = ctx.store.getState()
@@ -27,24 +28,24 @@ export function withAuth(WrappedComponent: any, requiredRole: ROLES) {
 
         if (ctx.isServer) {
           ctx.res.writeHead(302, {
-            Location: "/login?redirectBack=" + ctx.pathname,
+            Location: Routes.LOGIN + "?redirectBack=" + ctx.asPath,
           })
           ctx.res.end()
         } else {
-          Router.push("/login?redirectBack=" + ctx.pathname)
+          Router.push(Routes.LOGIN + "?redirectBack=" + ctx.asPath)
         }
 
         // important: prevent calling getInitialProps on the
         // child component, it's unnecessary and will probably
         // fail anyways without a valid auth token
-        return { hasRequiredRole: false }
+        return { hasRequiredRole: false, namespacesRequired: includeDefaultNamespaces() }
       }
 
-      const authProps = { hasRequiredRole: selectHasRole(state, requiredRole) }
+      const hasRequiredRole = selectHasRole(state, requiredRole)
 
-      return WrappedComponent.getInitialProps
-        ? { ...authProps, ...await WrappedComponent.getInitialProps(ctx) }
-        : authProps
+      return WrappedComponent.getInitialProps && hasRequiredRole
+        ? { hasRequiredRole, ...await WrappedComponent.getInitialProps(ctx) }
+        : { hasRequiredRole, namespacesRequired: includeDefaultNamespaces() }
     }
 
     public render() {

@@ -1,22 +1,23 @@
+import { putWait, withCallback } from "redux-saga-callback"
 import { all, call, put, select, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
 import { IProcess, IProject, ProjectProgress } from "api/schema"
-import { AuthActionTypes } from "redux/actions/auth"
-import { ICreateIdeaAction, resetNewIdeaAction } from "redux/actions/newIdea"
+import { AuthActionTypes, ISetAuthAction } from "redux/actions/auth"
+import { ICreateIdeaAction, NewIdeaActionTypes, resetNewIdeaAction } from "redux/actions/newIdea"
 import { addNotificationAction } from "redux/actions/notifications"
 import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
-import { createModelAction, createModelSuccessAction } from "redux/helper/actions"
-import { selectCurrentProcess } from "redux/reducer/currentProcess"
-import { Scope } from "redux/reducer/data"
+import { createModelAction, createModelSuccessAction, setLoadingAction } from "redux/helper/actions"
+import { AppState } from "redux/reducer"
+import { EntityType } from "redux/reducer/data"
 import { selectNewIdea } from "redux/reducer/newIdea"
-import { loadCurrentProcessSaga } from "redux/saga/currentProcess"
 import { SubmissionError } from "services/submissionError"
+import { getCurrentProcess } from "./currentProcess"
 
 export function* newIdeaWatcherSaga() {
   yield all([
-    takeLatest("CREATE_IDEA", createIdeaSaga),
-    takeLatest(AuthActionTypes.LOGIN_SUCCESSFUL, createSavedIdeaSaga),
+    takeLatest(NewIdeaActionTypes.CREATE_IDEA, withCallback(createIdeaSaga)),
+    takeLatest(AuthActionTypes.SET_AUTH, createSavedIdeaSaga),
     takeLatest(RegistrationActionTypes.SET_REGISTERED_USER, postRegistrationSaga),
   ])
 }
@@ -27,40 +28,55 @@ export function* newIdeaWatcherSaga() {
  * @param action ICreateIdeaAction
  */
 function* createIdeaSaga(action: ICreateIdeaAction) {
-  // inject the current process, it's required
-  let process: IProcess = yield select(selectCurrentProcess)
+  yield put(setLoadingAction("project_operation", true))
+
+  const process: IProcess = yield call(getCurrentProcess)
   if (!process) {
-    yield call(loadCurrentProcessSaga)
-    process = yield select(selectCurrentProcess)
+    const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+    yield put(setLoadingAction("project_operation", false, err))
+    return null
   }
+
+  // inject the current process, it's required
   action.idea.process = process["@id"]
 
-  yield put(createModelAction(Scope.PROJECT, "new_idea", action.idea, action.actions))
+  return yield putWait(createModelAction(EntityType.PROJECT, action.idea, action.actions, "new_idea"))
 }
 
 /**
  * After the user logged in: check if we have a previously entered but
  * not submitted project idea, if yes push it to the API now.
  */
-function* createSavedIdeaSaga() {
+function* createSavedIdeaSaga(action: ISetAuthAction) {
+  // no token -> no successful login -> do nothing
+  if (!action.token) {
+    return
+  }
+
   const newIdea = yield select(selectNewIdea)
   if (!newIdea) {
     return
   }
 
   try {
-    // inject the current process, it's required
-    let process: IProcess = yield select(selectCurrentProcess)
+    yield put(setLoadingAction("project_operation", true))
+    const process: IProcess = yield call(getCurrentProcess)
     if (!process) {
-      yield call(loadCurrentProcessSaga)
-      process = yield select(selectCurrentProcess)
+      const err = yield select((s) => s.currentProcess.request.loadingError)
+      yield put(setLoadingAction("project_operation", false, err))
+      return null
     }
+
+    // inject the current process, it's required
     newIdea.process = process["@id"]
 
     const savedIdea: IProject = yield call(apiClient.createProject, newIdea)
-    yield put(createModelSuccessAction(Scope.PROJECT, savedIdea))
+    yield put(createModelSuccessAction(EntityType.PROJECT, savedIdea, "new_idea"))
+    yield put(setLoadingAction("project_operation", false))
     yield put(addNotificationAction("message.projectIdea.saved", "success"))
     yield put(resetNewIdeaAction())
+
+    return savedIdea
   } catch (err) {
     if (err instanceof SubmissionError) {
       // we have no form where we could show individual messages per property, also the
@@ -70,6 +86,8 @@ function* createSavedIdeaSaga() {
       // @todo log RequestError for monitoring
       yield put(addNotificationAction(err.message, "error"))
     }
+
+    return null
   }
 }
 
@@ -92,7 +110,7 @@ function* postRegistrationSaga(action: ISetRegisteredUserAction) {
       if (project.progress === ProjectProgress.IDEA) {
         yield put(addNotificationAction("message.projectIdea.saved", "success"))
         yield put(resetNewIdeaAction())
-        yield put(createModelSuccessAction("project", createdProjects[key]))
+        yield put(createModelSuccessAction(EntityType.PROJECT, createdProjects[key], "new_idea"))
       }
     }
   }

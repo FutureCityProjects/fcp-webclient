@@ -1,8 +1,6 @@
-import { combineReducers } from "redux"
-
 import { emptyProject, IProjectCreation } from "api/schema"
 import { NewProjectActions, NewProjectActionTypes } from "redux/actions/newProject"
-import { scopedSetLoadingReducer } from "redux/helper/reducers"
+import { AppState } from "redux/reducer"
 
 const newProjectReducer =
   (state: IProjectCreation = emptyProject, action: NewProjectActions): IProjectCreation => {
@@ -18,16 +16,12 @@ const newProjectReducer =
     }
   }
 
-export default combineReducers({
-  creation: scopedSetLoadingReducer("create_project_request"),
-  inspiration: scopedSetLoadingReducer("inspiration_request"),
-  project: newProjectReducer,
-})
+export default newProjectReducer
 
 /**
  * Selector to retrieve the new project entered by the user.
  *
  * @returns IProject|null
  */
-export const selectNewProject = (state: { newProject: { project: IProjectCreation } }): IProjectCreation =>
-  state.newProject.project.motivation ? state.newProject.project : null
+export const selectNewProject = (state: AppState): IProjectCreation =>
+  state.newProject.motivation ? state.newProject : null

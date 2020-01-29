@@ -2,6 +2,7 @@ import Link from "next/link"
 import React, { FunctionComponent } from "react"
 
 import { IUser } from "api/schema"
+import { Routes } from "services/routes"
 
 interface IProps {
   user: IUser
@@ -32,8 +33,10 @@ export const Show: FunctionComponent<IProps> = ({ user }) => (
         </tr>
       </tbody>
     </table>
-    <Link href="/users"><a className="btn btn-primary">
-      Back to list
-    </a></Link>
+    <Link href={Routes.USER_OVERVIEW}>
+      <a className="btn btn-primary">
+        Back to list
+      </a>
+    </Link>
   </div>
 )

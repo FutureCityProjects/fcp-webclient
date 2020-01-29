@@ -30,8 +30,9 @@ export interface IHydraCollection<T> {
 }
 
 export enum FundState {
-  OPEN = "open",
-  SUBMITTED = "submitted",
+  ACTIVE = "active",
+  FINISHED = "finished",
+  INACTIVE = "inactive",
 }
 
 export interface IFund extends INumericIdentifierModel {
@@ -39,7 +40,7 @@ export interface IFund extends INumericIdentifierModel {
   applications?: IFundApplication[]
   briefingDate?: any
   budget?: number
-  concretizations: IFundConcretization[]
+  concretizations?: IFundConcretization[]
   criteria?: string[]
   description?: string
   finalJuryDate?: any
@@ -51,16 +52,21 @@ export interface IFund extends INumericIdentifierModel {
   maximumGrant?: number
   minimumGrant?: number
   name?: string
-  process?: IProcess
+  process?: IProcess | string
   projects?: IProject[]
   ratingBegin?: any
   ratingEnd?: any
   region?: string
   slug?: string
   sponsor?: string
-  state?: string
+  state?: FundState
   submissionBegin?: any
   submissionEnd?: any
+}
+
+export enum FundApplicationState {
+  OPEN = "open",
+  SUBMITTED = "submitted",
 }
 
 export interface IFundApplication extends INumericIdentifierModel {
@@ -71,15 +77,15 @@ export interface IFundApplication extends INumericIdentifierModel {
   id?: number
   juryComment?: string
   juryOrder?: number
-  project?: IProject
+  project?: IProject | string
   ratings?: IJuryRating[]
-  state?: string
+  state?: FundApplicationState
 }
 
 export interface IFundConcretization extends INumericIdentifierModel {
   "@id"?: string
   description?: string
-  fund?: IFund
+  fund?: IFund | string
   id?: number
   maxLength?: number
   question?: string
@@ -87,16 +93,15 @@ export interface IFundConcretization extends INumericIdentifierModel {
 
 export interface IJuryCriterion extends INumericIdentifierModel {
   "@id"?: string
-  fund?: IFund
+  fund?: IFund | string
   id?: number
   question?: string
 }
 
 export interface IJuryRating {
   "@id"?: string
-  application?: IFundApplication
-  fund?: IFund
-  juror?: IUser
+  application?: IFundApplication | string
+  juror?: IUser | string
   ratings?: any // @todo
   state?: string
 }
@@ -141,6 +146,7 @@ export interface IProject extends INumericIdentifierModel {
   description?: string
   goal?: string
   id?: number
+  implementationTime?: number
   inspiration?: IProject | string
   isLocked?: boolean
   memberships?: IProjectMembership[]
@@ -153,8 +159,10 @@ export interface IProject extends INumericIdentifierModel {
   shortDescription?: string
   slug?: string
   state?: string
+  tasks?: IProjectTask[]
   vision?: string
   visualization?: string
+  workPackages?: IWorkPackage[]
 }
 
 export const emptyIdea: IProject = {
@@ -162,6 +170,8 @@ export const emptyIdea: IProject = {
   shortDescription: "",
 }
 
+// additional fields required when a user creates a project,
+// are moved to his membership server-side
 export interface IProjectCreation extends IProject {
   motivation: string,
   skills: string,
@@ -173,20 +183,90 @@ export const emptyProject: IProjectCreation = {
   skills: "",
 }
 
+export interface IProjectTask {
+  // @PHMU textarea
+  description?: string
+
+  // create via lodash/uniqueId
+  id?: string
+
+  // in which months of the projects implementationTime this task will be worked on
+  // e.g. 1,2,3 for the first 3 months
+  months?: number[]
+
+  // using workPackages is optional but a task always belongs to a project
+  project?: IProject | string
+
+  ressourceRequirements?: IRessourceRequirement[]
+
+  // @PHMU: nicht für die erste Umsetzung
+  result?: string
+  // @PHMU: nicht für die erste Umsetzung
+  title?: string
+
+  // id of the parent IWorkPackage
+  workPackage?: string
+}
+
+export interface IWorkPackage {
+  // @PHMU textarea
+  description?: string
+
+  id?: string // create via lodash/uniqueId
+
+  // @PHMU text input
+  mainResponsibility?: string
+
+  // @PHMU text input
+  name?: string
+
+  // for display when no name is set (AP1, AP2, ...) and for sorting,
+  // newPackage.order = project.workPackages.length + 1
+  // @PHMU Umsortierung (bspw. via Drag&Drop) erstmal optional / low prio
+  order?: number
+
+  project?: IProject | string
+
+  // when the project is loaded from the API this will be empty,
+  // can be filled in runtime for editing & display:
+  // wp.tasks = project.tasks.filter((t) => t.workPackage === wp.id)
+  // when a task is added to a workPackage the task CAN be added to this array but the
+  // tasks workPackage property MUST be set to the packages ID
+  tasks?: IProjectTask[]
+}
+
+export interface IRessourceRequirement {
+  costs?: number
+  costType: string
+  description?: string
+  source?: string
+  sourceType?: string
+  task?: string // id of the parent IProjectTask
+}
+
+export enum MembershipRole {
+  APPLICANT = "applicant",
+  MEMBER = "member",
+  OWNER = "owner",
+}
+
 export interface IProjectMembership {
   "@id"?: string
   motivation?: string
-  project?: IProject
-  role?: string
+  project?: IProject | string
+  role?: MembershipRole
   skills?: string
   tasks?: string
   user?: IUser
 }
 
-export enum ROLES {
-  ROLE_ADMIN = "ROLE_ADMIN",
-  ROLE_PROCESS_OWNER = "ROLE_PROCESS_OWNER",
-  ROLE_USER = "ROLE_USER",
+export enum UserRole {
+  ADMIN = "ROLE_ADMIN",
+  PROCESS_OWNER = "ROLE_PROCESS_OWNER",
+  USER = "ROLE_USER",
+
+  // @todo should not be an allowed role for any actions, added here for authenticated links
+  GUEST = "ROLE_GUEST",
 }
 
 export interface IUser extends INumericIdentifierModel {
@@ -203,7 +283,7 @@ export interface IUser extends INumericIdentifierModel {
   objectRoles?: IUserObjectRoles[]
   password?: string
   projectMemberships?: IProjectMembership[]
-  roles?: ROLES[]
+  roles?: UserRole[]
   salt?: string
   username?: string
 }

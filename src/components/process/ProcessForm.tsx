@@ -1,11 +1,14 @@
-import { FieldArray, Form, Formik, getIn } from "formik"
+import { Field, FieldArray, Form, Formik } from "formik"
 import React from "react"
-import { Button, FormGroup, Spinner } from "reactstrap"
+import { Button, Card, CardBody, CardHeader, FormGroup, Spinner } from "reactstrap"
 
 import { IProcess } from "api/schema"
-import FormikFieldArray from "components/common/FormikFieldArray"
-import FormikInput from "components/common/FormikInput"
-import FormikRTE from "components/common/FormikRTE"
+import FormikInput from "components/common/form/FormikInput"
+import FormikRTE from "components/common/form/FormikRTE"
+import GeneralFormError from "components/common/form/GeneralFormError"
+import { useTranslation } from "services/i18n"
+import CriteriaArray from "./CriteriaArray"
+import GoalsArray from "./GoalsArray"
 
 interface IProps {
   onSubmit: any
@@ -20,46 +23,77 @@ const ProcessForm = ({ onSubmit, process = {
   name: "",
   region: "",
 } }: IProps) => {
+  const { t } = useTranslation()
+
   return <Formik<IProcess> initialValues={process} onSubmit={onSubmit}>
     {({
       errors,
-      handleReset,
       handleSubmit,
       isSubmitting,
       values,
     }) => {
       return (
         <Form onSubmit={handleSubmit}>
-          {getIn(errors, "_error") && <p className="text-danger">{getIn(errors, "_error")}</p>}
-          <div>
-            <FormikInput name="name" required value={values.name} />
-          </div>
-          <div>
-            <FormikRTE label="Beschreibung" name="description" required value={values.description} />
-          </div>
-          <div>
-            <FormikInput name="region" required value={values.region} />
-          </div>
-          <FieldArray
-            name="goals"
-            component={FormikFieldArray}
-          />
-          <FieldArray
-            name="criteria"
-            component={FormikFieldArray}
-          />
-          <div>
-            <FormikRTE name="imprint" required value={values.imprint} />
-          </div>
-          <FormGroup>
-            <Button type="submit" disabled={isSubmitting}>
-              Submit {isSubmitting && <Spinner />}
-            </Button>
-            &nbsp;
-            <Button type="button" disabled={isSubmitting} onClick={handleReset}>
-              Clear Values
-            </Button>
-          </FormGroup>
+          <Card>
+            <CardHeader>{t("form.process.header")}</CardHeader>
+            <CardBody>
+              <GeneralFormError errors={errors} values={values} />
+
+              <Field component={FormikInput}
+                help="form.process.name.help"
+                label="process.name"
+                name="name"
+                placeholder="form.process.name.placeholder"
+                required
+                value={values.name}
+              />
+
+              <Field component={FormikRTE}
+                help="form.process.description.help"
+                label="process.description"
+                name="description"
+                placeholder="form.process.description.placeholder"
+                required
+                value={values.description}
+              />
+
+              <Field component={FormikInput}
+                help="form.process.region.help"
+                label="process.region"
+                name="region"
+                placeholder="process.fund.region.placeholder"
+                required
+                value={values.region}
+              />
+
+              <FieldArray
+                name="goals"
+                component={GoalsArray}
+              />
+
+              <FieldArray
+                name="criteria"
+                component={CriteriaArray}
+              />
+
+              <Field component={FormikRTE}
+                help="form.process.imprint.help"
+                label="process.imprint"
+                name="imprint"
+                placeholder="form.process.imprint.placeholder"
+                required
+                value={values.imprint}
+              />
+
+              <FormGroup>
+                <Button color="primary" type="submit" disabled={isSubmitting}>
+                  {t("form.submit")} {isSubmitting && <Spinner />}
+                </Button>
+              </FormGroup>
+
+              <p className="text-danger">{t("form.requiredFieldsHint")}</p>
+            </CardBody>
+          </Card>
         </Form>
       )
     }}

@@ -1,5 +1,4 @@
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Link from "next/link"
 import React, { useState } from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -7,13 +6,16 @@ import { Card, CardBody, CardHeader, CardText, Col, Row } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
 import { IUser } from "api/schema"
+import BaseLayout from "components/BaseLayout"
+import PageError from "components/common/PageError"
 import Redirect from "components/common/Redirect"
-import Layout from "components/Layout"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import RegistrationForm from "components/user/RegistrationForm"
 import { registerUserAction } from "redux/actions/registration"
+import { AppState } from "redux/reducer"
 import { selectIsAuthenticated } from "redux/reducer/auth"
-import { AppState } from "redux/store"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
+import { Routes } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   registerUser: (user: IUser, actions: any) => dispatch(registerUserAction(user, actions)),
@@ -21,19 +23,21 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 
 const mapStateToProps = (state: AppState) => ({
   isAuthenticated: selectIsAuthenticated(state),
-  request: state.registration.request,
-  user: state.registration.user,
+  request: state.requests.userOperation,
+  user: state.registration,
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const Page: I18nPage<PageProps> = (props) => {
+const RegistrationPage: I18nPage<PageProps> = (props) => {
   const [registered, setRegistered] = useState(false)
 
   if (props.isAuthenticated) {
-    return <Redirect route="/" />
+    return <Redirect route={Routes.HOME} />
   }
+
+  const { request, t } = props
 
   const onSubmit = (user: IUser, actions: any) => {
     actions.success = () => {
@@ -42,39 +46,31 @@ const Page: I18nPage<PageProps> = (props) => {
     props.registerUser(user, actions)
   }
 
-  return <Layout>
+  return <BaseLayout pageTitle={t("page.user.register.title")}>
     <Row>
       <Col>
-        <h1>Neues Benutzerkonto</h1>
-        <p>
-          Hier kannst du ein neues Benutzerkonto für diese Plattform anlegen um Projekte zu
-          erstellen oder daran mitzuarbeiten.
-        </p>
+        <h1>{t("page.user.register.heading")}</h1>
+        <p><TranslatedHtml content="page.user.register.intro" /></p>
       </Col>
     </Row>
     <Row>
       <Col sm={8}>
         <Card>
-          <CardHeader>Benutzerdaten</CardHeader>
+          <CardHeader>{t("form.registration.header")}</CardHeader>
           <CardBody>
             {!registered && <>
-              {props.request.loadingError && <p className="text-danger">Error: {props.request.loadingError}</p>}
+              <PageError error={request.loadingError} />
+
               <RegistrationForm onSubmit={onSubmit} />
             </>}
 
             {registered && <>
               <CardText className="text-success">
-                Vielen Dank, dein Benutzerkonto wurde angelegt!<br />
-                Um dich einloggen zu können klicke bitte auf den Link in der Bestätigungs-Email
-                die wir an deine Adresse geschickt haben.<br />
-                <small>
-                  Dieser Link ist zwei Tage lang gültig, danach wird das inaktive Konto
-                  entfernt. Der Email-Versand kann einige Minuten dauern, bitte prüfe auch den Spam-Ordner!
-                </small>
+                <TranslatedHtml content="page.user.register.userCreated" />
               </CardText>
               <CardText className="text-center">
-                <Link href="/login">
-                  <a className="btn btn-primary">Zum Login</a>
+                <Link href={Routes.LOGIN}>
+                  <a className="btn btn-primary">{t("goto.login")}</a>
                 </Link>
               </CardText>
             </>}
@@ -83,12 +79,11 @@ const Page: I18nPage<PageProps> = (props) => {
         </Card>
       </Col>
     </Row>
-  </Layout>
+  </BaseLayout>
 }
 
-Page.getInitialProps = ({ store }: NextJSContext) => {
-  const props = mapStateToProps(store.getState())
-  return { ...props, namespacesRequired: includeDefaultNamespaces() }
-}
+RegistrationPage.getInitialProps = () => ({
+  namespacesRequired: includeDefaultNamespaces(),
+})
 
-export default connector(withTranslation("common")(Page))
+export default connector(withTranslation(includeDefaultNamespaces())(RegistrationPage))

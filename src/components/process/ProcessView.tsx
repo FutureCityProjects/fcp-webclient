@@ -1,37 +1,55 @@
 import React from "react"
+import { Card, CardBody, CardHeader } from "reactstrap"
 
 import { IProcess } from "api/schema"
+import TranslatedHtml from "components/common/TranslatedHtml"
+import Icon from "components/Icon"
+import Link from "next/link"
+import { useTranslation } from "services/i18n"
+import { Routes } from "services/routes"
 
 interface IProps {
   process: IProcess
 }
 
 export default function ProcessView({ process }: IProps) {
-  return <>
-    <h1>Prozess: {process.name}</h1>
-    <h3>Description</h3>
-    <div className=""><div dangerouslySetInnerHTML={{ __html: process.description }} /></div>
+  const { t } = useTranslation()
 
-    <h3>Region</h3>
-    <p>{process.region}</p>
+  return <Card>
+    <CardHeader>{t("process.name")}: {process.name}
+      <div role="actions" className="icon-navigation">
+        <Link href={Routes.PROCESS_EDIT} /*as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
+          <a aria-label="view participants" className="navigation-item" title="goto.editProcess">
+            <Icon name={"pencil"} size={24} />
+          </a>
+        </Link>
+      </div>
+    </CardHeader>
+    <CardBody>
+      <h5>{t("process.description")}</h5>
+      <TranslatedHtml content={process.description} />
 
-    <h3>Goals</h3>
-    {process.goals
-      ? <ul>
-        {process.goals.map((goal, index) => <li key={index}>{goal}</li>)}
-      </ul>
-      : <p>--none--</p>
-    }
+      <h5>{t("process.region")}</h5>
+      <p>{process.region}</p>
 
-    <h3>Criteria</h3>
-    {process.criteria
-      ? <ul>
-        {process.criteria.map((criteria, index) => <li key={index}>{criteria}</li>)}
-      </ul>
-      : <p>--none--</p>
-    }
+      <h5>{t("process.goals")}</h5>
+      {process.goals && process.goals.length
+        ? <ul>
+          {process.goals.map((goal, index) => <li key={index}>{goal}</li>)}
+        </ul>
+        : <p>{t("default.empty")}</p>
+      }
 
-    <h3>Imprint</h3>
-    <div className=""><div dangerouslySetInnerHTML={{ __html: process.imprint }} /></div>
-  </>
+      <h5>{t("process.criteria")}</h5>
+      {process.criteria && process.criteria.length
+        ? <ul>
+          {process.criteria.map((criteria, index) => <li key={index}>{criteria}</li>)}
+        </ul>
+        : <p>{t("default.empty")}</p>
+      }
+
+      <h5>{t("process.imprint")}</h5>
+      <TranslatedHtml content={process.imprint} />
+    </CardBody>
+  </Card>
 }

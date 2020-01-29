@@ -1,0 +1,16 @@
+$custom-primary: #FCE122;
+$custom-primary-darker: darken($custom-primary, 15%);
+$custom-secondary: #292929;
+$custom-dark: #292929;
+$custom-gray: #595959;
+$custom-light: #f0f0f0;
+
+$theme-colors: (
+  primary: $custom-primary,
+  secondary: $custom-secondary,
+  light: $custom-light,
+  gray: $custom-gray,
+  dark: $custom-dark,
+) !default;
+
+$font-size-xs: 0.75rem;

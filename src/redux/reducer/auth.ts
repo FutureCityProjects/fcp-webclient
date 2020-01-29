@@ -1,73 +1,62 @@
-import { ROLES } from "api/schema"
+import { IUser, UserRole } from "api/schema"
 import { AuthActions, AuthActionTypes } from "redux/actions/auth"
 import { IWebToken } from "redux/helper/state"
+import { AppState } from "redux/reducer"
+import { EntityType, selectById } from "./data"
 
-export interface IAuthState {
-  token?: IWebToken,
-  loginPending: boolean
-  redirectUrl?: string
-  error?: string
-}
-
-export const initialAuthState: IAuthState = {
-  error: null,
-  loginPending: false,
-  redirectUrl: null,
-  token: null,
-}
-
-export default function(state: IAuthState = initialAuthState, action: AuthActions) {
+const tokenReducer = (state: IWebToken = null, action: AuthActions) => {
   switch (action.type) {
-    case AuthActionTypes.LOGIN:
-      return { ...state, loginPending: true, error: null }
-
-    case AuthActionTypes.LOGIN_SUCCESSFUL:
-      return { ...state, loginPending: false, error: null }
-
-    case AuthActionTypes.LOGIN_FAILED:
-      return { ...state, token: null, loginPending: false, error: action.error }
+    case AuthActionTypes.SET_AUTH:
+      return action.token
 
     case AuthActionTypes.LOGOUT:
-      return { ...state, token: null, loginPending: false, error: null }
-
-    case AuthActionTypes.SET_AUTH:
-      return { ...state, token: action.token }
+      return null
 
     default:
       return state
   }
 }
 
+export default tokenReducer
+
 /**
  * Selector to retrieve the token for use in the Authentication Header.
  *
  * @returns the encoded JWT or null if none is in the store
  */
-export const selectAuthToken = (state: { auth: IAuthState }): string =>
-  state.auth.token ? state.auth.token.encoded : null
+export const selectAuthToken = (state: AppState): string =>
+  state.auth ? state.auth.encoded : null
 
 /**
  * Selector to retrieve the current username.
  *
  * @returns the username from the JWT or null if not authenticated
  */
-export const selectUsername = (state: { auth: IAuthState }): string =>
-  state.auth.token ? state.auth.token.username : null
+export const selectUsername = (state: AppState): string =>
+  state.auth ? state.auth.username : null
+
+/**
+ * Selector to retrieve the current users ID.
+ *
+ * @returns the user ID from the JWT or null if not authenticated
+ */
+export const selectCurrentUserId = (state: AppState): number =>
+  state.auth ? state.auth.id : null
 
 /**
  * Selector to retrieve the current user roles.
  *
  * @returns array of role names, may be empty
  */
-export const selectRoles = (state: { auth: IAuthState }): string[] =>
-  state.auth.token ? state.auth.token.roles : []
+export const selectRoles = (state: AppState): string[] =>
+  state.auth ? state.auth.roles : []
 
 /**
  * Selector to check if the user has a given role
  *
  * @returns true if the JWT claims the given role, else false
  */
-export const selectHasRole = (state: { auth: IAuthState }, role: ROLES): boolean =>
+export const selectHasRole = (state: AppState, role: UserRole): boolean =>
   selectRoles(state).includes(role)
 
 /**
@@ -75,9 +64,9 @@ export const selectHasRole = (state: { auth: IAuthState }, role: ROLES): boolean
  *
  * @returns number of seconds remaining or null if none / no token
  */
-export const selectAuthExpiresIn = (state: { auth: IAuthState }): number =>
+export const selectAuthExpiresIn = (state: AppState): number =>
   selectIsAuthenticated(state)
-    ? (state.auth.token.expiresAt * 1000 - new Date().getTime()) / 1000
+    ? (state.auth.expiresAt * 1000 - new Date().getTime()) / 1000
     : 0
 
 /**
@@ -85,13 +74,23 @@ export const selectAuthExpiresIn = (state: { auth: IAuthState }): number =>
  *
  * @returns true only if there is a token which is expired, else false
  */
-export const selectAuthExpired = (state: { auth: IAuthState }): boolean =>
-  state.auth.token && new Date() > new Date(state.auth.token.expiresAt * 1000)
+export const selectAuthExpired = (state: AppState): boolean =>
+  state.auth && new Date() > new Date(state.auth.expiresAt * 1000)
 
 /**
  * Selector to check if a user is authenticated.
  *
  * @returns true if there is a non-expired auth token in the store, else false
  */
-export const selectIsAuthenticated = (state: { auth: IAuthState }): boolean =>
-  state.auth.token && !selectAuthExpired(state)
+export const selectIsAuthenticated = (state: AppState): boolean =>
+  state.auth && !selectAuthExpired(state)
+
+/**
+ * Selector to retrieve the currently logged in user.
+ *
+ * @returns IUser, may be empty
+ */
+export const selectCurrentUser = (state: AppState): IUser => {
+  const id = selectCurrentUserId(state)
+  return id ? selectById(state, EntityType.USER, id) : null
+}

@@ -1,18 +1,18 @@
-import { combineReducers } from "redux"
+import { Action } from "redux"
 
 import { IUser } from "api/schema"
-import { RegistrationActions, RegistrationActionTypes } from "redux/actions/registration"
-import { scopedSetLoadingReducer } from "redux/helper/reducers"
-import { AppState } from "redux/store"
-import { Scope, selectById } from "./data"
+import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
+import { AppState } from "redux/reducer"
+import { EntityType, selectById } from "./data"
 
 const registrationReducer =
-  (state: number = null, action: RegistrationActions): number => {
+  (state: number = null, action: Action): number => {
     switch (action.type) {
       case RegistrationActionTypes.SET_REGISTERED_USER:
-        return action.user.id
+        return (action as ISetRegisteredUserAction).user.id
 
-      case RegistrationActionTypes.RESET_REGISTRATION:
+      // After the user logged in remove the reference to a previous registration
+      case "LOADING_LOGIN_SUCCESS":
         return null
 
       default:
@@ -20,10 +20,7 @@ const registrationReducer =
     }
   }
 
-export default combineReducers({
-  request: scopedSetLoadingReducer("registration"),
-  user: registrationReducer,
-})
+export default registrationReducer
 
 /**
  * Selector to retrieve the registered user model if any.
@@ -31,4 +28,4 @@ export default combineReducers({
  * @returns IUser
  */
 export const selectRegisteredUser = (state: AppState): IUser =>
-  state.registration.user ? selectById(Scope.USER, state.registration.user, state) : null
+  state.registration ? selectById(state, EntityType.USER, state.registration) : null
