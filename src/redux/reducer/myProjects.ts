@@ -112,7 +112,14 @@ export const selectMyProjectByIdentifier = (state: AppState, identifier: string 
 
 export const selectIsProjectOwner = (state: AppState, identifier: string | number): boolean => {
   const project = selectMyProjectByIdentifier(state, identifier)
+  if (!project) {
+    return false
+  }
+
   const memberships = selectMyMemberships(state)
+  if (!memberships || memberships.length === 0) {
+    return false
+  }
 
   return memberships
     .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role === MembershipRole.OWNER)

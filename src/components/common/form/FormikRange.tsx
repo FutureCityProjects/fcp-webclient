@@ -8,7 +8,7 @@ import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
   value: SelfAssessment
-  labels: object,
+  labels: { [key: number]: string },
 }
 
 class FormikRange extends FormikElement<IProps> {
@@ -22,6 +22,7 @@ class FormikRange extends FormikElement<IProps> {
       {this.helpElement()}
 
       <RangeSlider
+        id={this.props.id || field.name}
         labels={labels}
         onChange={(val) => form.setFieldValue(field.name, val)}
         value={value}

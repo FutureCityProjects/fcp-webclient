@@ -40,7 +40,7 @@ class BaseLayout extends React.Component<IProps> {
         <PageBody>
           {this.props.children}
         </PageBody>
-        <Footer />
+        <Footer isFrontPage={this.props.isFrontPage} />
       </div>
     </>
   }

@@ -13,7 +13,7 @@
   },
   "failure": {
     "fundApplication": {
-      "notFound": "Der angefragte Förderantrag wurde leider nicht gefunden.",
+      "notFound": "Der angefragte Förderantrag wurde leider nicht gefunden."
     },
     "invalidRequest": "Die Anfrage ist leider ungültig, ist die URL korrekt?",
     "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort",
@@ -42,6 +42,11 @@
         "notValid": "Dieser Benutzername ist nicht zulässig."
       }
     }
+  },
+  "user": {
+    "invalidCredentials": "Das Passwort ist falsch oder der angegebene Benutzername/die Emailadresse ist unbekannt.",
+    "notActivated": "Das Benutzerkonto ist nicht aktiviert, ein Login ist leider derzeit nicht möglich.",
+    "notValidated": "Das Benutzerkonto wurde noch nicht bestätigt.<br />Bitte klicke den Link in der Bestätigungsemail."
   },
   "validation": {
     "account": {

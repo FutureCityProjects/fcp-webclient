@@ -6,6 +6,7 @@ import { IProcess } from "api/schema"
 import FormikInput from "components/common/form/FormikInput"
 import FormikRTE from "components/common/form/FormikRTE"
 import GeneralFormError from "components/common/form/GeneralFormError"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 import CriteriaArray from "./CriteriaArray"
 import GoalsArray from "./GoalsArray"
@@ -31,72 +32,70 @@ const ProcessForm = ({ onSubmit, process = {
       handleSubmit,
       isSubmitting,
       values,
-    }) => {
-      return (
-        <Form onSubmit={handleSubmit}>
-          <Card>
-            <CardHeader>{t("form.process.header")}</CardHeader>
-            <CardBody>
-              <GeneralFormError errors={errors} values={values} />
+    }) => <Form onSubmit={handleSubmit}>
+        <Card>
+          <CardHeader>{t("form.process.header")}</CardHeader>
+          <CardBody>
+            <GeneralFormError errors={errors} values={values} />
 
-              <Field component={FormikInput}
-                help="form.process.name.help"
-                label="process.name"
-                name="name"
-                placeholder="form.process.name.placeholder"
-                required
-                value={values.name}
-              />
+            <Field component={FormikInput}
+              help="form.process.name.help"
+              label="process.name"
+              name="name"
+              placeholder="form.process.name.placeholder"
+              required
+              value={values.name}
+            />
 
-              <Field component={FormikRTE}
-                help="form.process.description.help"
-                label="process.description"
-                name="description"
-                placeholder="form.process.description.placeholder"
-                required
-                value={values.description}
-              />
+            <Field component={FormikRTE}
+              help="form.process.description.help"
+              label="process.description"
+              name="description"
+              placeholder="form.process.description.placeholder"
+              required
+              value={values.description}
+            />
 
-              <Field component={FormikInput}
-                help="form.process.region.help"
-                label="process.region"
-                name="region"
-                placeholder="process.fund.region.placeholder"
-                required
-                value={values.region}
-              />
+            <Field component={FormikInput}
+              help="form.process.region.help"
+              label="process.region"
+              name="region"
+              placeholder="process.fund.region.placeholder"
+              required
+              value={values.region}
+            />
 
-              <FieldArray
-                name="goals"
-                component={GoalsArray}
-              />
+            <FieldArray
+              name="goals"
+              component={GoalsArray}
+            />
 
-              <FieldArray
-                name="criteria"
-                component={CriteriaArray}
-              />
+            <FieldArray
+              name="criteria"
+              component={CriteriaArray}
+            />
 
-              <Field component={FormikRTE}
-                help="form.process.imprint.help"
-                label="process.imprint"
-                name="imprint"
-                placeholder="form.process.imprint.placeholder"
-                required
-                value={values.imprint}
-              />
+            <Field component={FormikRTE}
+              help="form.process.imprint.help"
+              label="process.imprint"
+              name="imprint"
+              placeholder="form.process.imprint.placeholder"
+              required
+              value={values.imprint}
+            />
 
-              <FormGroup>
-                <Button color="primary" type="submit" disabled={isSubmitting}>
-                  {t("form.submit")} {isSubmitting && <Spinner />}
-                </Button>
-              </FormGroup>
+            <FormGroup>
+              <Button className="btn-action btn-icon" color="primary" type="submit" disabled={isSubmitting}>
+                <Icon name="save" size={18} />
+                {t("form.submit")} {isSubmitting && <Spinner />}
+              </Button>
+            </FormGroup>
 
-              <p className="text-danger">{t("form.requiredFieldsHint")}</p>
-            </CardBody>
-          </Card>
-        </Form>
-      )
-    }}
+            <p className="text-danger">{t("form.requiredFieldsHint")}</p>
+          </CardBody>
+        </Card>
+      </Form>
+    }
   </Formik>
 }
 

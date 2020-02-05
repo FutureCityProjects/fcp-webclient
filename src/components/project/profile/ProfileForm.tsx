@@ -1,17 +1,19 @@
 import { Field, Form, Formik } from "formik"
 import React from "react"
-import { Button, Card, CardBody, CardHeader } from "reactstrap"
+import { Button, Card, CardBody, CardHeader, Col, Row, Spinner } from "reactstrap"
 
-import { IProject } from "api/schema"
+import { IProject, SelfAssessment } from "api/schema"
+import DropdownComponent from "components/common/DropdownComponent"
 import FormikInput from "components/common/form/FormikInput"
 import FormikRange from "components/common/form/FormikRange"
 import FormikRTE from "components/common/form/FormikRTE"
 import GeneralFormError from "components/common/form/GeneralFormError"
-import Icon from "components/Icon"
+import Icon from "components/common/Icon"
 import Link from "next/link"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
+// @todo complete validation
 const validate = (values: IProject) => {
   if (values) {
     const errors: { [key: string]: string } = {}
@@ -42,109 +44,123 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
       validateOnChange={false}
     >
       {({
-        values,
         errors,
         handleSubmit,
-      }) => {
-        return <Form className="profile-form" onSubmit={handleSubmit}>
+        isSubmitting,
+        values,
+      }) => <Form className="profile-form" onSubmit={handleSubmit}>
           <GeneralFormError errors={errors} values={values} />
 
           <CardHeader>
             <Field component={FormikInput}
-              help="Gib deinem Projekt einen Titel"
+              help="form.project.name.help"
               name="name"
-              placeholder="Projekttitel"
+              placeholder="form.project.name.placeholder"
               value={values.name}
               type="text"
             />
 
-            <div className={"save-profile"} onClick={() => handleSubmit()}>
-              <Icon name="save" size={42} />
-              <Icon name="grid" size={42} />
+            <div className="icon-navigation">
+              {isSubmitting
+                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
+              <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
+                <Link
+                  href={Routes.PROJECT_PROFILE}
+                  as={routeWithParams(Routes.PROJECT_PROFILE, { slug: project.slug || project.id })}
+                >
+                  <a>{t("goto.profileOverview")}</a>
+                </Link>
+                <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+                  <a>{t("goto.myProjects")}</a>
+                </Link>
+              </DropdownComponent>
             </div>
           </CardHeader>
 
           <h2 className="card-title">{t("project.profile")}</h2>
-          <CardBody className="card-body-2-columns">
-            <div className="column">
-              <Field component={FormikInput}
-                help="form.project.shortDescription.help"
-                label="project.shortDescription"
-                name="shortDescription"
-                placeholder="form.project.shortDescription.placeHolder"
-                type="textarea"
-                value={values.shortDescription}
-              />
-              <Field component={FormikRTE}
-                help="form.project.challenges.help"
-                label="project.challenges"
-                name="challenges"
-                placeholder="form.project.challenges.placeHolder"
-                value={values.challenges}
-              />
-              <Field component={FormikRTE}
-                help="form.project.description.help"
-                label="project.description"
-                name="description"
-                placeholder="form.project.description.placeHolder"
-                value={values.description}
-              />
-            </div>
+          <CardBody>
+            <Row>
+              <Col lg>
+                <Field component={FormikInput}
+                  help="form.project.shortDescription.help"
+                  label="project.shortDescription"
+                  name="shortDescription"
+                  placeholder="form.project.shortDescription.placeholder"
+                  type="textarea"
+                  value={values.shortDescription}
+                />
+                <Field component={FormikRTE}
+                  help="form.project.challenges.help"
+                  label="project.challenges"
+                  name="challenges"
+                  placeholder="form.project.challenges.placeholder"
+                  value={values.challenges}
+                />
+                <Field component={FormikRTE}
+                  help="form.project.description.help"
+                  label="project.description"
+                  name="description"
+                  placeholder="form.project.description.placeholder"
+                  value={values.description}
+                />
+              </Col>
 
-            <div className="column">
-              <Field component={FormikRTE}
-                help="form.project.goal.help"
-                label="project.goal"
-                name="goal"
-                placeholder="form.project.goal.placeHolder"
-                value={values.goal}
-              />
-              <Field component={FormikRTE}
-                help="form.project.vision.help"
-                label="project.vision"
-                name="vision"
-                placeholder="form.project.vision.placeHolder"
-                value={values.vision}
-              />
-              <Field component={FormikRTE}
-                help="form.project.delimitation.help"
-                label="project.delimitation"
-                name="delimitation"
-                placeholder="form.project.delimitation.placeHolder"
-                value={values.delimitation}
-              />
-              <Field component={FormikRange}
-                help="form.project.profileSelfAssessment.help"
-                label="project.profileSelfAssessment"
-                name="profileSelfAssessment"
-                labels={{
-                  0: t("progress.0"),
-                  25: t("progress.25"),
-                  50: t("progress.50"),
-                  75: t("progress.75"),
-                  100: t("progress.100"),
-                }}
-                value={values.profileSelfAssessment}
-              />
+              <Col lg>
+                <Field component={FormikRTE}
+                  help="form.project.goal.help"
+                  label="project.goal"
+                  name="goal"
+                  placeholder="form.project.goal.placeholder"
+                  value={values.goal}
+                />
 
-              <br />
-              <p>
-                <Button type="submit" color="primary">
-                  <Icon name="save" size={42} />&nbsp;
-                    {t("form.save")}
-                </Button>
-                &nbsp;
-                  <Link href={Routes.PROJECT_PROFILE}
-                  as={routeWithParams(Routes.PROJECT_PROFILE, { slug: project.slug || project.id })}
-                >
-                  <a className="btn btn-secondary"><Icon name="save" size={42} />&nbsp; Zurück zum Profil</a>
-                </Link>
-              </p>
+                <Field component={FormikRTE}
+                  help="form.project.vision.help"
+                  label="project.vision"
+                  name="vision"
+                  placeholder="form.project.vision.placeholder"
+                  value={values.vision}
+                />
 
+                <Field component={FormikRTE}
+                  help="form.project.delimitation.help"
+                  label="project.delimitation"
+                  name="delimitation"
+                  placeholder="form.project.delimitation.placeholder"
+                  value={values.delimitation}
+                />
+
+                <Field component={FormikRange}
+                  help="form.project.profileSelfAssessment.help"
+                  label="project.profileSelfAssessment"
+                  name="profileSelfAssessment"
+                  labels={{
+                    [SelfAssessment.STARTING]: t("progress.0"),
+                    [SelfAssessment.MAKING_PROGRESS]: t("progress.25"),
+                    [SelfAssessment.HALF_FINISHED]: t("progress.50"),
+                    [SelfAssessment.ALMOST_FINISHED]: t("progress.75"),
+                    [SelfAssessment.COMPLETE]: t("progress.100"),
+                  }}
+                  value={values.profileSelfAssessment}
+                />
+              </Col>
+            </Row>
+            <div className="button-area">
+              <Button className="btn-action btn-icon" type="submit" color="primary" disabled={isSubmitting}>
+                <Icon name="save" size={18} />
+                {t("form.save")} {isSubmitting && <Spinner />}
+              </Button>
+              <Link
+                href={Routes.PROJECT_PROFILE}
+                as={routeWithParams(Routes.PROJECT_PROFILE, { slug: project.slug || project.id })}
+              >
+                <a className="btn btn-light">{t("goto.profileOverview")}</a>
+              </Link>
             </div>
           </CardBody>
         </Form>
-      }}
+      }
     </Formik>
   </Card>
 }

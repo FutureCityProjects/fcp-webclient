@@ -89,6 +89,10 @@ export class FCPClient extends HydraClient {
   public deleteFundApplication = (fundApplication: IFundApplication): Promise<void> => {
     return this.delete(fundApplication["@id"])
   }
+
+  public submitFundApplication = (fundApplication: IFundApplication): Promise<void> => {
+    return this.post(fundApplication["@id"] + "/submit", {})
+  }
   /* #endregion */
 
   /* #region Process */

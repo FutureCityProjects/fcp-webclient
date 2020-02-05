@@ -12,12 +12,12 @@ const HeaderLogo: React.FC<IProps> = ({ isFrontPage }) => {
   const { t } = useTranslation()
 
   if (isFrontPage) {
-    return <img className="header-logo" src="/assets/img/logo.svg" height="52" alt={"logo"} />
+    return <img className="header-logo" src="/assets/img/logo.svg" height="52" alt="PROJEKT.WERK.STADT" />
   }
 
   return <Link href={Routes.HOME}>
-    <a title={t("goto.home")}>
-      <img className="header-logo" src="/assets/img/logo.svg" height="52" alt={"logo"} />
+    <a className="header-logo" title={t("goto.home")}>
+      <img src="/assets/img/logo.svg" height="52" alt="PROJEKT.WERK.STADT" />
     </a>
   </Link>
 }

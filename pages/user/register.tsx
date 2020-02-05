@@ -7,7 +7,6 @@ import { AnyAction, Dispatch } from "redux"
 
 import { IUser } from "api/schema"
 import BaseLayout from "components/BaseLayout"
-import PageError from "components/common/PageError"
 import Redirect from "components/common/Redirect"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import RegistrationForm from "components/user/RegistrationForm"
@@ -23,27 +22,23 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 
 const mapStateToProps = (state: AppState) => ({
   isAuthenticated: selectIsAuthenticated(state),
-  request: state.requests.userOperation,
-  user: state.registration,
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const RegistrationPage: I18nPage<PageProps> = (props) => {
+const RegistrationPage: I18nPage<PageProps> = ({ isAuthenticated, registerUser, t }) => {
   const [registered, setRegistered] = useState(false)
 
-  if (props.isAuthenticated) {
-    return <Redirect route={Routes.HOME} />
+  if (isAuthenticated) {
+    return <Redirect route={Routes.USER_PROFILE} />
   }
-
-  const { request, t } = props
 
   const onSubmit = (user: IUser, actions: any) => {
     actions.success = () => {
       setRegistered(true)
     }
-    props.registerUser(user, actions)
+    registerUser(user, actions)
   }
 
   return <BaseLayout pageTitle={t("page.user.register.title")}>
@@ -59,8 +54,6 @@ const RegistrationPage: I18nPage<PageProps> = (props) => {
           <CardHeader>{t("form.registration.header")}</CardHeader>
           <CardBody>
             {!registered && <>
-              <PageError error={request.loadingError} />
-
               <RegistrationForm onSubmit={onSubmit} />
             </>}
 

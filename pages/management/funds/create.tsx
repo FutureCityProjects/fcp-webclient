@@ -5,7 +5,8 @@ import { connect, ConnectedProps } from "react-redux"
 import { Col, Row } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
-import { UserRole } from "api/schema"
+import { normalizeFund } from "api/helper"
+import { IFund, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import FundForm from "components/fund/FundForm"
@@ -16,11 +17,12 @@ import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i1
 import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  onSubmit: (fund, actions) => {
+  onSubmit: (fund: IFund, actions) => {
     actions.success = (result) => {
       Router.push(Routes.FUND_DETAILS, routeWithParams(Routes.FUND_DETAILS, { id: result.id }))
     }
-    dispatch(createModelAction(EntityType.FUND, fund, actions))
+
+    dispatch(createModelAction(EntityType.FUND, normalizeFund(fund), actions))
   },
 })
 

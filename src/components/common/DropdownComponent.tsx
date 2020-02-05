@@ -3,7 +3,10 @@ import has from "lodash/has"
 import React, { useState } from "react"
 import { Dropdown, DropdownItem, DropdownMenu, DropdownToggle } from "reactstrap"
 
+import { useTranslation } from "services/i18n"
+
 interface IProps {
+  "aria-label"?: string
   button: any
   className?: any
   light?: boolean
@@ -22,12 +25,13 @@ const DropdownComponent: React.FC<IProps> = (props) => {
     }</>
   })
 
+  const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => setIsOpen(!isOpen)
 
   return <>
     <Dropdown className={props.className} isOpen={isOpen} toggle={toggle} title={props.title}>
-      <DropdownToggle children={props.button} />
+      <DropdownToggle children={props.button} aria-label={props["aria-label"] || t("default.dropdown")} />
       <DropdownMenu className={props.light ? "dropdown-menu-light" : ""} right >
         {wrappedChildren}
       </DropdownMenu>

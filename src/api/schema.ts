@@ -1,9 +1,9 @@
 export enum SelfAssessment {
-  SELF_ASSESSMENT_0_PERCENT = 0,
-  SELF_ASSESSMENT_25_PERCENT = 25,
-  SELF_ASSESSMENT_50_PERCENT = 50,
-  SELF_ASSESSMENT_75_PERCENT = 75,
-  SELF_ASSESSMENT_100_PERCENT = 100,
+  STARTING = 0,
+  MAKING_PROGRESS = 25,
+  HALF_FINISHED = 50,
+  ALMOST_FINISHED = 75,
+  COMPLETE = 100,
 }
 
 export interface ICredentials {
@@ -65,13 +65,15 @@ export interface IFund extends INumericIdentifierModel {
 }
 
 export enum FundApplicationState {
-  OPEN = "open",
-  SUBMITTED = "submitted",
+  CONCRETIZATION = 'concretization',
+  DETAILING = 'detailing',
+  SUBMITTED = 'submitted',
 }
 
 export interface IFundApplication extends INumericIdentifierModel {
   "@id"?: string
-  concretizations?: string[]
+  applicationSelfAssessment?: SelfAssessment
+  concretizations?: { [id: number]: string }
   concretizationSelfAssessment?: SelfAssessment
   fund?: IFund
   id?: number
@@ -79,6 +81,7 @@ export interface IFundApplication extends INumericIdentifierModel {
   juryOrder?: number
   project?: IProject | string
   ratings?: IJuryRating[]
+  requestedFunding?: number
   state?: FundApplicationState
 }
 
@@ -126,6 +129,7 @@ export enum ProjectProgress {
   CREATING_PROFILE = "creating_profile",
   CREATING_PLAN = "creating_plan",
   CREATING_APPLICATION = "creating_application",
+  SUBMITTING_APPLICATION = "submitting_application",
   APPLICATION_SUBMITTED = "application_submitted",
 }
 
@@ -139,27 +143,42 @@ export interface IProject extends INumericIdentifierModel {
   "@id"?: string
   applications?: IFundApplication[]
   challenges?: string
-  createdAt?: Date
+  contactEmaiL?: string
+  contactName?: string
+  contactPhone?: string
+  createdAt?: string
   createdBy?: IUser
-  deletedAt?: Date
+  deletedAt?: string
   delimitation?: string
   description?: string
   goal?: string
+  holderAddressInfo?: string
+  holderCity?: string
+  holderName?: string
+  holderStreet?: string
+  holderZipCode?: string
   id?: number
+  impact?: string[]
   implementationTime?: number
   inspiration?: IProject | string
   isLocked?: boolean
   memberships?: IProjectMembership[]
   name?: string
+  outcome?: string[]
   picture?: string
+  planSelfAssessment?: SelfAssessment
   process?: IProcess | string
   profileSelfAssessment?: SelfAssessment
   progress?: ProjectProgress
   resultingProjects?: IProject[]
+  results?: string[]
   shortDescription?: string
   slug?: string
   state?: string
+  targetGroups?: string[]
   tasks?: IProjectTask[]
+  updatedAt?: string
+  utilization?: string
   vision?: string
   visualization?: string
   workPackages?: IWorkPackage[]

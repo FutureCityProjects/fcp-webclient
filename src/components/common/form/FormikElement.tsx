@@ -7,6 +7,7 @@ import TranslatedHtml from "../TranslatedHtml"
 
 export interface IBaseFormikProps extends FieldProps, WithTranslation {
   help?: string
+  id?: string
   label?: string
   name: string
   required?: boolean

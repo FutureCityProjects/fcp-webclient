@@ -3,6 +3,7 @@ import Slider from "react-rangeslider"
 import "react-rangeslider/lib/index.css"
 
 interface IProps {
+  id?: string
   labels: object
   onChange?: any
   static?: boolean
@@ -14,6 +15,7 @@ const RangeSlider: React.FC<IProps> = (props: IProps) => {
 
   return <div className={(props.static ? "slider-static " : "") + "slider custom-labels"}>
     <Slider
+      id={props.id}
       min={0}
       max={100}
       step={25}

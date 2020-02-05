@@ -10,9 +10,6 @@
 
 $container-width: 1800px;
 
-$font-heading: "Montserrat", sans-serif;
-$font-body: "Roboto", sans-serif;
-
 body {
   margin: 0;
 }
@@ -25,10 +22,39 @@ h1 {
   border-radius: 0.5rem;
   height: fit-content;
   width: fit-content;
+  font-family: $font-heading;
+  font-weight: 600;
+  font-size: 0.925em;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-sm, .btn-group-sm {
+  font-size: 0.875rem;
+}
+
+.btn-action {
+  padding: 0.75rem 2.25rem;
+  text-transform: uppercase;
+  font-size: 1rem;
+}
+
+.btn-icon {
+  svg {
+    margin-right: 0.5rem;
+  }
+}
+
+a:not(.btn) {
+  transition: all 0.175s ease-in-out;
+  border-bottom: 2px solid $custom-primary;
+  &:hover {
+    border-bottom-width: 4px;
+  }
 }
 
 main.container {
-  margin-bottom: 80px;
+  margin-bottom: 30px;
   //max-width: none;
   //min-height: 100vh;
   padding: 2.5rem 2.25rem;
@@ -36,13 +62,6 @@ main.container {
   flex-direction: column;
   flex-grow: 1;
   max-width: $container-width;
-  a {
-    transition: all 0.175s ease-in-out;
-    border-bottom: 2px solid $custom-primary;
-    &:hover {
-      border-bottom-width: 4px;
-    }
-  }
 }
 
 // break out of container width
@@ -55,7 +74,7 @@ main.container {
   margin-right: -50vw;
 }
 
-a, a:hover, a:visited {
+a:not(.btn), a:not(.btn):hover, a:not(.btn):visited {
   color: inherit;
   text-decoration: none;
   position: relative;
@@ -99,9 +118,9 @@ a, a:hover, a:visited {
     background-position-x: 40vw;
     background-size: 100% 140%;
   }
-  main.container {
+  main.container, .footer-links {
     a {
-      border-color: $custom-dark;
+      border-color: white;
     }
   }
 }
@@ -110,14 +129,25 @@ header {
   font-family: $font-heading;
   width: 100%;
 }
-header > div {
+header > .row {
   max-width: 1800px;
   margin-left: auto;
   margin-right: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2.75rem 2.25rem 0;
+  padding: 2rem 2.25rem 1rem;
+  .icon-navigation {
+    justify-content: flex-end;
+  }
+  .col {
+    padding: 0;
+    &:nth-child(2) { text-align: center; }
+    &:nth-child(3) { align-items: flex-end; }
+  }
+  a.header-logo {
+    border: none;
+  }
 }
 .page-title {
   font-weight: 700;
@@ -126,8 +156,11 @@ header > div {
 
 nav {
   ul {
+    padding: 0;
+    justify-content: flex-end;
     list-style: none;
     display: flex;
+    margin-bottom: 0;
   }
 }
 
@@ -188,10 +221,19 @@ footer {
   width: 100%;
   .footer-content {
     display: flex;
+    align-items: center;
     max-width: 1800px;
     margin-left: auto;
     margin-right: auto;
-    padding: 2rem 2.25rem 3.5rem;
+    padding: 2rem 2.25rem 2.5rem;
+    .col {
+      &:nth-child(2) { text-align: center; }
+      &:nth-child(3) { text-align: right; }
+    }
+    .footer-links a {
+      font-size: $font-size-sm;
+      font-weight: 500;
+    }
   }
 }
 
@@ -202,8 +244,9 @@ footer {
     margin-right: 1.625rem;
     color: inherit;
     transition: all linear 0.125s;
+    border: none;
     &:hover {
-      opacity: .5;
+      opacity: .625;
     }
   }
 }
@@ -243,15 +286,13 @@ footer {
   padding: 0 1.5rem;
   margin: 1.5rem;
   .card-body {
-    text-align: justify;
     padding: 0 0 1.75rem;
-    .btn {
-      border-radius: 0.75rem;
-      margin: auto;
-      padding: 1rem 2.5rem;
-      font-family: $font-heading;
-      font-weight: bold;
-      text-transform: uppercase;
+    .button-area {
+      margin-top: 2rem;
+      text-align: right;
+      .btn {
+        margin-left: 0.5rem;
+      }
     }
   }
 }
@@ -266,7 +307,7 @@ footer {
   font-size: 1.5rem;
   h3 {
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: $h3-font-size;
   }
   .title-section {
     display: flex;
@@ -291,6 +332,11 @@ footer {
   }
   .card-body {
     p { margin: 0; }
+    .btn {
+      border-radius: 0.75rem;
+      margin: auto;
+      @extend .btn-action;
+    }
   }
   .dropdown {
     display: flex;
@@ -320,20 +366,30 @@ footer {
   min-width: 0;
   min-height: 0;
   margin: 1rem 0 0 0;
+  flex-grow: 0;
 }
 
 .profile-form {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
   .form-text {
     color: $custom-gray;
     font-size: $font-size-sm;
     font-weight: normal;
   }
   .card-header {
-    padding-bottom: 0;
+    h3 {
+      font-size: $h3-font-size;
+      margin-bottom: 1rem;
+    }
+    .icon-navigation {
+      align-items: flex-start;
+    }
     .form-group {
       width: 100%;
       display: flex;
       flex-direction: column-reverse;
+      margin-bottom: 0.75rem;
       label { display: none; }
       input {
         width: 50%;
@@ -342,44 +398,38 @@ footer {
         font-size: $h3-font-size;
         color: $custom-dark;
         font-weight: bold;
+        margin-bottom: 0.5rem;
       }
-      .form-text {
-        padding: 0 0.75rem;
-      }
-    }
-    .save-profile {
-      font-weight: 500;
-      font-size: 1.25rem;
-      display: flex;
-      margin-right: 0.75rem;
-      margin-top: -2rem;
-        align-items: center;
-        cursor: pointer;
-        transition: all linear 0.175s;
-        &:hover {
-          opacity: 0.8;
-        }
     }
   }
   .card-title {
     border-top: 1px solid $custom-light;
     padding-top: 1.5rem;
-    margin: 0 0.75rem 1.5rem;
+    margin-top: 0;
   }
   .card-body {
-    padding: 0 0.75rem;
-  }
-}
-
-.card-body-2-columns {
-  display: flex;
-  flex-direction: row;
-  margin: 0 -1rem;
-  overflow-y: auto;
-  height: 800px;
-  .column {
-    width: 50%;
-    padding: 0 1rem;
+    padding-bottom: 2rem;
+    h3 {
+      font-weight: bold;
+      font-size: 1.25rem;
+      margin-bottom: 0.125rem;
+    }
+    h3 + div {
+      margin-top: 0.75rem;
+    }
+    .description {
+      color: #595959;
+      font-size: 0.875rem;
+      font-weight: normal;
+      margin-bottom: 0.5rem;
+    }
+    .profile-value-empty {
+      font-style: italic;
+      color: #767676;
+    }
+    .form-group {
+      margin-bottom: 2.25rem;
+    }
   }
 }
 
@@ -417,6 +467,7 @@ footer {
   }
   .rangeslider-horizontal {
     height: 10px;
+    margin-bottom: 3rem;
   }
 }
 
@@ -424,7 +475,7 @@ footer {
   pointer-events: none;
   .rangeslider {
     .rangeslider__handle {
-      display: none;
+      border-color: #c1c1c1;
     }
   }
 }
@@ -433,6 +484,8 @@ footer {
   display: flex;
   align-items: center;
   a.navigation-item, .navigation-item > button {
+    display: flex;
+    cursor: pointer;
     color: inherit;
     margin-left: 1.625rem;
     transition: all linear 0.125s;
@@ -443,9 +496,15 @@ footer {
     &:before {
       background: transparent;
     }
+
+    .spinner-border {
+      margin: 0;
+      height: 1em;
+      width: 1em;
+    }
   }
   a.active {
-    color: $custom-primary-darker;
+    color: $custom-active-link;
   }
 }
 
@@ -471,7 +530,7 @@ footer {
     text-align: center;
     margin-right: -12px;
     margin-top: 13px;
-    z-index: 500;
+    z-index: 10000;
     &:before {
       position: absolute;
       content: "";
@@ -554,9 +613,8 @@ footer {
   }
   .card-body {
     font-size: 16px;
-    padding: 0 0 2rem;
+    padding: 1rem 0 2rem;
     margin-top: 0;
-    border-top: 1px solid $custom-light;
     .icon-navigation {
       margin: 0 0 2rem;
       justify-content: flex-end;
@@ -645,7 +703,8 @@ a.progress-box:hover {
         margin: 0.25em 0 0.25em;
       }
       .title-smaller {
-        font-size: 1.25em;
+        font-size: 1.3em;
+        padding-bottom: 0.5em;
       }
       .progress-box-status {
         font-size: 0.7em;
@@ -769,7 +828,7 @@ a.progress-box:hover {
   }
 }
 
-.sub-status-card {
+a.sub-status-card {
   position: relative;
   background: #EFF0EF;
   display: flex;
@@ -779,6 +838,7 @@ a.progress-box:hover {
   width: 10em;
   height: 13em;
   border-radius: 0.75em;
+  border: none;
   padding: 0 1em 1em 1.5em;
   margin-right: 1.25em;
   margin-top: 0;
@@ -791,6 +851,7 @@ a.progress-box:hover {
   &:hover {
     margin-top: 0.5em;
     margin-bottom: 0;
+    display: flex;
   }
 
   h3 {
@@ -874,7 +935,7 @@ a.progress-box:hover {
 .rte-container {
   padding: 0.5rem;
   border-radius: 0.25rem;
-  background: $custom-light;
+  background-color: $custom-light;
   .ql-container.ql-snow {
     font-size: 15px;
     border: none;
@@ -892,20 +953,26 @@ a.progress-box:hover {
  * <<< Forms
  */
 
+.form-control, .ql-editor {
+  background-color: $custom-light;
+  transition: all ease-in-out 0.175s;
+}
+
+.form-control:focus, .rte-active {
+  background-color: $custom-light;
+  outline: 0;
+  box-shadow: 0 0 0.2rem 0.2rem adjust_color($custom-primary, $alpha: -0.5);
+}
+
 .form-group {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1.75rem;
   label {
     font-weight: bold;
     font-size: $font-size-lg;
     margin-bottom: 0.125rem;
   }
   input, textarea {
-    background: $custom-light;
     border: none;
     color: $custom-dark;
-    transition: all ease-in-out 0.175s;
   }
   textarea {
     height: 5.5rem;
@@ -913,4 +980,143 @@ a.progress-box:hover {
   .form-text {
     margin: 0 0 0.5rem;
   }
+}
+
+.project-tasks {
+  padding: 0 2.25rem;
+  .card-header {
+    border-bottom: 1px solid $custom-light;
+  }
+  .card-body {
+    h4 {
+      font-weight: bold;
+      display: inline-flex;
+      align-items: baseline;
+      font-size: 1.125rem;
+      svg { margin-left: 0.375rem; }
+      margin-bottom: 0;
+    }
+    .form-text {
+      color: $custom-gray;
+      font-size: $font-size-sm;
+      font-weight: normal;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+.task-card-grid {
+  margin-top: 1.5rem;
+}
+
+.task-card {
+  padding: 0 1.25rem;
+  min-height: 5rem;
+  margin: 0 0 1rem;
+  word-break: break-word;
+  .card-body {
+    padding: 1rem 0;
+    display: flex;
+    p {
+      flex-grow: 1;
+      margin: 0;
+    }
+    .icon-navigation {
+      align-items: flex-start;
+      a.navigation-item {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+  form {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+  }
+  .form-group {
+    margin-bottom: 0;
+    flex-grow: 1;
+  }
+}
+
+.empty-task-card {
+  margin-bottom: 0;
+  min-height: 0;
+  .btn-add {
+    align-self: center;
+  }
+  .form-group {
+    padding-right: 1rem;
+  }
+}
+
+.btn-add {
+  background: white;
+  color: $custom-primary;
+  border-radius: 9999rem;
+  padding: 0.125rem;
+  border: none;
+  box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.25);
+  transition: all ease-in-out 0.175s;
+  &:hover, &:active, &:focus {
+    background: $custom-primary;
+    color: white;
+    border: none;
+  }
+  &:hover {
+    transform: scale(1.25);
+  }
+  &:active, &:focus {
+    box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.col > .spinner-border,
+.card .spinner-border {
+  border-color: $custom-primary;
+  height: 4rem;
+  width: 4rem;
+  border-width: 0.5rem;
+  border-right-color: transparent;
+  align-self: center;
+  display: block;
+  &:not(.btn .spinner-border, .icon-navigation .spinner-border) {
+    margin: auto auto 1rem;
+  }
+}
+
+.btn .spinner-border, 
+.icon-navigation .spinner-border {
+  height: 1rem;
+  width: 1rem;
+  border-width: 0.125rem;
+  border-color: $custom-dark;
+  border-right-color: transparent;
+  margin: 0 0 0 0.5rem;
+}
+
+.btn-sm .spinner-border {
+  height: 0.75rem;
+  width: 0.75rem;
+  border-width: 0.1rem;
+}
+
+.btn-action .spinner-border {
+  height: 1.5rem;
+  width: 1.5rem;
+  border-width: 0.175rem;
+  margin-left: 0.75rem;
+  margin-right: -0.5rem;
+}
+
+.btn-secondary .spinner-border,
+.btn-dark .spinner-border {
+  border-color: $custom-primary;
+  border-right-color: transparent;
+}
+
+.card-header + .card-body, 
+.collapse .card-body, 
+.collapsing .card-body {
+  padding-top: 0;
 }

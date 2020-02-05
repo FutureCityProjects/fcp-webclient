@@ -4,7 +4,8 @@ import { Card, CardBody, CardHeader, UncontrolledCollapse } from "reactstrap"
 
 import { FundState, IFund } from "api/schema"
 import HtmlContent from "components/common/HtmlContent"
-import Icon from "components/Icon"
+import Icon from "components/common/Icon"
+import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
 interface IProps {
@@ -16,6 +17,8 @@ function handleClick(id) {
 }
 
 const FundManagementCard: React.FC<IProps> = ({ fund }: IProps) => {
+  const { t } = useTranslation()
+
   const stateText = fund.state === FundState.ACTIVE
     ? <span className="text-success">aktiv</span>
     : (fund.state === FundState.FINISHED
@@ -41,20 +44,20 @@ const FundManagementCard: React.FC<IProps> = ({ fund }: IProps) => {
         <CardBody>
           <div role="actions" className="icon-navigation">
             <Link href={Routes.FUND_DETAILS} as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}>
-              <a aria-label="view details" className="navigation-item" title="Detailansicht">
+              <a aria-label={t("goto.fundDetails")} className="navigation-item" title={t("goto.fundDetails")}>
                 <Icon name={"search"} size={24} />
               </a>
             </Link>
             <Link href={Routes.FUND_EDIT} as={routeWithParams(Routes.FUND_EDIT, { id: fund.id })}>
-              <a aria-label="edit fund" className="navigation-item" title="Fördertopf bearbeiten">
+              <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                 <Icon name={"pencil"} size={24} />
               </a>
             </Link>
           </div>
-          <h4>Beschreibung</h4>
+          <h4>{t("fund.description")}</h4>
           <HtmlContent content={fund.description} />
 
-          <h4>Region</h4>
+          <h4>{t("fund.region")}</h4>
           <HtmlContent content={fund.region} />
         </CardBody>
       </UncontrolledCollapse>

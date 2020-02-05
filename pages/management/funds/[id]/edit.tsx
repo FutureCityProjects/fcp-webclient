@@ -6,6 +6,7 @@ import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
+import { normalizeFund } from "api/helper"
 import { IFund, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import StatusCode from "components/common/StatusCode"
@@ -51,7 +52,7 @@ const FundEditPage: I18nPage<PageProps> = ({ fund, request, t, updateFund }) => 
         routeWithParams(Routes.FUND_DETAILS, { id: fund.id }))
     }
 
-    updateFund(values, actions)
+    updateFund(normalizeFund(values), actions)
   }
 
   return <BaseLayout pageTitle={t("page.management.funds.edit.title")}>
@@ -62,13 +63,13 @@ const FundEditPage: I18nPage<PageProps> = ({ fund, request, t, updateFund }) => 
       </Col>
     </Row>
 
-    {request.isLoading ? <Spinner /> :
-      <Row>
-        <Col>
+    <Row>
+      <Col>
+        {request.isLoading ? <Spinner /> :
           <FundForm onSubmit={onSubmit} fund={fund} />
-        </Col>
-      </Row>
-    }
+        }
+      </Col>
+    </Row>
   </BaseLayout>
 }
 

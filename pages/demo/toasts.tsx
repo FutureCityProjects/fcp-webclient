@@ -1,7 +1,7 @@
 import { WithTranslation } from "next-i18next"
 import React from "react"
 import { toast } from "react-toastify"
-import { Col, Row } from "reactstrap"
+import { Col, Row, Card, Spinner, Button, CardBody, CardHeader, Label } from "reactstrap"
 
 import BaseLayout from "components/BaseLayout"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
@@ -13,7 +13,56 @@ const Page: I18nPage<PageProps> = () => {
     <BaseLayout pageTitle="Toasts" >
       <Row>
         <Col>
-          Einige statische Toasts als Hilfe beim Styling
+          Einige statische Toasts als Hilfe beim Styling<br />
+          <Spinner />
+
+          <Card>
+            <CardBody>
+              <div className="form-group">
+                <Label>Test</Label>
+                <input className="form-control"></input>
+              </div>
+              <div className="form-group">
+                <Button color="primary" className="btn-action">
+                  Absenden
+                </Button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <Button color="primary" className="btn-action">
+                  Absenden <Spinner />
+                </Button>
+                &nbsp;
+                <Button color="primary">
+                  Absenden <Spinner />
+                </Button>
+                &nbsp;
+                <Button color="primary" className="btn-sm">
+                  Absenden <Spinner />
+                </Button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <Button color="secondary" className="btn-action">
+                  Absenden <Spinner />
+                </Button>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <Button color="light" className="btn-action">
+                  Absenden <Spinner />
+                </Button>
+              </div>
+            </CardBody>
+
+          </Card>
+
+          <Card>
+            <CardHeader>Loading Card</CardHeader>
+            <CardBody>
+              <Spinner />
+            </CardBody>
+          </Card>
         </Col>
       </Row>
     </BaseLayout>

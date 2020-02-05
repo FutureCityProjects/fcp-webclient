@@ -17,4 +17,8 @@ const AboutPage: I18nPage<WithTranslation> = ({ t }) => {
   </BaseLayout>
 }
 
+AboutPage.getInitialProps = async () => ({
+  namespacesRequired: includeDefaultNamespaces(),
+})
+
 export default withTranslation(includeDefaultNamespaces())(AboutPage)

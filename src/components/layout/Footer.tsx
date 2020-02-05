@@ -1,15 +1,33 @@
 import React from "react"
+import { Col, Row } from "reactstrap"
 
+import Link from "next/link"
+import { useTranslation } from "services/i18n"
+import { Routes } from "services/routes"
 import SocialLinks from "./SocialLinks"
 
-export default class Footer extends React.Component {
-  public render() {
-    return (
-      <footer>
-        <div className="footer-content">
-          <SocialLinks />
-        </div>
-      </footer>
-    )
-  }
+interface IProps {
+  isFrontPage?: boolean
 }
+
+const Footer: React.FC<IProps> = (props: IProps) => {
+  const { t } = useTranslation()
+
+  return <footer>
+    <Row className="footer-content">
+      <Col>
+        {props.isFrontPage && <SocialLinks />}
+      </Col>
+      <Col className="footer-links">
+        <Link href={Routes.IMPRINT} >
+          <a>{t("navigation.imprint")}</a>
+        </Link> | <Link href={Routes.DATA_PROTECTION} >
+          <a>{t("navigation.dataProtection")}</a>
+        </Link>
+      </Col>
+      <Col></Col>
+    </Row>
+  </footer>
+}
+
+export default Footer

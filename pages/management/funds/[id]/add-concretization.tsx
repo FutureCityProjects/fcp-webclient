@@ -63,18 +63,18 @@ const ConcretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, cre
       </Col>
     </Row>
 
-    {request.isLoading ? <Spinner /> :
-      <Row>
-        <Col>
+    <Row>
+      <Col>
+        {request.isLoading ? <Spinner /> :
           <Card>
             <CardHeader>{t("form.fundConcretization.header")}</CardHeader>
             <CardBody>
               <ConcretizationForm onSubmit={onSubmit} />
             </CardBody>
           </Card>
-        </Col>
-      </Row>
-    }
+        }
+      </Col>
+    </Row>
   </BaseLayout>
 }
 

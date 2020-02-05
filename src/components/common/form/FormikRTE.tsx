@@ -1,14 +1,21 @@
+import dynamic from "next/dynamic"
 import React from "react"
 import { FormGroup, Label } from "reactstrap"
 
 import { includeDefaultNamespaces, withTranslation } from "services/i18n"
 import FormikElement, { IBaseFormikProps } from "./FormikElement"
-import RTE from "./RTE"
 
 interface IProps extends IBaseFormikProps {
+  maxLength?: number
   placeholder?: string
   value: string
 }
+
+// don't render the editor server-side, reactQuill doesn't support it and
+// our componentDidMount hook requires the DOM too...
+const RTE = dynamic(() => import('./RTE'), {
+  ssr: false,
+})
 
 class FormikRTE extends FormikElement<IProps> {
   public render() {
@@ -23,7 +30,8 @@ class FormikRTE extends FormikElement<IProps> {
 
         <RTE
           className={this.hasError() ? "is-invalid" : ""}
-          id={field.name}
+          id={this.props.id || field.name}
+          maxLength={this.props.maxLength}
           onChange={field.onChange(field.name)}
           placeholder={placeholder}
           value={value || ""}

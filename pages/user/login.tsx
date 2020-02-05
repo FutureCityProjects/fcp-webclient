@@ -6,7 +6,7 @@ import { connect, ConnectedProps } from "react-redux"
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
-import { ICredentials, IUser, ProjectProgress } from "api/schema"
+import { ICredentials, IProject, IUser, MembershipRole, ProjectProgress } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import PageError from "components/common/PageError"
 import Redirect from "components/common/Redirect"
@@ -47,13 +47,19 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
       }
 
       if (user.createdProjects) {
-        const newProjects = user.createdProjects.filter(
-          (p) => p.progress === ProjectProgress.CREATING_PROFILE && !p.name)
+        const newProject = user.createdProjects
+          .filter((p) => p.progress === ProjectProgress.CREATING_PROFILE && !p.name)
+          .shift()
 
-        // if the user has a project without a name -> directly redirect to the profile
-        if (newProjects.length) {
+        const membership = newProject && user.projectMemberships
+          .filter((m) => (m.project as IProject).id === newProject.id && m.role !== MembershipRole.APPLICANT)
+          .shift()
+
+        // if the user has created a project without a name and is still a member
+        // -> directly redirect to the profile
+        if (newProject && membership) {
           Router.push(Routes.PROJECT_PROFILE_EDIT, routeWithParams(Routes.PROJECT_PROFILE_EDIT,
-            { slug: newProjects.shift().id }))
+            { slug: newProject.id }))
           return
         }
       }

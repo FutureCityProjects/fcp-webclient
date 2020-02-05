@@ -1,5 +1,5 @@
-import dynamic from "next/dynamic"
-import React from "react"
+import React, { useEffect } from "react"
+import ReactQuill from "react-quill"
 import "react-quill/dist/quill.snow.css"
 import { UncontrolledTooltip } from "reactstrap"
 
@@ -73,20 +73,37 @@ const CustomToolbar = ({ id, t }: { id: string, t: any }) => (
   </div>
 )
 
-const ReactQuill = dynamic(() => import("react-quill"), {
-  ssr: false,
-})
-
 interface IProps {
   className?: string
   id: string
   onChange: (value: string) => void
+  maxLength?: number
   placeholder?: string
   value: string
 }
 
 const RTE: React.FC<IProps> = (props) => {
   const { t } = useTranslation()
+
+  // show the current text length in the editor, called onChange and after the component mounted
+  const updateTextLength = (editor) => {
+    const length = editor.getText().length - 1
+    document.getElementById(props.id + "-length").innerHTML = length.toString()
+
+    if (props.maxLength) {
+      document.getElementById(props.id + "-length-container").classList
+        .toggle("text-danger", length > props.maxLength)
+    }
+  }
+
+  // there is no initialize hook for reactQuill, use a reference to access the editor after it
+  // mounted
+  let quillRef = null
+  useEffect(() => {
+    if (quillRef) {
+      updateTextLength(quillRef.getEditor())
+    }
+  }, [])
 
   return <div className={"rte-container " + props.className}
     // do not use .ql-active, it is used internally and would break formatting
@@ -101,18 +118,27 @@ const RTE: React.FC<IProps> = (props) => {
           container: "#ql-toolbar-" + props.id,
         },
       }}
+      id={props.id}
       theme="snow"
       value={props.value}
-      onChange={(value, _delta, _sources, _editor) => {
-        // @todo shouldn't be done on each change, maybe only in validate() or server-side
-        // if (editor.getText().trim().length === 0) {
-        //  return props.onChange("")
-        // }
 
+      // provide the reactQuill reference to the parent component for initial action
+      ref={(element) => quillRef = element}
+
+      // call the provided change handler (probably from Formik) and update the textLength display
+      onChange={(value, _delta, _sources, editor) => {
         props.onChange(value)
+        updateTextLength(editor)
       }}
+
       placeholder={props.placeholder ? t(props.placeholder) : null}
     />
+    <div className="ql-textlength" id={props.id + "-length-container"}>
+      <span id={props.id + "-length"}>0</span> {
+        props.maxLength
+          ? t("form.RTE.textLengthWithMaxLength", { maxLength: props.maxLength })
+          : t("form.RTE.textLength")
+      }</div>
   </div>
 }
 

@@ -1,77 +1,92 @@
 import { Field, Form, Formik } from "formik"
+import Link from "next/link"
 import React from "react"
-import { Button, FormGroup, Spinner } from "reactstrap"
+import { Button, Card, CardBody, CardHeader, FormGroup, Spinner } from "reactstrap"
 
-import { IFundApplication, IFundConcretization } from "api/schema"
-import FormikInput from "components/common/form/FormikInput"
+import { IFund, IFundApplication, IProject, SelfAssessment } from "api/schema"
+import DropdownComponent from "components/common/DropdownComponent"
+import FormikRange from "components/common/form/FormikRange"
 import FormikRTE from "components/common/form/FormikRTE"
 import GeneralFormError from "components/common/form/GeneralFormError"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
+import { Routes } from "services/routes"
 
 interface IProps {
-  onSubmit: any
   application?: IFundApplication
+  fund: IFund
+  onSubmit: any
+  project: IProject
 }
 
-const ProjectConcretizationForm = ({ onSubmit, application = {
-  description: "",
-  maxLength: 280,
-  question: ""
-} }: IProps) => {
+const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IProps) => {
   const { t } = useTranslation()
 
-  return <Formik<IFundConcretization> initialValues={concretization} onSubmit={onSubmit}>
-    {({
-      errors,
-      handleSubmit,
-      isSubmitting,
-      values,
-    }) => {
-      return (
-        <Form onSubmit={handleSubmit}>
-          <GeneralFormError errors={errors} values={values} />
+  return <Card>
+    <Formik<IFundApplication> initialValues={application} onSubmit={onSubmit}>
+      {({
+        errors,
+        handleSubmit,
+        isSubmitting,
+        values,
+      }) => {
+        if (!application.concretizations) {
+          application.concretizations = {}
+        }
 
-          <Field component={FormikInput}
-            help="form.fundConcretization.question.help"
-            label="fundConcretization.question"
-            name="question"
-            maxLength={1000}
-            placeholder="form.fundConcretization.question.placeholder"
-            required
-            value={values.question}
-          />
+        return <Form onSubmit={handleSubmit}>
+          <CardHeader>
+            {t("fundApplication.fund") + ": " + fund.name}
+            <div className="icon-navigation">
+              {isSubmitting
+                ? <a className="navigation-item"><Spinner /></a>
+                : <a onClick={() => handleSubmit()} className="navigation-item" title={t("form.save")}><Icon name="save" size={24} /></a>}
+              <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
+                <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+                  <a>{t("goto.myProjects")}</a>
+                </Link>
+              </DropdownComponent>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <GeneralFormError errors={errors} values={values} />
 
-          <Field component={FormikRTE}
-            help="form.fundConcretization.description.help"
-            label="fundConcretization.description"
-            name="description"
-            placeholder="form.fundConcretization.description.placeholder"
-            required
-            value={values.description}
-          />
+            {fund.concretizations.map((concretization) => <Field component={FormikRTE}
+              help={concretization.description}
+              label={concretization.question}
+              id={"concretizations-" + concretization.id}
+              key={concretization.id}
+              name={"concretizations." + concretization.id}
+              maxLength={concretization.maxLength}
+              placeholder={t("form.fundApplication.concretization.placeholder", { maxLength: concretization.maxLength })}
+              value={values.concretizations[concretization.id] || ""}
+            />)}
 
-          <Field component={FormikInput}
-            help="form.fundConcretization.maxLength.help"
-            label="fundConcretization.maxLength"
-            name="maxLength"
-            maxLength={4}
-            placeholder="form.fundConcretization.maxLength.placeholder"
-            required
-            type="number"
-            value={values.maxLength}
-          />
+            <Field component={FormikRange}
+              help="form.fundApplication.concretizationSelfAssessment.help"
+              label="fundApplication.concretizationSelfAssessment"
+              name="concretizationSelfAssessment"
+              labels={{
+                [SelfAssessment.STARTING]: t("progress.0"),
+                [SelfAssessment.MAKING_PROGRESS]: t("progress.25"),
+                [SelfAssessment.HALF_FINISHED]: t("progress.50"),
+                [SelfAssessment.ALMOST_FINISHED]: t("progress.75"),
+                [SelfAssessment.COMPLETE]: t("progress.100"),
+              }}
+              value={values.concretizationSelfAssessment}
+            />
 
-          <FormGroup>
-            <Button color="primary" type="submit" disabled={isSubmitting}>
-              {t("form.submit")} {isSubmitting && <Spinner />}
-            </Button>
-          </FormGroup>
-
-          <p className="text-danger">{t("form.requiredFieldsHint")}</p>
+            <FormGroup>
+              <Button color="primary" className="btn-action btn-icon" type="submit" disabled={isSubmitting}>
+                <Icon name="save" size={18} />
+                {t("form.save")} {isSubmitting && <Spinner />}
+              </Button>
+            </FormGroup>
+          </CardBody>
         </Form>
-      )
-    }}
-  </Formik>
+      }}
+    </Formik>
+  </Card >
 }
 
 export default ProjectConcretizationForm

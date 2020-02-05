@@ -1,7 +1,7 @@
 import React from "react"
 
 import ActiveLink from "components/common/ActiveLink"
-import Icon from "components/Icon"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 
 interface IProps {

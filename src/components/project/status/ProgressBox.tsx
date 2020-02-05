@@ -1,11 +1,11 @@
 import Link from "next/link"
 import React from "react"
 
-import Icon from "components/Icon"
+import Icon from "components/common/Icon"
 import { progressToText } from "components/project/ProgressText"
 import { useTranslation } from "services/i18n"
 
-const statusIcon = (progress) => progress === 100
+const statusIcon = (complete) => complete
   ? <div aria-label="complete" className="progress-box-status-icon text-success">
     <Icon name="check" size={28} />
   </div>
@@ -16,9 +16,10 @@ const statusIcon = (progress) => progress === 100
 const boxClassName = (active: boolean) => "progress-box" + (active ? "" : " inactive")
 
 interface IProps {
-  active?: boolean,
-  as?: string
-  href?: string
+  active?: boolean
+  as?: string | { pathname: string, query: any }
+  complete?: boolean
+  href?: string | { pathname: string, query: any }
   icon: string
   progress?: number
   subtitle: string
@@ -27,16 +28,17 @@ interface IProps {
 
 const ProgressBox: React.FC<IProps> = (props: IProps) => {
   const { t } = useTranslation()
-  const { as, active = true, href, icon, progress, title, subtitle } = props
+  const { as, active = true, complete = false, href, icon, progress, title, subtitle } = props
+  const translatedTitle = t(title)
 
   const body = <div className="progress-box-body">
     <div><Icon name={icon} size={34} /></div>
     <div className="progress-box-text">
       <span className="project-milestone-prefix">{t(subtitle)}</span>
-      <h4 className="progress-box-title">{t(title)}</h4>
+      <h4 className={"progress-box-title" + (translatedTitle.length > 7 && " title-smaller")}>{translatedTitle}</h4>
       <span className="progress-box-status">{t(progressToText(progress))}</span>
     </div>
-    {statusIcon(progress)}
+    {statusIcon(complete)}
   </div>
 
   return href

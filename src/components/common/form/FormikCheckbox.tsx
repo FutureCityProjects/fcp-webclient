@@ -16,7 +16,7 @@ class FormikCheckbox extends FormikElement<IProps> {
   public render = () => {
     // extract all properties not allowed / not needed for the input element so the don't get
     // passed down and appear in the HTML with the rest of the props
-    const { children, field, form, help, i18n, label, meta, t, tReady, ...props } = this.props
+    const { children, field, form, help, i18n, id, label, meta, t, tReady, ...props } = this.props
     const labelText = this.labelText()
 
     return (
@@ -25,7 +25,8 @@ class FormikCheckbox extends FormikElement<IProps> {
           <Input
             {...field}
             {...props}
-            id={field.name}
+            id={id || field.name}
+            name={field.name}
             invalid={this.hasError()}
             value="true"
             type="checkbox"

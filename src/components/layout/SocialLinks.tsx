@@ -1,6 +1,6 @@
 import React from "react"
 
-import Icon from "components/Icon"
+import Icon from "components/common/Icon"
 
 export default class SocialLinks extends React.Component {
   public render() {

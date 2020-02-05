@@ -2,7 +2,7 @@ import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
-import { Spinner } from "reactstrap"
+import { Spinner, Row, Col } from "reactstrap"
 
 import BaseLayout from "components/BaseLayout"
 import PageError from "components/common/PageError"
@@ -24,14 +24,18 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
 const MarketPage: I18nPage<PageProps> = ({ ideas, projects, request, t }) => {
   return <BaseLayout pageTitle={t("page.projects.index.title")}>
-    {request.isLoading
-      ? <Spinner />
-      : <>
-        <PageError error={request.loadingError} />
-        <IdeaCarousel projects={ideas} />
-        <ProjectCarousel projects={projects} />
-      </>
-    }
+    <Row>
+      <Col>
+        {request.isLoading
+          ? <Spinner />
+          : <>
+            <PageError error={request.loadingError} />
+            <IdeaCarousel projects={ideas} />
+            <ProjectCarousel projects={projects} />
+          </>
+        }
+      </Col>
+    </Row>
   </BaseLayout>
 }
 

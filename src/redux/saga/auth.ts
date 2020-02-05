@@ -82,7 +82,7 @@ export function* logoutSaga(action: ILogoutAction) {
   yield put(clearStoreAction())
 
   // only after the store was cleared add new state
-  yield put(addNotificationAction(action.message || "message.auth.logout", "info"))
+  yield put(addNotificationAction(action.message || "message.auth.logout", "info", action.options))
 }
 
 export function* refreshTokenSaga() {
@@ -177,7 +177,7 @@ export function* saveToken(encodedToken: string) {
 export function* userIsIdleSaga() {
   const isAuthenticated = yield select(selectIsAuthenticated)
   if (isAuthenticated) {
-    yield put(logoutAction("message.auth.idleLogout"))
+    yield put(logoutAction("message.auth.idleLogout", { autoClose: false }))
   }
 }
 

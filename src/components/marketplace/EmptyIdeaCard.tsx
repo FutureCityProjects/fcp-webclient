@@ -5,7 +5,7 @@ import { Button, Card, CardBody, CardHeader } from "reactstrap"
 import { useTranslation } from "services/i18n"
 import { Routes } from "services/routes"
 
-const EmptyProjectCard: React.FC = () => {
+const EmptyIdeaCard: React.FC = () => {
   const { t } = useTranslation()
 
   return <Card className="marketplace-card empty-card">
@@ -23,4 +23,4 @@ const EmptyProjectCard: React.FC = () => {
   </Card>
 }
 
-export default EmptyProjectCard
+export default EmptyIdeaCard

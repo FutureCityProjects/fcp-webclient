@@ -4,6 +4,8 @@ import { all, call, put, select, takeLatest } from "redux-saga/effects"
 import apiClient from "api/client"
 import { IProcess, IProject, ProjectProgress } from "api/schema"
 import { AuthActionTypes, ISetAuthAction } from "redux/actions/auth"
+import { loadCurrentUserAction } from "redux/actions/currentUser"
+import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { ICreateProjectAction, NewProjectActionTypes, resetNewProjectAction } from "redux/actions/newProject"
 import { addNotificationAction } from "redux/actions/notifications"
 import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
@@ -39,7 +41,15 @@ function* createProjectSaga(action: ICreateProjectAction) {
   // inject the current process, it's required
   action.project.process = process["@id"]
 
-  return yield putWait(createModelAction(EntityType.PROJECT, action.project, action.actions, "new_project"))
+  const project = yield putWait(createModelAction(EntityType.PROJECT, action.project, action.actions, "new_project"))
+
+  // refresh the user to get the new membership
+  yield put(loadCurrentUserAction())
+
+  // refresh list of projects
+  yield put(loadMyProjectsAction())
+
+  return project
 }
 
 /**

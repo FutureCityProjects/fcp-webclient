@@ -18,19 +18,16 @@ const ConfirmationForm = ({ buttonLabel, onSubmit }: IProps) => {
       errors,
       handleSubmit,
       isSubmitting,
-    }) => {
-      return (
-        <Form onSubmit={handleSubmit}>
-          <GeneralFormError errors={errors} />
+    }) => <Form onSubmit={handleSubmit}>
+        <GeneralFormError errors={errors} />
 
-          <FormGroup>
-            <Button color="primary" type="submit" disabled={isSubmitting}>
-              {t(buttonLabel || "form.confirm")} {isSubmitting && <Spinner />}
-            </Button>
-          </FormGroup>
-        </Form>
-      )
-    }}
+        <FormGroup>
+          <Button className="btn-action" color="primary" type="submit" disabled={isSubmitting}>
+            {t(buttonLabel || "form.confirm")} {isSubmitting && <Spinner />}
+          </Button>
+        </FormGroup>
+      </Form>
+    }
   </Formik>
 }
 

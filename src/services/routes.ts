@@ -2,6 +2,8 @@
 export enum Routes {
   HOME = "/",
   ABOUT = "/about",
+  IMPRINT = "/imprint",
+  DATA_PROTECTION = "/data-protection",
 
   // user handling
   LOGIN = "/user/login",
@@ -22,8 +24,16 @@ export enum Routes {
   MY_PROJECTS = "/user/projects",
   PROJECT_PROFILE = "/projects/[slug]/profile",
   PROJECT_PROFILE_EDIT = "/projects/[slug]/profile/edit",
-  PROJECT_SELECT_FUND = "/projects/[slug]/select-fund",
-  PROJECT_CONCRETIZATION = "/projects/[slug]/concretization",
+  PROJECT_SELECT_FUND = "/projects/[slug]/fund-application/select-fund",
+  PROJECT_CONCRETIZATION = "/projects/[slug]/fund-application/concretization",
+  PROJECT_PLAN = "/projects/[slug]/plan",
+  PROJECT_PLAN_EDIT = "/projects/[slug]/plan/edit",
+  PROJECT_PLAN_TASKS = "/projects/[slug]/plan/tasks",
+  PROJECT_PLAN_WORK_PACKAGES = "/projects/[slug]/plan/work-packages",
+  PROJECT_FUND_APPLICATION = "/projects/[slug]/fund-application",
+  PROJECT_FUND_APPLICATION_EDIT = "/projects/[slug]/fund-application/edit",
+  PROJECT_FUND_APPLICATION_SUBMIT = "/projects/[slug]/fund-application/submit",
+  PROJECT_FUNDING_EDIT = "/projects/[slug]/fund-application/funding",
 
   // administrative pages for process owner / admin
   PROCESS_OVERVIEW = "/process",

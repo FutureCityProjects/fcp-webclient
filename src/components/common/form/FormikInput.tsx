@@ -10,13 +10,15 @@ interface IProps extends IBaseFormikProps {
   name: string
   placeholder?: string
   type?: InputType
+  value?: any
 }
 
 class FormikInput extends FormikElement<IProps> {
   public render = () => {
     // extract all properties not allowed / not needed for the input element so the don't get
     // passed down and appear in the HTML
-    const { children, field, form, help, i18n, label, meta, placeholder, t, tReady, type, ...props } = this.props
+    const { children, field, form, help, id, i18n, label, meta, placeholder,
+      t, tReady, type, value, ...props } = this.props
     const labelText = this.labelText()
 
     return <FormGroup>
@@ -27,10 +29,12 @@ class FormikInput extends FormikElement<IProps> {
       <Input
         {...field}
         {...props}
-        id={field.name}
+        id={id || field.name}
+        name={field.name}
         invalid={this.hasError()}
         placeholder={placeholder ? t(placeholder) : null}
         type={type || "text"}
+        value={value === null ? "" : value}
       />
 
       {this.errorElement()}

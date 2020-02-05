@@ -4,18 +4,17 @@ import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css"
 import { FormGroup, Label } from "reactstrap"
 
-import { SelfAssessment } from "api/schema"
 import { includeDefaultNamespaces, withTranslation } from "services/i18n"
 import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
-  value: SelfAssessment
+  value: string
   labels: object,
 }
 
-class FormikRange extends FormikElement<IProps> {
+class FormikDate extends FormikElement<IProps> {
   public render() {
-    const { field, form, value } = this.props
+    const { id, field, form, value } = this.props
     const labelText = this.labelText()
 
     return <FormGroup>
@@ -26,6 +25,8 @@ class FormikRange extends FormikElement<IProps> {
       <DatePicker
         className="form-control"
         dateFormat="P"
+        id={id || field.name}
+        name={field.name}
         locale={de}
         onChange={(val) => {
           form.setFieldValue(field.name, val)
@@ -38,4 +39,4 @@ class FormikRange extends FormikElement<IProps> {
   }
 }
 
-export default withTranslation(includeDefaultNamespaces())(FormikRange)
+export default withTranslation(includeDefaultNamespaces())(FormikDate)

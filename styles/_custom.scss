@@ -1,5 +1,5 @@
 $custom-primary: #FCE122;
-$custom-primary-darker: darken($custom-primary, 15%);
+$custom-active-link: #CE5F00;
 $custom-secondary: #292929;
 $custom-dark: #292929;
 $custom-gray: #595959;
@@ -14,3 +14,6 @@ $theme-colors: (
 ) !default;
 
 $font-size-xs: 0.75rem;
+
+$font-heading: "Montserrat", sans-serif;
+$font-body: "Roboto", sans-serif;

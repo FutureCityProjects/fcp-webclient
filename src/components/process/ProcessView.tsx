@@ -2,8 +2,8 @@ import React from "react"
 import { Card, CardBody, CardHeader } from "reactstrap"
 
 import { IProcess } from "api/schema"
+import Icon from "components/common/Icon"
 import TranslatedHtml from "components/common/TranslatedHtml"
-import Icon from "components/Icon"
 import Link from "next/link"
 import { useTranslation } from "services/i18n"
 import { Routes } from "services/routes"
@@ -19,7 +19,7 @@ export default function ProcessView({ process }: IProps) {
     <CardHeader>{t("process.name")}: {process.name}
       <div role="actions" className="icon-navigation">
         <Link href={Routes.PROCESS_EDIT} /*as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
-          <a aria-label="view participants" className="navigation-item" title="goto.editProcess">
+          <a aria-label={t("goto.editProcess")} className="navigation-item" title={t("goto.editProcess")}>
             <Icon name={"pencil"} size={24} />
           </a>
         </Link>

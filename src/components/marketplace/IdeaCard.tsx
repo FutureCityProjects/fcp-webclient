@@ -4,7 +4,7 @@ import { Card, CardBody, CardHeader } from "reactstrap"
 
 import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
-import Icon from "components/Icon"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 

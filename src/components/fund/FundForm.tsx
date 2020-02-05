@@ -3,17 +3,23 @@ import React from "react"
 import { Button, Card, CardBody, CardHeader, FormGroup, Spinner } from "reactstrap"
 
 import { IFund } from "api/schema"
+import DropdownComponent from "components/common/DropdownComponent"
 import FormikDate from "components/common/form/FormikDate"
 import FormikInput from "components/common/form/FormikInput"
 import FormikRTE from "components/common/form/FormikRTE"
 import GeneralFormError from "components/common/form/GeneralFormError"
+import Icon from "components/common/Icon"
+import Link from "next/link"
 import { useTranslation } from "services/i18n"
+import { Routes, routeWithParams } from "services/routes"
 import CriteriaArray from "./CriteriaArray"
 
 interface IProps {
   onSubmit: any
   fund?: IFund
 }
+
+// @todo client-side validation function
 
 const FundForm = ({ onSubmit, fund = {
   briefingDate: null,
@@ -41,169 +47,266 @@ const FundForm = ({ onSubmit, fund = {
       handleSubmit,
       isSubmitting,
       values,
-    }) => {
-      return (
-        <Form onSubmit={handleSubmit}>
-          <Card>
-            <CardHeader id="form-fund-general">{t("form.fund.generalHeader")}</CardHeader>
-            <CardBody>
-              <GeneralFormError errors={errors} values={values} />
+    }) => <Form onSubmit={handleSubmit}>
+        <Card>
+          <CardHeader id="form-fund-general">
+            {t("form.fund.generalHeader")}
 
-              <Field component={FormikInput}
-                help="form.fund.name.help"
-                label="fund.name"
-                name="name"
-                placeholder="form.fund.name.placeholder"
-                required
-                value={values.name}
-              />
+            <div className="icon-navigation">
+              {isSubmitting
+                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
+              <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
+                {fund.id
+                  ? <Link
+                    href={Routes.FUND_DETAILS}
+                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                  >
+                    <a>{t("goto.fundDetails")}</a>
+                  </Link>
+                  : <Link href={Routes.FUND_OVERVIEW}>
+                    <a>{t("goto.fundManagement")}</a>
+                  </Link>
+                }
+              </DropdownComponent>
+            </div>
+          </CardHeader>
 
-              <Field component={FormikRTE}
-                help="form.fund.description.help"
-                label="fund.description"
-                name="description"
-                placeholder="form.fund.description.placeholder"
-                required
-                value={values.description}
-              />
+          <CardBody>
+            <GeneralFormError errors={errors} values={values} />
 
-              <Field component={FormikInput}
-                help="form.fund.region.help"
-                label="fund.region"
-                name="region"
-                placeholder="form.fund.region.placeholder"
-                required
-                value={values.region}
-              />
+            <Field component={FormikInput}
+              help="form.fund.name.help"
+              label="fund.name"
+              name="name"
+              // @todo maxLength
+              placeholder="form.fund.name.placeholder"
+              required
+              value={values.name}
+            />
 
-              <FieldArray
-                name="criteria"
-                component={CriteriaArray}
-              />
+            <Field component={FormikRTE}
+              help="form.fund.description.help"
+              label="fund.description"
+              name="description"
+              maxLength={10000}
+              placeholder="form.fund.description.placeholder"
+              required
+              value={values.description}
+            />
 
-              <Field component={FormikInput}
-                help="form.fund.sponsor.help"
-                label="fund.sponsor"
-                name="sponsor"
-                placeholder="form.fund.sponsor.placeholder"
-                required
-                value={values.sponsor}
-              />
+            <Field component={FormikInput}
+              help="form.fund.region.help"
+              label="fund.region"
+              name="region"
+              // @todo maxLength
+              placeholder="form.fund.region.placeholder"
+              required
+              value={values.region}
+            />
 
-              <Field component={FormikRTE}
-                help="form.fund.imprint.help"
-                label="fund.imprint"
-                name="imprint"
-                placeholder="form.fund.imprint.placeholder"
-                required
-                value={values.imprint}
-              />
-            </CardBody>
-          </Card>
+            <FieldArray
+              name="criteria"
+              component={CriteriaArray}
+            />
 
-          <Card>
-            <CardHeader id="form-fund-funding">{t("form.fund.fundingHeader")}</CardHeader>
-            <CardBody>
-              <Field component={FormikInput}
-                help="form.fund.budget.help"
-                label="fund.budget"
-                name="budget"
-                placeholder="form.fund.budget.placeholder"
-                type="number"
-                value={values.budget}
-              />
+            <Field component={FormikInput}
+              help="form.fund.sponsor.help"
+              label="fund.sponsor"
+              name="sponsor"
+              // @todo maxLength
+              placeholder="form.fund.sponsor.placeholder"
+              required
+              value={values.sponsor}
+            />
 
-              <Field component={FormikInput}
-                help="form.fund.maximumGrant.help"
-                label="fund.maximumGrant"
-                name="maximumGrant"
-                placeholder="form.fund.maximumGrant.placeholder"
-                type="number"
-                value={values.maximumGrant}
-              />
+            <Field component={FormikRTE}
+              help="form.fund.imprint.help"
+              label="fund.imprint"
+              name="imprint"
+              // @todo maxLength
+              placeholder="form.fund.imprint.placeholder"
+              required
+              value={values.imprint}
+            />
+          </CardBody>
+        </Card>
 
-              <Field component={FormikInput}
-                help="form.fund.minimumGrant.help"
-                label="fund.minimumGrant"
-                name="minimumGrant"
-                placeholder="form.fund.minimumGrant.placeholder"
-                type="number"
-                value={values.minimumGrant}
-              />
-            </CardBody>
-          </Card>
+        <Card>
+          <CardHeader id="form-fund-funding">
+            {t("form.fund.fundingHeader")}
 
-          <Card>
-            <CardHeader id="form-fund-application">{t("form.fund.applicationHeader")}</CardHeader>
-            <CardBody>
-              <Field component={FormikDate}
-                help="form.fund.submissionBegin.help"
-                label="fund.submissionBegin"
-                name="submissionBegin"
-                value={values.submissionBegin}
-              />
+            <div className="icon-navigation">
+              {isSubmitting
+                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
+              <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
+                {fund.id
+                  ? <Link
+                    href={Routes.FUND_DETAILS}
+                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                  >
+                    <a>{t("goto.fundDetails")}</a>
+                  </Link>
+                  : <Link href={Routes.FUND_OVERVIEW}>
+                    <a>{t("goto.fundManagement")}</a>
+                  </Link>
+                }
+              </DropdownComponent>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <Field component={FormikInput}
+              help="form.fund.budget.help"
+              label="fund.budget"
+              name="budget"
+              placeholder="form.fund.budget.placeholder"
+              min="0"
+              max="99999999"
+              step="0.01"
+              type="number"
+              value={values.budget}
+            />
 
-              <Field component={FormikDate}
-                help="form.fund.submissionEnd.help"
-                label="fund.submissionEnd"
-                name="submissionEnd"
-                value={values.submissionEnd}
-              />
-            </CardBody>
-          </Card>
+            <Field component={FormikInput}
+              help="form.fund.minimumGrant.help"
+              label="fund.minimumGrant"
+              name="minimumGrant"
+              placeholder="form.fund.minimumGrant.placeholder"
+              min="0"
+              max="99999999"
+              step="0.01"
+              type="number"
+              value={values.minimumGrant}
+            />
 
-          <Card>
-            <CardHeader id="form-fund-jury">{t("form.fund.juryHeader")}</CardHeader>
-            <CardBody>
-              <Field component={FormikInput}
-                help="form.fund.jurorsPerApplication.help"
-                label="fund.jurorsPerApplication"
-                name="jurorsPerApplication"
-                placeholder="form.fund.jurorsPerApplication.placeholder"
-                type="number"
-                value={values.jurorsPerApplication}
-              />
+            <Field component={FormikInput}
+              help="form.fund.maximumGrant.help"
+              label="fund.maximumGrant"
+              name="maximumGrant"
+              placeholder="form.fund.maximumGrant.placeholder"
+              min="0"
+              max="99999999"
+              step="0.01"
+              type="number"
+              value={values.maximumGrant}
+            />
+          </CardBody>
+        </Card>
 
-              <Field component={FormikDate}
-                help="form.fund.ratingBegin.help"
-                label="fund.ratingBegin"
-                name="ratingBegin"
-                value={values.ratingBegin}
-              />
+        <Card>
+          <CardHeader id="form-fund-application">
+            {t("form.fund.applicationHeader")}
 
-              <Field component={FormikDate}
-                help="form.fund.ratingEnd.help"
-                label="fund.ratingEnd"
-                name="ratingEnd"
-                value={values.ratingEnd}
-              />
+            <div className="icon-navigation">
+              {isSubmitting
+                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
+              <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
+                {fund.id
+                  ? <Link
+                    href={Routes.FUND_DETAILS}
+                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                  >
+                    <a>{t("goto.fundDetails")}</a>
+                  </Link>
+                  : <Link href={Routes.FUND_OVERVIEW}>
+                    <a>{t("goto.fundManagement")}</a>
+                  </Link>
+                }
+              </DropdownComponent>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <Field component={FormikDate}
+              help="form.fund.submissionBegin.help"
+              label="fund.submissionBegin"
+              name="submissionBegin"
+              value={values.submissionBegin}
+            />
 
-              <Field component={FormikDate}
-                help="form.fund.briefingDate.help"
-                label="fund.briefingDate"
-                name="briefingDate"
-                value={values.briefingDate}
-              />
+            <Field component={FormikDate}
+              help="form.fund.submissionEnd.help"
+              label="fund.submissionEnd"
+              name="submissionEnd"
+              value={values.submissionEnd}
+            />
+          </CardBody>
+        </Card>
 
-              <Field component={FormikDate}
-                help="form.fund.finalJuryDate.help"
-                label="fund.finalJuryDate"
-                name="finalJuryDate"
-                value={values.finalJuryDate}
-              />
+        <Card>
+          <CardHeader id="form-fund-jury">
+            {t("form.fund.juryHeader")}
 
-              <FormGroup>
-                <Button color="primary" type="submit" disabled={isSubmitting}>
-                  {t("form.submit")} {isSubmitting && <Spinner />}
-                </Button>
-              </FormGroup>
+            <div className="icon-navigation">
+              {isSubmitting
+                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
+              <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
+                {fund.id
+                  ? <Link
+                    href={Routes.FUND_DETAILS}
+                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                  >
+                    <a>{t("goto.fundDetails")}</a>
+                  </Link>
+                  : <Link href={Routes.FUND_OVERVIEW}>
+                    <a>{t("goto.fundManagement")}</a>
+                  </Link>
+                }
+              </DropdownComponent>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <Field component={FormikInput}
+              help="form.fund.jurorsPerApplication.help"
+              label="fund.jurorsPerApplication"
+              name="jurorsPerApplication"
+              placeholder="form.fund.jurorsPerApplication.placeholder"
+              type="number"
+              value={values.jurorsPerApplication}
+            />
 
-              <p className="text-danger">{t("form.requiredFieldsHint")}</p>
-            </CardBody>
-          </Card>
-        </Form>
-      )
-    }}
+            <Field component={FormikDate}
+              help="form.fund.ratingBegin.help"
+              label="fund.ratingBegin"
+              name="ratingBegin"
+              value={values.ratingBegin}
+            />
+
+            <Field component={FormikDate}
+              help="form.fund.ratingEnd.help"
+              label="fund.ratingEnd"
+              name="ratingEnd"
+              value={values.ratingEnd}
+            />
+
+            <Field component={FormikDate}
+              help="form.fund.briefingDate.help"
+              label="fund.briefingDate"
+              name="briefingDate"
+              value={values.briefingDate}
+            />
+
+            <Field component={FormikDate}
+              help="form.fund.finalJuryDate.help"
+              label="fund.finalJuryDate"
+              name="finalJuryDate"
+              value={values.finalJuryDate}
+            />
+
+            <FormGroup>
+              <Button className="btn-action btn-icon" color="primary" type="submit" disabled={isSubmitting}>
+                <Icon name="save" size={18} />
+                {t("form.submit")} {isSubmitting && <Spinner />}
+              </Button>
+            </FormGroup>
+
+            <p className="text-danger">{t("form.requiredFieldsHint")}</p>
+          </CardBody>
+        </Card>
+      </Form>
+    }
   </Formik>
 }
 

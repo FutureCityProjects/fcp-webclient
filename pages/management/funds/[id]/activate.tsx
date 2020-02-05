@@ -13,6 +13,7 @@ import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
+import Link from "next/link"
 import { activateFundAction } from "redux/actions/fundManagement"
 import { loadCollectionAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
@@ -37,7 +38,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   id: number,
 }
 
-const FundEditPage: I18nPage<PageProps> = ({ activateFund, fund, request, t, }) => {
+const FundEditPage: I18nPage<PageProps> = ({ activateFund, id, fund, request, t, }) => {
   // @todo custom error message "fund not found" etc.
   if (!request.isLoading && !fund) {
     return <StatusCode statusCode={404}>
@@ -59,12 +60,19 @@ const FundEditPage: I18nPage<PageProps> = ({ activateFund, fund, request, t, }) 
       <Col>
         <h1>{t("page.management.funds.activate.heading")}</h1>
         <p><TranslatedHtml content="page.management.funds.activate.intro" /></p>
+
+        <Link
+          href={Routes.FUND_DETAILS}
+          as={routeWithParams(Routes.FUND_DETAILS, { id })}
+        >
+          <a className="btn btn-secondary btn-sm">{t("goto.fundManagement")}</a>
+        </Link>
       </Col>
     </Row>
 
-    {request.isLoading ? <Spinner /> :
-      <Row>
-        <Col sm={6}>
+    <Row>
+      <Col sm={6}>
+        {request.isLoading ? <Spinner /> :
           <Card>
             <CardHeader>{t("fund.name")}: {fund.name}</CardHeader>
             <CardBody>
@@ -72,9 +80,9 @@ const FundEditPage: I18nPage<PageProps> = ({ activateFund, fund, request, t, }) 
               <ConfirmationForm onSubmit={onSubmit} />
             </CardBody>
           </Card>
-        </Col>
-      </Row>
-    }
+        }
+      </Col>
+    </Row>
   </BaseLayout>
 }
 

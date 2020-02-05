@@ -29,7 +29,6 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 })
 
 const mapStateToProps = (state: AppState, { inspirationId }) => ({
-  creationRequest: state.requests.projectOperation,
   inspiration: selectById(state, EntityType.PROJECT, inspirationId),
   inspirationRequest: state.requests.projectLoading,
   isAuthenticated: selectIsAuthenticated(state),
@@ -55,7 +54,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props) => {
     </StatusCode>
   }
 
-  const { creationRequest, t } = props
+  const { t } = props
   const [projectSaved, setProjectSaved] = useState(false)
   const [projectCreated, setProjectCreated] = useState(false)
 
@@ -103,7 +102,6 @@ const ProjectCreationPage: I18nPage<PageProps> = (props) => {
           <CardHeader>{t("form.project.create.header")}</CardHeader>
           <CardBody>
             {!projectSaved && !projectCreated && <>
-              <PageError error={creationRequest.loadingError} />
               <ProjectCreationForm onSubmit={onSubmit} project={props.project} />
             </>}
 

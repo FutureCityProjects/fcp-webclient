@@ -26,6 +26,7 @@ const MarketPage: I18nPage<PageProps> = () => {
   }
 
   const p1: IProject = {
+    createdAt: new Date(),
     delimitation: "Wir grenzen uns von anderen Projekten ab durch ...",
     description: "etwas längere Beschreibung, kann HTML enthalten",
     goal: "Unser Ziel ist die Weltherrschaft",
@@ -35,13 +36,14 @@ const MarketPage: I18nPage<PageProps> = () => {
       shortDescription: "die Inspiration",
     },
     name: "Testprojekt",
-    profileSelfAssessment: SelfAssessment.SELF_ASSESSMENT_25_PERCENT,
+    profileSelfAssessment: SelfAssessment.MAKING_PROGRESS,
     progress: ProjectProgress.CREATING_PLAN,
     shortDescription: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas",
     slug: "testprojekt",
   }
 
   const p2: IProject = {
+    createdAt: new Date(),
     delimitation: "Wir grenzen uns von anderen Projekten ab durch ...",
     description: "etwas längere Beschreibung, kann HTML enthalten",
     goal: "Unser Ziel ist die Weltherrschaft",
@@ -51,7 +53,7 @@ const MarketPage: I18nPage<PageProps> = () => {
       shortDescription: "die andere Inspiration",
     },
     name: null,
-    profileSelfAssessment: SelfAssessment.SELF_ASSESSMENT_0_PERCENT,
+    profileSelfAssessment: SelfAssessment.0,
     progress: ProjectProgress.CREATING_PLAN,
     shortDescription: "übernommen von der Projektidee",
     slug: null,

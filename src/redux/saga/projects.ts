@@ -124,7 +124,10 @@ function* updateProjectSaga(action: IModelFormAction<IProject>) {
       yield put(loadingSuccessAction(action.scope, process))
     }
 
-    yield call(success, project)
+    yield call(setSubmitting, false)
+    if (success) {
+      yield call(success, project)
+    }
 
     return project
   } catch (err) {

@@ -1,15 +1,17 @@
 # Todo
-  * Prozess-Edit: Kriterien sind als Pflicht markiert, absenden geht ohne?
-  * Testen: FÖrdertopfauswahl als ProjektOwner - keine inaktiven Funds
-  * Testen: Fördertopfauswahl ohne Funds
-  * Zurück-Button bei Freischaltungs-Bestätigung Fund
-  * The type of the "maximumGrant" attribute must be "float", "string" given.
-  * Minlength Validator schliesst HTML mit ein
-  * Invalid credentials Übersetzung
+  * Übersetzungen Einreichen
+  * Hinweis bei Submit wenn ausserhalb Einreichungszeitraum
+  * Keine Bearbeitung Antragsdaten wenn bereits eingereicht?
+  * logout wegen inaktivität notice nicht verschwinden lassen
   * RTE toolbar konfigurierbar für PO + Members etc
+  * Wie kann die Zuspitzung als complete markiert werden? Wir wissen in ProjectStatus die Anzahl der
+    FundConcretizations nicht -> Fortschritt ähnlich wie beim Project preUpdate tracken
+  * Logo / Bild Platzhalter für Demo
   * refactor form error messages: before submit display only errors from touched fields
     (client validation), after submit from all fields (server validation, e.g. empty field is
     required, formik setState?)
+  * optimize carousel: smaller cards, show partial card, hide buttons/move outside
+  * validate: tasks that have a workpackage ID that does not exist (still catched by "tasksWithoutPackage")
   * WYSIWYG als Markdown speichern
     * use https://github.com/domchristie/turndown to generate markdown from quill html.
     * use markdown-to-jsx to render the markdown instead of using
@@ -21,6 +23,8 @@
     * or use only html-to-react for display
   * UserManagement lädt nicht die Liste aller User wenn schon/nur der eingeloggte User in der
     Liste ist
+  * isLocked ausgeben für owner + member
+    * auswerten in myProjectCard + unterseiten
   * multipage wizard: https://github.com/vincentntang/multistep-wizard-formik-yup-reactstrap
   * component files .jsx benennen
   * icons als echte .svg ins public dir (caching, served by nginx -> performance)
@@ -41,3 +45,5 @@
   * Prio low fixes
     * Project-Tableau Hover Bug: http://prntscr.com/qs7ukj
     * project tableau overflows project card on high zoom
+    * slider labels schieben sich schon bei relativ hohen bildschirmbreiten inneinander: http://prntscr.com/quxsi4
+    * a.btn mit Icon hat noch einen active rahmen: http://prntscr.com/qv56ch

@@ -8,17 +8,16 @@ import { AnyAction, Dispatch } from "redux"
 import { FundState, IFund, IFundConcretization, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import HtmlContent from "components/common/HtmlContent"
+import Icon from "components/common/Icon"
 import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
-import Icon from "components/Icon"
 import Link from "next/link"
 import { deleteModelAction, loadCollectionAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectById } from "redux/reducer/data"
 import { selectManagementFundsLoaded } from "redux/reducer/fundManagement"
-import { DateFormat, formatDate, TimeFormat } from "services/dateFormat"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
@@ -60,18 +59,21 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
       <Col>
         <h1>{t("page.management.funds.details.heading")}</h1>
         <p><TranslatedHtml content="page.management.funds.details.intro" /></p>
+        <Link href={Routes.FUND_OVERVIEW} >
+          <a className="btn btn-secondary">{t("goto.fundManagement")}</a>
+        </Link>
       </Col>
     </Row>
 
-    {request.isLoading ? <Spinner /> :
-      <Row>
-        <Col>
+    <Row>
+      <Col>
+        {request.isLoading ? <Spinner /> : <>
           <Card>
             <CardHeader>
               {fund.name}
               <div role="actions" className="icon-navigation">
                 <Link href={Routes.FUND_EDIT} as={routeWithParams(Routes.FUND_EDIT, { id: fund.id })}>
-                  <a aria-label="edit fund" className="navigation-item" title="Fördertopf bearbeiten">
+                  <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
                 </Link>
@@ -124,7 +126,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
               <div role="actions" className="icon-navigation">
                 <Link href={Routes.FUND_EDIT}
                   as={routeWithParams(Routes.FUND_EDIT, { id: fund.id }) + "#form-fund-funding"}>
-                  <a aria-label="edit fund" className="navigation-item" title="Fördertopf bearbeiten">
+                  <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
                 </Link>
@@ -132,13 +134,19 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             </CardHeader>
 
             <h5>{t("fund.budget")}</h5>
-            <p>{fund.budget}</p>
-
-            <h5>{t("fund.maximumGrant")}</h5>
-            <p>{fund.maximumGrant}</p>
+            <p>{fund.budget
+              ? t("default.currency", { value: fund.budget })
+              : t("default.empty")}</p>
 
             <h5>{t("fund.minimumGrant")}</h5>
-            <p>{fund.minimumGrant}</p>
+            <p>{fund.minimumGrant
+              ? t("default.currency", { value: fund.minimumGrant })
+              : t("default.empty")}</p>
+
+            <h5>{t("fund.maximumGrant")}</h5>
+            <p>{fund.maximumGrant
+              ? t("default.currency", { value: fund.maximumGrant })
+              : t("default.empty")}</p>
           </Card>
 
           <Card>
@@ -147,7 +155,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
               <div role="actions" className="icon-navigation">
                 <Link href={Routes.FUND_EDIT}
                   as={routeWithParams(Routes.FUND_EDIT, { id: fund.id }) + "#form-fund-application"}>
-                  <a aria-label="edit fund" className="navigation-item" title="Fördertopf bearbeiten">
+                  <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
                 </Link>
@@ -156,12 +164,12 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardBody>
               <h5>{t("fund.submissionBegin")}</h5>
               <p>{fund.submissionBegin
-                ? formatDate(fund.submissionBegin, DateFormat.LONG, TimeFormat.MINUTES)
+                ? t("default.longDateTime", { value: fund.submissionBegin })
                 : t("default.empty")}</p>
 
               <h5>{t("fund.submissionEnd")}</h5>
               <p>{fund.submissionEnd
-                ? formatDate(fund.submissionEnd, DateFormat.LONG, TimeFormat.MINUTES)
+                ? t("default.longDateTime", { value: fund.submissionEnd })
                 : t("default.empty")}</p>
 
               <h5 id="concretizations">{t("fund.concretizations")}</h5>
@@ -170,16 +178,17 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                   {fund.concretizations.map((c: IFundConcretization) => <li key={c.id}>
                     <dt>
                       {c.question}
+
                       <Link href={{
                         pathname: Routes.CONCRETIZATION_EDIT, query: { concretization: c.id }
                       }} as={{ pathname: routeWithParams(Routes.CONCRETIZATION_EDIT, { id: fund.id, concretizationId: c.id }), query: { concretization: c.id } }}>
-                        <Button color="secondary" title="Bearbeiten">
-                          <Icon name="pencil" color="white" size={18} />
-                        </Button>
+                        <a className="btn" title={t("goto.editConcretization")}>
+                          <Icon name="pencil" size={24} /></a>
                       </Link>
-                      <Button color="secondary" onClick={() => confirmDelete(c)} title="Löschen">
-                        <Icon name="trash" color="white" size={18} />
-                      </Button>
+
+                      <a className="btn" onClick={() => confirmDelete(c)} title={t("form.removeElement")}>
+                        <Icon name="trash" size={24} />
+                      </a>
                     </dt>
                     {c.description && <dd><HtmlContent content={c.description} /></dd>}
                     <small>{t("fundConcretization.maxLength")}: {c.maxLength}</small>
@@ -199,7 +208,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
               <div role="actions" className="icon-navigation">
                 <Link href={Routes.FUND_EDIT}
                   as={routeWithParams(Routes.FUND_EDIT, { id: fund.id }) + "#form-fund-jury"}>
-                  <a aria-label="edit fund" className="navigation-item" title="Fördertopf bearbeiten">
+                  <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
                 </Link>
@@ -215,28 +224,28 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
 
               <h5>{t("fund.ratingBegin")}</h5>
               <p>{fund.ratingBegin
-                ? formatDate(fund.ratingBegin, DateFormat.LONG)
+                ? t("default.longDateTime", { value: fund.ratingBegin })
                 : t("default.empty")}</p>
 
               <h5>{t("fund.ratingEnd")}</h5>
               <p>{fund.ratingEnd
-                ? formatDate(fund.ratingEnd, DateFormat.LONG)
+                ? t("default.longDateTime", { value: fund.ratingEnd })
                 : t("default.empty")}</p>
 
               <h5>{t("fund.briefingDate")}</h5>
               <p>{fund.briefingDate
-                ? formatDate(fund.briefingDate, DateFormat.LONG)
+                ? t("default.longDateTime", { value: fund.briefingDate })
                 : t("default.empty")}</p>
 
               <h5>{t("fund.finalJuryDate")}</h5>
               <p>{fund.finalJuryDate
-                ? formatDate(fund.finalJuryDate, DateFormat.LONG)
+                ? t("default.longDateTime", { value: fund.finalJuryDate })
                 : t("default.empty")}</p>
             </CardBody>
           </Card>
-        </Col>
-      </Row>
-    }
+        </>}
+      </Col>
+    </Row>
   </BaseLayout>
 }
 

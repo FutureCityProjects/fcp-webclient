@@ -3,24 +3,24 @@ import React from "react"
 import { Col, Row } from "reactstrap"
 
 import BaseLayout from "components/BaseLayout"
-import { Icons } from "components/Icon"
+import Icon, { Icons } from "components/common/Icon"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
 type PageProps = WithTranslation
 
 const Page: I18nPage<PageProps> = () => {
   const icons = []
-  for (const key in Icons) {
-    if (Icons.hasOwnProperty(key)) {
-      const Comp = Icons[key].default
-      icons.push(<li key={key}>{key}: <Comp size={40} /></li>)
-    }
-  }
+
+  Icons.forEach(icon => {
+    icons.push(<li key={Icons.indexOf(icon)}>{icon}: <Icon name={icon} size={40} /></li>)
+  })
+
   return (
     <BaseLayout pageTitle="Icons" >
       <Row>
         <Col>
-          <ul>
+          Farbig zum Test ob alle Icons die Farbe übernehmen:
+          <ul className="text-info">
             {icons}
           </ul>
         </Col>

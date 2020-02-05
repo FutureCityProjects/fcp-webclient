@@ -5,6 +5,7 @@ import { Button, FormGroup, Spinner } from "reactstrap"
 import { ICredentials } from "api/schema"
 import FormikInput from "components/common/form/FormikInput"
 import GeneralFormError from "components/common/form/GeneralFormError"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 
 interface IProps {
@@ -24,8 +25,7 @@ const LoginForm = ({ onSubmit, credentials = {
       handleSubmit,
       isSubmitting,
       values,
-    }) => {
-      return <Form onSubmit={handleSubmit}>
+    }) => <Form onSubmit={handleSubmit}>
         <GeneralFormError errors={errors} values={values} />
         <Field component={FormikInput}
           help="form.login.username.help"
@@ -47,12 +47,13 @@ const LoginForm = ({ onSubmit, credentials = {
         />
 
         <FormGroup>
-          <Button color="primary" type="submit" disabled={isSubmitting}>
+          <Button className="btn-action btn-icon" type="submit" color="primary" disabled={isSubmitting}>
+            <Icon name="user" size={18} />
             {t("form.login.submit")} {isSubmitting && <Spinner />}
           </Button>
         </FormGroup>
       </Form>
-    }}
+    }
   </Formik>
 }
 

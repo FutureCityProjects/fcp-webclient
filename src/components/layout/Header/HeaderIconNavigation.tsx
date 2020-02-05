@@ -3,7 +3,8 @@ import React from "react"
 import { UserRole } from "api/schema"
 import AuthElement from "components/common/AuthElement"
 import DropdownComponent from "components/common/DropdownComponent"
-import Icon from "components/Icon"
+import Icon from "components/common/Icon"
+import { useTranslation } from "services/i18n"
 import { Routes } from "services/routes"
 import NavIcon from "./NavIcon"
 import NavLink from "./NavLink"
@@ -16,6 +17,8 @@ interface IProps {
 }
 
 const HeaderIconNavigation: React.FC<IProps> = (props) => {
+  const { t } = useTranslation()
+
   return <nav role="navigation" className="icon-navigation">
     <ul>
       <AuthElement roles={props.roles} requiredRole={UserRole.PROCESS_OWNER}>
@@ -33,22 +36,22 @@ const HeaderIconNavigation: React.FC<IProps> = (props) => {
 
       <li><DropdownComponent
         className="navigation-item"
-        aria-label="account"
+        aria-label={t("navigation.user")}
         button={<Icon name="user" size={24} />}
         light={props.isFrontPage}
-        title="Benutzer"
+        title={t("navigation.user")}
       >
         <AuthElement roles={props.roles} requiredRole={UserRole.USER}>
-          <NavLink href={Routes.USER_PROFILE} label={"Profil " + props.username} />
+          <NavLink href={Routes.USER_PROFILE} label="navigation.userProfile" />
         </AuthElement>
         <AuthElement roles={props.roles} requiredRole={UserRole.USER}>
-          <NavLink href={Routes.MY_PROJECTS} label={"Meine Projekte"} />
+          <NavLink href={Routes.MY_PROJECTS} label="navigation.myProjects" />
         </AuthElement>
         <AuthElement roles={props.roles} requiredRole={UserRole.USER}>
-          <span aria-label="Logout" onClick={props.doLogout}>Logout</span>
+          <span aria-label={t("navigation.logout")} onClick={props.doLogout}>{t("navigation.logout")}</span>
         </AuthElement>
         <AuthElement roles={props.roles} requiredRole={UserRole.GUEST}>
-          <NavLink href={Routes.LOGIN} label={"Login"} />
+          <NavLink href={Routes.LOGIN} label="navigation.login" />
         </AuthElement>
       </DropdownComponent></li>
     </ul>

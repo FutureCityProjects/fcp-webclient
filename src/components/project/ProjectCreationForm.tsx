@@ -5,6 +5,7 @@ import { Button, FormGroup, Spinner } from "reactstrap"
 import { IProjectCreation } from "api/schema"
 import FormikInput from "components/common/form/FormikInput"
 import GeneralFormError from "components/common/form/GeneralFormError"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 
 interface IProps {
@@ -49,41 +50,39 @@ const ProjectCreationForm = ({ onSubmit, project }: IProps) => {
       handleSubmit,
       isSubmitting,
       values,
-    }) => {
-      return (
-        <Form onSubmit={handleSubmit}>
-          <GeneralFormError errors={errors} values={values} />
+    }) => <Form onSubmit={handleSubmit}>
+        <GeneralFormError errors={errors} values={values} />
 
-          <Field component={FormikInput}
-            help="form.project.create.motivation.help"
-            label="form.project.create.motivation.label"
-            name="motivation"
-            placeholder="form.project.create.motivation.placeholder"
-            required
-            type="textarea"
-            value={values.motivation}
-          />
+        <Field component={FormikInput}
+          help="form.project.create.motivation.help"
+          label="form.project.create.motivation.label"
+          name="motivation"
+          placeholder="form.project.create.motivation.placeholder"
+          required
+          type="textarea"
+          value={values.motivation}
+        />
 
-          <Field component={FormikInput}
-            help="form.project.create.skills.help"
-            label="form.project.create.skills.label"
-            name="skills"
-            placeholder="form.project.create.skills.placeholder"
-            required
-            type="textarea"
-            value={values.skills}
-          />
+        <Field component={FormikInput}
+          help="form.project.create.skills.help"
+          label="form.project.create.skills.label"
+          name="skills"
+          placeholder="form.project.create.skills.placeholder"
+          required
+          type="textarea"
+          value={values.skills}
+        />
 
-          <FormGroup>
-            <Button type="submit" disabled={isSubmitting}>
-              {t("form.submit")} {isSubmitting && <Spinner />}
-            </Button>
-          </FormGroup>
+        <FormGroup>
+          <Button className="btn-action btn-icon" type="submit" color="primary" disabled={isSubmitting}>
+            <Icon name="save" size={18} />
+            {t("form.submit")} {isSubmitting && <Spinner />}
+          </Button>
+        </FormGroup>
 
-          <p className="text-danger">{t("form.requiredFieldsHint")}</p>
-        </Form>
-      )
-    }}
+        <p className="text-danger">{t("form.requiredFieldsHint")}</p>
+      </Form>
+    }
   </Formik>
 }
 

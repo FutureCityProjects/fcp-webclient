@@ -84,8 +84,7 @@ const RegistrationForm = ({ onSubmit }: IProps) => {
       handleSubmit,
       isSubmitting,
       values,
-    }) => {
-      return <Form onSubmit={handleSubmit}>
+    }) => <Form onSubmit={handleSubmit}>
         <GeneralFormError errors={errors} values={values} />
 
         <Field component={FormikInput}
@@ -153,14 +152,15 @@ const RegistrationForm = ({ onSubmit }: IProps) => {
         />
 
         <FormGroup>
-          <Button type="submit" color="primary" disabled={isSubmitting}>
+          <Button className="btn-action btn-icon" type="submit" color="primary" disabled={isSubmitting}>
+            <Icon name="message" size={18} />
             {t("form.registration.submit")} {isSubmitting && <Spinner />}
           </Button>
         </FormGroup>
 
         <p className="text-danger">{t("form.requiredFieldsHint")}</p>
       </Form>
-    }}
+    }
   </Formik>
 }
 

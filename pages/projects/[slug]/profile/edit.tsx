@@ -6,7 +6,7 @@ import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
-import { ProjectState, UserRole } from "api/schema"
+import { UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
@@ -38,14 +38,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 
 const ProjectProfileEditPage: I18nPage<PageProps> = ({ project, request, t, updateProject }) => {
   // @todo custom error message "project not found or no permission" etc.
-  if (!request.isLoading && !project) {
-    return <StatusCode statusCode={404}>
-      <ErrorPage statusCode={404} error={request.loadingError} />
-    </StatusCode>
-  }
-
-  // @todo profilansicht wenn deaktiviert ja/nein? custom message?
-  if (project && project.state === ProjectState.DEACTIVATED) {
+  if (!request.isLoading && (!project || project.isLocked)) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={request.loadingError} />
     </StatusCode>
@@ -70,13 +63,13 @@ const ProjectProfileEditPage: I18nPage<PageProps> = ({ project, request, t, upda
       </Col>
     </Row>
 
-    {request.isLoading ? <Spinner /> :
-      <Row>
-        <Col>
+    <Row>
+      <Col>
+        {request.isLoading ? <Spinner /> :
           <ProfileForm onSubmit={onSubmit} project={project} />
-        </Col>
-      </Row>
-    }
+        }
+      </Col>
+    </Row>
   </BaseLayout>
 }
 

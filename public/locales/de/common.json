@@ -1,6 +1,12 @@
 {
   "default": {
-    "empty": "<keine Angaben>"
+    "currency": "{{value, currency}}",
+    "dropdown": "weitere Funktionen",
+    "number": "{{value, number}}",
+    "empty": "<keine Angaben>",
+    "date": "{{value, date}}",
+    "longDate": "{{value, longDate}}",
+    "longDateTime": "{{value, longDateTime}} Uhr"
   },
   "form": {
     "fund": {
@@ -13,18 +19,18 @@
       },
       "criteria": {
         "help": "Welche Kriterien stellt der Fördertopf für Projekte auf?",
-        "placeholder": "5-280 Zeichen"
+        "placeholder": "5 - 280 Zeichen"
       },
       "description": {
         "help": "Öffentliche Beschreibung des Fördertopfes",
-        "placeholder": "20-5000 Zeichen"
+        "placeholder": "20 - 10.000 Zeichen"
       },
       "finalJuryDate": {
         "help": "nach Beginn der Besprechung und nach Bewertungsabschluss"
       },
       "imprint": {
         "help": "Verantwortliche (juristische) Person & Kontakt des Fördertopfes",
-        "placeholder": "20-5000 Zeichen"
+        "placeholder": "20 - 5.000 Zeichen"
       },
       "jurorsPerApplication": {
         "help": "Wieviele Juroren sollen jedem Förderantrag zur Bewertung zugeteilt werden?",
@@ -50,11 +56,11 @@
       },
       "region": {
         "help": "In welchem geographischen Gebiet ist dieser Fördertopf verfügbar?",
-        "placeholder": "5-200 Zeichen"
+        "placeholder": "5 - 200 Zeichen"
       },
       "sponsor": {
         "help": "Wer stellt die Mittel zur Verfügung?",
-        "placeholder": "10-200 Zeichen"
+        "placeholder": "10 - 200 Zeichen"
       },
       "addCriterion": "Kriterium hinzufügen",
       "addConcretization": "Zuspitzung hinzufügen",
@@ -63,18 +69,33 @@
       "generalHeader": "Allgemeine Angaben",
       "juryHeader": "Angaben zur Bewertung"
     },
+    "fundApplication": {
+      "applicationSelfAssessment": {
+        "help": "@todo"
+      },
+      "concretization": {
+        "placeholder": "Maximal {{maxLength, number}} Zeichen"
+      },
+      "concretizationSelfAssessment": {
+        "help": "@todo"
+      },
+      "requestedFunding": {
+        "help": "@todo",
+        "placeholder": "Ganzzahl"
+      }
+    },
     "fundConcretization": {
       "description": {
         "help": "@todo",
-        "placeholder": "1-1000 Zeichen"
+        "placeholder": "1 - 1.000 Zeichen"
       },
       "maxLength": {
         "help": "Maximallänge der vom Benutzer angebbaren Antwort",
-        "placeholder": "Ganzzahl zwischen 1 und 2000"
+        "placeholder": "Ganzzahl zwischen 1 und 2.000"
       },
       "question": {
         "help": "@todo",
-        "placeholder": "1-1000 Zeichen"
+        "placeholder": "1 - 1.000 Zeichen"
       },
       "header": "Zuspitzung definieren"
     },
@@ -83,7 +104,7 @@
       "shortDescription": {
         "help": "Was willst du erreichen? Was soll getan werden?",
         "label": "",
-        "placeholder": "Kurze Beschreibung, 10-280 Zeichen"
+        "placeholder": "Kurze Beschreibung, 10 - 280 Zeichen"
       }
     },
     "login": {
@@ -102,15 +123,15 @@
     "process": {
       "criteria": {
         "help": "@todo",
-        "placeholder": "5-1000 Zeichen"
+        "placeholder": "5 - 1.000 Zeichen"
       },
       "description": {
         "help": "Öffentliche Beschreibung des Prozesses",
-        "placeholder": "20-5000 Zeichen"
+        "placeholder": "20 - 5.000 Zeichen"
       },
       "goals": {
         "help": "@todo",
-        "placeholder": "5-1000 Zeichen"
+        "placeholder": "5 - 1.000 Zeichen"
       },
       "imprint": {
         "help": "Verantwortliche (juristische) Person & Kontakt des Prozesses",
@@ -129,6 +150,9 @@
       "header": "Prozess-Informationen"
     },
     "project": {
+      "application": {
+        "header": "Angaben zum Förderantrag"
+      },
       "create": {
         "motivation": {
           "help": "Was motiviert dich diese Idee umzusetzen?",
@@ -142,9 +166,28 @@
         },
         "header": "Angaben zu dir"
       },
+      "plan": {
+        "header": "Angaben zum Projektplan",
+        "addImpact": "Impact hinzufügen",
+        "addOutcome": "Outcome hinzufügen",
+        "addResult": "Resultat hinzufügen",
+        "addTargetGroup": "Zielgruppe hinzufügen"
+      },
       "challenges": {
         "help": "Beschreibe deine Lösung eines Problems in einfachen Worten",
         "placeholder": "@todo"
+      },
+      "contactEmail": {
+        "help": "Wie erreicht dich der Fördermittelgeber?",
+        "placeholder": "email@domain.de"
+      },
+      "contactName": {
+        "help": "Wer ist der Ansprechpartner für den Fördermittelgeber?",
+        "placeholder": "Vorname Nachname"
+      },
+      "contactPhone": {
+        "help": "Hier kann deine Projektidee weiterentwickelt werden",
+        "placeholder": "Vorwahl + Nummer"
       },
       "delimitation": {
         "help": "Was soll durch das Projekt nicht bearbeitet werden, obwohl es naheliegt?",
@@ -158,11 +201,61 @@
         "help": "Die mit eigenen Mitteln realistisch erreichbar sind",
         "placeholder": "@todo"
       },
+      "holderAddressInfo": {
+        "help": "Zusatzangaben, bspw. &quot;im Hinterhaus&quot;",
+        "placeholder": "@todo"
+      },
+      "holderCity": {
+        "help": "Adresse des Projektträgers",
+        "placeholder": "Stadt/Ort"
+      },
+      "holderName": {
+        "help": "Name der Trägerorganisiation, bspw. Name des Vereins.",
+        "placeholder": "@todo"
+      },
+      "holderStreet": {
+        "help": "Adresse des Projektträgers",
+        "placeholder": "Straße + Hausnummer"
+      },
+      "holderZipCode": {
+        "help": "Adresse des Projektträgers",
+        "placeholder": "12345"
+      },
+      "impact": {
+        "help": "@todo",
+        "placeholder": "@todo"
+      },
+      "name": {
+        "help": "Gib deinem Projekt einen Namen",
+        "placeholder": "@todo"
+      },
+      "outcome": {
+        "help": "@todo",
+        "placeholder": "@todo"
+      },
+      "planSelfAssessment": {
+        "help": "@todo"
+      },
       "profileSelfAssessment": {
         "help": "@todo"
       },
+      "results": {
+        "help": "@todo",
+        "placeholder": "@todo"
+      },
       "shortDescription": {
         "help": "Beschreibe deine Idee / Projekt kurz und prägnant",
+        "placeholder": "@todo"
+      },
+      "targetGroups": {
+        "help": "@todo",
+        "placeholder": "@todo"
+      },
+      "tasks": {
+        "newTask": "Aufgabe hinzufügen..."
+      },
+      "utilization": {
+        "help": "@todo",
         "placeholder": "@todo"
       },
       "vision": {
@@ -231,7 +324,9 @@
       "ordered": "Nummerierte Liste",
       "size": "Schriftgröße",
       "strike": "Durchgestrichen",
-      "underline": "Unterstrichen"
+      "underline": "Unterstrichen",
+      "textLength": "Zeichen",
+      "textLengthWithMaxLength": "/ {{maxLength, number}} Zeichen"
     },
     "removeElement": "Entfernen",
     "requiredFieldsHint": "* dies ist eine Pflichtangabe",
@@ -265,6 +360,12 @@
     "submissionBegin": "Beginn Antragsannahme",
     "submissionEnd": "Ende Antragsannahme"
   },
+  "fundApplication": {
+    "applicationSelfAssessment": "Selbsteinschätzung zum Förderantrag",
+    "fund": "Gewählter Fördertopf",
+    "concretizationSelfAssessment": "Selbsteinschätzung zur Zuspitzung",
+    "requestedFunding": "Gewünschte Fördersumme"
+  },
   "fundConcretization": {
     "description": "Erläuterung zur Frage",
     "question": "Zuspitzungsfrage",
@@ -273,15 +374,25 @@
   "goto": {
     "about": "Worum geht's?",
     "activateFund": "Fördertopf freischalten",
+    "projectApplication": "Zum Förderantrag",
     "createFund": "Fördertopf anlegen",
+    "editApplicationData": "Antragsdaten bearbeiten",
+    "editConcretization": "Zuspitzung bearbeiten",
     "editFund": "Fördertopf bearbeiten",
     "editProcess": "Prozess bearbeiten",
+    "editProjectPlan": "Projektplan bearbeiten",
+    "editProjectProfile": "Profil bearbeiten",
+    "editProjectTasks": "Aufgaben bearbeiten",
+    "editRequestedFunding": "Fördersumme bearbeiten",
     "fundDetails": "Detailansicht",
     "fundManagement": "Fördertopf-Verwaltung",
-    "home": "zur Startseite",
+    "home": "Zur Startseite",
     "login": "Jetzt einloggen",
     "marketplace": "Zum Projektmarktplatz",
     "memberApplication": "Als Mitarbeiter bewerben",
+    "myProjects": "Zur Projektübersicht",
+    "planOverview": "Zur Projektplanübersicht",
+    "profileOverview": "Zum Projektprofil",
     "newIdea": "Neue Idee eintragen",
     "newProject": "Idee zum Projekt fortentwickeln",
     "processManagement": "Prozess-Verwaltung",
@@ -304,7 +415,26 @@
       "saved": "Deine Projektidee wurde gespeichert!"
     }
   },
+  "navigation": {
+    "dataProtection": "Datenschutz",
+    "imprint": "Impressum",
+    "login": "Login",
+    "logout": "Logout",
+    "myProjects": "Meine Projekte",
+    "user": "Benutzer",
+    "userProfile": "Meine Daten"
+  },
   "page": {
+    "about": {
+      "heading": "Was ist die PROJEKT.WERK.STADT?",
+      "intro": "@todo",
+      "title": "Worum geht's?"
+    },
+    "dataProtection": {
+      "heading": "Datenschutz",
+      "intro": "@todo",
+      "title": "Datenschutz"
+    },
     "ideas": {
       "create": {
         "title": "Projektidee eintragen",
@@ -316,6 +446,11 @@
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird die Idee abgepeichert!",
         "saveViaRegistration": "Noch kein Konto auf der Plattform? Nach der Registrierung wird deine Idee gespeichert und bei Freischaltung deines Kontos sichtbar."
       }
+    },
+    "imprint": {
+      "heading": "Impressum",
+      "intro": "@todo",
+      "title": "Impressum"
     },
     "management": {
       "funds": {
@@ -402,7 +537,7 @@
           "body": "Übernimm eine eigene oder fremde Projektidee um ein neues Projekt anzulegen!"
         },
         "project": {
-          "subHeader": "Erstellt am {{date}} von {{user}}"
+          "subHeader": "Erstellt am {{date, date}} von {{user}}"
         }
       },
       "profile": {
@@ -417,14 +552,67 @@
           "title": "Projektprofil"
         }
       },
-      "selectFund": {
-        "allowedOnlyForProjectOwner": "Hinweis: Der Fördertopf kann nur vom Projektleiter ausgewählt werden!",
-        "availableFunds": "Verfügbare Fördertöpfe",
-        "confirmSelection": "Wirklich diesen Fördertopf auswählen?",
-        "heading": "Fördertopf auswählen",
-        "intro": "Hier kannst du einen Fördertopf auswählen auf den sich dein Projekt <em>{{projectName}}</em> bewerben soll.",
-        "selectThisFund": "Diesen Fördertopf wählen",
-        "title": "Fördertopf wählen"
+      "plan": {
+        "index": {
+          "heading": "Projektplan: {{projectName}}",
+          "intro": "Hier siehst du den Stand des Projektplans zu deinem Projekt.",
+          "title": "Projektplan"
+        },
+        "edit": {
+          "heading": "Projektplan bearbeiten",
+          "intro": "Hier kannst du Angaben zum Projektplan deines Projekts <em>{{projectName}}</em> bearbeiten.",
+          "title": "Projektplan bearbeiten"
+        },
+        "tasks": {
+          "heading": "Aufgaben bearbeiten",
+          "intro": "Hier kannst du die Aufgaben zu deinem Projekt <em>{{projectName}}</em> bearbeiten.",
+          "title": "Aufgaben bearbeiten",
+          "subHeader": "Aufgaben und Arbeitspakete",
+          "taskHeading": "Aufgaben",
+          "taskIntro": "Hier kannst du einzelne Aufgaben eintragen."
+        },
+        "workPackages": {
+          "heading": "Arbeitspakete bearbeiten",
+          "intro": "Hier kannst du die Arbeitspakete zu deinem Projekt <em>{{projectName}}</em> bearbeiten.",
+          "title": "Arbeitspakete bearbeiten"
+        }
+      },
+      "application": {
+        "selectFund": {
+          "allowedOnlyForProjectOwner": "Hinweis: Der Fördertopf kann nur vom Projektleiter ausgewählt werden!",
+          "availableFunds": "Verfügbare Fördertöpfe",
+          "heading": "Fördertopf auswählen",
+          "intro": "Hier kannst du einen Fördertopf auswählen auf den sich dein Projekt <em>{{projectName}}</em> bewerben soll.",
+          "noAvailableFunds": "Aktuell stehen leider keine Fördertöpfe zur Bewerbung zur Verfügung, bitte schaue später noch einmal nach.",
+          "selectThisFund": "Diesen Fördertopf wählen",
+          "title": "Fördertopf wählen"
+        },
+        "concretization": {
+          "heading": "Projektzuspitzung eintragen",
+          "intro": "Hier kannst du die Zuspitzung deines Projektes auf den gewähltden Fördertopf vornehmen",
+          "title": "Projekt zuspitzen"
+        },
+        "index": {
+          "heading": "Angaben zum Förderantrag",
+          "intro": "Hier siehst du die weiteren Angaben zum Förderantrag des Projekts <em>{{projectName}}</em>.",
+          "title": "Förderantrag"
+        },
+        "edit": {
+          "heading": "Angaben zum Förderantrag bearbeiten",
+          "intro": "Hier kannst du weitere Angaben zum Förderantrag des Projekts <em>{{projectName}}</em> bearbeiten.",
+          "title": "Förderantrag bearbeiten"
+        },
+        "funding": {
+          "heading": "Fördersumme bearbeiten",
+          "intro": "Hier kannst du die gewünschte Fördersumme des Projekts <em>{{projectName}}</em> bearbeiten.",
+          "title": "Fördersumme bearbeiten"
+        },
+        "submit": {
+          "confirmSubmit": "Antrag jetzt einreichen",
+          "heading": "Förderantrag einreichen",
+          "intro": "Hier kannst du den Förderantrag zum Projekt <em>{{projectName}}</em> einreichen.<br>Diese Aktion kann <strong>nicht</strong> rückgängig gemacht werden, eine nachträgliche Bearbeitung der Antragsdaten ist dann nicht mehr möglich. Bitte prüfe daher alle Daten auf Vollständigkeit!",
+          "title": "Förderantrag einreichen"
+        }
       }
     },
     "user": {
@@ -436,6 +624,9 @@
       "login": {
         "heading": "Login",
         "title": "Login"
+      },
+      "myProjects": {
+        "title": "Meine Projekte"
       },
       "register": {
         "title": "Registrierung",
@@ -462,25 +653,55 @@
     "unknown": "offen"
   },
   "project": {
+    "applicationData": "Antragsdaten",
     "challenges": "Probleme / Herausforderung, worauf geantwortet werden soll",
+    "contactEmail": "Kontakt-Emailadresse",
+    "contactName": "Ansprechpartner",
+    "contactPhone": "Kontakt-Telefonnummer",
     "delimitation": "Abgrenzung",
     "description": "Beschreibung",
+    "fundingData": "Angaben zur Förderung",
     "goal": "Ziel",
+    "holderAddressInfo": "Adresszusatz",
+    "holderCity": "Ort",
+    "holderName": "Projektträger",
+    "holderStreet": "Straße",
+    "holderZipCode": "Postleitzahl",
+    "impact": "Impact",
+    "outcome": "Outcome",
+    "planSelfAssessment": "Selbsteinschätzung zum Fortschritt des Projektplans",
     "profile": "Projektprofil",
     "profileSelfAssessment": "Selbsteinschätzung zum Projektfortschritt",
+    "results": "Resultate",
     "shortDescription": "Das Projekt in einem Satz",
+    "state": {
+      "active": "aktiv",
+      "deactivated": "deaktiviert",
+      "inactive": "inaktiv",
+      "locked": "gesperrt"
+    },
     "tableau": {
       "application": "Antrag",
+      "concretization": "Zuspitzung",
       "idea": "Idee",
       "fund": "Fördertopf",
+      "fundApplication": "Förderantrag",
+      "funding": "Förder",
       "plan": "Plan",
+      "planTool": "Planung",
       "profile": "Profil",
+      "profileTool": "Profile",
       "project": "Projekt",
       "selectFund": "Wählen",
-      "submitApplication": "Einreichen"
+      "submitApplication": "Einreichen",
+      "teamTool": "Team"
     },
+    "targetGroups": "Zielgruppen",
+    "tasks": "Aufgaben",
     "unnamed": "[unbenanntes Projekt]",
-    "vision": "Vision"
+    "utilization": "Verwertung",
+    "vision": "Vision",
+    "workPackages": "Arbeitspakete"
   },
   "user": {
     "unknown": "[unbekannt]"

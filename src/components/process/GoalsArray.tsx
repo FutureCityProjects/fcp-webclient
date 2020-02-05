@@ -1,10 +1,10 @@
 import { Field, FieldArrayRenderProps, getIn } from "formik"
 import React from "react"
-import { Button, FormGroup, Label, FormText } from "reactstrap"
+import { Button, FormGroup, FormText, Label } from "reactstrap"
 
 import FormikArrayInput from "components/common/form/FormikArrayInput"
+import Icon from "components/common/Icon"
 import TranslatedHtml from "components/common/TranslatedHtml"
-import Icon from "components/Icon"
 import { useTranslation } from "services/i18n"
 
 interface IProps extends FieldArrayRenderProps {
@@ -46,7 +46,7 @@ const GoalsArray = ({
       ))}
 
       <Button onClick={() => push("")} className="btn btn-sm d-block">
-        <Icon name="plus" size={20} color="white" /> {t("form.process.addGoal")}
+        <Icon name="plus" size={20} /> {t("form.process.addGoal")}
       </Button>
 
     </FormGroup>

@@ -1,3 +1,5 @@
+import { ToastOptions } from "react-toastify"
+
 import { ICredentials } from "api/schema"
 import { IWebToken } from "redux/helper/state"
 
@@ -26,6 +28,7 @@ export interface ILoginAction extends IAuthAction {
 
 export interface ILogoutAction extends IAuthAction {
   message?: string
+  options?: ToastOptions
   type: AuthActionTypes.LOGOUT
 }
 
@@ -60,8 +63,9 @@ export const localStorageChangedAction = (): ILocalStorageChangedAction => ({
   type: AuthActionTypes.LOCAL_STORAGE_CHANGED,
 })
 
-export const logoutAction = (message?: string): ILogoutAction => ({
+export const logoutAction = (message?: string, options?: ToastOptions): ILogoutAction => ({
   message,
+  options,
   type: AuthActionTypes.LOGOUT,
 })
 

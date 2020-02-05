@@ -5,6 +5,7 @@ import { Button, FormGroup, Spinner } from "reactstrap"
 import { IProject } from "api/schema"
 import FormikInput from "components/common/form/FormikInput"
 import GeneralFormError from "components/common/form/GeneralFormError"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 
 const validate = (values: IProject) => {
@@ -40,8 +41,7 @@ const IdeaForm = ({ onSubmit, idea }: IProps) => {
       handleSubmit,
       isSubmitting,
       values,
-    }) => {
-      return <Form onSubmit={handleSubmit}>
+    }) => <Form onSubmit={handleSubmit}>
         <GeneralFormError errors={errors} values={values} />
 
         <Field component={FormikInput}
@@ -55,14 +55,15 @@ const IdeaForm = ({ onSubmit, idea }: IProps) => {
         />
 
         <FormGroup>
-          <Button color="primary" type="submit" disabled={isSubmitting}>
+          <Button color="primary" className="btn-action btn-icon" type="submit" disabled={isSubmitting}>
+            <Icon name="message" size={18} />
             {t("form.submit")} {isSubmitting && <Spinner />}
           </Button>
         </FormGroup>
 
         <p className="text-danger">{t("form.requiredFieldsHint")}</p>
       </Form>
-    }}
+    }
   </Formik>
 }
 

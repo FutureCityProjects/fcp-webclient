@@ -28,7 +28,7 @@ const ValidationForm = ({ bindErrorHandler, id = "", onSubmit, token = "" }: IPr
       // allow the parent page to inject errors
       useEffect(() => {
         bindErrorHandler(setErrors)
-      })
+      }, [])
 
       const err = <GeneralFormError errors={errors} values={values} />
 
@@ -58,7 +58,7 @@ const ValidationForm = ({ bindErrorHandler, id = "", onSubmit, token = "" }: IPr
             />
 
             <FormGroup>
-              <Button color="primary" type="submit" disabled={isSubmitting}>
+              <Button className="btn-action" color="primary" type="submit" disabled={isSubmitting}>
                 {t("form.submit")} {isSubmitting && <Spinner />}
               </Button>
             </FormGroup>

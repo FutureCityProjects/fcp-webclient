@@ -9,6 +9,13 @@
    height: auto !important;
 }
 
+// bar below the editor showing the number of current characters
+.ql-textlength {
+  font-size: 0.8em;
+  line-height: 0.8em;
+  margin-top: 0.7em;
+}
+
 // for displaying the formatted content
 .ql-size-small {
   font-size: 0.8em;

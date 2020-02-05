@@ -4,8 +4,7 @@ import { Card, CardBody, CardHeader } from "reactstrap"
 
 import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
-import Icon from "components/Icon"
-import formatDate from "services/dateFormat"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
@@ -37,8 +36,8 @@ const ProjectCard: React.FC<IProps> = ({ project }) => {
         </h3>
         <span>{t("page.projects.index.project.subHeader",
           {
-            date: formatDate(project.createdAt),
-            user: project.createdBy ? project.createdBy.username : "user.unknown"
+            date: project.createdAt,
+            user: project.createdBy ? project.createdBy.username : t("user.unknown")
           })}</span>
       </div>
 
