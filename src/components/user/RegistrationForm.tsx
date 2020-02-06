@@ -6,6 +6,7 @@ import { IUser } from "api/schema"
 import FormikCheckbox from "components/common/form/FormikCheckbox"
 import FormikInput from "components/common/form/FormikInput"
 import GeneralFormError from "components/common/form/GeneralFormError"
+import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 
 interface IRegistrationData extends IUser {

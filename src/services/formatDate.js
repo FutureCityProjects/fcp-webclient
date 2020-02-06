@@ -40,7 +40,7 @@ function formatDate(locale, date, format) {
     return "[invalid datetime format]"
   }
 
-  // @todo returns 01/10/2020 server-side instead of 10.01.2020, why?
+  // @todo node per default only includes small-icu (english)
   // return new Intl.DateTimeFormat(locale, intlFormats[format]).format(date))
 
   return dateFns.format(date, formats[format], { locale: getLocale(locale) })

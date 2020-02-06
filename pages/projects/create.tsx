@@ -54,7 +54,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props) => {
     </StatusCode>
   }
 
-  const { t } = props
+  const { inspirationRequest, t } = props
   const [projectSaved, setProjectSaved] = useState(false)
   const [projectCreated, setProjectCreated] = useState(false)
 
@@ -88,6 +88,8 @@ const ProjectCreationPage: I18nPage<PageProps> = (props) => {
           <CardBody>
             {props.inspirationRequest.isLoading ? <Spinner />
               : <CardText>
+                <PageError error={inspirationRequest.loadingError} />
+
                 {props.inspiration.shortDescription}
               </CardText>
             }

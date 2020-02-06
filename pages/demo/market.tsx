@@ -53,7 +53,7 @@ const MarketPage: I18nPage<PageProps> = () => {
       shortDescription: "die andere Inspiration",
     },
     name: null,
-    profileSelfAssessment: SelfAssessment.0,
+    profileSelfAssessment: SelfAssessment.STARTING,
     progress: ProjectProgress.CREATING_PLAN,
     shortDescription: "übernommen von der Projektidee",
     slug: null,

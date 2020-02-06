@@ -64,7 +64,7 @@ const ProjectTasksPage: I18nPage<PageProps> = () => {
   }
 
   return <BaseLayout pageTitle="Aufgaben im Projektplan">
-    <ProjectTasks project={p1} />
+    <ProjectTasks project={p1} onSubmit={(values) => console.log(values)} />
   </BaseLayout>
 }
 

@@ -38,12 +38,12 @@ export enum FundState {
 export interface IFund extends INumericIdentifierModel {
   "@id"?: string
   applications?: IFundApplication[]
-  briefingDate?: any
+  briefingDate?: Date | string
   budget?: number
   concretizations?: IFundConcretization[]
   criteria?: string[]
   description?: string
-  finalJuryDate?: any
+  finalJuryDate?: Date | string
   id?: number
   imprint?: string
   jurorsPerApplication: number
@@ -54,14 +54,14 @@ export interface IFund extends INumericIdentifierModel {
   name?: string
   process?: IProcess | string
   projects?: IProject[]
-  ratingBegin?: any
-  ratingEnd?: any
+  ratingBegin?: Date | string
+  ratingEnd?: Date | string
   region?: string
   slug?: string
   sponsor?: string
   state?: FundState
-  submissionBegin?: any
-  submissionEnd?: any
+  submissionBegin?: Date | string
+  submissionEnd?: Date | string
 }
 
 export enum FundApplicationState {
@@ -146,9 +146,9 @@ export interface IProject extends INumericIdentifierModel {
   contactEmaiL?: string
   contactName?: string
   contactPhone?: string
-  createdAt?: string
+  createdAt?: Date | string
   createdBy?: IUser
-  deletedAt?: string
+  deletedAt?: Date | string
   delimitation?: string
   description?: string
   goal?: string
@@ -177,7 +177,7 @@ export interface IProject extends INumericIdentifierModel {
   state?: string
   targetGroups?: string[]
   tasks?: IProjectTask[]
-  updatedAt?: string
+  updatedAt?: Date | string
   utilization?: string
   vision?: string
   visualization?: string
@@ -290,9 +290,9 @@ export enum UserRole {
 
 export interface IUser extends INumericIdentifierModel {
   "@id"?: string
-  createdAt?: Date
+  createdAt?: Date | string
   createdProjects?: IProject[]
-  deletedAt?: Date
+  deletedAt?: Date | string
   email?: string
   firstName?: string
   id?: number
