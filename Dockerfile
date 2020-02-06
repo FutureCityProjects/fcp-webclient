@@ -27,8 +27,18 @@ FROM node:current-alpine as deploy
 
 WORKDIR /usr/src/client
 
-# @todo copy only required files&folders, e.g. server.js, public, .next, config
-COPY --from=build /usr/src/client .
+# copy only required files&folders
+COPY --from=build /usr/src/client/.next ./.next
+COPY --from=build /usr/src/client/config ./config
+COPY --from=build /usr/src/client/node_modules ./node_modules
+COPY --from=build /usr/src/client/public ./public
+COPY --from=build /usr/src/client/src ./src
+COPY --from=build \
+  /usr/src/client/index.js \
+  /usr/src/client/next.config.js \
+  /usr/src/client/package.json \
+  /usr/src/client/server.js \
+  ./
 
 EXPOSE 3000
 
