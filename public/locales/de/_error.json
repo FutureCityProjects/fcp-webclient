@@ -27,10 +27,12 @@
       "notBlank": "Dies ist ein Pflichtfeld.",
       "outOfRange": "Der Wert liegt ausserhalb des zulässigen Bereichs.",
       "submissionFailed": "Das Speichern eines Objektes schlug fehl.",
-      "tooLong": "Der eingegbene Text ist zu lang.",
-      "tooShort": "Der eingegbene Text ist zu kurz."
+      "tooLong": "Der eingegebene Text ist zu lang.",
+      "tooShort": "Der eingegebene Text ist zu kurz."
     },
-    "project": {},
+    "project": {
+      "duplicatePackageNames": "Arbeitspakete müssen unterschiedliche Namen verwenden."
+    },
     "registration": {
       "acceptTerms": "Ohne Zustimmung ist leider keine Registrierung möglich."
     },

@@ -251,8 +251,14 @@
         "help": "@todo",
         "placeholder": "@todo"
       },
+      "task": {
+        "description": {
+          "placeholder": "5 - 500 Zeichen"
+        }
+      },
       "tasks": {
-        "newTask": "Aufgabe hinzufügen..."
+        "addTask": "Aufgabe hinzufügen",
+        "assignWorkPackage": "Arbeitspaket zuweisen"
       },
       "utilization": {
         "help": "@todo",
@@ -261,6 +267,24 @@
       "vision": {
         "help": "Zukunftsbild das über die persönliche Einflussnahme hinaus geht",
         "placeholder": "@todo"
+      },
+      "workPackage": {
+        "description": {
+          "help": "@todo",
+          "placeholder": "0 - 500 Zeichen"
+        },
+        "mainResponsibility": {
+          "help": "@todo",
+          "placeholder": "0 - 100 Zeichen"
+        },
+        "name": {
+          "help": "@todo",
+          "placeholder": "2 - 100 Zeichen"
+        }
+      },
+      "workPackages": {
+        "addPackage": "Arbeitspaket hinzufügen",
+        "editPackage": "Arbeitspaket bearbeiten"
       }
     },
     "registration": {
@@ -328,10 +352,14 @@
       "textLength": "Zeichen",
       "textLengthWithMaxLength": "/ {{maxLength, number}} Zeichen"
     },
+    "addElement": "Hinzufügen",
+    "cancel": "Abbrechen",
+    "edit": "Bearbeiten",
     "removeElement": "Entfernen",
     "requiredFieldsHint": "* dies ist eine Pflichtangabe",
     "confirm": "Bestätigen",
-    "save": "Änderungen speichern",
+    "save": "Speichern",
+    "saveChanges": "Änderungen speichern",
     "submit": "Absenden"
   },
   "fund": {
@@ -553,6 +581,7 @@
         }
       },
       "plan": {
+        "workHeader": "Aufgaben und Arbeitspakete",
         "index": {
           "heading": "Projektplan: {{projectName}}",
           "intro": "Hier siehst du den Stand des Projektplans zu deinem Projekt.",
@@ -567,13 +596,16 @@
           "heading": "Aufgaben bearbeiten",
           "intro": "Hier kannst du die Aufgaben zu deinem Projekt <em>{{projectName}}</em> bearbeiten.",
           "title": "Aufgaben bearbeiten",
-          "subHeader": "Aufgaben und Arbeitspakete",
           "taskHeading": "Aufgaben",
           "taskIntro": "Hier kannst du einzelne Aufgaben eintragen."
         },
         "workPackages": {
           "heading": "Arbeitspakete bearbeiten",
           "intro": "Hier kannst du die Arbeitspakete zu deinem Projekt <em>{{projectName}}</em> bearbeiten.",
+          "noPackages": "Erstelle ein neues Arbeitspaket",
+          "packageHeading": "Arbeitspakete",
+          "packageIntro": "Wähle deine einzelnen Aufgaben aus und organisiere sie in Arbeitspaketen.",
+          "subHeader": "Aufgaben und Arbeitspakete",
           "title": "Arbeitspakete bearbeiten"
         }
       },
@@ -608,9 +640,11 @@
           "title": "Fördersumme bearbeiten"
         },
         "submit": {
+          "allowedOnlyForProjectOwner": "Die Einreichung des Förderantrags kann nur vom Projektleiter vorgenommen werden.",
           "confirmSubmit": "Antrag jetzt einreichen",
           "heading": "Förderantrag einreichen",
           "intro": "Hier kannst du den Förderantrag zum Projekt <em>{{projectName}}</em> einreichen.<br>Diese Aktion kann <strong>nicht</strong> rückgängig gemacht werden, eine nachträgliche Bearbeitung der Antragsdaten ist dann nicht mehr möglich. Bitte prüfe daher alle Daten auf Vollständigkeit!",
+          "outsideSubmissionPeriod": "Eine Einreichen ist leider nur im Antragszeitraum möglich!",
           "title": "Förderantrag einreichen"
         }
       }
@@ -697,11 +731,19 @@
       "teamTool": "Team"
     },
     "targetGroups": "Zielgruppen",
-    "tasks": "Aufgaben",
+    "tasks": {
+      "description": "Aufgabenbeschreibung",
+      "label": "Aufgaben"
+    },
     "unnamed": "[unbenanntes Projekt]",
     "utilization": "Verwertung",
     "vision": "Vision",
-    "workPackages": "Arbeitspakete"
+    "workPackages": {
+      "description": "Kurzbeschreibung",
+      "label": "Arbeitspakete",
+      "mainResponsibility": "Hauptverantwortliche*r",
+      "name": "Arbeitspaketname"
+    }
   },
   "user": {
     "unknown": "[unbekannt]"

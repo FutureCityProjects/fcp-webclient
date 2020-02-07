@@ -30,7 +30,7 @@ const ValidationForm = ({ bindErrorHandler, id = "", onSubmit, token = "" }: IPr
         bindErrorHandler(setErrors)
       }, [])
 
-      const err = <GeneralFormError errors={errors} values={values} />
+      const err = <GeneralFormError errors={errors} prefix="validation" values={values} />
 
       return <Form onSubmit={handleSubmit}>
         <Card>

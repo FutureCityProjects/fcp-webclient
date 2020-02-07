@@ -32,7 +32,7 @@ const SelfAssessmentForm: React.FC<IProps> = (props: IProps) => {
           isSubmitting,
           values,
         }) => <Form onSubmit={handleSubmit}>
-            <GeneralFormError errors={errors} values={values} />
+            <GeneralFormError errors={errors} prefix="fundApplication" values={values} />
 
             <Field component={FormikRange}
               help="form.fundApplication.applicationSelfAssessment.help"
@@ -51,7 +51,7 @@ const SelfAssessmentForm: React.FC<IProps> = (props: IProps) => {
               {values.applicationSelfAssessment !== application.applicationSelfAssessment
                 ? <Button className="btn-icon" type="submit" color="primary" disabled={isSubmitting}>
                   <Icon name="save" size={18} />
-                  {t("form.save")} {isSubmitting && <Spinner />}
+                  {t("form.saveChanges")} {isSubmitting && <Spinner />}
                 </Button>
                 : ""
               }

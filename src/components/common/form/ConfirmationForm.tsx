@@ -7,10 +7,11 @@ import { useTranslation } from "services/i18n"
 
 interface IProps {
   buttonLabel?: string
+  errorPrefix?: string
   onSubmit: any
 }
 
-const ConfirmationForm = ({ buttonLabel, onSubmit }: IProps) => {
+const ConfirmationForm = ({ buttonLabel, errorPrefix, onSubmit }: IProps) => {
   const { t } = useTranslation()
 
   return <Formik initialValues={{}} onSubmit={onSubmit}>
@@ -19,7 +20,7 @@ const ConfirmationForm = ({ buttonLabel, onSubmit }: IProps) => {
       handleSubmit,
       isSubmitting,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} />
+        <GeneralFormError errors={errors} prefix={errorPrefix} />
 
         <FormGroup>
           <Button className="btn-action" color="primary" type="submit" disabled={isSubmitting}>

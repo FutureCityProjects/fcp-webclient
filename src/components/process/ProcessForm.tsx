@@ -36,7 +36,7 @@ const ProcessForm = ({ onSubmit, process = {
         <Card>
           <CardHeader>{t("form.process.header")}</CardHeader>
           <CardBody>
-            <GeneralFormError errors={errors} values={values} />
+            <GeneralFormError errors={errors} prefix="process" values={values} />
 
             <Field component={FormikInput}
               help="form.process.name.help"

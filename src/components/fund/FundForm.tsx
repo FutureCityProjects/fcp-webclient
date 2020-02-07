@@ -54,7 +54,7 @@ const FundForm = ({ onSubmit, fund = {
 
             <div className="icon-navigation">
               {isSubmitting
-                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                ? <a className="navigation-item" aria-label={t("form.save")}><Spinner /></a>
                 : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
@@ -73,7 +73,7 @@ const FundForm = ({ onSubmit, fund = {
           </CardHeader>
 
           <CardBody>
-            <GeneralFormError errors={errors} values={values} />
+            <GeneralFormError errors={errors} prefix="fund" values={values} />
 
             <Field component={FormikInput}
               help="form.fund.name.help"
@@ -138,7 +138,7 @@ const FundForm = ({ onSubmit, fund = {
 
             <div className="icon-navigation">
               {isSubmitting
-                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                ? <a className="navigation-item" aria-label={t("form.save")}><Spinner /></a>
                 : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
@@ -200,7 +200,7 @@ const FundForm = ({ onSubmit, fund = {
 
             <div className="icon-navigation">
               {isSubmitting
-                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                ? <a className="navigation-item" aria-label={t("form.save")}><Spinner /></a>
                 : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
@@ -240,7 +240,7 @@ const FundForm = ({ onSubmit, fund = {
 
             <div className="icon-navigation">
               {isSubmitting
-                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
+                ? <a className="navigation-item" aria-label={t("form.save")}><Spinner /></a>
                 : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id

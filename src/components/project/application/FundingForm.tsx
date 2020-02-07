@@ -23,7 +23,7 @@ const FundingForm = ({ application, onSubmit }: IProps) => {
       isSubmitting,
       values,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} values={values} />
+        <GeneralFormError errors={errors} prefix="fundAppliaction" values={values} />
 
         <Field component={FormikInput}
           help="form.fundApplication.requestedFunding.help"
@@ -40,7 +40,7 @@ const FundingForm = ({ application, onSubmit }: IProps) => {
         <div className="button-area">
           <Button className="btn-action btn-icon" type="submit" color="primary" disabled={isSubmitting}>
             <Icon name="save" size={18} />
-            {t("form.save")} {isSubmitting && <Spinner />}
+            {t("form.saveChanges")} {isSubmitting && <Spinner />}
           </Button>
         </div>
       </Form>

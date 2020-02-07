@@ -132,22 +132,30 @@ export class HydraClient {
 
   /**
    * API Platform returns a list of violations, one element for each failed constraint, in the form
-   * of propertyPath => message. But if the property is nested it returns prop[subProp] => message
+   * of propertyPath => message. But if the property is an array it returns prop[i] => message,
+   * if the property is nested it returns prop.subProp => message (or even prop[i].subProp),
    * which is not what redux-form expects in its SubmissionError. So we have to parse the path to build
    * a nested errors object.
    */
   private parsePropertyPath = (path: string): string[] => {
-    const pathList = []
-    const nestedPropRegex = /\[(.+?)]/g
-    const nestedStart = path.indexOf("[")
+    let pathList = []
+    let baseProp = path
 
-    if (nestedStart > 0) {
-      const baseProp = path.substring(0, nestedStart)
+    const nestStart = path.indexOf(".")
+    if (nestStart > 0) {
+      baseProp = baseProp.substring(0, nestStart)
+    }
+
+    const arrayPropRegex = /\[(.+?)]/g
+    const arrayStart = path.indexOf("[")
+
+    if (arrayStart > 0) {
+      baseProp = baseProp.substring(0, arrayStart)
       pathList.push(baseProp)
 
       let matches
       do {
-        matches = nestedPropRegex.exec(path)
+        matches = arrayPropRegex.exec(path)
         if (matches) {
           pathList.push(matches[1])
         }
@@ -155,6 +163,10 @@ export class HydraClient {
     } else {
       pathList.push(path)
     }
+
+    pathList = nestStart > 0
+      ? [...pathList, ...this.parsePropertyPath(path.substring(nestStart + 1))]
+      : pathList
 
     return pathList
   }

@@ -1,27 +1,21 @@
 import React from "react"
 import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
 
 import { IProject } from "api/schema"
 import EmptyProjectCard from "./EmptyProjectCard"
 import ProjectCard from "./ProjectCard"
 
 const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 2400 },
-    items: 4,
-  },
   large: {
-    breakpoint: { max: 2400, min: 1800 },
+    breakpoint: { max: 4000, min: 2000 },
     items: 3,
   },
   medium: {
-    breakpoint: { max: 1800, min: 1200 },
+    breakpoint: { max: 2000, min: 1300 },
     items: 2,
   },
   small: {
-    breakpoint: { max: 1200, min: 0 },
+    breakpoint: { max: 1300, min: 0 },
     items: 1,
   },
 }
@@ -37,16 +31,16 @@ export default class ProjectCarousel extends React.Component<IProps> {
     const wrappedProjects = projects.map((project) => <ProjectCard key={project.id} project={project} />)
 
     return <Carousel
-      responsive={responsive}
-      swipeable={true}
-      draggable={true}
-      ssr={true}
       autoPlay={true}
       autoPlaySpeed={5000}
+      centerMode
+      draggable={true}
       infinite={true}
-      partialVisible
-      renderButtonGroupOutside={true}
       keyBoardControl={true}
+      renderButtonGroupOutside={true}
+      responsive={responsive}
+      ssr={true}
+      swipeable={true}
     >
       {wrappedProjects}
       <EmptyProjectCard />

@@ -1,7 +1,8 @@
 # Todo
-  * Übersetzungen Einreichen
-  * Hinweis bei Submit wenn ausserhalb Einreichungszeitraum
+  * Einreichen nur mit owner PW
   * Keine Bearbeitung Antragsdaten wenn bereits eingereicht?
+  * DropdownComponent rendert leere Buttons im Menu weil sie <AuthElement> als nicht-leer
+    erkennt.
   * logout wegen inaktivität notice nicht verschwinden lassen
   * RTE toolbar konfigurierbar für PO + Members etc
   * Wie kann die Zuspitzung als complete markiert werden? Wir wissen in ProjectStatus die Anzahl der
@@ -39,8 +40,10 @@
   * saga_ran action: replace by ``typeof window !== 'undefined'``? maybe replace next-redux-sage etc too?  @see https://github.com/bbortt/qdrakeboo/pull/11/commits/0df1a76c3bd6aa08807fe71855190abe24d4aa2b
   * we use a handcrafted token-refresh which uses the currently valid JWT to retrieve a new JWT, is there
     any (security) benefit in using specialized refresh tokens? e.g. via https://github.com/markitosgv/JWTRefreshTokenBundle - refresh tokens are probably required for native apps because we don't want the user to login each time he uses the app, for browser usage it's okay to keep only the session alive and then re-login
+  * update redux.md to reflect generalized request state & scoping
   * use `<time>` and other semantic elements in markup
-
+  * how to customize translation for different instances?
+  * how to customize styling for different instances?
 
   * Prio low fixes
     * Project-Tableau Hover Bug: http://prntscr.com/qs7ukj

@@ -14,12 +14,13 @@ import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
+import { parseISO } from "date-fns"
 import { AnyAction, Dispatch } from "redux"
 import { loadMyProjectsAction, submitFundApplicationAction } from "redux/actions/myProjects"
 import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectById } from "redux/reducer/data"
-import { selectMyProjectByIdentifier } from "redux/reducer/myProjects"
+import { selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
 
@@ -31,6 +32,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 const mapStateToProps = (state: AppState, { fundId, slug }) => ({
   fund: selectById<IFund>(state, EntityType.FUND, fundId),
   fundRequest: state.requests.fundLoading,
+  isOwner: selectIsProjectOwner(state, slug),
   project: selectMyProjectByIdentifier(state, slug),
   projectRequest: state.requests.projectsLoading,
 })
@@ -42,7 +44,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 }
 
 const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
-  const { fund, fundRequest, project, projectRequest, submitApplication, t } = props
+  const { fund, fundRequest, isOwner, project, projectRequest, submitApplication, t } = props
 
   // @todo custom error message "project not found or no permission" etc.
   if (!projectRequest.isLoading && (!project || project.isLocked
@@ -77,6 +79,10 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
     submitApplication(fundApplication, actions)
   }
 
+  const now = new Date()
+  const submissionBegin = parseISO(fund.submissionBegin as string)
+  const submissionEnd = parseISO(fund.submissionEnd as string)
+
   return <BaseLayout pageTitle={t("page.projects.application.submit.title")}>
     <Row>
       <Col>
@@ -103,15 +109,21 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
           </CardHeader>
           <CardBody>
             <h5>{t("fund.submissionBegin")}</h5>
-            <p>{t("default.longDateTime", { value: fund.submissionBegin })}</p>
+            <p className={now < submissionBegin && "text-danger"}>{t("default.longDateTime", { value: fund.submissionBegin })}</p>
 
             <h5>{t("fund.submissionEnd")}</h5>
-            <p>{t("default.longDateTime", { value: fund.submissionEnd })}</p>
+            <p className={now > submissionEnd && "text-danger"}>{t("default.longDateTime", { value: fund.submissionEnd })}</p>
 
-            <ConfirmationForm
-              buttonLabel="page.projects.application.submit.confirmSubmit"
-              onSubmit={onSubmit}
-            />
+            {isOwner
+              ? submissionBegin <= now && now <= submissionEnd
+                ? <ConfirmationForm
+                  buttonLabel="page.projects.application.submit.confirmSubmit"
+                  onSubmit={onSubmit}
+                />
+                : t("page.projects.application.submit.outsideSubmissionPeriod")
+
+              : <p className="text-danger">{t("page.projects.application.submit.allowedOnlyForProjectOwner")}</p>
+            }
           </CardBody>
         </Card>
       </Col>

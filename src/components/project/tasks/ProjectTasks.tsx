@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap"
 import uuidv1 from "uuid/v1"
 
-import { IProject, IProjectTask } from "api/schema"
+import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
 import ConfirmationForm from "components/common/form/ConfirmationForm"
 import Icon from "components/common/Icon"
@@ -17,52 +17,37 @@ interface IProps {
   project: IProject
 }
 
-interface IState {
-  tasks: IProjectTask[]
-}
-
 const ProjectTasks: React.FC<IProps> = ({ onSubmit, project }: IProps) => {
   const { t } = useTranslation()
-  const [state, setState] = useState<IState>({
-    tasks: project.tasks || []
-  })
+  const [tasks, setTasks] = useState(project.tasks || [])
 
   const addTask = (description: string) => {
-    state.tasks.unshift({
-      description,
-      id: uuidv1(),
-      workPackage: null,
-      months: []
-    })
-    setState({
-      tasks: state.tasks
-    })
+    setTasks([{ description, id: uuidv1() }, ...tasks])
   }
 
   const deleteTask = (id: string) => {
-    setState({
-      tasks: state.tasks.filter((old) => old.id !== id)
-    })
+    setTasks(tasks.filter((task) => task.id !== id))
   }
 
   const updateTask = (id: string, description: string) => {
-    const task = state.tasks.filter((old) => old.id === id).shift()
-    if (!task) {
-      throw Error("Unknown task ID given!")
-    }
-
-    task.description = description
-    state.tasks.filter((old) => old.id !== id).unshift(task)
-
-    setState({
-      tasks: state.tasks
-    })
+    const updatedTasks = tasks.map((task) => task.id === id
+      ? { ...task, description }
+      : task
+    )
+    setTasks(updatedTasks)
   }
 
   return <Card className="body-card project-tasks">
     <CardHeader>
       <div className="title-section">
         <h3>{project.name}</h3>
+        <span>
+          {t("page.projects.index.project.subHeader", // @todo eigene Übersetzung oder key verallgemeinern
+            {
+              date: project.createdAt,
+              user: project.createdBy ? project.createdBy.username : t("user.unknown"),
+            })}
+        </span>
       </div>
       <DropdownComponent button={<Icon name="grid" size={26} />}>
         <Link
@@ -77,7 +62,7 @@ const ProjectTasks: React.FC<IProps> = ({ onSubmit, project }: IProps) => {
       </DropdownComponent>
     </CardHeader>
     <CardBody>
-      <h3 className="card-title">{t("page.projects.plan.tasks.subHeader")}</h3>
+      <h3 className="card-title">{t("page.projects.plan.workHeader")}</h3>
       <h4>{t("page.projects.plan.tasks.taskHeading")} <Icon name="to-do" size={24} /></h4>
       <span className="form-text">{t("page.projects.plan.tasks.taskIntro")}</span>
 
@@ -85,16 +70,16 @@ const ProjectTasks: React.FC<IProps> = ({ onSubmit, project }: IProps) => {
         <Col lg={4}><EmptyProjectTaskCard onSubmit={addTask} /></Col>
       </Row>
 
-      <ProjectTaskCardGrid tasks={state.tasks} onDelete={deleteTask} onUpdate={updateTask} />
+      <ProjectTaskCardGrid tasks={tasks} onDelete={deleteTask} onUpdate={updateTask} />
 
       <div className="button-area">
         <ConfirmationForm
-          buttonLabel="form.save"
+          buttonLabel="form.saveChanges"
           onSubmit={(_values, actions) => {
             // only update the tasks, we don't want to overwrite other data meanwhile updated
             const taskUpdate: IProject = {
               "@id": project["@id"],
-              tasks: state.tasks
+              tasks
             }
 
             onSubmit(taskUpdate, actions)

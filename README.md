@@ -3,6 +3,8 @@
 This is the React/Next.js based web interface for the FCP platform.  
 It uses Next.js for server-side rendering and uses only the REST API exposed by the [fcp-backend](https://github.com/FutureCityProjects/fcp-backend "FCP Backend repository") to provide its features.
 
+[Documentation](doc/index.md)
+
 ## Supported by
 The project is a finalist of the [PrototypeFund Round 6](https://prototypefund.de/projects/round-6/ "Prototypefund Website"), see https://prototypefund.de/project/future-city-projects/ for details.
 

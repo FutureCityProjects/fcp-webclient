@@ -5,9 +5,9 @@ import { IProjectTask } from "api/schema"
 import ProjectTaskCard from "./ProjectTaskCard"
 
 interface IProps {
-  tasks: IProjectTask[],
   onDelete: any
   onUpdate: any
+  tasks: IProjectTask[]
 }
 
 const ProjectTaskCardGrid: React.FC<IProps> = ({ tasks, onDelete, onUpdate }: IProps) => {

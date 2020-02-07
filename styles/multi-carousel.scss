@@ -1,0 +1,12 @@
+@import "../node_modules/react-multi-carousel/lib/styles.css";
+
+/* stretch over the padding of the .main container */
+.react-multi-carousel-list {
+  margin-left: -2.5em;
+  margin-right: -2.5em;
+}
+
+.react-multiple-carousel__arrow {
+  min-height: 33px;
+  min-width: 33px;
+}

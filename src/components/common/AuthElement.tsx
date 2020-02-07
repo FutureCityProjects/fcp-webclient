@@ -16,7 +16,7 @@ const AuthElement: FunctionComponent<IProps> = ({ children, requiredRole, roles 
     return <>{children}</>
   }
 
-  return <></>
+  return null
 }
 
 export default AuthElement

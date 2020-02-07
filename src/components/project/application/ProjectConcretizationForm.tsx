@@ -40,7 +40,7 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
             <div className="icon-navigation">
               {isSubmitting
                 ? <a className="navigation-item"><Spinner /></a>
-                : <a onClick={() => handleSubmit()} className="navigation-item" title={t("form.save")}><Icon name="save" size={24} /></a>}
+                : <a onClick={() => handleSubmit()} className="navigation-item" title={t("form.saveChanges")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
                   <a>{t("goto.myProjects")}</a>
@@ -49,7 +49,7 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
             </div>
           </CardHeader>
           <CardBody>
-            <GeneralFormError errors={errors} values={values} />
+            <GeneralFormError errors={errors} prefix="fundApplication" values={values} />
 
             {fund.concretizations.map((concretization) => <Field component={FormikRTE}
               help={concretization.description}
@@ -79,7 +79,7 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
             <FormGroup>
               <Button color="primary" className="btn-action btn-icon" type="submit" disabled={isSubmitting}>
                 <Icon name="save" size={18} />
-                {t("form.save")} {isSubmitting && <Spinner />}
+                {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
             </FormGroup>
           </CardBody>

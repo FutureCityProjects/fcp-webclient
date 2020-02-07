@@ -1,17 +1,11 @@
 import React from "react"
 import Carousel from 'react-multi-carousel'
-import 'react-multi-carousel/lib/styles.css'
 
 import { IProject } from "api/schema"
 import EmptyIdeaCard from "./EmptyIdeaCard"
 import IdeaCard from "./IdeaCard"
 
 const responsive = {
-  superLargeDesktop: {
-    // the naming can be any, depends on you.
-    breakpoint: { max: 4000, min: 2400 },
-    items: 4,
-  },
   large: {
     breakpoint: { max: 2400, min: 1800 },
     items: 3,
@@ -37,16 +31,16 @@ export default class IdeaCarousel extends React.Component<IProps> {
     const wrappedProjects = projects.map((project) => <IdeaCard key={project.id} project={project} />)
 
     return <Carousel
-      responsive={responsive}
-      swipeable={true}
-      draggable={true}
-      ssr={true}
       autoPlay={true}
       autoPlaySpeed={5000}
+      centerMode
+      draggable={true}
       infinite={true}
-      partialVisible
-      renderButtonGroupOutside={true}
       keyBoardControl={true}
+      renderButtonGroupOutside={true}
+      responsive={responsive}
+      ssr={true}
+      swipeable={true}
     >
       {wrappedProjects}
       <EmptyIdeaCard />

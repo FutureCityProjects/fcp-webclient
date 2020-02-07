@@ -5,6 +5,8 @@ import { Card, CardBody } from "reactstrap"
 import { IProjectTask } from "api/schema"
 import FormikInput from "components/common/form/FormikInput"
 import Icon from "components/common/Icon"
+import { useTranslation } from "services/i18n"
+import { validateTask } from "services/validation"
 
 interface IProps {
   task: IProjectTask
@@ -13,77 +15,73 @@ interface IProps {
 }
 
 const ProjectTaskCard: React.FC<IProps> = ({ task, onDelete, onUpdate }: IProps) => {
+  const { t } = useTranslation()
   const [editing, setEditing] = useState(false)
-
   const toggleEdit = () => { setEditing(!editing) }
 
-  const validate = (values: IProjectTask) => {
-    const errors: { [key: string]: string } = {}
+  const taskEditForm = () => <Formik<IProjectTask>
+    initialValues={{ description: task.description }}
+    onSubmit={(values) => {
+      onUpdate(task.id, values.description)
+      toggleEdit()
+    }}
+    onReset={toggleEdit}
+    validateOnChange={false}
+    validateOnBlur={false}
+    validate={validateTask}
+  >
+    {({
+      values,
+      handleSubmit,
+      handleReset
+    }) => <Form onSubmit={handleSubmit}>
+        <Field
+          component={FormikInput}
+          label=""
+          name="description"
+          maxLength={500}
+          minLength={5}
+          onKeyDown={(event) => {
+            if (event.keyCode === 27) handleReset()
+          }}
+          required
+          value={values.description}
+        />
 
-    const description = values.description.trim()
-    if (description.length > 0 && description.length < 6) {
-      errors.description = "validate.general.tooShort"
+        <div className="icon-navigation">
+          <a className="navigation-item"
+            onClick={() => handleReset()}
+            title={t("form.cancel")}
+          ><Icon name="cancel" size={18} /></a>
+          <a className="navigation-item"
+            onClick={() => handleSubmit()}
+            title={t("form.save")}
+          ><Icon name="save" size={18} /></a>
+        </div>
+      </Form>
     }
+  </Formik>
 
-    return errors
-  }
-
-  const taskEditForm = () => {
-    return <Formik<IProjectTask>
-      initialValues={{ description: task.description }}
-      onSubmit={(values) => {
-        const description = values.description.trim()
-        if (description.length) {
-          onUpdate(task.id, description)
-        } else {
-          onDelete(task.id)
-        }
-        toggleEdit()
-      }}
-      onReset={toggleEdit}
-      validateOnChange={false}
-      validateOnBlur={false}
-      validate={validate}
-    >
-      {({
-        values,
-        handleSubmit,
-        handleReset
-      }) => <Form onSubmit={handleSubmit}>
-          <Field
-            component={FormikInput}
-            label=""
-            name="description"
-            onKeyDown={(event) => {
-              if (event.keyCode === 27) handleReset()
-            }}
-            value={values.description}
-          />
+  return <Card className="task-card">
+    <CardBody>
+      {editing
+        ? taskEditForm()
+        : <>
           <div className="icon-navigation">
-            <a onClick={() => handleReset()} className="navigation-item"><Icon name="cancel" size={18} /></a>
-            <a onClick={() => handleSubmit()} className="navigation-item"><Icon name="save" size={18} /></a>
+            <a className="navigation-item"
+              onClick={() => onDelete(task.id)}
+              title={t("form.removeElement")}
+            ><Icon name="trash" size={18} /></a>
+            <a className="navigation-item"
+              onClick={toggleEdit}
+              title={t("form.edit")}
+            ><Icon name="pencil" size={18} /></a>
           </div>
-        </Form>
+          <p>{task.description}</p>
+        </>
       }
-    </Formik>
-  }
-
-  return (
-    <Card className="task-card">
-      <CardBody>
-        {editing
-          ? taskEditForm()
-          : <>
-            <p>{task.description}</p>
-            <div className="icon-navigation">
-              <a onClick={() => onDelete(task.id)} className="navigation-item"><Icon name="trash" size={18} /></a>
-              <a onClick={toggleEdit} className="navigation-item"><Icon name="pencil" size={18} /></a>
-            </div>
-          </>
-        }
-      </CardBody>
-    </Card>
-  )
+    </CardBody>
+  </Card>
 }
 
 export default ProjectTaskCard

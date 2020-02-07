@@ -49,7 +49,7 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
         isSubmitting,
         values,
       }) => <Form className="profile-form" onSubmit={handleSubmit}>
-          <GeneralFormError errors={errors} values={values} />
+          <GeneralFormError errors={errors} prefix="project" values={values} />
 
           <CardHeader>
             <Field component={FormikInput}
@@ -62,8 +62,8 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
 
             <div className="icon-navigation">
               {isSubmitting
-                ? <a className="navigation-item"><Spinner /><span className="sr-only">{t("form.save")}</span></a>
-                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.save")} title={t("form.save")}><Icon name="save" size={24} /></a>}
+                ? <a className="navigation-item" aria-label={t("form.saveChanges")} ><Spinner /></a>
+                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.saveChanges")} title={t("form.saveChanges")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 <Link
                   href={Routes.PROJECT_PROFILE}
@@ -149,7 +149,7 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
             <div className="button-area">
               <Button className="btn-action btn-icon" type="submit" color="primary" disabled={isSubmitting}>
                 <Icon name="save" size={18} />
-                {t("form.save")} {isSubmitting && <Spinner />}
+                {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
               <Link
                 href={Routes.PROJECT_PROFILE}

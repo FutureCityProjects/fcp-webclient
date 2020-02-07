@@ -86,7 +86,7 @@ const RegistrationForm = ({ onSubmit }: IProps) => {
       isSubmitting,
       values,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} values={values} />
+        <GeneralFormError errors={errors} prefix="user" values={values} />
 
         <Field component={FormikInput}
           help="form.registration.username.help"

@@ -1,33 +1,46 @@
 import React from "react"
 
 import TranslatedHtml from "components/common/TranslatedHtml"
+import { flattenErrors } from "services/submissionError"
 
 interface IProps {
   errors: { [key: string]: any }
+  prefix?: string
   values?: { [key: string]: any }
 }
 
-const GeneralFormError: React.FC<IProps> = ({ errors, values = {} }) => {
+const GeneralFormError: React.FC<IProps> = ({ errors, prefix = "", values = {} }) => {
   const elements = Object.keys(values)
-
   const generalErrors = []
   Object.keys(errors).forEach((key) => {
     if (elements.includes(key)) {
       return
     }
 
-    generalErrors.push(errors[key].toString())
+    if (typeof errors[key] === "string") {
+      generalErrors.push(<TranslatedHtml content={"_error:" + errors[key]} />)
+    }
+
+    // we may receive nested errors here, e.g. for forms that submit JSON elements ->
+    // flatten the errors and display the propertyPath in front of the error:
+    else {
+      const elementErrors = flattenErrors(errors[key], prefix ? prefix + "." + key : key)
+      Object.keys(elementErrors).forEach((k) => {
+        generalErrors.push(<>
+          <TranslatedHtml content={k} />
+          : <TranslatedHtml content={"_error:" + elementErrors[k]} />
+        </>)
+      })
+    }
   })
 
   if (generalErrors.length === 0) {
-    return <></>
+    return null
   }
 
   return <div className="form-general-error-container">
     {generalErrors.map((err, index) =>
-      <div className="form-general-error" key={index}>
-        <TranslatedHtml content={"_error:" + err} />
-      </div>,
+      <div className="form-general-error" key={index}>{err}</div>
     )}
   </div>
 }

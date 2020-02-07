@@ -18,23 +18,32 @@ const TasksView: React.FC<IProps> = (props: IProps) => {
   return <Card className="body-card">
     <CardHeader  >
       <div className="title-section" >
-        <h3>{t("project.tasks")}</h3>
+        <h3>{t("page.projects.plan.workHeader")}</h3>
       </div>
       <div className={"icon-navigation"}>
-        <Link
-          href={Routes.PROJECT_PLAN_TASKS}
-          as={routeWithParams(Routes.PROJECT_PLAN_TASKS, { slug: project.slug || project.id })}
-        >
-          <a aria-label={t("goto.editProjectTasks")} className="navigation-item" title={t("goto.editProjectTasks")}>
-            <Icon name={"pencil"} size={24} />
-          </a>
-        </Link>
+
       </div>
     </CardHeader>
     <CardBody>
-      {t("project.tasks")}: {project.tasks ? project.tasks.length : 0}
+      {t("project.tasks.label")}: {project.tasks ? project.tasks.length : 0}
+      <Link
+        href={Routes.PROJECT_PLAN_TASKS}
+        as={routeWithParams(Routes.PROJECT_PLAN_TASKS, { slug: project.slug || project.id })}
+      >
+        <a className="btn btn-inline" aria-label={t("goto.editProjectTasks")} title={t("goto.editProjectTasks")}>
+          <Icon name={"pencil"} size={24} />
+        </a>
+      </Link>
       <br />
-      {t("project.workPackages")}: {project.workPackages ? project.workPackages.length : 0}
+      {t("project.workPackages.label")}: {project.workPackages ? project.workPackages.length : 0}
+      <Link
+        href={Routes.PROJECT_PLAN_WORK_PACKAGES}
+        as={routeWithParams(Routes.PROJECT_PLAN_WORK_PACKAGES, { slug: project.slug || project.id })}
+      >
+        <a className="btn btn-inline" aria-label={t("goto.editWorkPackages")} title={t("goto.editWorkPackages")}>
+          <Icon name={"pencil"} size={24} />
+        </a>
+      </Link>
     </CardBody>
   </Card>
 }

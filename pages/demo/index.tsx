@@ -50,6 +50,11 @@ const Page: I18nPage<PageProps> = () => {
               </Link>
             </li>
             <li>
+              <Link href="/demo/work-packages">
+                <a>Arbeitspakete</a>
+              </Link>
+            </li>
+            <li>
               <Link href="/demo/icons">
                 <a>alle Icons</a>
               </Link>

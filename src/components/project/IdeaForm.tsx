@@ -42,7 +42,7 @@ const IdeaForm = ({ onSubmit, idea }: IProps) => {
       isSubmitting,
       values,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} values={values} />
+        <GeneralFormError errors={errors} prefix="project" values={values} />
 
         <Field component={FormikInput}
           help="form.idea.shortDescription.help"

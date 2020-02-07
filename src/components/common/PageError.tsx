@@ -8,7 +8,7 @@ interface IProps {
 
 const PageError: React.FC<IProps> = ({ error }) => {
   if (!error) {
-    return <></>
+    return null
   }
 
   return <p className="page-error text-danger">

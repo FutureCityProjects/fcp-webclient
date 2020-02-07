@@ -3,12 +3,12 @@ import React from "react"
 
 import { IProject, ProjectProgress, SelfAssessment } from "api/schema"
 import BaseLayout from "components/BaseLayout"
+import ProjectWorkPackages from "components/project/work-packages/ProjectWorkPackages"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
-import ProjectTasks from "../../src/components/project/tasks/ProjectTasks"
 
 type PageProps = WithTranslation
 
-const ProjectTasksPage: I18nPage<PageProps> = () => {
+const ProjectWorkPackagesPage: I18nPage<PageProps> = () => {
   const p1: IProject = {
     createdAt: new Date(),
     delimitation: "Wir grenzen uns von anderen Projekten ab durch ...",
@@ -28,33 +28,33 @@ const ProjectTasksPage: I18nPage<PageProps> = () => {
     tasks: [
       {
         description: "Die erste Aufgabe",
-        id: "112312312",
         workPackage: "ab0c5de7f",
-        months: [1, 2, 3]
+        months: [1, 2, 3],
+        id: "1"
       },
       {
         description: "Ohne Arbeitspaket",
-        id: "212312312",
         workPackage: null,
-        months: [3, 4, 5]
+        months: [3, 4, 5],
+        id: "2"
+      },
+      {
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu",
+        workPackage: null,
+        months: [4, 5],
+        id: "3"
       },
       {
         description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
-        id: "312312312",
         workPackage: null,
-        months: [4, 5]
+        months: [4, 5],
+        id: "4"
       },
       {
         description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
-        id: "412312312",
         workPackage: null,
-        months: [4, 5]
-      },
-      {
-        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
-        id: "512312312",
-        workPackage: null,
-        months: [4, 5]
+        months: [4, 5],
+        id: "5"
       }
     ],
     vision: "Element mit <b>HTML</b>",
@@ -65,17 +65,24 @@ const ProjectTasksPage: I18nPage<PageProps> = () => {
         description: "Die wichtigsten Aufgaben",
         mainResponsibility: "Norbert Rost",
         // tasks kann dann zur Laufzeit angelegt/befüllt werden, siehe Schema
+      },
+      {
+        id: "2rs-27g3a7v",
+        name: "AP2",
+        description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibu",
+        mainResponsibility: "Norbert Rost",
+        // tasks kann dann zur Laufzeit angelegt/befüllt werden, siehe Schema
       }
     ]
   }
 
-  return <BaseLayout pageTitle="Aufgaben im Projektplan">
-    <ProjectTasks project={p1} onSubmit={(values) => console.log(values)} />
+  return <BaseLayout pageTitle="Arbeitspakete im Projektplan">
+    <ProjectWorkPackages project={p1} onSubmit={(values) => console.log(values)} />
   </BaseLayout>
 }
 
-ProjectTasksPage.getInitialProps = async () => ({
+ProjectWorkPackagesPage.getInitialProps = async () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 
-export default withTranslation(includeDefaultNamespaces())(ProjectTasksPage)
+export default withTranslation(includeDefaultNamespaces())(ProjectWorkPackagesPage)
