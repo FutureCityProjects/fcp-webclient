@@ -30,6 +30,7 @@ export enum Routes {
   PROJECT_PLAN_EDIT = "/projects/[slug]/plan/edit",
   PROJECT_PLAN_TASKS = "/projects/[slug]/plan/tasks",
   PROJECT_PLAN_WORK_PACKAGES = "/projects/[slug]/plan/work-packages",
+  PROJECT_PLAN_RESOURCE_REQUIREMENTS = "/projects/[slug]/plan/resource-requirements",
   PROJECT_FUND_APPLICATION = "/projects/[slug]/fund-application",
   PROJECT_FUND_APPLICATION_EDIT = "/projects/[slug]/fund-application/edit",
   PROJECT_FUND_APPLICATION_SUBMIT = "/projects/[slug]/fund-application/submit",

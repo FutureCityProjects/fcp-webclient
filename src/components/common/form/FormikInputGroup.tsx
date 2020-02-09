@@ -1,32 +1,27 @@
 import React from "react"
-import { FormGroup, Input, Label } from "reactstrap"
+import { Input, InputGroup } from "reactstrap"
 import { InputType } from "reactstrap/lib/Input"
 
 import { includeDefaultNamespaces, withTranslation } from "services/i18n"
 import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
+  addOn: any
   className: string
   name: string
-  noGroup?: boolean
+  onRemove: any
   placeholder?: string
   type?: InputType
-  value?: any
 }
 
-class FormikInput extends FormikElement<IProps> {
+class FormikArrayInput extends FormikElement<IProps> {
   public render = () => {
     // extract all properties not allowed / not needed for the input element so the don't get
     // passed down and appear in the HTML
-    const { children, field, form, help, id, i18n, label, meta, noGroup = false,
-      placeholder, t, tReady, type, value, ...props } = this.props
-    const labelText = this.labelText()
+    const { addOn, children, field, form, i18n, id, meta, onRemove,
+      placeholder, t, tReady, type, ...props } = this.props
 
-    const element = <>
-      {labelText.length > 0 && <Label for={field.name}>{labelText}</Label>}
-
-      {this.helpElement()}
-
+    return <InputGroup>
       <Input
         {...field}
         {...props}
@@ -35,14 +30,12 @@ class FormikInput extends FormikElement<IProps> {
         invalid={this.hasError()}
         placeholder={placeholder ? t(placeholder) : null}
         type={type || "text"}
-        value={value === null ? "" : value}
       />
+      {addOn}
 
       {this.errorElement()}
-    </>
-
-    return noGroup ? element : <FormGroup>{element}</FormGroup>
+    </InputGroup>
   }
 }
 
-export default withTranslation(includeDefaultNamespaces())(FormikInput)
+export default withTranslation(includeDefaultNamespaces())(FormikArrayInput)

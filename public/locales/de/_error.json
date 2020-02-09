@@ -25,6 +25,7 @@
     },
     "general": {
       "notBlank": "Dies ist ein Pflichtfeld.",
+      "noNumber": "Es sind nur Zahlen zulässig",
       "outOfRange": "Der Wert liegt ausserhalb des zulässigen Bereichs.",
       "submissionFailed": "Das Speichern eines Objektes schlug fehl.",
       "tooLong": "Der eingegebene Text ist zu lang.",

@@ -170,6 +170,7 @@ export interface IProject extends INumericIdentifierModel {
   process?: IProcess | string
   profileSelfAssessment?: SelfAssessment
   progress?: ProjectProgress
+  resourceRequirements?: IRessourceRequirement[]
   resultingProjects?: IProject[]
   results?: string[]
   shortDescription?: string
@@ -203,64 +204,34 @@ export const emptyProject: IProjectCreation = {
 }
 
 export interface IProjectTask {
-  // @PHMU textarea
   description?: string
-
-  // create via lodash/uniqueId
   id?: string
-
   // in which months of the projects implementationTime this task will be worked on
   // e.g. 1,2,3 for the first 3 months
   months?: number[]
-
-  // using workPackages is optional but a task always belongs to a project
-  project?: IProject | string
-
-  ressourceRequirements?: IRessourceRequirement[]
-
-  // @PHMU: nicht für die erste Umsetzung
   result?: string
-  // @PHMU: nicht für die erste Umsetzung
   title?: string
-
-  // id of the parent IWorkPackage
-  workPackage?: string
+  workPackage?: string // ID of the parent IWorkPackage
 }
 
 export interface IWorkPackage {
-  // @PHMU textarea
   description?: string
-
-  id?: string // create via lodash/uniqueId
-
-  // @PHMU text input
+  id?: string
   mainResponsibility?: string
-
-  // @PHMU text input
   name?: string
-
-  // for display when no name is set (AP1, AP2, ...) and for sorting,
-  // newPackage.order = project.workPackages.length + 1
-  // @PHMU Umsortierung (bspw. via Drag&Drop) erstmal optional / low prio
+  // for display (AP1, AP2, ...) and for sorting
   order?: number
-
   project?: IProject | string
-
-  // when the project is loaded from the API this will be empty,
-  // can be filled in runtime for editing & display:
-  // wp.tasks = project.tasks.filter((t) => t.workPackage === wp.id)
-  // when a task is added to a workPackage the task CAN be added to this array but the
-  // tasks workPackage property MUST be set to the packages ID
-  tasks?: IProjectTask[]
 }
 
 export interface IRessourceRequirement {
-  costs?: number
-  costType: string
+  cost?: number
+  costType?: string
   description?: string
+  id?: string
   source?: string
   sourceType?: string
-  task?: string // id of the parent IProjectTask
+  task?: string // ID of the parent IProjectTask
 }
 
 export enum MembershipRole {

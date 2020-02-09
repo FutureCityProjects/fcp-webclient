@@ -1,30 +1,21 @@
-import { IProject } from "api/schema"
 import React from "react"
 
+import { IProject } from "api/schema"
+import { IPlanFunctions } from "components/project/common/PlanContainer"
 import WorkPackageCard from "./WorkPackageCard"
 
 interface IProps {
-  onDelete: any,
-  onEdit: any,
-  onTaskDelete: any
-  onTaskAssign: any,
+  functions: IPlanFunctions
   project: IProject,
 }
 
-const WordPackageCardContainer: React.FC<IProps> = (props: IProps) => {
-  const { project, onEdit, onDelete, onTaskAssign, onTaskDelete } = props
-
-  const currentPackages = project.workPackages.map((wp) => <WorkPackageCard
-    currentPackage={wp.id}
+const WordPackageCardContainer: React.FC<IProps> = ({ functions, project }: IProps) => <>
+  {project.workPackages.map((wp) => <WorkPackageCard
+    currentPackage={wp}
+    functions={functions}
     key={wp.id}
-    onEdit={onEdit}
-    onDelete={onDelete}
-    onTaskAssign={onTaskAssign}
-    onTaskDelete={onTaskDelete}
     project={project}
-  />)
-
-  return <>{currentPackages}</>
-}
+  />)}
+</>
 
 export default WordPackageCardContainer

@@ -22,7 +22,7 @@ const ProjectTaskCard: React.FC<IProps> = ({ task, onDelete, onUpdate }: IProps)
   const taskEditForm = () => <Formik<IProjectTask>
     initialValues={{ description: task.description }}
     onSubmit={(values) => {
-      onUpdate(task.id, values.description)
+      onUpdate({ ...task, ...values })
       toggleEdit()
     }}
     onReset={toggleEdit}

@@ -19,12 +19,22 @@ const TaskPopover: React.FC<IProps> = (props: IProps) => {
   const { header, onSubmit, toggle, target, popoverOpen } = props
   const { t } = useTranslation()
 
-  return <Popover trigger="legacy" isOpen={popoverOpen} placement="right" target={target} toggle={toggle} className="work-package-form-container">
+  return <Popover
+    className="task-popover-container"
+    isOpen={popoverOpen}
+    placement="right"
+    target={target}
+    toggle={toggle}
+    trigger="legacy"
+  >
     <PopoverHeader>{t(header)}</PopoverHeader>
     <PopoverBody>
       <Formik<IProjectTask>
         initialValues={{ description: "" }}
-        onSubmit={onSubmit}
+        onSubmit={(values) => {
+          onSubmit(values)
+          toggle()
+        }}
         validate={validateTask}
         validateOnChange={false}
         validateOnBlur={false}
@@ -32,7 +42,7 @@ const TaskPopover: React.FC<IProps> = (props: IProps) => {
         {({
           values,
           handleSubmit,
-        }) => <Form className="work-package-form" onSubmit={handleSubmit}>
+        }) => <Form className="task-popover-form" onSubmit={handleSubmit}>
             <Field component={FormikInput}
               label=""
               maxLength={500}

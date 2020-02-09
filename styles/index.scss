@@ -49,7 +49,7 @@ h1 {
   padding: 0;
   margin-left: 0.8em;
   vertical-align: bottom;
-  &:hover {
+  &:hover, &:active, &:focus {
     color: $custom-dark;
   }
 }
@@ -1016,24 +1016,29 @@ a.sub-status-card {
   margin-top: 1.5rem;
 }
 
+.task-card,
+.resource-card {
+  word-break: break-word;
+
+  .icon-navigation {
+    align-items: flex-start;
+    float: right;
+    a.navigation-item,
+    .navigation-item > button {
+      margin-left: 0.5rem;
+    }
+  }
+}
+
 .task-card {
   padding: 0 1.25rem;
   min-height: 5rem;
   margin: 0 0 1rem;
-  word-break: break-word;
   .card-body {
     padding: 1rem 0;
     p {
       flex-grow: 1;
       margin: 0;
-    }
-    .icon-navigation {
-      align-items: flex-start;
-      float: right;
-      a.navigation-item,
-      .navigation-item > button {
-        margin-left: 0.5rem;
-      }
     }
   }
   form {
@@ -1076,6 +1081,75 @@ a.sub-status-card {
       margin: 1rem 0;
     }
   }
+  .work-package-card {
+    background: $custom-light;
+    position: relative;
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    width: 25rem;
+    &:last-child { margin-bottom: 0 }
+    .card-header {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      h4 {
+        font-size: 1.25rem;
+        font-weight: normal;
+      }
+      svg {
+        position: absolute;
+        transform: rotate(90deg);
+        right: 1rem;
+      }
+    }
+    .work-package-description {
+      font-size: $font-size-sm;
+      text-align: left;
+      font-style: italic;
+      color: $custom-gray;
+    }
+    .card-footer {
+      background: $custom-light;
+      padding: 0 0.5rem 0.25rem;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        color: $custom-gray;
+        margin-left: 0.5rem;
+        font-size: $font-size-sm;
+      }
+      .navigation-item {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+
+  .work-package-card > .collapse > .card-body,
+  .work-package-card > .collapsing > .card-body {
+    padding: 0 1.5rem 1.5rem;
+    text-align: center;
+    min-height: 0;
+    .no-tasks {
+      font-size: $font-size-sm;
+      font-family: $font-heading;
+      color: #6D6D6D;
+    }
+  }
+
+  .no-work-packages {
+    .card-header {
+      font-size: $font-size-sm;
+      font-weight: normal;
+      font-family: $font-heading;
+      cursor: auto;
+    }
+  }
 }
 
 @media screen and (max-width: 920px) {
@@ -1093,76 +1167,6 @@ a.sub-status-card {
       }
     }
     .work-package-card { width: 100% }
-  }
-}
-
-.work-package-card {
-  background: $custom-light;
-  position: relative;
-  border-radius: 0;
-  box-shadow: none;
-  padding: 0;
-  margin: 0 0 1rem;
-  width: 25rem;
-  &:last-child { margin-bottom: 0 }
-  .card-header {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    h4 {
-      font-size: 1.25rem;
-      font-weight: normal;
-    }
-    svg {
-      position: absolute;
-      transform: rotate(90deg);
-      right: 1rem;
-    }
-  }
-  .work-package-description {
-    font-size: $font-size-sm;
-    text-align: left;
-    font-style: italic;
-    color: $custom-gray;
-  }
-  .card-footer {
-    background: $custom-light;
-    padding: 0 0.5rem 0.25rem;
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    span {
-      color: $custom-gray;
-      margin-left: 0.5rem;
-      font-size: $font-size-sm;
-    }
-    .navigation-item {
-      margin-left: 0.5rem;
-    }
-  }
-}
-
-.work-package-card > .collapse > .card-body,
-.work-package-card > .collapsing > .card-body {
-  padding: 0 1.5rem 1.5rem;
-  text-align: center;
-  min-height: 0;
-  .no-tasks {
-    font-size: $font-size-sm;
-    font-family: $font-heading;
-    color: #6D6D6D;
-  }
-}
-
-.no-work-packages {
-  .card-header {
-    font-size: $font-size-sm;
-    font-weight: normal;
-    font-family: $font-heading;
-    cursor: auto;
   }
 }
 
@@ -1237,48 +1241,23 @@ a.sub-status-card {
   padding-top: 0;
 }
 
-.work-package-form-container {
-  .popover, .modal-content {
-    box-shadow: 0 6px 25px 1px rgba(0, 0, 0, 0.25);
-    border-radius: 0.625rem;
+.popover, .modal-content {
+  box-shadow: 0 6px 25px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 0.625rem;
+  border: none;
+  padding: 0 1.5rem;
+  font-family: $font-body;
+  .arrow::before { border-right-color: transparent }
+  .popover-header, .modal-header {
+    background: none;
     border: none;
-    padding: 0 1.5rem;
-    font-family: $font-body;
-    .arrow::before { border-right-color: transparent }
-    .popover-header, .modal-header {
-      background: none;
-      border: none;
-      padding-top: 1.75rem;
-    }
-    .modal-title, h3.popover-header {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
+    padding-top: 1.75rem;
   }
-  .popover {
-    width: 30rem;
-    max-width: none;
+  .modal-title, h3.popover-header {
+    font-size: 1.5rem;
+    font-weight: bold;
   }
-}
 
-.work-package-form {
-  .field {
-    display: flex;
-    align-items: flex-start;
-    .form-group {
-      flex-grow: 1;
-    }
-    .btn-add {
-      color: $custom-dark;
-      box-shadow: none;
-      margin-right: 1rem;
-    }
-  }
-  .field-disabled {
-    .form-group {
-      opacity: 0.5;
-    }
-  }
   .form-group {
     label {
       font-weight: 400;
@@ -1291,3 +1270,10 @@ a.sub-status-card {
     button { margin-left: 0.5rem; }
   }
 }
+
+.task-popover-container .popover {
+  width: 30rem;
+  max-width: none;
+}
+
+@import "page-project-resources.scss"

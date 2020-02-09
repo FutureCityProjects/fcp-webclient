@@ -1,29 +1,22 @@
 import Link from "next/link"
 import React, { useState } from "react"
 import { Button, Card, CardBody, CardHeader, Col, Row } from "reactstrap"
-import uuidv1 from "uuid/v1"
 
-import { IProject, IProjectTask, IWorkPackage } from "api/schema"
+import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
 import ConfirmationForm from "components/common/form/ConfirmationForm"
 import Icon from "components/common/Icon"
+import { IPlanProps } from "components/project/common/PlanContainer"
+import TaskPopover from "components/project/common/TaskPopover"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 import NoWorkPackages from "./NoWorkPackages"
 import TaskCard from "./TaskCard"
-import TaskPopover from "./TaskPopover"
 import WordPackageCardContainer from "./WorkPackageCardContainer"
 import WorkPackageModal from "./WorkPackageModal"
 
-interface IProps {
-  onSubmit: any
-  project: IProject
-}
-
-const ProjectWorkPackages: React.FC<IProps> = (props: IProps) => {
+const ProjectWorkPackages: React.FC<IPlanProps> = ({ functions, project, updateProject }: IPlanProps) => {
   const { t } = useTranslation()
-
-  const [project, setProject] = useState(props.project)
 
   const [packageModalOpen, setPackageModalOpen] = useState(false)
   const togglePackageModal = () => setPackageModalOpen(!packageModalOpen)
@@ -31,64 +24,7 @@ const ProjectWorkPackages: React.FC<IProps> = (props: IProps) => {
   const [taskPopoverOpen, setTaskPopoverOpen] = useState(false)
   const toggleTaskPopover = () => setTaskPopoverOpen(!taskPopoverOpen)
 
-  const addWorkPackage = (workPackage: IWorkPackage) => {
-    workPackage.id = uuidv1()
-    workPackage.order = project.workPackages.length + 1
-
-    project.workPackages.push(workPackage)
-    setProject(project)
-  }
-
-  const assignPackage = (taskId: string, workPackageId: string) => {
-    const updatedTasks = project.tasks.map((task) => task.id === taskId
-      ? { ...task, workPackage: workPackageId }
-      : task
-    )
-
-    setProject({ ...project, tasks: updatedTasks })
-  }
-
-  const createTask = (task: IProjectTask) => {
-    task.id = uuidv1()
-    project.tasks.push(task)
-    setProject(project)
-    toggleTaskPopover()
-  }
-
-  const deleteTask = (taskId: string) => {
-    setProject({ ...project, tasks: project.tasks.filter((task) => task.id !== taskId) })
-  }
-
-  const deleteWorkPackage = (id: string) => {
-    const updatedTasks = project.tasks.map((task) => task.workPackage === id
-      ? { ...task, workPackage: null }
-      : task
-    )
-
-    const updatedPackages = project.workPackages.filter((wp) => wp.id !== id)
-
-    setProject({ ...project, tasks: updatedTasks, workPackages: updatedPackages })
-  }
-
-  const editWorkPackage = (id: string, values: object) => {
-    const updatedPackages = project.workPackages.map((wp) => wp.id === id
-      ? { ...wp, ...values }
-      : wp
-    )
-
-    setProject({ ...project, workPackages: updatedPackages })
-  }
-
-  const unassignedTasks = project.tasks.map((task) => !task.workPackage &&
-    <Col key={task.id}>
-      <TaskCard
-        availablePackages={project.workPackages}
-        onAssign={assignPackage}
-        onDelete={deleteTask}
-        task={task}
-      />
-    </Col>
-  )
+  const unassignedTasks = functions.getWorkPackageTasks(null)
 
   return <Card className="body-card project-tasks work-packages">
     <CardHeader>
@@ -123,10 +59,7 @@ const ProjectWorkPackages: React.FC<IProps> = (props: IProps) => {
         <div className="packages">
           {project.workPackages.length
             ? <WordPackageCardContainer
-              onEdit={editWorkPackage}
-              onDelete={deleteWorkPackage}
-              onTaskAssign={assignPackage}
-              onTaskDelete={deleteTask}
+              functions={functions}
               project={project}
             />
             : <NoWorkPackages />
@@ -146,13 +79,20 @@ const ProjectWorkPackages: React.FC<IProps> = (props: IProps) => {
           <WorkPackageModal
             header="form.project.workPackages.addPackage"
             modalOpen={packageModalOpen}
-            onSubmit={addWorkPackage}
+            onSubmit={functions.addWorkPackage}
             toggle={togglePackageModal}
           />
         </div>
         <div className="tasks">
           <Row xs={1} xl={2}>
-            {unassignedTasks}
+            {unassignedTasks.map(task => <Col key={task.id}>
+              <TaskCard
+                availablePackages={project.workPackages}
+                onAssign={functions.updateTask}
+                onDelete={functions.removeTask}
+                task={task}
+              />
+            </Col>)}
           </Row>
 
           <Button
@@ -167,7 +107,7 @@ const ProjectWorkPackages: React.FC<IProps> = (props: IProps) => {
 
           <TaskPopover
             header="form.project.tasks.addTask"
-            onSubmit={createTask}
+            onSubmit={functions.addTask}
             popoverOpen={taskPopoverOpen}
             target="task-creation-form"
             toggle={toggleTaskPopover}
@@ -179,14 +119,15 @@ const ProjectWorkPackages: React.FC<IProps> = (props: IProps) => {
           buttonLabel="form.saveChanges"
           errorPrefix="project"
           onSubmit={(_values, actions) => {
-            // only update the tasks & packages, we don't want to overwrite other data meanwhile updated
-            const packageUpdate: IProject = {
+            // only update the tasks, packages and resourceRequirements, we don't want to overwrite other data meanwhile updated
+            const update: IProject = {
               "@id": project["@id"],
+              resourceRequirements: project.resourceRequirements,
               tasks: project.tasks,
               workPackages: project.workPackages,
             }
 
-            props.onSubmit(packageUpdate, actions)
+            updateProject(update, actions)
           }}
         />
       </div>

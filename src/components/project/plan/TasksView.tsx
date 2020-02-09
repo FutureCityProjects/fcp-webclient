@@ -43,6 +43,15 @@ const TasksView: React.FC<IProps> = (props: IProps) => {
         <a className="btn btn-inline" aria-label={t("goto.editWorkPackages")} title={t("goto.editWorkPackages")}>
           <Icon name={"pencil"} size={24} />
         </a>
+      </Link><br />
+      {t("project.resourceRequirements.label")}: {project.resourceRequirements ? project.resourceRequirements.length : 0}
+      <Link
+        href={Routes.PROJECT_PLAN_RESOURCE_REQUIREMENTS}
+        as={routeWithParams(Routes.PROJECT_PLAN_RESOURCE_REQUIREMENTS, { slug: project.slug || project.id })}
+      >
+        <a className="btn btn-inline" aria-label={t("goto.editResourceRequirements")} title={t("goto.editResourceRequirements")}>
+          <Icon name={"pencil"} size={24} />
+        </a>
       </Link>
     </CardBody>
   </Card>

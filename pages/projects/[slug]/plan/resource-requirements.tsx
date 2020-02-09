@@ -13,7 +13,7 @@ import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
 import PlanContainer from "components/project/common/PlanContainer"
-import ProjectWorkPackages from "components/project/work-packages/ProjectWorkPackages"
+import ProjectResources from "components/project/resources/ProjectResources"
 import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { updateModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
@@ -37,7 +37,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   slug: string,
 }
 
-const ProjectWorkPackagesPage: I18nPage<PageProps> = ({ project, request, t, updateProject }) => {
+const ProjectResourceRequirementsPage: I18nPage<PageProps> = ({ project, request, t, updateProject }) => {
   // @todo custom error message "project not found or no permission" etc.
   if (!request.isLoading && (!project || project.isLocked || project.progress === ProjectProgress.CREATING_PROFILE)) {
     return <StatusCode statusCode={404}>
@@ -54,14 +54,11 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = ({ project, request, t, upd
     updateProject(values, actions)
   }
 
-  project.tasks = project.tasks || []
-  project.workPackages = project.workPackages || []
-
-  return <BaseLayout pageTitle={t("page.projects.plan.workPackages.title")}>
+  return <BaseLayout pageTitle={t("page.projects.plan.resourceRequirements.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.plan.workPackages.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.plan.workPackages.intro" params={{ projectName: project.name }} /></p>
+        <h1>{t("page.projects.plan.resourceRequirements.heading")}</h1>
+        <p><TranslatedHtml content="page.projects.plan.resourceRequirements.intro" params={{ projectName: project.name }} /></p>
       </Col>
     </Row>
 
@@ -69,7 +66,7 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = ({ project, request, t, upd
       <Col>
         {request.isLoading ? <Spinner /> :
           <PlanContainer
-            component={ProjectWorkPackages}
+            component={ProjectResources}
             project={project}
             updateProject={onSubmit}
           />
@@ -79,7 +76,7 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = ({ project, request, t, upd
   </BaseLayout>
 }
 
-ProjectWorkPackagesPage.getInitialProps = ({ store, query }: NextJSContext) => {
+ProjectResourceRequirementsPage.getInitialProps = ({ store, query }: NextJSContext) => {
   // slug could also be the ID
   const slug: string = typeof query.slug === "string" ? query.slug : null
   if (slug && !selectMyProjectByIdentifier(store.getState(), slug)) {
@@ -91,7 +88,7 @@ ProjectWorkPackagesPage.getInitialProps = ({ store, query }: NextJSContext) => {
 
 export default withAuth(
   connector(
-    withTranslation(includeDefaultNamespaces())(ProjectWorkPackagesPage),
+    withTranslation(includeDefaultNamespaces())(ProjectResourceRequirementsPage),
   ),
   UserRole.USER,
 )

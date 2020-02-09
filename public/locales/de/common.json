@@ -239,6 +239,21 @@
       "profileSelfAssessment": {
         "help": "@todo"
       },
+      "resourceRequirement": {
+        "cost": {
+          "help": "Kosten der Ressource in €",
+          "label": "Kosten",
+          "placeholder": "Ganzzahl"
+        },
+        "description": {
+          "help": "Was wird benötigt? Was muss bezahlt werden?",
+          "label": "Leistung/Ressource",
+          "placeholder": "5 - 280 Zeichen"
+        }
+      },
+      "resourceRequirements": {
+        "addResource": "Bedarf hinzufügen"
+      },
       "results": {
         "help": "@todo",
         "placeholder": "@todo"
@@ -411,6 +426,7 @@
     "editProjectPlan": "Projektplan bearbeiten",
     "editProjectProfile": "Profil bearbeiten",
     "editProjectTasks": "Aufgaben bearbeiten",
+    "editResourceRequirements": "Bedarfe bearbeiten",
     "editRequestedFunding": "Fördersumme bearbeiten",
     "fundDetails": "Detailansicht",
     "fundManagement": "Fördertopf-Verwaltung",
@@ -582,6 +598,7 @@
       },
       "plan": {
         "workHeader": "Aufgaben und Arbeitspakete",
+        "resourceRequirementsHeader": "Ressourcenbedarf",
         "index": {
           "heading": "Projektplan: {{projectName}}",
           "intro": "Hier siehst du den Stand des Projektplans zu deinem Projekt.",
@@ -603,10 +620,18 @@
           "heading": "Arbeitspakete bearbeiten",
           "intro": "Hier kannst du die Arbeitspakete zu deinem Projekt <em>{{projectName}}</em> bearbeiten.",
           "noPackages": "Erstelle ein neues Arbeitspaket",
+          "noTasks": "Noch keine Aufgaben zugewiesen",
           "packageHeading": "Arbeitspakete",
           "packageIntro": "Wähle deine einzelnen Aufgaben aus und organisiere sie in Arbeitspaketen.",
           "subHeader": "Aufgaben und Arbeitspakete",
           "title": "Arbeitspakete bearbeiten"
+        },
+        "resourceRequirements": {
+          "heading": "Ressourcenbedarf des Projekts",
+          "intro": "Hier kannst du die Bedarfe deines Projekt <em>{{projectName}}</em> eintragen.",
+          "resourceHeading": "Leistungen und Kosten",
+          "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
+          "title": "Ressourcenbedarf"
         }
       },
       "application": {
@@ -706,6 +731,12 @@
     "planSelfAssessment": "Selbsteinschätzung zum Fortschritt des Projektplans",
     "profile": "Projektprofil",
     "profileSelfAssessment": "Selbsteinschätzung zum Projektfortschritt",
+    "resourceRequirements": {
+      "cost": "Kosten",
+      "costSum": "∑ Kosten der Aufgabe",
+      "description": "Ressource/Leistung",
+      "label": "Ressourcenbedarfe"
+    },
     "results": "Resultate",
     "shortDescription": "Das Projekt in einem Satz",
     "state": {
@@ -739,6 +770,7 @@
     "utilization": "Verwertung",
     "vision": "Vision",
     "workPackages": {
+      "costSum": "∑ Kosten des Arbeitspaketes",
       "description": "Kurzbeschreibung",
       "label": "Arbeitspakete",
       "mainResponsibility": "Hauptverantwortliche*r",

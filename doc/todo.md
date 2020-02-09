@@ -1,8 +1,11 @@
 # Todo
+  * set focus on taskpopover input + package first input + resource first input when 
+    popover/modal opens
   * Einreichen nur mit owner PW
   * Keine Bearbeitung Antragsdaten wenn bereits eingereicht?
   * DropdownComponent rendert leere Buttons im Menu weil sie <AuthElement> als nicht-leer
-    erkennt.
+    erkennt. (autowrap true/false)
+  * warning tasks löschen wenn resourcen (task page + wp page), resourcen aktualisieren wenn task gelöscht wird
   * logout wegen inaktivität notice nicht verschwinden lassen
   * RTE toolbar konfigurierbar für PO + Members etc
   * Wie kann die Zuspitzung als complete markiert werden? Wir wissen in ProjectStatus die Anzahl der

@@ -4,12 +4,12 @@ import React from "react"
 import { IProject, ProjectProgress, SelfAssessment } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import PlanContainer from "components/project/common/PlanContainer"
-import ProjectTasks from "components/project/tasks/ProjectTasks"
+import ProjectResources from "components/project/resources/ProjectResources"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
 type PageProps = WithTranslation
 
-const ProjectTasksPage: I18nPage<PageProps> = () => {
+const ProjectResourcesPage: I18nPage<PageProps> = () => {
   const p1: IProject = {
     createdAt: new Date(),
     delimitation: "Wir grenzen uns von anderen Projekten ab durch ...",
@@ -26,34 +26,54 @@ const ProjectTasksPage: I18nPage<PageProps> = () => {
     progress: ProjectProgress.CREATING_PLAN,
     shortDescription: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas",
     slug: "testprojekt",
+    resourceRequirements: [
+      {
+        cost: 5,
+        description: "Eigenanteil",
+        id: "r11111",
+        task: "t11111",
+      },
+      {
+        cost: 95,
+        description: "Fördermittel",
+        id: "r22222",
+        task: "t11111",
+      },
+      {
+        cost: 7777.77,
+        description: "Personalkosten",
+        id: "r33333",
+        task: "t22222",
+      },
+    ],
     tasks: [
       {
         description: "Die erste Aufgabe",
-        id: "112312312",
-        workPackage: "ab0c5de7f",
+        id: "t11111",
+        workPackage: "w11111",
         months: [1, 2, 3]
       },
       {
         description: "Ohne Arbeitspaket",
-        id: "212312312",
+        id: "t22222",
         workPackage: null,
         months: [3, 4, 5]
       },
       {
         description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
-        id: "312312312",
-        workPackage: null,
+        id: "t33333",
+        workPackage: "w22222",
         months: [4, 5]
       },
       {
         description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
-        id: "412312312",
-        workPackage: null,
+        id: "t44444",
+        workPackage: "w22222",
         months: [4, 5]
       },
       {
         description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
-        id: "512312312",
+        id: "t55555",
         workPackage: null,
         months: [4, 5]
       }
@@ -61,26 +81,40 @@ const ProjectTasksPage: I18nPage<PageProps> = () => {
     vision: "Element mit <b>HTML</b>",
     workPackages: [
       {
-        id: "ab0c5de7f",
-        name: "AP1",
+        id: "w11111",
+        name: "Marketing",
         description: "Die wichtigsten Aufgaben",
         mainResponsibility: "Norbert Rost",
-        // tasks kann dann zur Laufzeit angelegt/befüllt werden, siehe Schema
+        order: 1,
+      },
+      {
+        id: "w22222",
+        name: "Milestone 2",
+        description: "Die wichtigsten Aufgaben",
+        mainResponsibility: "Norbert Rost",
+        order: 2,
+      },
+      {
+        id: "w33333",
+        name: "M3",
+        description: "Die wichtigsten Aufgaben",
+        mainResponsibility: "Norbert Rost",
+        order: 3,
       }
     ]
   }
 
   return <BaseLayout pageTitle="Aufgaben im Projektplan">
     <PlanContainer
-      component={ProjectTasks}
+      component={ProjectResources}
       project={p1}
       updateProject={(values) => console.log(values)}
     />
   </BaseLayout>
 }
 
-ProjectTasksPage.getInitialProps = async () => ({
+ProjectResourcesPage.getInitialProps = async () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 
-export default withTranslation(includeDefaultNamespaces())(ProjectTasksPage)
+export default withTranslation(includeDefaultNamespaces())(ProjectResourcesPage)

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import React from "react"
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap"
+import { Card, CardBody, CardHeader } from "reactstrap"
 
 import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
@@ -9,15 +9,15 @@ import Icon from "components/common/Icon"
 import { IPlanProps } from "components/project/common/PlanContainer"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
-import EmptyProjectTaskCard from "./EmptyProjectTaskCard"
-import ProjectTaskCardGrid from "./ProjectTaskCardGrid"
+import WorkPackageResourcesCard from "./WorkPackageResourcesCard"
 
-const ProjectTasks: React.FC<IPlanProps> = ({ functions, project, updateProject }: IPlanProps) => {
+const ProjectResources: React.FC<IPlanProps> = (props: IPlanProps) => {
   const { t } = useTranslation()
+  const { functions, project, updateProject } = props
 
-  const tasks = project.tasks
+  const packages = functions.sortWorkPackages(project.workPackages)
 
-  return <Card className="body-card project-tasks">
+  return <Card className="body-card project-resources">
     <CardHeader>
       <div className="title-section">
         <h3>{project.name}</h3>
@@ -42,32 +42,39 @@ const ProjectTasks: React.FC<IPlanProps> = ({ functions, project, updateProject 
       </DropdownComponent>
     </CardHeader>
     <CardBody>
-      <h3 className="card-title">{t("page.projects.plan.workHeader")}</h3>
-      <h4>{t("page.projects.plan.tasks.taskHeading")} <Icon name="to-do" size={24} /></h4>
-      <span className="form-text">{t("page.projects.plan.tasks.taskIntro")}</span>
+      <h3 className="card-title">{t("page.projects.plan.resourceRequirementsHeader")}</h3>
+      <h4>{t("page.projects.plan.resourceRequirements.resourceHeading")} <Icon name="money-bag" size={24} /></h4>
+      <span className="form-text">{t("page.projects.plan.resourceRequirements.resourceIntro")}</span>
 
-      <Row>
-        <Col lg={4}><EmptyProjectTaskCard onSubmit={functions.addTask} /></Col>
-      </Row>
+      <div className="card-content">
+        {packages.map((wp) => <WorkPackageResourcesCard
+          currentPackage={wp.id}
+          functions={functions}
+          key={wp.id}
+          project={project}
+        />)}
 
-      <ProjectTaskCardGrid
-        tasks={tasks}
-        onDelete={functions.removeTask}
-        onUpdate={functions.updateTask}
-      />
+        <WorkPackageResourcesCard
+          currentPackage={null}
+          functions={functions}
+          project={project}
+        />
+      </div>
 
       <div className="button-area">
         <ConfirmationForm
           buttonLabel="form.saveChanges"
+          errorPrefix="project"
           onSubmit={(_values, actions) => {
-            // only update the tasks/resourceRequirements, we don't want to overwrite other data meanwhile updated
-            const update: IProject = {
+            // only update the plan, we don't want to overwrite other data meanwhile updated
+            const updatedProject: IProject = {
               "@id": project["@id"],
               resourceRequirements: project.resourceRequirements,
               tasks: project.tasks,
+              workPackages: project.workPackages,
             }
 
-            updateProject(update, actions)
+            updateProject(updatedProject, actions)
           }}
         />
       </div>
@@ -75,4 +82,4 @@ const ProjectTasks: React.FC<IPlanProps> = ({ functions, project, updateProject 
   </Card>
 }
 
-export default ProjectTasks
+export default ProjectResources

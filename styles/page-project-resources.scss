@@ -1,0 +1,125 @@
+.project-resources {
+  /* reset the defaults spacing, we want the borders to collapse table-like */
+  .col-lg-2, .col-lg-4, .col-lg-5, .col-lg-7, .col-lg-8, .col-lg-10, 
+  .col-md-4, .col-md-8, 
+  .card-body {
+    padding: 0;
+  }
+  .row {
+    margin: 0;
+  }
+
+  .work-package-card {
+    margin: 2em 0.5em;
+    padding: 1em;
+  }
+
+  .work-package-add-task,
+  .task-add-resource {
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+  }
+
+  .resource-description-content {
+    display: block;
+
+   .icon-navigation {
+      align-items: center;
+      margin-right: 2em;
+    }
+  }
+
+  /* >>> for small screens, all elements are displayed in a column,
+     indent to show parent - child relation */
+  .task-resources-card,
+  .resource-card {
+    margin-left: 1em;
+    margin-top: 1.5em;
+  }
+
+  .task-empty-resources-header {
+    display: none;
+  }
+
+  .resource-cost {
+    margin-top: 1em;
+  }
+  /* <<< small screens */
+
+  @include media-breakpoint-up(md) {
+    .resource-cost {
+      margin-top: 0;
+    }
+  }
+
+  /* >>> for big screens show table-like structure */
+  @include media-breakpoint-up(lg) {
+    .task-resources-card {
+        border-top: 10px solid green;
+    }
+    .task-resources-card:first-child {
+        border-top: 0px;
+    }
+
+    .task-resources-card,
+    .resource-card {
+      margin-left: 0;
+      margin-top: 0;
+    }
+
+    .work-package-name-label,
+    .work-package-name-content,
+    .work-package-empty-tasks-header,
+    .task-description-label,
+    .task-description-content,
+    .resource-description-label,
+    .resource-description-content,
+    .resource-cost-label,
+    .resource-cost-content {
+      padding: 0.8em;
+    }
+
+    .task-empty-resources-header {
+      display: block;
+      height: 2.85em;
+    }
+
+    .work-package-name-label,
+    .work-package-empty-tasks-header,
+    .task-description-label,
+    .task-empty-resources-header,
+    .resource-description-label,
+    .resource-cost-label{
+      text-align: center;
+
+      h5 {
+        margin: 0 auto;
+      }
+    }
+
+    .resource-description-content .icon-navigation {
+      margin-right: 0;
+    }
+
+    .work-package-tasks,
+    .task-resources{
+      border-left: 1px solid $custom-gray;
+    }
+
+    .work-package-summary,
+    .task-resources-card {
+      border-top: 1px solid $custom-gray;
+    }
+
+    .work-package-add-task.has-tasks {
+      border-right: 1px solid $custom-gray;
+    }
+
+    .resource-cost-content {
+      display: block;
+      text-align: right;
+    }
+  }
+  /* <<< big screens */
+}

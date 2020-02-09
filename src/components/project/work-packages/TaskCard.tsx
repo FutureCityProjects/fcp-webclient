@@ -20,7 +20,7 @@ const TaskCard: React.FC<IProps> = (props: IProps) => {
   const wrappedPackages = availablePackages.map((workPackage) =>
     <a
       key={workPackage.id}
-      onClick={() => onAssign(task.id, workPackage.id)}
+      onClick={() => onAssign({ ...task, workPackage: workPackage.id })}
       title={workPackage.name}
     >
       {workPackage.name.substr(0, 23)}{workPackage.name.length > 23 && "…"}

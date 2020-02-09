@@ -20,7 +20,7 @@ const EmptyProjectTaskCard: React.FC<IProps> = ({ onSubmit }: IProps) => {
       <Formik<IProjectTask>
         initialValues={{ description: "" }}
         onSubmit={(values, { resetForm }) => {
-          onSubmit(values.description)
+          onSubmit(values)
           resetForm()
         }}
         enableReinitialize={true}

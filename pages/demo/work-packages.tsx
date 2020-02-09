@@ -3,6 +3,7 @@ import React from "react"
 
 import { IProject, ProjectProgress, SelfAssessment } from "api/schema"
 import BaseLayout from "components/BaseLayout"
+import PlanContainer from "components/project/common/PlanContainer"
 import ProjectWorkPackages from "components/project/work-packages/ProjectWorkPackages"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
@@ -77,7 +78,11 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = () => {
   }
 
   return <BaseLayout pageTitle="Arbeitspakete im Projektplan">
-    <ProjectWorkPackages project={p1} onSubmit={(values) => console.log(values)} />
+    <PlanContainer
+      component={ProjectWorkPackages}
+      project={p1}
+      updateProject={(values) => console.log(values)}
+    />
   </BaseLayout>
 }
 

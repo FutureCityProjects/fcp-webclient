@@ -12,6 +12,7 @@ import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
+import PlanContainer from "components/project/common/PlanContainer"
 import ProjectTasks from "components/project/tasks/ProjectTasks"
 import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { updateModelAction } from "redux/helper/actions"
@@ -64,7 +65,11 @@ const ProjectTasksPage: I18nPage<PageProps> = ({ project, request, t, updateProj
     <Row>
       <Col>
         {request.isLoading ? <Spinner /> :
-          <ProjectTasks onSubmit={onSubmit} project={project} />
+          <PlanContainer
+            component={ProjectTasks}
+            project={project}
+            updateProject={onSubmit}
+          />
         }
       </Col>
     </Row>
