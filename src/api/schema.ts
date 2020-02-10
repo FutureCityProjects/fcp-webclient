@@ -159,6 +159,7 @@ export interface IProject extends INumericIdentifierModel {
   holderZipCode?: string
   id?: number
   impact?: string[]
+  implementationBegin?: Date | string
   implementationTime?: number
   inspiration?: IProject | string
   isLocked?: boolean
@@ -170,7 +171,7 @@ export interface IProject extends INumericIdentifierModel {
   process?: IProcess | string
   profileSelfAssessment?: SelfAssessment
   progress?: ProjectProgress
-  resourceRequirements?: IRessourceRequirement[]
+  resourceRequirements?: IResourceRequirement[]
   resultingProjects?: IProject[]
   results?: string[]
   shortDescription?: string
@@ -224,7 +225,7 @@ export interface IWorkPackage {
   project?: IProject | string
 }
 
-export interface IRessourceRequirement {
+export interface IResourceRequirement {
   cost?: number
   costType?: string
   description?: string

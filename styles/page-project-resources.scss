@@ -1,7 +1,7 @@
 .project-resources {
   /* reset the defaults spacing, we want the borders to collapse table-like */
-  .col-lg-2, .col-lg-4, .col-lg-5, .col-lg-7, .col-lg-8, .col-lg-10, 
-  .col-md-4, .col-md-8, 
+  .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-12,
+  .col-md-3, .col-md-4, .col-md-5, .col-md-7, .col-md-8, .col-md-9,
   .card-body {
     padding: 0;
   }
@@ -12,15 +12,45 @@
   .work-package-card {
     margin: 2em 0.5em;
     padding: 1em;
+
+    .card-header {
+      padding: 0
+    }
+
+    .work-package-summary {
+      .work-package-add-task {
+        display:flex;
+        align-items: center;
+      }
+      .package-sum {
+        margin-top: 1.5em;
+
+        .package-cost-description,
+        .package-cost-content {
+          font-weight: 600;
+          font-size: 1.1em;
+        }
+      }
+      .work-package-add-task,
+      .package-cost-content {
+        margin-top: 1em;
+      }
+    }
+  } 
+
+  .task-summary {
+    .task-add-resource {
+      text-align: center;
+      padding-top: 0.5em;
+      padding-bottom: 1em;
+    }
+    .task-cost-description,
+    .task-cost-content {
+      font-weight: 600;
+    }
   }
 
-  .work-package-add-task,
-  .task-add-resource {
-    text-align: center;
-    padding-top: 1em;
-    padding-bottom: 1em;
-  }
-
+  /* to align the edit/delete icons */
   .resource-description-content {
     display: block;
 
@@ -30,54 +60,82 @@
     }
   }
 
+  .total-card {
+    margin-bottom: 0;
+
+    .resource-card {
+      margin: 0;
+    }
+    
+    .total-cost-description,
+    .total-cost-content {
+      font-weight: 800;
+      font-size: 1.1em;
+    }
+  }
+
   /* >>> for small screens, all elements are displayed in a column,
      indent to show parent - child relation */
-  .task-resources-card,
-  .resource-card {
-    margin-left: 1em;
-    margin-top: 1.5em;
-  }
-
-  .task-empty-resources-header {
-    display: none;
-  }
-
+  .task-resources,
+  .resource-source,
   .resource-cost {
     margin-top: 1em;
+    margin-left: 1em;
+  }
+
+  .task-description-label,
+  .resource-card:not(.first-resource) {
+    margin-top: 1.5em;
   }
   /* <<< small screens */
 
+  /* >>> for medium screens show only resource data in table form */
   @include media-breakpoint-up(md) {
-    .resource-cost {
-      margin-top: 0;
+    .work-package-card {
+      .resource-card,
+      .resource-card:not(.first-resource),
+      .resource-cost,
+      .resource-source,
+      .work-package-summary .package-cost-content {
+        margin: 0;
+      }
     }
   }
+  /* <<< medium screens */
 
   /* >>> for big screens show table-like structure */
   @include media-breakpoint-up(lg) {
-    .task-resources-card {
-        border-top: 10px solid green;
-    }
-    .task-resources-card:first-child {
-        border-top: 0px;
-    }
-
-    .task-resources-card,
-    .resource-card {
-      margin-left: 0;
-      margin-top: 0;
+    .package-table-header {
+      .th {
+        padding: 0.8em 0.8em 0em;
+      }
     }
 
-    .work-package-name-label,
-    .work-package-name-content,
-    .work-package-empty-tasks-header,
-    .task-description-label,
-    .task-description-content,
+    .work-package-card {
+      .task-resources,
+      .work-package-summary .package-sum,
+      .work-package-summary .work-package-add-task {
+        margin: 0;
+      }
+
+      .task-description-label,
+      .task-description-content {
+        padding: 0.5em 0.8em;
+        margin: 0
+      }
+    }
     .resource-description-label,
     .resource-description-content,
+    .resource-source-label,
+    .resource-source-content
     .resource-cost-label,
-    .resource-cost-content {
-      padding: 0.8em;
+    .resource-cost-content,
+    .resource-source-label,
+    .resource-source-content,
+    .work-package-add-task,
+    .package-cost-content,
+    .package-cost-description {
+      padding: 0.5em 0.8em 0em;
     }
 
     .task-empty-resources-header {
@@ -85,35 +143,13 @@
       height: 2.85em;
     }
 
-    .work-package-name-label,
-    .work-package-empty-tasks-header,
-    .task-description-label,
-    .task-empty-resources-header,
-    .resource-description-label,
-    .resource-cost-label{
-      text-align: center;
-
-      h5 {
-        margin: 0 auto;
-      }
-    }
-
     .resource-description-content .icon-navigation {
       margin-right: 0;
-    }
-
-    .work-package-tasks,
-    .task-resources{
-      border-left: 1px solid $custom-gray;
     }
 
     .work-package-summary,
     .task-resources-card {
       border-top: 1px solid $custom-gray;
-    }
-
-    .work-package-add-task.has-tasks {
-      border-right: 1px solid $custom-gray;
     }
 
     .resource-cost-content {

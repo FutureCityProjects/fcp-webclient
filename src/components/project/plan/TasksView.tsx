@@ -25,7 +25,7 @@ const TasksView: React.FC<IProps> = (props: IProps) => {
       </div>
     </CardHeader>
     <CardBody>
-      {t("project.tasks.label")}: {project.tasks ? project.tasks.length : 0}
+      {t("project.tasks")}: {project.tasks ? project.tasks.length : 0}
       <Link
         href={Routes.PROJECT_PLAN_TASKS}
         as={routeWithParams(Routes.PROJECT_PLAN_TASKS, { slug: project.slug || project.id })}
@@ -35,7 +35,7 @@ const TasksView: React.FC<IProps> = (props: IProps) => {
         </a>
       </Link>
       <br />
-      {t("project.workPackages.label")}: {project.workPackages ? project.workPackages.length : 0}
+      {t("project.workPackages")}: {project.workPackages ? project.workPackages.length : 0}
       <Link
         href={Routes.PROJECT_PLAN_WORK_PACKAGES}
         as={routeWithParams(Routes.PROJECT_PLAN_WORK_PACKAGES, { slug: project.slug || project.id })}
@@ -44,7 +44,7 @@ const TasksView: React.FC<IProps> = (props: IProps) => {
           <Icon name={"pencil"} size={24} />
         </a>
       </Link><br />
-      {t("project.resourceRequirements.label")}: {project.resourceRequirements ? project.resourceRequirements.length : 0}
+      {t("project.resourceRequirements")}: {project.resourceRequirements ? project.resourceRequirements.length : 0}
       <Link
         href={Routes.PROJECT_PLAN_RESOURCE_REQUIREMENTS}
         as={routeWithParams(Routes.PROJECT_PLAN_RESOURCE_REQUIREMENTS, { slug: project.slug || project.id })}

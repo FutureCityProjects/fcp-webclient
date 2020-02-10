@@ -2,7 +2,7 @@ import { Field, Form, Formik } from "formik"
 import React from "react"
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap"
 
-import { IRessourceRequirement } from "api/schema"
+import { IResourceRequirement } from "api/schema"
 import FormikInput from "components/common/form/FormikInput"
 import { useTranslation } from "services/i18n"
 import { validateResourceRequirement } from "services/validation"
@@ -12,11 +12,12 @@ interface IProps {
   modalOpen: boolean
   onSubmit: any
   toggle: any
-  resource?: IRessourceRequirement
+  resource?: IResourceRequirement
+  showFinances?: boolean
 }
 
 const ResourceModal: React.FC<IProps> = (props: IProps) => {
-  const { header, modalOpen, onSubmit, toggle } = props
+  const { header, modalOpen, onSubmit, showFinances = false, toggle } = props
   const { resource = { description: "", cost: 0 } } = props
   const { t } = useTranslation()
 
@@ -25,7 +26,7 @@ const ResourceModal: React.FC<IProps> = (props: IProps) => {
       {t(header)}
     </ModalHeader>
     <ModalBody>
-      <Formik<IRessourceRequirement>
+      <Formik<IResourceRequirement>
         initialValues={resource}
         onSubmit={(values) => {
           onSubmit(values)
@@ -41,7 +42,7 @@ const ResourceModal: React.FC<IProps> = (props: IProps) => {
         }) => <Form className="work-package-form" onSubmit={handleSubmit}>
             <Field component={FormikInput}
               help="form.project.resourceRequirement.description.help"
-              label="project.resourceRequirements.description"
+              label="project.resourceRequirement.description"
               maxLength={280}
               minLength={5}
               name="description"
@@ -52,14 +53,34 @@ const ResourceModal: React.FC<IProps> = (props: IProps) => {
 
             <Field component={FormikInput}
               help="form.project.resourceRequirement.cost.help"
-              label="project.resourceRequirements.cost"
+              label="project.resourceRequirement.cost"
               min={0}
               max={99999999}
               name="cost"
-              placeholder="form.project.resource.cost.placeholder"
+              placeholder="form.project.resourceRequirement.cost.placeholder"
               type="number"
               value={values.cost}
             />
+
+            {showFinances && <>
+              <Field component={FormikInput}
+                help="form.project.resourceRequirement.source.help"
+                label="project.resourceRequirement.source"
+                maxLength={280}
+                name="source"
+                placeholder="form.project.resourceRequirement.source.placeholder"
+                value={values.source}
+              />
+
+              <Field component={FormikInput}
+                help="form.project.resourceRequirement.sourceType.help"
+                label="project.resourceRequirement.sourceType"
+                maxLength={280}
+                name="sourceType"
+                placeholder="form.project.resourceRequirement.sourceType.placeholder"
+                value={values.sourceType}
+              />
+            </>}
 
             <div className="button-area">
               <Button color="primary" type="submit">{t("form.save")}</Button>

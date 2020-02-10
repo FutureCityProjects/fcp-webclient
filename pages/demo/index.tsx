@@ -60,6 +60,11 @@ const Page: I18nPage<PageProps> = () => {
               </Link>
             </li>
             <li>
+              <Link href="/demo/finances">
+                <a>Finanzen</a>
+              </Link>
+            </li>
+            <li>
               <Link href="/demo/icons">
                 <a>alle Icons</a>
               </Link>

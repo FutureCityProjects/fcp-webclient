@@ -1,19 +1,19 @@
 import React, { useState } from "react"
 import { Button, Col, Row } from "reactstrap"
 
-import { IProject } from "api/schema"
+import { IProjectTask } from "api/schema"
 import Icon from "components/common/Icon"
-import ResourceModal from "components/project/common/ResourceModal"
 import { useTranslation } from "services/i18n"
-import { IPlanFunctions } from "../common/PlanContainer"
+import { IPlanFunctions } from "./PlanContainer"
 import ResourceCard from "./ResourceCard"
+import ResourceModal from "./ResourceModal"
 import TaskSumCard from "./TaskSumCard"
 
 interface IProps {
-  currentTask: string
+  currentTask: IProjectTask
   functions: IPlanFunctions
   isFirst: boolean
-  project: IProject
+  showFinances: boolean
 }
 
 const TaskResourcesCard: React.FC<IProps> = (props: IProps) => {
@@ -21,43 +21,33 @@ const TaskResourcesCard: React.FC<IProps> = (props: IProps) => {
   const [resourceModalOpen, setResourceModalOpen] = useState(false)
   const toggleResourceModal = () => setResourceModalOpen(!resourceModalOpen)
 
-  const { currentTask, functions, isFirst, project } = props
+  const { currentTask, functions, isFirst, showFinances = false } = props
 
   const addResource = (values) => {
-    values.task = currentTask
+    values.task = currentTask.id
     functions.addResourceRequirement(values)
   }
 
-  const task = functions.getTask(currentTask)
-  const resourceRequirements = functions.sortResourceRequirements(functions.getTaskResourceRequirements(currentTask))
+  const resourceRequirements = functions.sortResourceRequirements(functions.getTaskResourceRequirements(currentTask.id))
 
   return <Row className={"task-resources-card" + (isFirst ? "" : " not-first")}>
-    <Col lg={5} className="task-description">
-      <Row className={"task-description-label" + (isFirst ? "" : " d-lg-none")}><h5>Aufgabe</h5></Row>
-      <Row className="task-description-content">{task.description}</Row>
+    <Col lg={showFinances ? 3 : 5} className="task-description">
+      <Row className={"task-description-label d-lg-none d-xs-block"}><h5>{t("project.task.label")}</h5></Row>
+      <Row className="task-description-content">{currentTask.description}</Row>
     </Col>
 
-    <Col lg={7} className="task-resources">
-
-      {resourceRequirements.length === 0 && isFirst && // just an empty spacer for alignment on big screens
-        <Row className="task-empty-resources-header d-lg-block"></Row>}
+    <Col lg={showFinances ? 9 : 7} className="task-resources">
 
       {resourceRequirements.map((r, i) => <ResourceCard
-        currentResource={r.id}
+        resourceRequirement={r}
         functions={functions}
         isFirst={i === 0}
         key={r.id}
-        project={project}
+        showFinances={showFinances}
       />)}
 
-      {resourceRequirements.length > 1 && <TaskSumCard
-        currentTask={task.id}
-        functions={functions}
-        project={project}
-      />}
-
-      <Row>
-        <Col md={12} className={"task-add-resource" + (resourceRequirements.length ? " has-resources" : "")}>
+      <Row className="task-summary">
+        <Col md={showFinances ? 5 : 8} className={"task-add-resource" + (resourceRequirements.length ? " has-resources" : "")}>
           {t("form.project.resourceRequirements.addResource")}
           <Button
             aria-label={t("form.project.resourceRequirements.addResource")}
@@ -75,8 +65,14 @@ const TaskResourcesCard: React.FC<IProps> = (props: IProps) => {
             modalOpen={resourceModalOpen}
             onSubmit={addResource}
             toggle={toggleResourceModal}
+            showFinances={showFinances}
           />
         </Col>
+        {resourceRequirements.length > 1 && <TaskSumCard
+          currentTask={currentTask}
+          functions={functions}
+          showFinances={showFinances}
+        />}
       </Row>
     </Col>
   </Row>

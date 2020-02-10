@@ -1,4 +1,10 @@
 # Todo
+  * norbert wifö
+  * norbert app
+  * logout zeigt keine meldungen
+  * pakete erst bei Aufgaben freischalten
+  * ressourcen erst bei aufgaben freischalten
+  * gesamtsumme in res + taskview
   * set focus on taskpopover input + package first input + resource first input when 
     popover/modal opens
   * Einreichen nur mit owner PW

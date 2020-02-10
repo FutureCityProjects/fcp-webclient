@@ -41,7 +41,7 @@ const WorkPackageModal: React.FC<IProps> = (props: IProps) => {
         }) => <Form className="work-package-form" onSubmit={handleSubmit}>
             <Field component={FormikInput}
               help="form.project.workPackage.name.help"
-              label="project.workPackages.name"
+              label="project.workPackage.name"
               maxLength={100}
               minLength={2}
               name="name"
@@ -52,7 +52,7 @@ const WorkPackageModal: React.FC<IProps> = (props: IProps) => {
 
             <Field component={FormikInput}
               help="form.project.workPackage.description.help"
-              label="project.workPackages.description"
+              label="project.workPackage.description"
               maxLength={500}
               name="description"
               placeholder="form.project.workPackage.description.placeholder"
@@ -62,7 +62,7 @@ const WorkPackageModal: React.FC<IProps> = (props: IProps) => {
 
             <Field component={FormikInput}
               help="form.project.workPackage.mainResponsibility.help"
-              label="project.workPackages.mainResponsibility"
+              label="project.workPackage.mainResponsibility"
               maxLength={100}
               name="mainResponsibility"
               placeholder="form.project.workPackage.mainResponsibility.placeholder"

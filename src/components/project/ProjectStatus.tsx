@@ -141,7 +141,7 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
     <div className="sub-step-container">
       <ProgressSubBox href="/assets/files/Kneipentool_Teamfindung.pdf" title={t("project.tableau.teamTool")} />
       <ProgressSubBox href="/assets/files/Kneipentool_Teamfindung.pdf" title={t("project.tableau.profileTool")} />
-      <ProgressSubBox href="/assets/files/Kneipentool_Teamfindung.pdf" title={t("project.tableau.planTool")} />
+      <ProgressSubBox href="/assets/files/Kneipentool_Planung.pdf" title={t("project.tableau.planTool")} />
     </div>
   </>
 }

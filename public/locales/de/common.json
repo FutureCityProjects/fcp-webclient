@@ -457,6 +457,12 @@
     },
     "projectIdea": {
       "saved": "Deine Projektidee wurde gespeichert!"
+    },
+    "project": {
+      "confirmDelete": {
+        "taskWithResourceRequirements": "Dieser Aufgabe sind Leistungen/Ressourcen zugeordnet, sie werden ebenso gelöscht.\nDiese Aufgabe wirklich löschen?",
+        "workPackageWithTasks": "Diesem Arbeitspaket sind Aufgaben zugeordnet, wenn es gelöscht wird werden diese als nicht-zugeordnet markiert.\nDieses Arbeitpaket wirklich löschen?"
+      }
     }
   },
   "navigation": {
@@ -731,12 +737,17 @@
     "planSelfAssessment": "Selbsteinschätzung zum Fortschritt des Projektplans",
     "profile": "Projektprofil",
     "profileSelfAssessment": "Selbsteinschätzung zum Projektfortschritt",
-    "resourceRequirements": {
+    "resourceRequirement": {
       "cost": "Kosten",
-      "costSum": "∑ Kosten der Aufgabe",
+      "taskSum": "∑ Kosten der Aufgabe",
+      "packageSum": "∑ Kosten des Arbeitspaketes",
+      "totalSum": "∑ Kosten aller Bedarfe",
       "description": "Ressource/Leistung",
-      "label": "Ressourcenbedarfe"
+      "source": "Finanzquelle",
+      "sourceType": "Typ",
+      "label": "Bedarf"
     },
+    "resourceRequirements": "Ressourcenbedarfe",
     "results": "Resultate",
     "shortDescription": "Das Projekt in einem Satz",
     "state": {
@@ -762,20 +773,22 @@
       "teamTool": "Team"
     },
     "targetGroups": "Zielgruppen",
-    "tasks": {
+    "task": {
       "description": "Aufgabenbeschreibung",
-      "label": "Aufgaben"
+      "label": "Aufgabe"
     },
+    "tasks": "Aufgaben",
     "unnamed": "[unbenanntes Projekt]",
     "utilization": "Verwertung",
     "vision": "Vision",
-    "workPackages": {
-      "costSum": "∑ Kosten des Arbeitspaketes",
+    "workPackage": {
       "description": "Kurzbeschreibung",
-      "label": "Arbeitspakete",
+      "label": "Arbeitspaket",
       "mainResponsibility": "Hauptverantwortliche*r",
-      "name": "Arbeitspaketname"
-    }
+      "name": "Arbeitspaketname",
+      "noPackage": "ohne Arbeitspaket"
+    },
+    "workPackages": "Arbeitspakete"
   },
   "user": {
     "unknown": "[unbekannt]"

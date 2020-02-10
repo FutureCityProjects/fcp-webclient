@@ -2,19 +2,19 @@ import { Field, Formik } from "formik"
 import React, { useState } from "react"
 import { Button, Col, Form, Row } from "reactstrap"
 
-import { IProject, IRessourceRequirement } from "api/schema"
+import { IResourceRequirement } from "api/schema"
 import FormikInput from "components/common/form/FormikInput"
 import FormikInputGroup from "components/common/form/FormikInputGroup"
 import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 import { validateResourceRequirement } from "services/validation"
-import { IPlanFunctions } from "../common/PlanContainer"
+import { IPlanFunctions } from "./PlanContainer"
 
 interface IProps {
-  currentResource: string
   functions: IPlanFunctions
   isFirst: boolean
-  project: IProject
+  resourceRequirement: IResourceRequirement
+  showFinances?: boolean
 }
 
 const ResourceCard: React.FC<IProps> = (props: IProps) => {
@@ -22,14 +22,12 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
   const [editing, setEditing] = useState(false)
   const toggleEdit = () => { setEditing(!editing) }
 
-  const { currentResource, functions, isFirst } = props
+  const { functions, isFirst, resourceRequirement, showFinances = false } = props
 
-  const resource = functions.getResourceRequirement(currentResource)
-
-  const editForm = () => <Formik<IRessourceRequirement>
-    initialValues={resource}
+  const editForm = () => <Formik<IResourceRequirement>
+    initialValues={resourceRequirement}
     onSubmit={(values) => {
-      functions.updateResourceRequirement({ ...resource, ...values })
+      functions.updateResourceRequirement({ ...resourceRequirement, ...values })
       toggleEdit()
     }}
     onReset={toggleEdit}
@@ -42,9 +40,11 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
       handleSubmit,
       handleReset
     }) => <Form onSubmit={handleSubmit}>
-        <Row className="resource-card">
-          <Col md={8} className="resource-description">
-            <Row className={"resource-description-label" + (isFirst ? "" : " d-lg-none")}><h5>{t("project.resourceRequirements.description")}</h5></Row>
+        <Row className={"resource-card " + (isFirst ? "first-resource" : "")}>
+          <Col md={showFinances ? 5 : 8} className="resource-description">
+            <Row className={"resource-description-label d-lg-none d-xs-block " + (isFirst ? "" : "d-md-none")}>
+              <h5>{t("project.resourceRequirement.description")}</h5>
+            </Row>
             <Row className="resource-description-content">
               <Field component={FormikInputGroup}
                 addOn={<div className="icon-navigation">
@@ -72,8 +72,20 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
               />
             </Row>
           </Col>
-          <Col md={4} className="resource-cost">
-            <Row className={"resource-cost-label" + (isFirst ? "" : " d-lg-none")}><h5>{t("project.resourceRequirements.cost")}</h5></Row>
+          {showFinances && <Col md={4} className="resource-source">
+            <Row className={"resource-source-label d-lg-none d-xs-block " + (isFirst ? "" : "d-md-none")}><h5>{t("project.resourceRequirement.source")}</h5></Row>
+            <Row className="resource-source-content text-right">
+              <Field component={FormikInput}
+                label=""
+                maxLength={280}
+                name="source"
+                placeholder="form.project.resourceRequirement.source.placeholder"
+                value={values.source}
+              />
+            </Row>
+          </Col>}
+          <Col md={showFinances ? 3 : 4} className="resource-cost">
+            <Row className={"resource-cost-label d-lg-none d-xs-block " + (isFirst ? "" : "d-md-none")}><h5>{t("project.resourceRequirement.cost")}</h5></Row>
             <Row className="resource-cost-content text-right">
               <Field component={FormikInput}
                 label=""
@@ -92,27 +104,30 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
   </Formik>
 
   return <>
-    {editing ? editForm() : <Row className="resource-card">
-      <Col md={8} className="resource-description">
-        <Row className={"resource-description-label" + (isFirst ? "" : " d-lg-none")
-        }> <h5>{t("project.resourceRequirements.description")}</h5></Row >
-        <Row className="resource-description-content">
+    {editing ? editForm() : <Row className={"resource-card " + (isFirst ? "first-resource" : "")}>
+      <Col md={showFinances ? 5 : 8} className="resource-description">
+        <Row className={"resource-description-label d-lg-none d-xs-block " + (isFirst ? "" : "d-md-none")}> <h5>{t("project.resourceRequirement.description")}</h5></Row >
+        <Row className={"resource-description-content " + (isFirst ? "first-resource" : "")}>
           <div className="icon-navigation">
             <a className="navigation-item"
               onClick={toggleEdit}
               title={t("form.edit")}
             ><Icon name="pencil" size={18} /></a>
             <a className="navigation-item"
-              onClick={() => functions.removeResourceRequirement(currentResource)}
+              onClick={() => functions.removeResourceRequirement(resourceRequirement.id)}
               title={t("form.removeElement")}
             ><Icon name="trash" size={18} /></a>
           </div>
-          {resource.description}
+          {resourceRequirement.description}
         </Row>
       </Col >
-      <Col md={4} className="resource-cost">
-        <Row className={"resource-cost-label" + (isFirst ? "" : " d-lg-none")}><h5>{t("project.resourceRequirements.cost")}</h5></Row>
-        <Row className="resource-cost-content text-right">{t("default.currency", { value: resource.cost })}</Row>
+      {showFinances && <Col md={4} className="resource-source">
+        <Row className={"resource-source-label d-lg-none d-block " + (isFirst ? "" : "d-md-none")}><h5>{t("project.resourceRequirement.source")}</h5></Row>
+        <Row className={"resource-source-content " + (isFirst ? "first-resource" : "")}>{resourceRequirement.source}</Row>
+      </Col>}
+      <Col md={showFinances ? 3 : 4} className="resource-cost">
+        <Row className={"resource-cost-label text-md-right d-lg-none d-block " + (isFirst ? "" : "d-md-none")}><h5>{t("project.resourceRequirement.cost")}</h5></Row>
+        <Row className={"resource-cost-content text-md-right d-block " + (isFirst ? "first-resource" : "")}>{t("default.currency", { value: resourceRequirement.cost })}</Row>
       </Col>
     </Row >
     }</>

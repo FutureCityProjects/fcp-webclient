@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import uuidv1 from "uuid/v1"
 
-import { IProject, IProjectTask, IRessourceRequirement, IWorkPackage } from "api/schema"
+import { IProject, IProjectTask, IResourceRequirement, IWorkPackage } from "api/schema"
+import { useTranslation } from "services/i18n"
 
 export interface IPlanFunctions {
   addResourceRequirement: any
@@ -15,6 +16,7 @@ export interface IPlanFunctions {
   getTaskResourceRequirements: any
   getWorkPackage: any
   getWorkPackages: any
+  getWorkPackageMonths: any
   getWorkPackageTasks: any
   getWorkPackageResourceRequirements: any
   removeResourceRequirement: any
@@ -53,13 +55,14 @@ interface IProps {
  * @param props IPlanProps
  */
 const PlanContainer: React.FC<IProps> = (props: IProps) => {
+  const { t } = useTranslation()
   const [project, setProject] = useState(props.project)
   const getIDs = (list: any[]): string[] => list.map((e) => e.id)
 
   const getTasks = (): IProjectTask[] =>
     project.tasks || []
   const getTask = (id: string): IProjectTask =>
-    getTasks().find((t) => t.id === id)
+    getTasks().find((e) => e.id === id)
   const sortTasks = (list: IProjectTask[]): IProjectTask[] =>
     list.sort((a, b) => a.description.toLowerCase() > b.description.toLowerCase() ? 1 : -1)
 
@@ -68,33 +71,42 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
   const getWorkPackage = (id: string): IWorkPackage =>
     getWorkPackages().find((w) => w.id === id)
   const getWorkPackageTasks = (id: string) =>
-    getTasks().filter((t) => id ? t.workPackage === id : !t.workPackage)
+    getTasks().filter((e) => id ? e.workPackage === id : !e.workPackage)
+  const getWorkPackageMonths = (id: string) => {
+    const tasks = getWorkPackageTasks(id)
+    const months = []
+    tasks.forEach((e) => months.push(...e.months))
+
+    return months
+      .filter((m, i, self) => self.indexOf(m) === i)
+      .sort((a, b) => a > b ? 1 : -1)
+  }
   const sortWorkPackages = (list: IWorkPackage[]): IWorkPackage[] =>
     list.sort((a, b) => a.order > b.order ? 1 : -1)
 
-  const getResourceRequirements = (): IRessourceRequirement[] =>
+  const getResourceRequirements = (): IResourceRequirement[] =>
     project.resourceRequirements || []
-  const getResourceRequirement = (id: string): IRessourceRequirement =>
+  const getResourceRequirement = (id: string): IResourceRequirement =>
     getResourceRequirements().find((r) => r.id === id)
-  const getTaskResourceRequirements = (id: string): IRessourceRequirement[] =>
+  const getTaskResourceRequirements = (id: string): IResourceRequirement[] =>
     getResourceRequirements().filter((r) => r.task === id)
-  const getWorkPackageResourceRequirements = (id: string): IRessourceRequirement[] => {
+  const getWorkPackageResourceRequirements = (id: string): IResourceRequirement[] => {
     const ids = getIDs(getWorkPackageTasks(id))
     return (project.resourceRequirements || []).filter((r) => ids.includes(r.task))
   }
-  const sortResourceRequirements = (list: IRessourceRequirement[]): IRessourceRequirement[] =>
+  const sortResourceRequirements = (list: IResourceRequirement[]): IResourceRequirement[] =>
     list.sort((a, b) => a.description.toLowerCase() > b.description.toLowerCase() ? 1 : -1)
 
-  const sumResourceRequirementCosts = (requirements: IRessourceRequirement[]): number =>
+  const sumResourceRequirementCosts = (requirements: IResourceRequirement[]): number =>
     requirements.reduce((s, r) => s + (r.cost || 0), 0)
 
-  const addResourceRequirement = (resource: IRessourceRequirement) => {
+  const addResourceRequirement = (resource: IResourceRequirement) => {
     resource.id = uuidv1()
     setProject({ ...project, resourceRequirements: [...getResourceRequirements(), resource] })
   }
-  const updateResourceRequirement = (resource: IRessourceRequirement) => {
+  const updateResourceRequirement = (resource: IResourceRequirement) => {
     const updatedResources = getResourceRequirements()
-      .map((r) => r.id === resource.id ? resource : r)
+      .map((r) => r.id === resource.id ? { ...r, ...resource } : r)
     setProject({ ...project, resourceRequirements: updatedResources })
   }
   const removeResourceRequirement = (id: string) => {
@@ -109,13 +121,14 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     setProject({ ...project, tasks: [task, ...getTasks()] })
   }
   const updateTask = (task: IProjectTask) => {
-    const updatedTasks = getTasks().map((t) => t.id === task.id ? task : t)
+    const updatedTasks = getTasks()
+      .map((e) => e.id === task.id ? { ...e, ...task } : e)
     setProject({ ...project, tasks: updatedTasks })
   }
   const removeTask = (id: string) => {
     const hasReqs = getTaskResourceRequirements(id).length > 0
     if (hasReqs) {
-      if (!confirm("Wirklich löschen, hat Res?")) {
+      if (!confirm(t("message.project.confirmDelete.taskWithResourceRequirements"))) {
         return
       }
     }
@@ -126,7 +139,7 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     setProject({
       ...project,
       resourceRequirements: updatedReqs,
-      tasks: getTasks().filter((t) => t.id !== id)
+      tasks: getTasks().filter((e) => e.id !== id)
     })
   }
 
@@ -136,21 +149,22 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     setProject({ ...project, workPackages: [...getWorkPackages(), wp] })
   }
   const updateWorkPackage = (wp: IWorkPackage) => {
-    const updatedPackages = getWorkPackages().map((w) => w.id === wp.id ? wp : w)
+    const updatedPackages = getWorkPackages()
+      .map((w) => w.id === wp.id ? { ...w, ...wp } : w)
     setProject({ ...project, workPackages: updatedPackages })
   }
   const removeWorkPackage = (id: string) => {
     const hasTasks = getWorkPackageTasks(id).length > 0
     if (hasTasks) {
-      if (!confirm("Wirklich löschen, hat Tasks?")) {
+      if (!confirm(t("message.project.confirmDelete.workPackageWithTasks"))) {
         return
       }
     }
 
     // reset all tasks in this package to unassigned
-    const updatedTasks = getTasks().map((t) => t.workPackage === id
-      ? { ...t, workPackage: null }
-      : t
+    const updatedTasks = getTasks().map((e) => e.workPackage === id
+      ? { ...e, workPackage: null }
+      : e
     )
 
     // remove the package
@@ -178,6 +192,7 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
       getTaskResourceRequirements,
       getWorkPackage,
       getWorkPackages,
+      getWorkPackageMonths,
       getWorkPackageTasks,
       getWorkPackageResourceRequirements,
       removeResourceRequirement,

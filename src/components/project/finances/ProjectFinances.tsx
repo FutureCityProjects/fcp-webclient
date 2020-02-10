@@ -12,7 +12,7 @@ import WorkPackageResourcesCard from "components/project/common/WorkPackageResou
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
-const ProjectResources: React.FC<IPlanProps> = (props: IPlanProps) => {
+const ProjectFinances: React.FC<IPlanProps> = (props: IPlanProps) => {
   const { t } = useTranslation()
   const { functions, project, updateProject } = props
 
@@ -44,23 +44,24 @@ const ProjectResources: React.FC<IPlanProps> = (props: IPlanProps) => {
     </CardHeader>
     <CardBody>
       <h3 className="card-title">{t("page.projects.plan.resourceRequirementsHeader")}</h3>
-      <h4>{t("page.projects.plan.resourceRequirements.resourceHeading")} <Icon name="money-bag" size={24} /></h4>
-      <span className="form-text">{t("page.projects.plan.resourceRequirements.resourceIntro")}</span>
+      <h4>{t("page.projects.plan.finances.fincancesHeading")} <Icon name="money-bag" size={24} /></h4>
+      <span className="form-text">{t("page.projects.plan.finances.financesIntro")}</span>
 
       <div className="card-content">
 
         <Row>
-          <Col lg={2}></Col>
-          <Col lg={10}>
+          <Col lg={3}></Col>
+          <Col lg={9}>
             <Row>
-              <Col lg={5}></Col>
-              <Col lg={7}>
-                <Card className="work-package-card total-card">
-                  <CardBody>
-                    <TotalSumCard functions={functions} />
-                  </CardBody>
-                </Card>
-              </Col>
+              <Col md={4}></Col>
+              <Card className="work-package-card total-card">
+                <CardBody>
+                  <TotalSumCard
+                    functions={functions}
+                    showFinances={true}
+                  />
+                </CardBody>
+              </Card>
             </Row>
           </Col>
         </Row>
@@ -69,11 +70,13 @@ const ProjectResources: React.FC<IPlanProps> = (props: IPlanProps) => {
           currentPackage={wp}
           functions={functions}
           key={wp.id}
+          showFinances={true}
         />)}
 
         <WorkPackageResourcesCard
           currentPackage={null}
           functions={functions}
+          showFinances={true}
         />
       </div>
 
@@ -98,4 +101,4 @@ const ProjectResources: React.FC<IPlanProps> = (props: IPlanProps) => {
   </Card>
 }
 
-export default ProjectResources
+export default ProjectFinances

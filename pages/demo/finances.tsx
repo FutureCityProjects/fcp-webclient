@@ -4,12 +4,12 @@ import React from "react"
 import { IProject, ProjectProgress, SelfAssessment } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import PlanContainer from "components/project/common/PlanContainer"
-import ProjectResources from "components/project/resources/ProjectResources"
+import ProjectFinances from "components/project/finances/ProjectFinances"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 
 type PageProps = WithTranslation
 
-const ProjectResourcesPage: I18nPage<PageProps> = () => {
+const ProjecFinancesPage: I18nPage<PageProps> = () => {
   const p1: IProject = {
     createdAt: new Date(),
     delimitation: "Wir grenzen uns von anderen Projekten ab durch ...",
@@ -51,7 +51,7 @@ const ProjectResourcesPage: I18nPage<PageProps> = () => {
         description: "Die erste Aufgabe",
         id: "t11111",
         workPackage: "w11111",
-        months: [1, 2, 3, 7]
+        months: [1, 2, 3]
       },
       {
         description: "Ohne Arbeitspaket",
@@ -63,7 +63,7 @@ const ProjectResourcesPage: I18nPage<PageProps> = () => {
         description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
         id: "t33333",
         workPackage: "w22222",
-        months: [7, 4]
+        months: [4, 5]
       },
       {
         description: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget.",
@@ -104,17 +104,17 @@ const ProjectResourcesPage: I18nPage<PageProps> = () => {
     ]
   }
 
-  return <BaseLayout pageTitle="Ressourcenbedarf">
+  return <BaseLayout pageTitle="Projektfinanzierung">
     <PlanContainer
-      component={ProjectResources}
+      component={ProjectFinances}
       project={p1}
       updateProject={(values) => console.log(values)}
     />
   </BaseLayout>
 }
 
-ProjectResourcesPage.getInitialProps = async () => ({
+ProjecFinancesPage.getInitialProps = async () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 
-export default withTranslation(includeDefaultNamespaces())(ProjectResourcesPage)
+export default withTranslation(includeDefaultNamespaces())(ProjecFinancesPage)
