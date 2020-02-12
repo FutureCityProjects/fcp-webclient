@@ -1,27 +1,17 @@
 # Todo
-  * norbert wifö
-  * norbert app
-  * logout zeigt keine meldungen
-  * pakete erst bei Aufgaben freischalten
-  * ressourcen erst bei aufgaben freischalten
-  * gesamtsumme in res + taskview
   * set focus on taskpopover input + package first input + resource first input when 
     popover/modal opens
   * Einreichen nur mit owner PW
   * Keine Bearbeitung Antragsdaten wenn bereits eingereicht?
   * DropdownComponent rendert leere Buttons im Menu weil sie <AuthElement> als nicht-leer
     erkennt. (autowrap true/false)
-  * warning tasks löschen wenn resourcen (task page + wp page), resourcen aktualisieren wenn task gelöscht wird
   * logout wegen inaktivität notice nicht verschwinden lassen
   * RTE toolbar konfigurierbar für PO + Members etc
-  * Wie kann die Zuspitzung als complete markiert werden? Wir wissen in ProjectStatus die Anzahl der
-    FundConcretizations nicht -> Fortschritt ähnlich wie beim Project preUpdate tracken
   * Logo / Bild Platzhalter für Demo
   * refactor form error messages: before submit display only errors from touched fields
     (client validation), after submit from all fields (server validation, e.g. empty field is
     required, formik setState?)
   * optimize carousel: smaller cards, show partial card, hide buttons/move outside
-  * validate: tasks that have a workpackage ID that does not exist (still catched by "tasksWithoutPackage")
   * WYSIWYG als Markdown speichern
     * use https://github.com/domchristie/turndown to generate markdown from quill html.
     * use markdown-to-jsx to render the markdown instead of using
@@ -36,8 +26,6 @@
   * isLocked ausgeben für owner + member
     * auswerten in myProjectCard + unterseiten
   * multipage wizard: https://github.com/vincentntang/multistep-wizard-formik-yup-reactstrap
-  * component files .jsx benennen
-  * icons als echte .svg ins public dir (caching, served by nginx -> performance)
   * Passwort minlength/strength validieren in der API
   * storing the JWT in localstorage and cookie is discouraged due to XSS vulnerability but how
     do we send it to the server otherwise? Samesite & httponly cookie? No session sync via localstorage but only logout sync? @see https://blog.hasura.io/best-practices-of-using-jwt-with-graphql/#jwt_security
@@ -59,3 +47,5 @@
     * project tableau overflows project card on high zoom
     * slider labels schieben sich schon bei relativ hohen bildschirmbreiten inneinander: http://prntscr.com/quxsi4
     * a.btn mit Icon hat noch einen active rahmen: http://prntscr.com/qv56ch
+    * FOrmularelemente synchronisieren, nicht nur für spezifische Forms:
+      http://prntscr.com/r1cqmx

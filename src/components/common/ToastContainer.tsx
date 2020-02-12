@@ -35,7 +35,7 @@ const ToastContainer = ({ notifications, removeNotification }: Props) => {
   }
 
   return (
-    <WrappedTC autoClose={8000} />
+    <WrappedTC autoClose={20000} />
   )
 }
 

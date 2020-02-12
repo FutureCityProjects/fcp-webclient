@@ -49,8 +49,15 @@ const ProjectApplicationEditPage: I18nPage<PageProps> = ({ project, request, t, 
 
   const onSubmit = (values, actions) => {
     actions.success = () => {
-      Router.push(Routes.PROJECT_FUND_APPLICATION,
-        routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }))
+      Router.push({
+        pathname: Routes.PROJECT_FUND_APPLICATION,
+        // @todo support multiple applications, how to store which one is the active application?
+        query: { fund: project.applications[0].fund.id }
+      }, {
+        pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }),
+        // @todo support multiple applications, how to store which one is the active application?
+        query: { fund: project.applications[0].fund.id }
+      })
     }
 
     updateProject(values, actions)

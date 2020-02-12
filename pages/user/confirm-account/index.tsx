@@ -13,6 +13,7 @@ import { confirmAccountAction, resetValidationResultAction } from "redux/actions
 import { AppState } from "redux/reducer"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
+import Router from "next/router"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   confirmValidation: (id: string, token: string, actions: any) =>
@@ -46,6 +47,9 @@ const ConfirmAccountPage: I18nPage<PageProps> = (props) => {
   }
 
   const onSubmit = (values: IValidation, actions: any) => {
+    actions.success = () => {
+      Router.push(Routes.LOGIN)
+    }
     confirmValidation(values.id, values.token, actions)
   }
 

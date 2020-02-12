@@ -21,9 +21,6 @@ class FormikArrayInput extends FormikElement<IProps> {
     const { children, field, form, i18n, id, meta, onRemove, placeholder, t, tReady, type, ...props } = this.props
 
     return <InputGroup>
-      <button className="btn-dark input-group-addon" onClick={onRemove} title={t("form.removeElement")}>
-        <Icon name="minus" size={16} />
-      </button>
       <Input
         {...field}
         {...props}
@@ -33,6 +30,12 @@ class FormikArrayInput extends FormikElement<IProps> {
         placeholder={placeholder ? t(placeholder) : null}
         type={type || "text"}
       />
+      <div className="icon-navigation input-group-addon">
+        <a className="navigation-item"
+          onClick={onRemove}
+          title={t("form.removeElement")}
+        ><Icon name="trash" size={18} /></a>
+      </div>
 
       {this.errorElement()}
     </InputGroup>

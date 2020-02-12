@@ -4,6 +4,8 @@
 @import "fonts/roboto";
 @import "custom";
 @import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "../node_modules/react-datepicker/dist/react-datepicker.css";
+@import "./autocomplete.scss"; 
 @import "./toastify.scss";
 @import "./multi-carousel.scss";
 @import "./rte.scss"; 
@@ -926,6 +928,9 @@ a.sub-status-card {
  */
 .form-group .input-group {
   padding-bottom: 0.75rem;
+}
+.icon-navigation.input-group-addon .navigation-item {
+  margin-left: 0.625rem;
 }
 
 .form-general-error-container {

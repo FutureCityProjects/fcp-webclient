@@ -18,7 +18,7 @@ export enum Routes {
   PROJECT_PAGE = "/projects/[slug]", // also works for ID
   CREATE_IDEA = "/ideas/create",
   CREATE_PROJECT = "/projects/create?inspiration=[id]",
-  PROJECT_APPLICATION = "projects/[slug]/apply",
+  PROJECT_APPLICATION = "/projects/[slug]/apply",
 
   // project data for members
   MY_PROJECTS = "/user/projects",

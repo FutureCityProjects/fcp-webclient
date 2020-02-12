@@ -72,6 +72,22 @@
       font-weight: 800;
       font-size: 1.1em;
     }
+
+    .funding-sum-description,
+    .funding-sum-content,
+    .own-costs-description,
+    .own-costs-content,
+    .proceeds-sum-description,
+    .proceeds-sum-content  {
+      font-weight: 600;
+    }
+
+    .total-cost-description,
+    .funding-sum-description,
+    .own-costs-description,
+    .proceeds-sum-description {
+      margin-top: 1em;
+    }
   }
 
   /* >>> for small screens, all elements are displayed in a column,
@@ -89,6 +105,23 @@
   }
   /* <<< small screens */
 
+  @include media-breakpoint-up(sm) {
+    .total-card {
+      .total-cost-description,
+      .funding-sum-description,
+      .own-costs-description,
+      .proceeds-sum-description {
+        margin-top: 0;
+      }
+
+      .proceeds-sum-description,
+      .proceeds-sum-content  {
+        border-bottom: 1px solid $custom-gray;
+        margin-bottom: 0.5em;
+      }
+    }
+  }
+
   /* >>> for medium screens show only resource data in table form */
   @include media-breakpoint-up(md) {
     .work-package-card {
@@ -98,6 +131,10 @@
       .resource-source,
       .work-package-summary .package-cost-content {
         margin: 0;
+      }
+
+      .resource-source-content .icon-navigation {
+        margin: 0 auto;
       }
     }
   }

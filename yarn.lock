@@ -1587,7 +1587,7 @@
   resolved "https://registry.yarnpkg.com/@xtuc/long/-/long-4.2.2.tgz#d291c6a4e97989b5c61d9acf396ae4fe133a718d"
   integrity sha512-NuHqBY1PB/D8xU6s/thBgOAiAP7HOYDQ32+BFZILJ8ivkUkAHQnWfn6WhL79Owj1qmUnoN/YPhktdIoucipkAQ==
 
-"@zeit/next-css@1.0.1":
+"@zeit/next-css@1.0.1", "@zeit/next-css@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@zeit/next-css/-/next-css-1.0.1.tgz#4f784e841e7ca1b21b3468a902e2c1fa95a3e75c"
   integrity sha512-yfHPRy/ne/5SddVClsoy+fpU7e0Cs1gkWA67/wm2uIu+9rznF45yQLxHEt5dPGF3h6IiIh7ZtIgA8VV8YKq87A==
@@ -4080,10 +4080,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-formik@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/formik/-/formik-2.1.2.tgz#573f63383d35461c607dad717ea9417e6c192682"
-  integrity sha512-lbhyV8FQ/hkg4tsVf075Ad9/vDXVbSj6XLW8ooZtAZyNJK8MBYLf1fRJ6iEo2C0pODQneDboYpEUby7nsPW00Q==
+formik@^2.1.4:
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/formik/-/formik-2.1.4.tgz#8deef07ec845ea98f75e03da4aad7aab4ac46570"
+  integrity sha512-oKz8S+yQBzuQVSEoxkqqJrKQS5XJASWGVn6mrs+oTWrBoHgByVwwI1qHiVc9GKDpZBU9vAxXYAKz2BvujlwunA==
   dependencies:
     deepmerge "^2.1.1"
     hoist-non-react-statics "^3.3.0"
@@ -6215,10 +6215,10 @@ next-fonts@^1.0.3:
     file-loader "^2.0.0"
     url-loader "^1.1.1"
 
-next-i18next@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-4.1.0.tgz#dcb5afba1254551b5ced34ef2e40b38203babdb6"
-  integrity sha512-i02CxQdLzUg1ny3FNFZ0QXoBu8Yn5SkNt1lctcUYUQNWw/xBGfN+WhuDAM8Vcifhb5bAcJeo3nX7ELMG2PyhBw==
+next-i18next@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/next-i18next/-/next-i18next-4.2.0.tgz#d8205bcfc527d0b877acbc36d484adee487147e3"
+  integrity sha512-AkDHe7OWa2PcaG3i5zW718AARynyKJQuCW4kzMBvdKcD5WYiVT+KhXdD1qDesIMDZ/zX3D3VH0i4G0GRAlPj8w==
   dependencies:
     core-js "^2"
     detect-node "^2.0.4"
@@ -7747,10 +7747,10 @@ react-autowhatever@^10.1.2:
     react-themeable "^1.1.0"
     section-iterator "^2.0.0"
 
-react-datepicker@^2.11.0:
-  version "2.11.0"
-  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-2.11.0.tgz#61aa79750856f91ee452f296d91b9ae4ebbacb4d"
-  integrity sha512-eyaLRTX4CaMnW4HW34gYmG4cT/3R9vyAIEAQ1SSWKBO77pTs6RfxUzbLRKOheyIlQM7BmXhLGOxq80vvlCb09w==
+react-datepicker@^2.12.1:
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-2.12.1.tgz#de37cc6cda4fd47153a618090a7628da1c6c97d0"
+  integrity sha512-Y5xIim/tzHZ0M+bo6EAZZX5KZ7ov+N6VceSM981bS9dNDoD+ezUAT1/DpeSRXxmFBrNnd5dW4BhlgE36ZzkfLQ==
   dependencies:
     classnames "^2.2.6"
     date-fns "^2.0.1"
@@ -7824,10 +7824,10 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-multi-carousel@^2.5.0:
-  version "2.5.0"
-  resolved "https://registry.yarnpkg.com/react-multi-carousel/-/react-multi-carousel-2.5.0.tgz#6a69cf6d7b0e2bd384170021b30d943be2f3aa9b"
-  integrity sha512-Z/iCrFaWbwedqyGCMaTG7OlwdMkchv0WiKGXSDXRqAfKwdoz8lRzToJCsap2F7N1qjPpRn0txq/9d0hE9xWBxw==
+react-multi-carousel@^2.5.2:
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/react-multi-carousel/-/react-multi-carousel-2.5.2.tgz#da6c0d68b9f264e56e63386cbbe66e174b13e4c4"
+  integrity sha512-dGDNAA1MmLZV+nvxvF8T2GlQnvv726jBdC/hLT7GD44PaL1ONE5nkKPrS/SeYvf5TLVxCUYzRyY7BMpUuQtXpw==
 
 react-onclickoutside@^6.9.0:
   version "6.9.0"
@@ -7926,10 +7926,10 @@ react@^16.12.0:
     object-assign "^4.1.1"
     prop-types "^15.6.2"
 
-reactstrap@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-8.4.0.tgz#318961ae8150ec1790fec5ee2f81816c9e32d7a1"
-  integrity sha512-hKH/+jnmPp+v1AZweFd58VI2z8KCQbLG+tcReQ/4ddIsJ5tWiBm5EbxD7RZxwlTSjPCqA5bHCwybdCuqUSoHcQ==
+reactstrap@^8.4.1:
+  version "8.4.1"
+  resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-8.4.1.tgz#c7f63b9057f58b52833061711ebe235b9ec4e3e5"
+  integrity sha512-oAjp9PYYUGKl7SLXwrQ1oRIrYw0MqfO2mUqYgGapFKHG2uwjEtLip5rYxtMujkGx3COjH5FX1WtcfNU4oqpH0Q==
   dependencies:
     "@babel/runtime" "^7.2.0"
     classnames "^2.2.3"

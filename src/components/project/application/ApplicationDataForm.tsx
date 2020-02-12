@@ -138,10 +138,15 @@ const ApplicationDataForm = ({ onSubmit, project }: IProps) => {
                 <Icon name="save" size={18} />
                 {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
-              <Link
-                href={Routes.PROJECT_FUND_APPLICATION}
-                as={routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }) + "#project-" + project.id}
-              >
+              <Link href={{
+                pathname: Routes.PROJECT_FUND_APPLICATION,
+                // @todo support multiple applications, how to store which one is the active application?
+                query: { fund: project.applications[0].fund.id }
+              }} as={{
+                pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }),
+                // @todo support multiple applications, how to store which one is the active application?
+                query: { fund: project.applications[0].fund.id }
+              }} >
                 <a className="btn btn-light">{t("goto.projectApplication")}</a>
               </Link>
             </div>

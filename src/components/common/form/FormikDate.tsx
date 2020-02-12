@@ -1,7 +1,6 @@
 import de from "date-fns/locale/de"
 import React from "react"
 import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
 import { FormGroup, Label } from "reactstrap"
 
 import { includeDefaultNamespaces, withTranslation } from "services/i18n"

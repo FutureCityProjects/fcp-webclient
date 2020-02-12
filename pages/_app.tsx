@@ -17,9 +17,6 @@ import { AuthToken } from "services/authToken"
 import { appWithTranslation } from "services/i18n"
 import { AUTH_COOKIE_NAME, AUTH_IDLE_TIMEOUT, AUTH_LOCALSTORAGE_NAME } from "../config"
 
-// @todo import (S)CSS here to fix order: some modules load their own styles?
-import "../styles/index.scss"
-
 type Props = AppProps & ReduxProps & {
   authStorageChanged: any,
   isIdle: any,
