@@ -9,7 +9,6 @@ import PageBody from "components/layout/PageBody"
 import { logoutAction } from "redux/actions/auth"
 import { AppState } from "redux/reducer"
 import { selectRoles, selectUsername } from "redux/reducer/auth"
-import "../../styles/index.scss"
 
 interface IProps {
   children: any
