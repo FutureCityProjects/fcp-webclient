@@ -12,6 +12,7 @@ interface IProps extends IBaseFormikProps {
   onRemove: any
   placeholder?: string
   type?: InputType
+  value?: any
 }
 
 class FormikArrayInput extends FormikElement<IProps> {
@@ -19,7 +20,7 @@ class FormikArrayInput extends FormikElement<IProps> {
     // extract all properties not allowed / not needed for the input element so the don't get
     // passed down and appear in the HTML
     const { addOn, children, field, form, i18n, id, meta, onRemove,
-      placeholder, t, tReady, type, ...props } = this.props
+      placeholder, t, tReady, type, value, ...props } = this.props
 
     return <InputGroup>
       <Input
@@ -30,6 +31,7 @@ class FormikArrayInput extends FormikElement<IProps> {
         invalid={this.hasError()}
         placeholder={placeholder ? t(placeholder) : null}
         type={type || "text"}
+        value={value === null ? "" : value}
       />
       {addOn}
 

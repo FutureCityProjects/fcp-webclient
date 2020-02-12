@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import uuidv1 from "uuid/v1"
 
-import { IProject, IProjectTask, IResourceRequirement, IWorkPackage } from "api/schema"
+import { IProject, IProjectTask, IResourceRequirement, IWorkPackage, ResourceSourceType } from "api/schema"
 import { useTranslation } from "services/i18n"
 
 export interface IPlanFunctions {
@@ -11,6 +11,8 @@ export interface IPlanFunctions {
   getIDs: any
   getResourceRequirement: any
   getResourceRequirements: any
+  getResourceRequirementSources: any
+  getResourceRequirementsBySourceType: any
   getTask: any
   getTasks: any
   getTaskResourceRequirements: any
@@ -97,6 +99,13 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
   const sortResourceRequirements = (list: IResourceRequirement[]): IResourceRequirement[] =>
     list.sort((a, b) => a.description.toLowerCase() > b.description.toLowerCase() ? 1 : -1)
 
+  const getResourceRequirementSources = () =>
+    getResourceRequirements()
+      .map((r) => r.source)
+      .filter((m, i, self) => m && self.indexOf(m) === i)
+      .sort((a, b) => a > b ? 1 : -1)
+  const getResourceRequirementsBySourceType = (type: ResourceSourceType) =>
+    getResourceRequirements().filter((r) => r.sourceType && r.sourceType === type)
   const sumResourceRequirementCosts = (requirements: IResourceRequirement[]): number =>
     requirements.reduce((s, r) => s + (r.cost || 0), 0)
 
@@ -187,6 +196,8 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
       getIDs,
       getResourceRequirement,
       getResourceRequirements,
+      getResourceRequirementSources,
+      getResourceRequirementsBySourceType,
       getTask,
       getTasks,
       getTaskResourceRequirements,

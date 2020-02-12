@@ -35,7 +35,9 @@ const WorkPackageResourcesCard: React.FC<IProps> = (props: IProps) => {
 
   return <Card className="work-package-card">
     <CardHeader>
-      {t(currentPackage ? "project.workPackage.label" : "project.workPackage.noPackage")}{currentPackage && (": " + currentPackage.name)}
+      {currentPackage
+        ? t("project.workPackage.abbreviation") + currentPackage.order + ": " + currentPackage.name
+        : t("project.workPackage.noPackage")}
     </CardHeader>
     <CardBody>
       {tasks.length > 0 && <Row className="package-table-header d-none d-lg-flex">

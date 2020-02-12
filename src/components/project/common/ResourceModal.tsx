@@ -2,8 +2,10 @@ import { Field, Form, Formik } from "formik"
 import React from "react"
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap"
 
-import { IResourceRequirement } from "api/schema"
+import { IResourceRequirement, ResourceSourceType } from "api/schema"
+import FormikAutocomplete from "components/common/form/FormikAutocomplete"
 import FormikInput from "components/common/form/FormikInput"
+import FormikSelect from "components/common/form/FormikSelect"
 import { useTranslation } from "services/i18n"
 import { validateResourceRequirement } from "services/validation"
 
@@ -11,13 +13,14 @@ interface IProps {
   header: string
   modalOpen: boolean
   onSubmit: any
+  sources?: any
   toggle: any
   resource?: IResourceRequirement
   showFinances?: boolean
 }
 
 const ResourceModal: React.FC<IProps> = (props: IProps) => {
-  const { header, modalOpen, onSubmit, showFinances = false, toggle } = props
+  const { header, modalOpen, onSubmit, showFinances = false, sources, toggle } = props
   const { resource = { description: "", cost: 0 } } = props
   const { t } = useTranslation()
 
@@ -63,22 +66,27 @@ const ResourceModal: React.FC<IProps> = (props: IProps) => {
             />
 
             {showFinances && <>
-              <Field component={FormikInput}
+              <Field component={FormikSelect}
+                help="form.project.resourceRequirement.sourceType.help"
+                label="project.resourceRequirement.sourceType"
+                name="sourceType"
+                options={{
+                  [t("form.project.resourceRequirement.sourceType.placeholder")]: "",
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_OWN_FUNDS)]: ResourceSourceType.SOURCE_TYPE_OWN_FUNDS,
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_FUNDING)]: ResourceSourceType.SOURCE_TYPE_FUNDING,
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_PROCEEDS)]: ResourceSourceType.SOURCE_TYPE_PROCEEDS,
+                }}
+                value={values.sourceType}
+              />
+
+              <Field component={FormikAutocomplete}
                 help="form.project.resourceRequirement.source.help"
                 label="project.resourceRequirement.source"
                 maxLength={280}
                 name="source"
+                options={sources}
                 placeholder="form.project.resourceRequirement.source.placeholder"
                 value={values.source}
-              />
-
-              <Field component={FormikInput}
-                help="form.project.resourceRequirement.sourceType.help"
-                label="project.resourceRequirement.sourceType"
-                maxLength={280}
-                name="sourceType"
-                placeholder="form.project.resourceRequirement.sourceType.placeholder"
-                value={values.sourceType}
               />
             </>}
 

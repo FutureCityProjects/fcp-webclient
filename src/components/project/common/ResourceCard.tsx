@@ -2,9 +2,11 @@ import { Field, Formik } from "formik"
 import React, { useState } from "react"
 import { Button, Col, Form, Row } from "reactstrap"
 
-import { IResourceRequirement } from "api/schema"
+import { IResourceRequirement, ResourceSourceType } from "api/schema"
+import FormikAutocomplete from "components/common/form/FormikAutocomplete"
 import FormikInput from "components/common/form/FormikInput"
 import FormikInputGroup from "components/common/form/FormikInputGroup"
+import FormikSelect from "components/common/form/FormikSelect"
 import Icon from "components/common/Icon"
 import { useTranslation } from "services/i18n"
 import { validateResourceRequirement } from "services/validation"
@@ -74,12 +76,25 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
           </Col>
           {showFinances && <Col md={4} className="resource-source">
             <Row className={"resource-source-label d-lg-none d-xs-block " + (isFirst ? "" : "d-md-none")}><h5>{t("project.resourceRequirement.source")}</h5></Row>
-            <Row className="resource-source-content text-right">
-              <Field component={FormikInput}
+            <Row className="resource-source-content text-right d-block">
+              <Field component={FormikSelect}
+                label=""
+                name="sourceType"
+                options={{
+                  [t("form.project.resourceRequirement.sourceType.placeholder")]: "",
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_OWN_FUNDS)]: ResourceSourceType.SOURCE_TYPE_OWN_FUNDS,
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_FUNDING)]: ResourceSourceType.SOURCE_TYPE_FUNDING,
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_PROCEEDS)]: ResourceSourceType.SOURCE_TYPE_PROCEEDS,
+                }}
+                value={values.sourceType}
+              />
+
+              <Field component={FormikAutocomplete}
                 label=""
                 maxLength={280}
                 name="source"
-                placeholder="form.project.resourceRequirement.source.placeholder"
+                options={functions.getResourceRequirementSources()}
+                placeholder="form.project.resourceRequirement.source.label"
                 value={values.source}
               />
             </Row>
@@ -123,7 +138,19 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
       </Col >
       {showFinances && <Col md={4} className="resource-source">
         <Row className={"resource-source-label d-lg-none d-block " + (isFirst ? "" : "d-md-none")}><h5>{t("project.resourceRequirement.source")}</h5></Row>
-        <Row className={"resource-source-content " + (isFirst ? "first-resource" : "")}>{resourceRequirement.source}</Row>
+        <Row className={"resource-source-content " + (isFirst ? "first-resource" : "")}>
+          {resourceRequirement.source}
+          {resourceRequirement.source && resourceRequirement.sourceType && " ("}
+          {resourceRequirement.sourceType && t("resourceRequirement.sourceType." + resourceRequirement.sourceType)}
+          {resourceRequirement.source && resourceRequirement.sourceType && ")"}
+
+          {!resourceRequirement.source && !resourceRequirement.sourceType && <div className="icon-navigation">
+            <a className="navigation-item"
+              onClick={toggleEdit}
+              title={t("form.edit")}
+            ><Icon name="pencil" size={18} /></a>
+          </div>}
+        </Row>
       </Col>}
       <Col md={showFinances ? 3 : 4} className="resource-cost">
         <Row className={"resource-cost-label text-md-right d-lg-none d-block " + (isFirst ? "" : "d-md-none")}><h5>{t("project.resourceRequirement.cost")}</h5></Row>

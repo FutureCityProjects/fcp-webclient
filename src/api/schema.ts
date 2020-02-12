@@ -65,9 +65,9 @@ export interface IFund extends INumericIdentifierModel {
 }
 
 export enum FundApplicationState {
-  CONCRETIZATION = 'concretization',
-  DETAILING = 'detailing',
-  SUBMITTED = 'submitted',
+  CONCRETIZATION = "concretization",
+  DETAILING = "detailing",
+  SUBMITTED = "submitted",
 }
 
 export interface IFundApplication extends INumericIdentifierModel {
@@ -225,13 +225,28 @@ export interface IWorkPackage {
   project?: IProject | string
 }
 
+export enum ResourceCostType {
+  COST_TYPE_ADMINISTRATIVE = "administrative",
+  COST_TYPE_INVESTMENT = "investment",
+  COST_TYPE_MATERIAL = "material",
+  COST_TYPE_PERSONNEL = "personnel",
+  COST_TYPE_RENT = "rent",
+  COST_TYPE_TRAVELING = "traveling",
+}
+
+export enum ResourceSourceType {
+  SOURCE_TYPE_FUNDING = "funding",
+  SOURCE_TYPE_OWN_FUNDS = "own_funds",
+  SOURCE_TYPE_PROCEEDS = "proceeds",
+}
+
 export interface IResourceRequirement {
   cost?: number
-  costType?: string
+  costType?: ResourceCostType
   description?: string
   id?: string
   source?: string
-  sourceType?: string
+  sourceType?: ResourceSourceType
   task?: string // ID of the parent IProjectTask
 }
 

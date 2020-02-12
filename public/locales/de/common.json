@@ -249,6 +249,16 @@
           "help": "Was wird benötigt? Was muss bezahlt werden?",
           "label": "Leistung/Ressource",
           "placeholder": "5 - 280 Zeichen"
+        },
+        "source": {
+          "help": "Wer übernimmt die Kosten?",
+          "label": "Finanzquelle",
+          "placeholder": "280 Zeichen"
+        },
+        "sourceType": {
+          "help": "Wie werden die Kosten gedeckt?",
+          "label": "Herkunft",
+          "placeholder": "Bitte Herkunft wählen"
         }
       },
       "resourceRequirements": {
@@ -366,6 +376,9 @@
       "underline": "Unterstrichen",
       "textLength": "Zeichen",
       "textLengthWithMaxLength": "/ {{maxLength, number}} Zeichen"
+    },
+    "autocomplete": {
+      "useNew": "Neuer Eintrag:"
     },
     "addElement": "Hinzufügen",
     "cancel": "Abbrechen",
@@ -606,6 +619,8 @@
         "workHeader": "Aufgaben und Arbeitspakete",
         "resourceRequirementsHeader": "Ressourcenbedarf",
         "index": {
+          "financesHeader": "Finanzen",
+          "financeParts": "davon",
           "heading": "Projektplan: {{projectName}}",
           "intro": "Hier siehst du den Stand des Projektplans zu deinem Projekt.",
           "title": "Projektplan"
@@ -638,6 +653,13 @@
           "resourceHeading": "Leistungen und Kosten",
           "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
           "title": "Ressourcenbedarf"
+        },
+        "finances": {
+          "fincancesHeading": "Finanzierung",
+          "financesIntro": "Wer stellt welche Mittel bereit?",
+          "heading": "Projektfinanzierung",
+          "intro": "Hier kannst du angeben aus welchen Quellen die einzelnen Bedarfe gedeckt werden sollen.",
+          "title": "Projektfinanzierung"
         }
       },
       "application": {
@@ -739,6 +761,9 @@
     "profileSelfAssessment": "Selbsteinschätzung zum Projektfortschritt",
     "resourceRequirement": {
       "cost": "Kosten",
+      "fundingSum": "∑ Fördermittel",
+      "ownCostsSum": "∑ Eigenmittel",
+      "proceedsSum": "∑ Erlöse",
       "taskSum": "∑ Kosten der Aufgabe",
       "packageSum": "∑ Kosten des Arbeitspaketes",
       "totalSum": "∑ Kosten aller Bedarfe",
@@ -782,6 +807,7 @@
     "utilization": "Verwertung",
     "vision": "Vision",
     "workPackage": {
+      "abbreviation": "AP",
       "description": "Kurzbeschreibung",
       "label": "Arbeitspaket",
       "mainResponsibility": "Hauptverantwortliche*r",
@@ -789,6 +815,13 @@
       "noPackage": "ohne Arbeitspaket"
     },
     "workPackages": "Arbeitspakete"
+  },
+  "resourceRequirement": {
+    "sourceType": {
+      "funding": "Fördermittel",
+      "own_funds": "Eigenmittel",
+      "proceeds": "Erlöse"
+    }
   },
   "user": {
     "unknown": "[unbekannt]"

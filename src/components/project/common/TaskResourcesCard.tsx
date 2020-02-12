@@ -65,6 +65,7 @@ const TaskResourcesCard: React.FC<IProps> = (props: IProps) => {
             modalOpen={resourceModalOpen}
             onSubmit={addResource}
             toggle={toggleResourceModal}
+            sources={showFinances && functions.getResourceRequirementSources()}
             showFinances={showFinances}
           />
         </Col>

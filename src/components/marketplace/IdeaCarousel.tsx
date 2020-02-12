@@ -6,12 +6,16 @@ import EmptyIdeaCard from "./EmptyIdeaCard"
 import IdeaCard from "./IdeaCard"
 
 const responsive = {
+  xl: {
+    breakpoint: { max: 3000, min: 1800 },
+    items: 4,
+  },
   large: {
-    breakpoint: { max: 2400, min: 1800 },
+    breakpoint: { max: 1800, min: 1500 },
     items: 3,
   },
   medium: {
-    breakpoint: { max: 1800, min: 1200 },
+    breakpoint: { max: 1500, min: 1200 },
     items: 2,
   },
   small: {

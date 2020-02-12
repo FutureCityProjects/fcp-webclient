@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { toast, ToastContainer as WrappedTC } from "react-toastify"
 import { AnyAction, Dispatch } from "redux"
@@ -26,15 +26,13 @@ type Props = ConnectedProps<typeof connector>
 const ToastContainer = ({ notifications, removeNotification }: Props) => {
   const { t } = useTranslation()
 
-  useEffect(() => {
-    // toasts are not renderes SSR -> execute on client only to keep notifications in state
-    if (process.browser) {
-      notifications.forEach((notification: INotification) => {
-        toast(t(notification.content), notification.options)
-        removeNotification(notification.id)
-      })
-    }
-  }, [])
+  // toasts are not renderes SSR -> execute on client only to keep notifications in state
+  if (process.browser) {
+    notifications.forEach((notification: INotification) => {
+      toast(t(notification.content), notification.options)
+      removeNotification(notification.id)
+    })
+  }
 
   return (
     <WrappedTC autoClose={8000} />
