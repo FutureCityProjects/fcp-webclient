@@ -1,0 +1,48 @@
+@import "../node_modules/react-rangeslider/lib/index";
+
+.slider {
+  .rangeslider, .rangeslider .rangeslider__fill {
+    box-shadow: none;
+  }
+  .rangeslider {
+    background: $custom-light;
+    .rangeslider__fill {
+      background: $custom-primary;
+    }
+    .rangeslider__handle {
+      width: 20px;
+      height: 20px;
+      box-shadow: none;
+      border: 2px solid black;
+      outline: none;
+      &:after {
+        display: none;
+      }
+    }
+    .rangeslider__labels {
+      .rangeslider__label-item {
+        font-size: $font-size-xs;
+        color: $custom-dark;
+        &:first-child {
+          transform: translateX(-85%);
+        }
+        &:last-child {
+          transform: translateX(-8px);
+        }
+      }
+    }
+  }
+  .rangeslider-horizontal {
+    height: 10px;
+    margin-bottom: 3rem;
+  }
+}
+
+.slider-static {
+  pointer-events: none;
+  .rangeslider {
+    .rangeslider__handle {
+      border-color: #c1c1c1;
+    }
+  }
+}

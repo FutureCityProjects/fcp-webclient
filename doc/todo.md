@@ -31,6 +31,9 @@
     do we send it to the server otherwise? Samesite & httponly cookie? No session sync via localstorage but only logout sync? @see https://blog.hasura.io/best-practices-of-using-jwt-with-graphql/#jwt_security
   * Muss Zustimmung zu den AGB und zur Datenspeicherung unabhängig erfolgen?
     * Muss die Zustimmung gesondert gespeichert werden, bspw. mit Zeitstempel / bool-Feld / IP?
+  * create bug report: using sass and importing css from node-modules which loads font
+    (react-bootstrap-multicarousel) fails: importing with .css ending loads styles in wrong
+    order, without .css causes error loading font (revicons.eot)
   * when a logged out user creates a new project and without registering/logging in tries to 
     create another project the first one is overwritten -> show warning instead, only one Project in state.newProject
   * locale not hardcoded in FormikDate, dateFormat

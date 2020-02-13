@@ -2,7 +2,6 @@ import ServerCookie from "next-cookies"
 import withReduxSaga from "next-redux-saga"
 import withRedux, { AppProps as ReduxProps, NextJSAppContext } from "next-redux-wrapper"
 import App, { AppProps } from "next/app"
-import Router from "next/router"
 import NextNprogress from "nextjs-progressbar"
 import React from "react"
 import IdleTimer from "react-idle-timer"
@@ -17,22 +16,13 @@ import { AuthToken } from "services/authToken"
 import { appWithTranslation } from "services/i18n"
 import { AUTH_COOKIE_NAME, AUTH_IDLE_TIMEOUT, AUTH_LOCALSTORAGE_NAME } from "../config"
 
+// single point to import (S)CSS for native Next.js support, all other styles (e.g. from
+// node-module) must be loaded there
+import "../styles/index.scss"
+
 type Props = AppProps & ReduxProps & {
   authStorageChanged: any,
   isIdle: any,
-}
-
-// @todo fixes additional page specific CSS not loading (dev only)
-// @see https://github.com/zeit/next-plugins/issues/282
-if (process.env.NODE_ENV !== "production") {
-  Router.events.on("routeChangeComplete", () => {
-    const path = "/_next/static/css/styles.chunk.css"
-    const chunksNodes: NodeListOf<HTMLLinkElement> = document.querySelectorAll(`link[href*="${path}"]:not([rel=preload])`)
-    if (chunksNodes.length) {
-      const timestamp = new Date().valueOf()
-      chunksNodes[0].href = `${path}?ts=${timestamp}`
-    }
-  })
 }
 
 // extend the default App with properties including the Redux store,
@@ -114,6 +104,7 @@ class FCPApp extends App<Props> {
       "MSPointerDown", "touchmove", "visibilitychange"]
 
     // NextNprogress gives a visual indication of route changes while pages are loading
+    // ToastContainer wraps react-toastify to show small alert popups
 
     return (
       <Provider store={store}>

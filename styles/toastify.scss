@@ -1,4 +1,4 @@
-@import "../node_modules/react-toastify/dist/ReactToastify.css";
+@import "../node_modules/react-toastify/dist/ReactToastify";
 
 /**
  * Leave some space for the header navigation
@@ -25,13 +25,13 @@
 }
 
 .Toastify__toast--warning {
-  border-left-color: $red;
-  color: darken($red, 15%);
+  border-left-color: $yellow;
+  color: darken($yellow, 15%);
 }
 
 .Toastify__toast--error {
-  border-left-color: $yellow;
-  color: darken($yellow, 15%);
+  border-left-color: $red;
+  color: darken($red, 15%);
 }
 
 .Toastify__toast--info {

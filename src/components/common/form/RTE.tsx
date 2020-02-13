@@ -1,6 +1,5 @@
 import React, { useEffect } from "react"
 import ReactQuill from "react-quill"
-import "react-quill/dist/quill.snow.css"
 import { UncontrolledTooltip } from "reactstrap"
 
 import { useTranslation } from "services/i18n"

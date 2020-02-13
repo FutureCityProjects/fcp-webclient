@@ -10,10 +10,6 @@ import { logoutAction } from "redux/actions/auth"
 import { AppState } from "redux/reducer"
 import { selectRoles, selectUsername } from "redux/reducer/auth"
 
-// @todo use native css+scss handling from next.js without next-sass/next-css when
-// it's released stable
-import "../../styles/index.scss"
-
 interface IProps {
   children: any
   doLogout: () => void
