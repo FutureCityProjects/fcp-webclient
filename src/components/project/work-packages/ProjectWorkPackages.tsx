@@ -95,23 +95,27 @@ const ProjectWorkPackages: React.FC<IPlanProps> = ({ functions, project, updateP
             </Col>)}
           </Row>
 
-          <Button
-            aria-label={t("form.project.tasks.addTask")}
-            className="btn-add"
-            color="link"
-            id="task-creation-form"
-            title={t("form.project.tasks.addTask")}
-          >
-            <Icon name="plus" size={24} />
-          </Button>
+          <Row xs={1} xl={2}>
+            <Col className="text-center">
+              <Button
+                aria-label={t("form.project.tasks.addTask")}
+                className="btn-add"
+                color="link"
+                id="task-creation-form"
+                title={t("form.project.tasks.addTask")}
+              >
+                <Icon name="plus" size={24} />
+              </Button>
 
-          <TaskPopover
-            header="form.project.tasks.addTask"
-            onSubmit={functions.addTask}
-            popoverOpen={taskPopoverOpen}
-            target="task-creation-form"
-            toggle={toggleTaskPopover}
-          />
+              <TaskPopover
+                header="form.project.tasks.addTask"
+                onSubmit={functions.addTask}
+                popoverOpen={taskPopoverOpen}
+                target="task-creation-form"
+                toggle={toggleTaskPopover}
+              />
+            </Col>
+          </Row>
         </div>
       </div>
       <div className="button-area">

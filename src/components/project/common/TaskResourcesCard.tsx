@@ -7,7 +7,6 @@ import { useTranslation } from "services/i18n"
 import { IPlanFunctions } from "./PlanContainer"
 import ResourceCard from "./ResourceCard"
 import ResourceModal from "./ResourceModal"
-import TaskSumCard from "./TaskSumCard"
 
 interface IProps {
   currentTask: IProjectTask
@@ -69,11 +68,6 @@ const TaskResourcesCard: React.FC<IProps> = (props: IProps) => {
             showFinances={showFinances}
           />
         </Col>
-        {resourceRequirements.length > 1 && <TaskSumCard
-          currentTask={currentTask}
-          functions={functions}
-          showFinances={showFinances}
-        />}
       </Row>
     </Col>
   </Row>

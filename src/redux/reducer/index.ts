@@ -5,6 +5,7 @@ import authReducer from "./auth"
 import dataReducer from "./data"
 import fundManagementReducer from "./fundManagement"
 import marketplaceReducer from "./marketplace"
+import memberApplicationReducer from "./memberApplication"
 import myProjectsReducer from "./myProjects"
 import newIdeaReducer from "./newIdea"
 import newProjectReducer from "./newProject"
@@ -19,6 +20,7 @@ const appReducer = combineReducers({
   data: dataReducer,
   fundManagement: fundManagementReducer,
   marketplace: marketplaceReducer,
+  memberApplication: memberApplicationReducer,
   myProjects: myProjectsReducer,
   newIdea: newIdeaReducer,
   newProject: newProjectReducer,

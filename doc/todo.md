@@ -36,6 +36,8 @@
     order, without .css causes error loading font (revicons.eot)
   * when a logged out user creates a new project and without registering/logging in tries to 
     create another project the first one is overwritten -> show warning instead, only one Project in state.newProject
+  * when a logged out user applies for a project and without registering/logging in tries to 
+    apply to another project the first one is overwritten -> show warning instead, only one Application in state.MemberApplication
   * locale not hardcoded in FormikDate, dateFormat
   * saga_ran action: replace by ``typeof window !== 'undefined'``? maybe replace next-redux-sage etc too?  @see https://github.com/bbortt/qdrakeboo/pull/11/commits/0df1a76c3bd6aa08807fe71855190abe24d4aa2b
   * we use a handcrafted token-refresh which uses the currently valid JWT to retrieve a new JWT, is there

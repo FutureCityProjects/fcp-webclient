@@ -755,10 +755,21 @@
     "holderStreet": "Straße",
     "holderZipCode": "Postleitzahl",
     "impact": "Impact",
+    "memberships": {
+      "count": "Teammitglieder"
+    },
     "outcome": "Outcome",
     "planSelfAssessment": "Selbsteinschätzung zum Fortschritt des Projektplans",
     "profile": "Projektprofil",
     "profileSelfAssessment": "Selbsteinschätzung zum Projektfortschritt",
+    "progress": {
+      "creating_profile": "Projektprofil vorhanden",
+      "creating_plan": "Projektplan wird erstellt",
+      "creating_application": "Förderantrag wird erstellt",
+      "submitting_application": "Förderantrag wird vorbereitet",
+      "application_submitted": "Förderantrag eingereicht",
+      "label": "Bearbeitungsstand"
+    },
     "resourceRequirement": {
       "cost": "Kosten",
       "fundingSum": "∑ Fördermittel",
@@ -804,6 +815,7 @@
     },
     "tasks": "Aufgaben",
     "unnamed": "[unbenanntes Projekt]",
+    "updatedAt": "Zuletzt bearbeitet",
     "utilization": "Verwertung",
     "vision": "Vision",
     "workPackage": {

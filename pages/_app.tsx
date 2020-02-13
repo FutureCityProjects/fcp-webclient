@@ -2,6 +2,7 @@ import ServerCookie from "next-cookies"
 import withReduxSaga from "next-redux-saga"
 import withRedux, { AppProps as ReduxProps, NextJSAppContext } from "next-redux-wrapper"
 import App, { AppProps } from "next/app"
+import { Router } from "next/router"
 import NextNprogress from "nextjs-progressbar"
 import React from "react"
 import IdleTimer from "react-idle-timer"
@@ -86,6 +87,11 @@ class FCPApp extends App<Props> {
       window.addEventListener("storage", this.syncLocalAuth)
       // @todo client-initialize action that triggers refreshTokenAction()
       // and adds the eventlistener for the localstorage itself?
+
+      // @todo in contrast to the behavior of setting window.location and <Link> using
+      // Router.push() does not reset the scroll position
+      // @see https://github.com/zeit/next.js/issues/3249
+      Router.events.on('routeChangeComplete', () => { window.scrollTo(0, 0) })
     }
   }
 

@@ -1,6 +1,5 @@
 import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
-import Link from "next/link"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
@@ -9,11 +8,11 @@ import { ProjectProgress, ProjectState } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import StatusCode from "components/common/StatusCode"
 import ErrorPage from "components/ErrorPage"
+import PublicProfile from "components/project/PublicProfile"
 import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectById, selectProjectBySlug } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
-import { Routes, routeWithParams } from "services/routes"
 
 const mapStateToProps = (state: AppState, { id, slug }) => ({
   project: id
@@ -28,7 +27,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   slug: string,
 }
 
-const ProjectPage: I18nPage<PageProps> = ({ project, request }) => {
+const ProjectPage: I18nPage<PageProps> = ({ project, request, t }) => {
   if (!request.isLoading) {
     if (!project
       || project.state === ProjectState.DEACTIVATED
@@ -41,29 +40,21 @@ const ProjectPage: I18nPage<PageProps> = ({ project, request }) => {
   }
 
   return <BaseLayout pageTitle={project && project.name ? project.name : "Projektansicht"}>
-    <Row>
-      <Col>
-        <h1>Öffentliches Projektprofil</h1>
-        <p>
-          @todo
-        </p>
-      </Col>
-    </Row>
-    {request.isLoading ? <Spinner /> :
+    {request.isLoading ? <Spinner /> : <>
       <Row>
-        <Col sm={8}>
-          {/* @todo projectView */}
-          <p>
-            {project.shortDescription}
-          </p>
-          <Link href={Routes.PROJECT_APPLICATION}
-            as={routeWithParams(Routes.PROJECT_APPLICATION, { slug: project.slug || project.id })}
-          >
-            <a className="btn btn-primary">Als Mitglied bewerben</a>
-          </Link>
+        <Col>
+          <h1>{project.name ? project.name : t("project.unnamed")}</h1>
+          <div className="d-block"><span>{t("page.projects.index.project.subHeader",
+            {
+              date: project.createdAt,
+              user: project.createdBy ? project.createdBy.username : t("user.unknown")
+            })}</span></div>
         </Col>
       </Row>
-    }
+      <Row>
+        <PublicProfile project={project} />
+      </Row>
+    </>}
   </BaseLayout >
 }
 

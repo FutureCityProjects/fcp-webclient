@@ -21,6 +21,7 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "date-fns": "^2.9.0",
+    "express": "^4.17.1",
     "formik": "^2.1.4",
     "html-to-react": "^1.4.2",
     "intl": "^1.2.5",

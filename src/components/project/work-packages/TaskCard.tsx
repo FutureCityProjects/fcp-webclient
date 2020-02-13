@@ -21,9 +21,9 @@ const TaskCard: React.FC<IProps> = (props: IProps) => {
     <a
       key={workPackage.id}
       onClick={() => onAssign({ ...task, workPackage: workPackage.id })}
-      title={workPackage.name}
+      title={t("project.workPackage.abbreviation") + workPackage.order + ": " + workPackage.name}
     >
-      {workPackage.name.substr(0, 23)}{workPackage.name.length > 23 && "…"}
+      {t("project.workPackage.abbreviation") + workPackage.order + ": " + workPackage.name.substr(0, 23)}{workPackage.name.length > 23 && "…"}
     </a>
   )
 

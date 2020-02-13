@@ -1,10 +1,10 @@
-import Icon from "components/common/Icon"
-import Link from "next/link"
+//import Icon from "components/common/Icon"
+//import Link from "next/link"
 import React from "react"
 
 const ProgressActionIcons: React.FC = () =>
   <div role="actions" className="icon-navigation">
-    <Link href="/">
+    {/*<Link href="/">
       <a aria-label="view participants" className="navigation-item">
         <Icon name={"user"} size={24} />
       </a>
@@ -18,7 +18,7 @@ const ProgressActionIcons: React.FC = () =>
       <a aria-label="download"  className="navigation-item">
         <Icon name={"download-cloud"} size={24} />
       </a>
-    </Link>
+</Link>*/}
   </div>
 
 export default ProgressActionIcons

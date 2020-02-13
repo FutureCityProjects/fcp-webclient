@@ -7,10 +7,12 @@ import { fundApplicationsWatcherSaga } from "./fundApplications"
 import { fundConcretizationsWatcherSaga } from "./fundConcretizations"
 import { fundsWatcherSaga } from "./funds"
 import { marketplaceWatcherSaga } from "./marketplace"
+import { memberApplicationWatcherSaga } from "./memberApplication"
 import { myProjectsWatcherSaga } from "./myProjects"
 import { newIdeaWatcherSaga } from "./newIdea"
 import { newProjectWatcherSaga } from "./newProject"
 import { processesWatcherSaga } from "./processes"
+import { projectMembershipsWatcherSaga } from "./projectMemberships"
 import { projectsWatcherSaga } from "./projects"
 import { registrationWatcherSaga } from "./registration"
 import { usersWatcherSaga } from "./users"
@@ -25,10 +27,12 @@ function* rootSaga() {
     fundConcretizationsWatcherSaga(),
     fundsWatcherSaga(),
     marketplaceWatcherSaga(),
+    memberApplicationWatcherSaga(),
     myProjectsWatcherSaga(),
     newIdeaWatcherSaga(),
     newProjectWatcherSaga(),
     processesWatcherSaga(),
+    projectMembershipsWatcherSaga(),
     projectsWatcherSaga(),
     registrationWatcherSaga(),
     usersWatcherSaga(),

@@ -2,7 +2,7 @@ import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
-import { Spinner, Row, Col } from "reactstrap"
+import { Col, Row, Spinner } from "reactstrap"
 
 import BaseLayout from "components/BaseLayout"
 import PageError from "components/common/PageError"

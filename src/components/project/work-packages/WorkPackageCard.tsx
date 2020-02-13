@@ -28,7 +28,9 @@ const WorkPackageCard: React.FC<IProps> = (props: IProps) => {
 
   return <Card className="work-package-card">
     <CardHeader onClick={toggleCollapse}>
-      <h4 id={"wp-" + currentPackage.id}>{currentPackage.name.substr(0, 23)}{currentPackage.name.length > 23 && "…"}</h4>
+      <h4 id={"wp-" + currentPackage.id}>
+        {t("project.workPackage.abbreviation") + currentPackage.order + ": " + currentPackage.name.substr(0, 23)}{currentPackage.name.length > 23 && "…"}
+      </h4>
       {currentPackage.name.length > 23 && <UncontrolledTooltip target={"wp-" + currentPackage.id}>{currentPackage.name}</UncontrolledTooltip>}
       <Icon name="caret" size={28} />
     </CardHeader>

@@ -1,6 +1,6 @@
 import { combineReducers } from "redux"
 
-import { IFund, IFundApplication, IFundConcretization, IProcess, IProject, IUser } from "api/schema"
+import { IFund, IFundApplication, IFundConcretization, IProcess, IProject, IProjectMembership, IUser } from "api/schema"
 import { scopedObjectReducer } from "redux/helper/reducers"
 import { AppState } from "redux/reducer"
 
@@ -10,6 +10,7 @@ export enum EntityType {
   FUND_CONCRETIZATION = "fundConcretization",
   PROCESS = "process",
   PROJECT = "project",
+  PROJECT_MEMBERSHIP = "projectMembership",
   USER = "user",
 }
 
@@ -26,6 +27,7 @@ export default combineReducers({
 
   process: scopedObjectReducer<IProcess>(EntityType.PROCESS),
   project: scopedObjectReducer<IProject>(EntityType.PROJECT),
+  projectMembership: scopedObjectReducer<IProjectMembership>(EntityType.PROJECT_MEMBERSHIP),
   user: scopedObjectReducer<IUser>(EntityType.USER),
 })
 

@@ -26,6 +26,8 @@ export default combineReducers({
   projectsLoading: scopedRequestReducer("project_collection_loading"),
   projectOperation: scopedRequestReducer("project_operation"),
 
+  projectMembershipOperation: scopedRequestReducer("projectMembership_operation"),
+
   userLoading: scopedRequestReducer("user_loading"),
   usersLoading: scopedRequestReducer("user_collection_loading"),
   userOperation: scopedRequestReducer("user_operation"),
