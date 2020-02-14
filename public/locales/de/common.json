@@ -559,6 +559,23 @@
         }
       }
     },
+    "offlineTools": {
+      "planning": {
+        "heading": "Projekt-Planung",
+        "intro": "Download: <a href=\"/assets/files/Kneipentool_Planung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Planung\">Arbeitsblatt zur Planung</a>",
+        "title": "Projekt-Planung"
+      },
+      "profile": {
+        "heading": "Projekt-Profil",
+        "intro": "Download: <a href=\"/assets/files/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">@todo</a>",
+        "title": "Projekt-Profil"
+      },
+      "team": {
+        "heading": "Projekt-Planung",
+        "intro": "Download: <a href=\"/assets/files/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a>",
+        "title": "Projekt-Planung"
+      }
+    },
     "process": {
       "index": {
         "heading": "Prozessdetails",
@@ -775,6 +792,7 @@
       "fundingSum": "∑ Fördermittel",
       "ownCostsSum": "∑ Eigenmittel",
       "proceedsSum": "∑ Erlöse",
+      "unassignedSum": "∑ nicht zugeordnet",
       "taskSum": "∑ Kosten der Aufgabe",
       "packageSum": "∑ Kosten des Arbeitspaketes",
       "totalSum": "∑ Kosten aller Bedarfe",

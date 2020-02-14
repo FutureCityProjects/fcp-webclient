@@ -2,8 +2,7 @@
   * OpenSource zu benutzen ist schwierig in einem komplexen Projekt:
     * man stößt schnell an die Grenzen der vorgesehenen Use Cases
     * man stößt oft auf kleine bis größere Bugs
-    * die Dokumentation für alles andere als triviale Fälle ist meist nicht vorhanden oder mindestens 
-      suboptimal
+    * die Dokumentation für alles andere als triviale Fälle ist meist nicht vorhanden oder mindestens suboptimal
 
 ## Next.js
   * Environment variables can be accessed server-side via ``process.env.ENV_VAR_NAME`` as known in Node, 

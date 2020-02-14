@@ -41,18 +41,18 @@ const WorkPackageResourcesCard: React.FC<IProps> = (props: IProps) => {
     </CardHeader>
     <CardBody>
       {tasks.length > 0 && <Row className="package-table-header d-none d-lg-flex">
-        <Col className="th" lg={showFinances ? 3 : 5}>
+        <Col className="th task-label" lg={showFinances ? 3 : 5}>
           <h5>{t("project.task.label")}</h5>
         </Col>
         <Col lg={showFinances ? 9 : 7}>
           <Row>
-            <Col className="th" md={showFinances ? 5 : 8}  >
+            <Col className="th resourceRequirement-label" md={showFinances ? 4 : 8}  >
               <h5>{t("project.resourceRequirement.label")}</h5>
             </Col>
-            {showFinances && <Col className="th" md={4}>
+            {showFinances && <Col className="th source-label" md={4}>
               <h5>{t("project.resourceRequirement.source")}</h5>
             </Col>}
-            <Col className="th text-right" md={showFinances ? 3 : 4} >
+            <Col className="th cost-label text-right" md={4} >
               <h5>{t("project.resourceRequirement.cost")}</h5>
             </Col>
           </Row>
@@ -69,7 +69,6 @@ const WorkPackageResourcesCard: React.FC<IProps> = (props: IProps) => {
 
       {currentPackage && <Row className={tasks.length > 0 ? "work-package-summary" : ""}>
         <Col lg={showFinances ? 3 : 5} className={"work-package-add-task" + (tasks.length ? " has-tasks" : "")}>
-          {t("form.project.tasks.addTask")}
           <Button
             aria-label={t("form.project.tasks.addTask")}
             className="btn btn-add btn-inline"
@@ -77,7 +76,7 @@ const WorkPackageResourcesCard: React.FC<IProps> = (props: IProps) => {
             id={"task-creation-form" + currentPackage.id}
             title={t("form.project.tasks.addTask")}
           >
-            <Icon name="plus" size={24} />
+            <Icon name="plus" size={24} /> {t("project.task.label")}
           </Button>
 
           <TaskPopover

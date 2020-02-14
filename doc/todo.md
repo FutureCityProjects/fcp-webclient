@@ -1,4 +1,8 @@
 # Todo
+  * einreichen: 2 boxen, eine mit Fördertopf + EInreichtungszeitraum + Warnings, unten eine mit Button
+  * fix: profilansicht ausgeloggt kennt keine Mitgliedszahl
+  * fix: https://fcp.vrok.de/projects/30 - vmtl aufgrund fehlendem updatedAt
+  * upd: membership für registrierungen in der api
   * set focus on taskpopover input + package first input + resource first input when 
     popover/modal opens
   * Einreichen nur mit owner PW
@@ -49,6 +53,7 @@
 
   * Prio low fixes
     * Project-Tableau Hover Bug: http://prntscr.com/qs7ukj
+    * Kosten haben zu wenig Platz: http://prntscr.com/r2fuk3, padding entfernen?
     * project tableau overflows project card on high zoom
     * slider labels schieben sich schon bei relativ hohen bildschirmbreiten inneinander: http://prntscr.com/quxsi4
     * a.btn mit Icon hat noch einen active rahmen: http://prntscr.com/qv56ch

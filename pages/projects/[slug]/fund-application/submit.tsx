@@ -80,8 +80,8 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
   }
 
   const now = new Date()
-  const submissionBegin = parseISO(fund.submissionBegin as string)
-  const submissionEnd = parseISO(fund.submissionEnd as string)
+  const submissionBegin = fund && parseISO(fund.submissionBegin as string)
+  const submissionEnd = fund && parseISO(fund.submissionEnd as string)
 
   return <BaseLayout pageTitle={t("page.projects.application.submit.title")}>
     <Row>
@@ -109,10 +109,10 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
           </CardHeader>
           <CardBody>
             <h5>{t("fund.submissionBegin")}</h5>
-            <p className={now < submissionBegin && "text-danger"}>{t("default.longDateTime", { value: fund.submissionBegin })}</p>
+            <p className={now < submissionBegin ? "text-danger" : undefined}>{t("default.longDateTime", { value: fund.submissionBegin })}</p>
 
             <h5>{t("fund.submissionEnd")}</h5>
-            <p className={now > submissionEnd && "text-danger"}>{t("default.longDateTime", { value: fund.submissionEnd })}</p>
+            <p className={now > submissionEnd ? "text-danger" : undefined}>{t("default.longDateTime", { value: fund.submissionEnd })}</p>
 
             {isOwner
               ? submissionBegin <= now && now <= submissionEnd

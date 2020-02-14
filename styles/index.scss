@@ -1129,17 +1129,26 @@ a.sub-status-card {
 }
 
 .btn-add {
-  background: white;
-  color: $custom-primary;
-  border-radius: 9999rem;
-  padding: 0.125rem;
+  background: $custom-light;
   border: none;
+  border-radius: 0.3rem;
   box-shadow: 0 2px 10px 1px rgba(0, 0, 0, 0.25);
+  color: $custom-dark;
+  padding: 0.125rem  0.4rem 0.125rem 0.125rem;
   transition: all ease-in-out 0.175s;
+
+  svg {
+    color: $custom-primary;
+  }
   &:hover, &:active, &:focus {
     background: $custom-primary;
     color: white;
     border: none;
+    text-decoration: none;
+
+    svg {
+      color: white;
+    }
   }
   &:hover {
     transform: scale(1.25);
