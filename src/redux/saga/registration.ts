@@ -2,7 +2,7 @@ import { withCallback } from "redux-saga-callback"
 import { all, call, put, select, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
-import { IProcess, IRegistration, IUser } from "api/schema"
+import { IProcess, IRegistration, IUser, MembershipRole } from "api/schema"
 import {
   IRegisterUserAction,
   RegistrationActionTypes,
@@ -17,6 +17,7 @@ import { Routes } from "services/routes"
 import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
 import { getCurrentProcess } from "./currentProcess"
+import { selectNewMemberApplication } from "redux/reducer/memberApplication"
 
 export function* registrationWatcherSaga() {
   yield all([
@@ -38,6 +39,7 @@ function* registerUserSaga(action: IRegisterUserAction) {
     }
 
     registration.createdProjects = []
+    registration.projectMemberships = []
 
     // @todo add additional action preUserRegister that we can intercept in extra sagas
     // to add the idea there
@@ -46,7 +48,6 @@ function* registerUserSaga(action: IRegisterUserAction) {
       const process: IProcess = yield call(getCurrentProcess)
       if (!process) {
         const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
-        yield put(setLoadingAction("new_idea", false, err))
         yield put(setLoadingAction("user_operation", false, err))
         return null
       }
@@ -63,7 +64,6 @@ function* registerUserSaga(action: IRegisterUserAction) {
       const process: IProcess = yield call(getCurrentProcess)
       if (!process) {
         const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
-        yield put(setLoadingAction("new_idea", false, err))
         yield put(setLoadingAction("user_operation", false, err))
         return null
       }
@@ -71,6 +71,14 @@ function* registerUserSaga(action: IRegisterUserAction) {
       // inject the current process, it's required
       newProject.process = process["@id"]
       registration.createdProjects.push(newProject)
+    }
+
+    // @todo add additional action preUserRegister that we can intercept in extra sagas
+    // to add the membership there
+    const newMembership = yield select(selectNewMemberApplication)
+    if (newMembership) {
+      newMembership.role = MembershipRole.APPLICANT
+      registration.projectMemberships.push(newMembership)
     }
 
     const newUser: IUser = yield call(apiClient.registerUser, registration)

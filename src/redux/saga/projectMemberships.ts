@@ -16,15 +16,15 @@ import { SubmissionError } from "services/submissionError"
 
 export function* projectMembershipsWatcherSaga() {
   yield all([
-    takeLatest("CREATE_PROJECT_MEMBERSHIP", withCallback(createProjectMembershipSaga)),
-    takeLatest("UPDATE_PROJECT_MEMBERSHIP", withCallback(updateProjectMembershipSaga)),
-    takeLatest("DELETE_PROJECT_MEMBERSHIP", withCallback(deleteProjectMembershipSaga)),
+    takeLatest("CREATE_PROJECTMEMBERSHIP", withCallback(createProjectMembershipSaga)),
+    takeLatest("UPDATE_PROJECTMEMBERSHIP", withCallback(updateProjectMembershipSaga)),
+    takeLatest("DELETE_PROJECTMEMBERSHIP", withCallback(deleteProjectMembershipSaga)),
   ])
 }
 
 function* createProjectMembershipSaga(action: IModelFormAction<IProjectMembership>) {
   const { success, setErrors, setSubmitting } = action.actions
-
+  console.log("start create")
   try {
     yield put(setLoadingAction("projectMembership_operation", true))
     const projectMembership: IProjectMembership = yield call(apiClient.createProjectMembership, action.model)
@@ -33,11 +33,12 @@ function* createProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))
     }
-
+    console.log("created")
     yield call(success, projectMembership)
 
     return projectMembership
   } catch (err) {
+    console.log("creat err", err)
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {

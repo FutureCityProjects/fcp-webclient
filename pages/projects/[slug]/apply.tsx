@@ -43,7 +43,8 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 }
 
 const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
-  const { application, createMemberApplication, isAuthenticated, project, request, setNewMemberApplication, t } = props
+  const { application, createMemberApplication, isAuthenticated, project, request,
+    setNewMemberApplication, t } = props
   const [applicationSaved, setApplicationSaved] = useState(false)
   const [applicationCreated, setApplicationCreated] = useState(false)
 
@@ -81,7 +82,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
       <Row>
         <Col sm={8}>
           <Card>
-            <CardHeader>{t("page.projects.create.inspiration")}</CardHeader>
+            <CardHeader>{project.name ? project.name : t("project.unnamed")}</CardHeader>
             <CardBody>
               <CardText>
                 {project.shortDescription}

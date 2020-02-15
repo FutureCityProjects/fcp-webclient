@@ -41,7 +41,7 @@ function* createProjectSaga(action: ICreateProjectAction) {
   // inject the current process, it's required
   action.project.process = process["@id"]
 
-  const project = yield putWait(createModelAction(EntityType.PROJECT, action.project, action.actions, "new_project"))
+  const project = yield putWait(createModelAction(EntityType.PROJECT, action.project, action.actions))
 
   // refresh the user to get the new membership
   yield put(loadCurrentUserAction())
@@ -80,10 +80,15 @@ function* createSavedProjectSaga(action: ISetAuthAction) {
     newProject.process = process["@id"]
 
     const savedProject: IProject = yield call(apiClient.createProject, newProject)
-    yield put(createModelSuccessAction(EntityType.PROJECT, savedProject, "new_project"))
     yield put(setLoadingAction("project_operation", false))
-    yield put(addNotificationAction("message.newProject.saved", "success"))
+    yield put(addNotificationAction("message.project.newProjectSaved", "success"))
     yield put(resetNewProjectAction())
+
+    // refresh the user to get the new membership
+    yield put(loadCurrentUserAction())
+
+    // refresh list of projects
+    yield put(loadMyProjectsAction())
 
     return savedProject
   } catch (err) {
@@ -116,7 +121,7 @@ function* postRegistrationSaga(action: ISetRegisteredUserAction) {
   for (const key in createdProjects) {
     if (createdProjects.hasOwnProperty(key)) {
       if (createdProjects[key].progress === ProjectProgress.CREATING_PROFILE) {
-        yield put(addNotificationAction("message.newProject.saved", "success"))
+        yield put(addNotificationAction("message.project.newProjectSaved", "success"))
         yield put(resetNewProjectAction())
         yield put(createModelSuccessAction(EntityType.PROJECT, createdProjects[key], "new_project"))
       }

@@ -1,5 +1,10 @@
 # Todo
+  * generalformerr: tatsächliche elemente übergeben damit hidden-fehler auch angezeigt werden,
+    bspw. project
+  * korrekte Fehlermeldung für "bereits mitglied" api + übersetz (wenn eingeloggt + nach Login)
+  * task screen but http://prntscr.com/r2gc21
   * einreichen: 2 boxen, eine mit Fördertopf + EInreichtungszeitraum + Warnings, unten eine mit Button
+  * Ansicht Mitglieder/Bewerbungen: Keine BEwerbungen von inaktiven Usern anzeigen.
   * fix: profilansicht ausgeloggt kennt keine Mitgliedszahl
   * fix: https://fcp.vrok.de/projects/30 - vmtl aufgrund fehlendem updatedAt
   * upd: membership für registrierungen in der api
@@ -59,3 +64,4 @@
     * a.btn mit Icon hat noch einen active rahmen: http://prntscr.com/qv56ch
     * FOrmularelemente synchronisieren, nicht nur für spezifische Forms:
       http://prntscr.com/r1cqmx
+    * Close Button etwas knapp: http://prntscr.com/r2njjp
