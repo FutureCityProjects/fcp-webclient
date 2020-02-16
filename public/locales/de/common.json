@@ -14,15 +14,15 @@
         "help": "nach Beginn der Bewertung, vor finaler Sitzung"
       },
       "budget": {
-        "help": "Maximale Ausschüttung dieses Fördertopfes",
+        "help": "Wie hoch ist das Gesamt-Volumen dieses Fördertopfes?",
         "placeholder": "Ganzzahl"
       },
       "criteria": {
-        "help": "Welche Kriterien stellt der Fördertopf für Projekte auf?",
+        "help": "Welche Kriterien stellt der Fördertopf für geförderte Projekte auf? Bitte listen Sie jedes Kriterium separat auf!",
         "placeholder": "5 - 280 Zeichen"
       },
       "description": {
-        "help": "Öffentliche Beschreibung des Fördertopfes",
+        "help": "Öffentlich sichtbare Beschreibung des Fördertopfes: Was wird gefördert und warum? Welche Menschen, Organisationen sind eingeladen, sich zu bewerben? Welche Art von Projekten sind besonders willkommen? Warum gibt es diesen Fördertopf? Welches Interesse wird mit ihm verfolgt?",
         "placeholder": "20 - 10.000 Zeichen"
       },
       "finalJuryDate": {
@@ -37,16 +37,16 @@
         "placeholder": "Ganzzahl"
       },
       "maximumGrant": {
-        "help": "@todo",
+        "help": "Bis zu welcher Höchstsumme können Förderungen beantragt werden?",
         "placeholder": "Ganzzahl"
       },
       "minimumGrant": {
-        "help": "@todo",
+        "help": "Welche Minimalsumme müssen Förderungen beantragen?",
         "placeholder": "Ganzzahl"
       },
       "name": {
-        "help": "Bezeichnung",
-        "placeholder": "@todo"
+        "help": "Geben Sie dem Fördertopf einen eindeutigen, verständlichen Namen",
+        "placeholder": "Zukunftsstadt-Fördertopf"
       },
       "ratingBegin": {
         "help": "nach Annahmestopp für Anträge"
@@ -59,8 +59,14 @@
         "placeholder": "5 - 200 Zeichen"
       },
       "sponsor": {
-        "help": "Wer stellt die Mittel zur Verfügung?",
+        "help": "Wer/Welche Organisation stellt die Mittel zur Verfügung?",
         "placeholder": "10 - 200 Zeichen"
+      },
+      "submissionBegin": {
+        "help": "Ab wann nimmt der Fördertopf offiziell Förderanträge entgegen?"
+      },
+      "submissionEnd": {
+        "help": "Deadline: Wann ist der letzte Tag, bis zu dem Förderanträge eingereicht werden können?"
       },
       "addCriterion": "Kriterium hinzufügen",
       "addConcretization": "Zuspitzung hinzufügen",
@@ -130,7 +136,7 @@
         "placeholder": "20 - 5.000 Zeichen"
       },
       "goals": {
-        "help": "@todo",
+        "help": "Welche Ziele verfolgen Sie mit diesem Prozess?",
         "placeholder": "5 - 1.000 Zeichen"
       },
       "imprint": {
@@ -143,7 +149,7 @@
       },
       "region": {
         "help": "Auf welches geographische Gebiet ist dieser Prozess ausgerichtet?",
-        "placeholder": "@todo"
+        "placeholder": "Musterstadt"
       },
       "addCriterion": "Kriterium hinzufügen",
       "addGoal": "Ziel hinzufügen",
@@ -168,9 +174,9 @@
       },
       "plan": {
         "header": "Angaben zum Projektplan",
-        "addImpact": "Impact hinzufügen",
-        "addOutcome": "Outcome hinzufügen",
-        "addResult": "Resultat hinzufügen",
+        "addImpact": "weitere Wirkungen hinzufügen",
+        "addOutcome": "weitere Auswirkung hinzufügen",
+        "addResult": "noch ein angestrebtes Resultat hinzufügen",
         "addTargetGroup": "Zielgruppe hinzufügen"
       },
       "challenges": {
@@ -198,8 +204,8 @@
         "placeholder": "@todo"
       },
       "goal": {
-        "help": "Die mit eigenen Mitteln realistisch erreichbar sind",
-        "placeholder": "@todo"
+        "help": "Ziele, die im Projekt mit eigenen Mitteln realistisch erreichbar sind",
+        "placeholder": "Leute lernen was, Teilnehmerinnen haben Spaß, ..."
       },
       "holderAddressInfo": {
         "help": "Zusatzangaben, bspw. &quot;im Hinterhaus&quot;",
@@ -211,52 +217,52 @@
       },
       "holderName": {
         "help": "Name der Trägerorganisiation, bspw. Name des Vereins.",
-        "placeholder": "@todo"
+        "placeholder": "Stadtmacher e.V."
       },
       "holderStreet": {
         "help": "Adresse des Projektträgers",
         "placeholder": "Straße + Hausnummer"
       },
       "holderZipCode": {
-        "help": "Adresse des Projektträgers",
+        "help": "Postleitzahl",
         "placeholder": "12345"
       },
       "impact": {
-        "help": "@todo",
-        "placeholder": "@todo"
+        "help": "Gute Projekte können sich auf die ganze Stadt auswirken oder sogar darüber hinaus. Welche über die Zielgruppe(n) hinaus gehenden Wirkungen soll das Projekt erreichen? Welche Wirkungen in deiner Stadt/deinem Dorf oder der Gesellschaft sollen spürbar sein?",
+        "placeholder": "Unsere Stadt wird grüner, dem Klimawandel wird vorgebeugt, die Menschen sind freundlicher zueinander..."
       },
       "name": {
         "help": "Gib deinem Projekt einen Namen",
-        "placeholder": "@todo"
+        "placeholder": "DasBesteProjektInUnsererStadt"
       },
       "outcome": {
-        "help": "@todo",
-        "placeholder": "@todo"
+        "help": "Was soll das Projekt bei diesen Leuten bewirken? Welche Auswirkungen soll das Projekt auf diese Zielgruppe(n) haben?",
+        "placeholder": "Beteiligte Jugendliche lernen Programmieren, Netzwerk an Akteuren entsteht, ..."
       },
       "planSelfAssessment": {
-        "help": "@todo"
+        "help": "Nach deiner Einschätzung: Wie weit ist der Projektplan fortgeschritten?"
       },
       "profileSelfAssessment": {
-        "help": "@todo"
+        "help": "Nach deiner Einschätzung: Wie weit ist das Projektprofil fortgeschritten?"
       },
       "resourceRequirement": {
         "cost": {
-          "help": "Kosten der Ressource in €",
+          "help": "Kosten des Ressourcenbedarfs in €",
           "label": "Kosten",
           "placeholder": "Ganzzahl"
         },
         "description": {
-          "help": "Was wird benötigt? Was muss bezahlt werden?",
+          "help": "Was wird zur Aufgabenerfüllung benötigt? Was kostet es, diesen Bedarf zu erfüllen?",
           "label": "Leistung/Ressource",
           "placeholder": "5 - 280 Zeichen"
         },
         "source": {
-          "help": "Wer übernimmt die Kosten?",
+          "help": "Aus welcher Quelle genau sollen die Kosten gedeckt werden?",
           "label": "Finanzquelle",
           "placeholder": "280 Zeichen"
         },
         "sourceType": {
-          "help": "Wie werden die Kosten gedeckt?",
+          "help": "Finanziert aus Fördermitteln, Eigenmitteln oder Erlösen?",
           "label": "Herkunft",
           "placeholder": "Bitte Herkunft wählen"
         }
@@ -265,16 +271,16 @@
         "addResource": "Bedarf hinzufügen"
       },
       "results": {
-        "help": "@todo",
-        "placeholder": "@todo"
+        "help": "Welche (handfesten) Ergebnisse soll das Projekt produzieren?",
+        "placeholder": "Im Stadtteil wird es ein verbindendes Straßenfest geben, die Festbesucher produzieren Blumensträuße und Weihnachtssterne; die Organisatoren veröffentlichen einen Bildband"
       },
       "shortDescription": {
-        "help": "Beschreibe deine Idee / Projekt kurz und prägnant",
-        "placeholder": "@todo"
+        "help": "Beschreibe deine Projektidee kurz und verständlich",
+        "placeholder": "In unserer Stadt soll es ... geben."
       },
       "targetGroups": {
-        "help": "@todo",
-        "placeholder": "@todo"
+        "help": "<strong>Welche Leute</strong> sind es, die sich an dem Projekt beteiligen sollen? <strong>Auf wen</strong> zielt das Projekt ab? Beschreibe einzelne Gruppen, z.B. <i>\"junge Männer zwischen 16 und 28 aus der Altstadt\"</i>",
+        "placeholder": "Rentner aus Striesen"
       },
       "task": {
         "description": {
@@ -283,27 +289,27 @@
       },
       "tasks": {
         "addTask": "Aufgabe hinzufügen",
-        "assignWorkPackage": "Arbeitspaket zuweisen"
+        "assignWorkPackage": "einem Arbeitspaket zuweisen"
       },
       "utilization": {
-        "help": "@todo",
-        "placeholder": "@todo"
+        "help": "Durch das Projekt entstehen Ergebnisse. Wenn das Projekt vorbei ist: Wie sollen die Projekt-Ergebnisse weitergenutzt werden? Wer nutzt sie dann weiter?",
+        "placeholder": "Unser Verein plant, künftig jährlich ein Straßenfest durchführen zu können. Die Erfahrungen des \"1. Johannstädter Straßenfestes\" werden dabei helfen. Außerdem ..."
       },
       "vision": {
-        "help": "Zukunftsbild das über die persönliche Einflussnahme hinaus geht",
-        "placeholder": "@todo"
+        "help": "Beschreibe dein Zukunftsbild von deiner Stadt, zu dem dieses Projekt beitragen soll. Dieses Zukunftsbild darf gern über deinen persönlichen Einflussbereich hinaus gehen und in ferner Zukunft liegen!",
+        "placeholder": "Unser Projekt wird dazu angeregt haben, dass im Jahr 2035 nur noch verpackungslos in unserem Stadtteil eingekauft wird. Auch die Läden in anderen Stadtteilen haben sich anregen lassen und beginnen, verpackungslose Angebote für ihre Kunden einzurichten. Der jährlich anfallende Müll in unserer Stadt schrumpfte dadurch um 35%."
       },
       "workPackage": {
         "description": {
-          "help": "@todo",
+          "help": "Kurzbeschreibung dieses Arbeitspakets: Welche Rolle spielt dieses Arbeitspaket im Projekt?",
           "placeholder": "0 - 500 Zeichen"
         },
         "mainResponsibility": {
-          "help": "@todo",
+          "help": "Wer ist hauptverantwortlich für dieses Arbeitspaket?",
           "placeholder": "0 - 100 Zeichen"
         },
         "name": {
-          "help": "@todo",
+          "help": "Gib diesem Arbeitspaket einen verständlichen Titel!",
           "placeholder": "2 - 100 Zeichen"
         }
       },
@@ -396,7 +402,7 @@
     "criteria": "Kriterien",
     "concretizations": "Zuspitzungen",
     "description": "Beschreibung",
-    "finalJuryDate": "Finale Jurysitzung",
+    "finalJuryDate": "Finale Jurysitzung am",
     "imprint": "Impressum",
     "jurorsPerApplication": "Juroren pro Bewerbung",
     "juryCriteria": "Bewertungskriterien",
@@ -425,7 +431,7 @@
   "fundConcretization": {
     "description": "Erläuterung zur Frage",
     "question": "Zuspitzungsfrage",
-    "maxLength": "Maximale Antwortlänge"
+    "maxLength": "Maximale Antwortlänge: Wie viele Zeichen lang darf die Antwort auf diese Frage höchsten sein? Hinweis: auf eine A4-Seite passen fast 3000 Zeichen in Schriftgröße 12."
   },
   "goto": {
     "about": "Worum geht's?",
@@ -433,14 +439,16 @@
     "projectApplication": "Zum Förderantrag",
     "createFund": "Fördertopf anlegen",
     "editApplicationData": "Antragsdaten bearbeiten",
-    "editConcretization": "Zuspitzung bearbeiten",
+    "editConcretization": "Projekte, die sich auf Fördergeld bewerben wollen, müssen sich an den Zielen des Fördertopfes orientieren.",
     "editFund": "Fördertopf bearbeiten",
     "editProcess": "Prozess bearbeiten",
     "editProjectPlan": "Projektplan bearbeiten",
-    "editProjectProfile": "Profil bearbeiten",
-    "editProjectTasks": "Aufgaben bearbeiten",
-    "editResourceRequirements": "Bedarfe bearbeiten",
-    "editRequestedFunding": "Fördersumme bearbeiten",
+    "editProjectProfile": "Das Projektprofil bearbeiten",
+    "editProjectTasks": "In jedem Projekt gibt es Aufgaben, die jemand erledigen muss. Welche sind das?",
+    "editWorkPackages": "Große Projekte haben viele Aufgaben. Man kann sie in Arbeitspaketen ordnen. Muss man aber nicht.",
+    "editResourceRequirements": "Um Aufgaben erledigen zu können, muss man manchmal Sachen oder Fachleute besorgen. Welche sind das?",
+    "editProjectFinances": "Was man für ein Projekt zukaufen muss, muss bezahl werden. Woher kommt welches Geld?",
+    "editRequestedFunding": "Wieviel Geld braucht ihr aus dem Fördertopf?",
     "fundDetails": "Detailansicht",
     "fundManagement": "Fördertopf-Verwaltung",
     "home": "Zur Startseite",
@@ -450,8 +458,8 @@
     "myProjects": "Zur Projektübersicht",
     "planOverview": "Zur Projektplanübersicht",
     "profileOverview": "Zum Projektprofil",
-    "newIdea": "Neue Idee eintragen",
-    "newProject": "Idee zum Projekt fortentwickeln",
+    "newIdea": "Neue Projektidee eintragen",
+    "newProject": "Projekt-Idee zum Projekt-Plan weiterentwickeln",
     "processManagement": "Prozess-Verwaltung",
     "registration": "Jetzt registrieren",
     "search": "Suchen"
@@ -473,8 +481,8 @@
     },
     "project": {
       "confirmDelete": {
-        "taskWithResourceRequirements": "Dieser Aufgabe sind Leistungen/Ressourcen zugeordnet, sie werden ebenso gelöscht.\nDiese Aufgabe wirklich löschen?",
-        "workPackageWithTasks": "Diesem Arbeitspaket sind Aufgaben zugeordnet, wenn es gelöscht wird werden diese als nicht-zugeordnet markiert.\nDieses Arbeitpaket wirklich löschen?"
+        "taskWithResourceRequirements": "Dieser Aufgabe sind Leistungen-/Ressourcenbedarfe zugeordnet, sie werden ebenso gelöscht.\nDiese Aufgabe wirklich löschen?",
+        "workPackageWithTasks": "Diesem Arbeitspaket sind Aufgaben zugeordnet. Wenn es gelöscht wird werden diese Aufgaben als nicht-zugeordnet markiert.\nDieses Arbeitpaket wirklich löschen?"
       }
     }
   },
@@ -490,12 +498,12 @@
   "page": {
     "about": {
       "heading": "Was ist die PROJEKT.WERK.STADT?",
-      "intro": "@todo",
+      "intro": "<p>Willkommen in der Projekt.Werk.Stadt! Sie haben eine Projektidee für Ihre Stadt oder Region? Sie wollen mit anderen zusammen Projekte planen und umsetzen?</p><p>Die Projekt.Werk.Stadt ist der Ort um miteinander Projekte zu durchdenken und vielleicht sogar Fördergelder dafür zu beantragen!</p><ul><li>Stadt- und Dorfbewohner und -bewohnerinnen planen hier Projekte.</li><li>Prozesssteuerer organisieren hier ihren Partizipationsprozess.</li><li>Gemeinsam machen Sie Ihre Stadt oder ihr Dorf zu einem nachhaltigeren und lebenswerteren Ort.</li></ul><p>Sie wollen die Projekt.Werk.Stadt in ihrer Kommune einsetzen oder Projekte darauf planen? Sprechen Sie uns an!</p><p>norbert.rost@zukunftsstadt.de, 0351/4466069</p>",
       "title": "Worum geht's?"
     },
     "dataProtection": {
-      "heading": "Datenschutz",
-      "intro": "@todo",
+      "heading": "Datenschutzerklärung",
+      "intro": "<p>Allgemeiner Hinweis und Pflichtinformationen</p><p>Benennung der verantwortlichen Stelle</p><p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p><p><span id=\"s3-t-firma\">Name der Firma</span><br><span id=\"s3-t-ansprechpartner\">Ansprechpartner</span><br><span id=\"s3-t-strasse\">Straße und Hausnummer</span><br><span id=\"s3-t-plz\">PLZ</span> <span id=\"s3-t-ort\">Ort</span></p><p></p><p>Die verantwortliche Stelle entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).</p><p><strong>Widerruf Ihrer Einwilligung zur Datenverarbeitung</strong></p><p>Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p><p><strong>Recht auf Beschwerde bei der zuständigen Aufsichtsbehörde</strong></p><p>Als Betroffener steht Ihnen im Falle eines datenschutzrechtlichen Verstoßes ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde bezüglich datenschutzrechtlicher Fragen ist der Landesdatenschutzbeauftragte des Bundeslandes, in dem sich der Sitz unseres Unternehmens befindet. Der folgende Link stellt eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten bereit: <a href=\"https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html\" target=\"_blank\">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a></p><p><strong>Recht auf Datenübertragbarkeit</strong></p><p>Ihnen steht das Recht zu, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an Dritte aushändigen zu lassen. Die Bereitstellung erfolgt in einem maschinenlesbaren Format. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.</p><p><strong>Recht auf Auskunft, Berichtigung, Sperrung, Löschung</strong></p><p>Sie haben jederzeit im Rahmen der geltenden gesetzlichen Bestimmungen das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, Herkunft der Daten, deren Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Diesbezüglich und auch zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit über die im Impressum aufgeführten Kontaktmöglichkeiten an uns wenden.</p><p><strong>SSL- bzw. TLS-Verschlüsselung</strong></p><p>Aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, die Sie an uns als Seitenbetreiber senden, nutzt unsere Website eine SSL-bzw. TLS-Verschlüsselung. Damit sind Daten, die Sie über diese Website übermitteln, für Dritte nicht mitlesbar. Sie erkennen eine verschlüsselte Verbindung an der „https://“ Adresszeile Ihres Browsers und am Schloss-Symbol in der Browserzeile.</p><p><strong>Server-Log-Dateien</strong></p><p>In Server-Log-Dateien erhebt und speichert der Provider der Website automatisch Informationen, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p><ul><li>Besuchte Seite auf unserer Domain</li><li>Datum und Uhrzeit der Serveranfrage</li><li>Browsertyp und Browserversion</li><li>Verwendetes Betriebssystem</li><li>Referrer URL</li><li>Hostname des zugreifenden Rechners</li><li>IP-Adresse</li></ul><p>Es findet keine Zusammenführung dieser Daten mit anderen Datenquellen statt. Grundlage der Datenverarbeitung bildet Art. 6 Abs. 1 lit. b DSGVO, der die Verarbeitung von Daten zur Erfüllung eines Vertrags oder vorvertraglicher Maßnahmen gestattet.</p><p><strong>Registrierung auf dieser Website</strong></p><p>Zur Nutzung bestimmter Funktionen können Sie sich auf unserer Website registrieren. Die übermittelten Daten dienen ausschließlich zum Zwecke der Nutzung des jeweiligen Angebotes oder Dienstes. Bei der Registrierung abgefragte Pflichtangaben sind vollständig anzugeben. Andernfalls werden wir die Registrierung ablehnen.</p><p>Im Falle wichtiger Änderungen, etwa aus technischen Gründen, informieren wir Sie per E-Mail. Die E-Mail wird an die Adresse versendet, die bei der Registrierung angegeben wurde.</p><p>Die Verarbeitung der bei der Registrierung eingegebenen Daten erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bereits erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p><p>Wir speichern die bei der Registrierung erfassten Daten während des Zeitraums, den Sie auf unserer Website registriert sind. Ihren Daten werden gelöscht, sollten Sie Ihre Registrierung aufheben. Gesetzliche Aufbewahrungsfristen bleiben unberührt.</p><p><strong>Kontaktformular</strong></p><p>Per Kontaktformular übermittelte Daten werden einschließlich Ihrer Kontaktdaten gespeichert, um Ihre Anfrage bearbeiten zu können oder um für Anschlussfragen bereitzustehen. Eine Weitergabe dieser Daten findet ohne Ihre Einwilligung nicht statt.</p><p>Die Verarbeitung der in das Kontaktformular eingegebenen Daten erfolgt ausschließlich auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.</p><p>Über das Kontaktformular übermittelte Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder keine Notwendigkeit der Datenspeicherung mehr besteht. Zwingende gesetzliche Bestimmungen - insbesondere Aufbewahrungsfristen - bleiben unberührt.</p><p><strong>Speicherdauer von Beiträgen und Kommentaren</strong></p><p>Beiträge und Kommentare sowie damit in Verbindung stehende Daten, wie beispielsweise IP-Adressen, werden gespeichert. Der Inhalt verbleibt auf unserer Website, bis er vollständig gelöscht wurde oder aus rechtlichen Gründen gelöscht werden musste.</p><p>Die Speicherung der Beiträge und Kommentare erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. DieRechtmäßigkeit bereits erfolgter Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.</p><p><strong>Google Web Fonts</strong></p><p>Unsere Website verwendet Web Fonts von Google. Anbieter ist die Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA.</p><p>Durch den Einsatz dieser Web Fonts wird es möglich Ihnen die von uns gewünschte Darstellung unserer Website zu präsentieren, unabhängig davon welche Schriften Ihnen lokal zur Verfügung stehen. Dies erfolgt über den Abruf der Google Web Fonts von einem Server von Google in den USA und der damit verbundenen Weitergabe Ihre Daten an Google. Dabei handelt es sich um Ihre IP-Adresse und welche Seite Sie bei uns besucht haben. Der Einsatz von Google Web Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Als Betreiber dieser Website haben wir ein berechtigtes Interesse an der optimalen Darstellung und Übertragung unseres Webauftritts.</p><p>Das Unternehmen Google ist für das us-europäische Datenschutzübereinkommen \"Privacy Shield\" zertifiziert. Dieses Datenschutzübereinkommen soll die Einhaltung des in der EU geltenden Datenschutzniveaus gewährleisten.</p><p>Einzelheiten über Google Web Fonts finden Sie unter: <a href=\"https://www.google.com/fonts#AboutPlace:about\">https://www.google.com/fonts#AboutPlace:about</a> und weitere Informationen in den Datenschutzbestimmungen von Google: <a href=\"https://policies.google.com/privacy/partners?hl=de\">https://policies.google.com/privacy/partners?hl=de</a></p><p><small>Quelle: Datenschutz-Konfigurator von <a href=\"http://www.mein-datenschutzbeauftragter.de\" target=\"_blank\">mein-datenschutzbeauftragter.de</a></small></p>",
       "title": "Datenschutz"
     },
     "ideas": {
@@ -512,25 +520,25 @@
     },
     "imprint": {
       "heading": "Impressum",
-      "intro": "@todo",
+      "intro": "<h2>Angaben gemäß § 5 TMG</h2>      <p>FutureCityProjects Rost/Schumann GbR<br />Fetscherstraße 33<br />01307 Dresden</p><p><strong>Vertreten durch:</strong><br />Norbert Rost</p><h2>Kontakt</h2><p>Telefon: +49 (0) 351 4466069<br />E-Mail: norbert.rost@regionalentwicklung.de</p><h2>EU-Streitschlichtung</h2><p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit: <a href=\"https://ec.europa.eu/consumers/odr\" target=\"_blank\" rel=\"noopener noreferrer\">https://ec.europa.eu/consumers/odr&lt;/a&gt;.&lt;br /> Unsere E-Mail-Adresse finden Sie oben im Impressum.</p><h2>Verbraucher­streit­beilegung/Universal­schlichtungs­stelle</h2><p>Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.</p><h3>Haftung für Inhalte</h3> <p>Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.</p> <p>Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.</p><h3>Haftung für Links</h3> <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der Verlinkung nicht erkennbar.</p> <p>Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Links umgehend entfernen.</p><h3>Urheberrecht</h3> <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet.</p> <p>Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p><p>Quelle: <a href=\"https://www.e-recht24.de/impressum-generator.html\">https://www.e-recht24.de/impressum-generator.html</a></p>",
       "title": "Impressum"
     },
     "management": {
       "funds": {
         "index": {
           "heading": "Fördertopf-Verwaltung",
-          "intro": "Hier kannst du neue Fördertöpfe anlegen und bestehende bearbeiten oder aktivieren.",
+          "intro": "Hier können Sie neue Fördertöpfe anlegen und bestehende bearbeiten oder aktivieren.",
           "noFunds": "Keine Födertöpfe gefunden.",
           "title": "Fördertöpfe"
         },
         "create": {
           "heading": "Fördertopf anlegen",
-          "intro": "Hier kannst du einen neuen Fördertopf für den Prozess anlegen.",
+          "intro": "Hier können Sie einen neuen Fördertopf für den Prozess anlegen.",
           "title": "Fördertopf anlegen"
         },
         "details": {
           "heading": "Details zum Fördertopf",
-          "intro": "Hier kannst du alle Daten zum Fördertopf einsehen und Bewertungskriterien und Zuspitzungen anlegen.",
+          "intro": "Hier können Sie alle Daten zum Fördertopf einsehen und Bewertungskriterien und Zuspitzungen anlegen.",
           "title": "Fördertopf Details",
           "fundingHeader": "Angaben zur Finanzierung",
           "applicationHeader": "Angaben zur Antragstellung",
@@ -538,22 +546,22 @@
         },
         "edit": {
           "heading": "Fördertopf bearbeiten",
-          "intro": "Hier kannst du alle Daten zum Fördertopf bearbeiten.",
+          "intro": "Hier können Sie alle Daten zum Fördertopf bearbeiten.",
           "title": "Fördertopf bearbeiten"
         },
         "addConcretization": {
           "heading": "Zuspitzung hinzufügen",
-          "intro": "Hier kannst du eine Zuspitzung zum gewählten Fördertopf hinzufügen.",
+          "intro": "Hier können Sie eine Zuspitzung zum gewählten Fördertopf hinzufügen. Zuspitzungen sind Aufforderungen an die Projektplaner, ihr Projekt so auszurichten, dass sie dem Zweck des Fördertopfes besser entsprechen. Den Projektplanern werden die Zuspitzungsfragen als auszufüllendes Formular angezeigt. Die Antworten auf die Zuspitzungsfragen sollten bei der Beurteilung eingehender Förderanträge eine zentrale Rolle spielen.",
           "title": "Zuspitzung hinzufügen"
         },
         "editConcretization": {
           "heading": "Zuspitzung bearbeiten",
-          "intro": "Hier kannst du die gewählte Zuspitzung bearbeiten.",
+          "intro": "Hier können Sie die gewählte Zuspitzung bearbeiten.",
           "title": "Zuspitzung bearbeiten"
         },
         "activate": {
           "heading": "Fördertopf freischalten",
-          "intro": "Hier kannst du den gewählten Fördertopf freischalten, er wird damit für die Öffentlichkeit sichtbar.<br />Sobald der Antragszeitraum beginnt wird automatisch die Antragseinreichung freigeschaltet.",
+          "intro": "Hier können Sie den gewählten Fördertopf freischalten. Er wird damit für die Öffentlichkeit sichtbar.<br />Sobald der Antragszeitraum beginnt wird automatisch die Antragseinreichung freigeschaltet.",
           "title": "Fördertopf freischalten",
           "confirm": "Soll dieser Fördertopf wirklich freigeschaltet werden? Änderungen an den öffentlichen Angaben sind dann nur noch begrenzt möglich."
         }
@@ -562,17 +570,17 @@
     "process": {
       "index": {
         "heading": "Prozessdetails",
-        "intro": "Hier siehst du alle Angaben zum aktuellen Prozess",
+        "intro": "Hier sehen Sie alle Angaben zum laufenden Beteiligungs-Prozess",
         "title": "Prozessdetails"
       },
       "create": {
         "heading": "Prozess definieren",
-        "intro": "Es muss erst ein Prozess definiert werden bevor die Plattform benutzbar ist.",
+        "intro": "Es muss erst ein Prozess definiert werden bevor die Plattform benutzbar ist. Bitte definieren Sie einen Beteiligungsprozess, in welchem die Projekt.Werk.Stadt eingesetzt wird.",
         "title": "Prozess anlegen"
       },
       "edit": {
         "heading": "Prozess bearbeiten",
-        "intro": "Hier kannst du den aktuellen Prozess bearbeiten",
+        "intro": "Hier können Sie den aktuellen Prozess bearbeiten",
         "title": "Prozess bearbeiten"
       }
     },
@@ -581,7 +589,7 @@
         "title": "Projekt erstellen",
         "heading": "Idee übernehmen",
         "intro": "Hier kannst du aus der gewählten Idee ein neues Projekt erstellen.",
-        "inspiration": "Deine Inspiration",
+        "inspiration": "Deine Inspiration, die ursprüngliche Projektidee",
         "projectCreated": "Vielen Dank, dein Projekt wurde erstellt!",
         "projectNotSaved": "Vielen Dank, um dein Projekt zu sichern brauchst du ein Benutzerkonto.",
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird das Projekt erstellt!",
@@ -622,20 +630,21 @@
           "financesHeader": "Finanzen",
           "financeParts": "davon",
           "heading": "Projektplan: {{projectName}}",
-          "intro": "Hier siehst du den Stand des Projektplans zu deinem Projekt.",
+          "intro": "Der Projektplan beschreibt, <strong>wer wann was</strong> zu tun hat, <strong>wofür Geld gebraucht wird</strong> und <strong>woher</strong> dieses Geld kommen soll. <br />Wie sieht euer Projektplan für <em>{{projectName}}</em> aus?",
           "title": "Projektplan"
         },
         "edit": {
           "heading": "Projektplan bearbeiten",
-          "intro": "Hier kannst du Angaben zum Projektplan deines Projekts <em>{{projectName}}</em> bearbeiten.",
-          "title": "Projektplan bearbeiten"
+          "intro": "An wen richtet sich das Projekt? Wen soll es erreichen?<br />Welche Ergebnisse werden im Projektverlauf produziert?<br />Wie wirkt das Projekt auf die beteiligten Leute?<br />Wie wirkt das Projekt auf dein Dorf/deine Stadt oder die Gesellschaft?<br />Was bleibt, wenn das Projekt vorbei ist? Was läßt sich dann weiternutzen?",
+          "title": "Projektplan: Was kommt hinten raus?"
         },
         "tasks": {
           "heading": "Aufgaben bearbeiten",
-          "intro": "Hier kannst du die Aufgaben zu deinem Projekt <em>{{projectName}}</em> bearbeiten.",
+          "intro": "In jedem Projekt müssen Aufgaben erledigt werden. Welche sind das in <em>{{projectName}}</em>? <br />Einfach drauflossammeln, sortiert wird später!",
           "title": "Aufgaben bearbeiten",
           "taskHeading": "Aufgaben",
-          "taskIntro": "Hier kannst du einzelne Aufgaben eintragen."
+          "taskIntro": "Hier kannst du einzelne Aufgaben eintragen.",
+          "packageIntro": "Wenn ein Projekt sehr viele Aufgaben hat, kann man die Aufgaben in Arbeitspaketen zusammenpacken. Der Name jedes Arbeitspakats läßt erkennen, welche Art von Aufgaben drin sind. An ein Arbeitspaket kann man außerdem ranschreiben, wer es zu erledigen hat. So kann man Projektpartnern ganze Aufgabenbündel zuweisen."
         },
         "workPackages": {
           "heading": "Arbeitspakete bearbeiten",
@@ -741,7 +750,7 @@
   },
   "project": {
     "applicationData": "Antragsdaten",
-    "challenges": "Probleme / Herausforderung, worauf geantwortet werden soll",
+    "challenges": "Was sind die Probleme oder Herausforderungen, auf die das Projekt antworten soll?",
     "contactEmail": "Kontakt-Emailadresse",
     "contactName": "Ansprechpartner",
     "contactPhone": "Kontakt-Telefonnummer",
@@ -754,11 +763,11 @@
     "holderName": "Projektträger",
     "holderStreet": "Straße",
     "holderZipCode": "Postleitzahl",
-    "impact": "Wirkung auf die Zielgruppe(n)",
+    "impact": "Weitergehende Wirkungen auf den Ort",
     "memberships": {
       "count": "Teammitglieder"
     },
-    "outcome": "Wirkung auf Kommune oder Gesellschaft",
+    "outcome": "Auswirkung auf die Leute",
     "planSelfAssessment": "Selbsteinschätzung zum Fortschritt des Projektplans",
     "profile": "Projektprofil",
     "profileSelfAssessment": "Selbsteinschätzung zum Projektfortschritt",
@@ -784,7 +793,7 @@
       "label": "Bedarf"
     },
     "resourceRequirements": "Ressourcenbedarfe",
-    "results": "Resultate",
+    "results": "Ergebnisse & Resultate",
     "shortDescription": "Das Projekt in einem Satz",
     "state": {
       "active": "aktiv",
@@ -816,7 +825,7 @@
     "tasks": "Aufgaben",
     "unnamed": "[unbenanntes Projekt]",
     "updatedAt": "Zuletzt bearbeitet",
-    "utilization": "Verwertung",
+    "utilization": "Weiternutzung der Projekt-Ergebnisse",
     "vision": "Vision",
     "workPackage": {
       "abbreviation": "AP",
