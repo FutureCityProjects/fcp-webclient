@@ -121,12 +121,11 @@
       .proceeds-sum-description {
         margin-top: 0;
       }
+    }
 
-      .unassigned-sum-description,
-      .unassigned-sum-content  {
-        border-bottom: 1px solid $custom-gray;
-        margin-bottom: 0.5em;
-      }
+    .total-sum:not(:first-child) {
+      border-top: 1px solid $custom-gray;
+      margin-top: 0.5em;
     }
   }
 

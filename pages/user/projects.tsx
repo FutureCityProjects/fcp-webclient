@@ -5,39 +5,54 @@ import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
 
-import { UserRole } from "api/schema"
+import { IProject, IProjectMembership, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import PageError from "components/common/PageError"
 import { withAuth } from "components/hoc/withAuth"
 import EmptyProjectCard from "components/marketplace/EmptyProjectCard"
 import MyProjectCard from "components/project/MyProjectCard"
+import { AnyAction, Dispatch } from "redux"
 import { loadMyProjectsAction } from "redux/actions/myProjects"
+import { deleteModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
-import { selectMyProjects, selectMyProjectsLoaded } from "redux/reducer/myProjects"
+import { EntityType } from "redux/reducer/data"
+import { selectMyMemberships, selectMyProjects, selectMyProjectsLoaded } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
 
+const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
+  deleteMembership: (membership: IProjectMembership, actions: any) =>
+    dispatch(deleteModelAction(EntityType.PROJECT_MEMBERSHIP, membership, actions)),
+})
+
 const mapStateToProps = (state: AppState) => ({
   myProjects: selectMyProjects(state),
+  myMemberships: selectMyMemberships(state),
   myProjectsLoaded: selectMyProjectsLoaded(state),
   request: state.requests.projectsLoading,
 })
 
-const connector = connect(mapStateToProps)
+const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const MyProjectsPage: I18nPage<PageProps> = ({ request, myProjects, myProjectsLoaded, t }) => {
+const MyProjectsPage: I18nPage<PageProps> = (props: PageProps) => {
+  const { deleteMembership, myMemberships, myProjects, myProjectsLoaded, request, t } = props
   const noProjects: boolean = myProjectsLoaded && myProjects.length === 0
   const hasProjects: boolean = myProjectsLoaded && myProjects.length > 0
 
   const wrappedProjects = hasProjects
     ? myProjects.map((project) =>
-      <MyProjectCard key={project.id} project={project} />)
-    : ""
+      <MyProjectCard
+        key={project.id}
+        project={project}
+        deleteMembership={deleteMembership}
+        membership={myMemberships && myMemberships.find((m) => (m.project as IProject).id === project.id)}
+      />)
+    : null
 
   // @todo error anzeigen
   return (
-    <BaseLayout pageTitle={t("page.user.myProjects.title")}>
+    <BaseLayout pageTitle={t("page.user.projects.title")}>
       <Row>
         <Col>
           {request.isLoading

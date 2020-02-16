@@ -28,7 +28,11 @@ const ConcretizationForm = ({ onSubmit, concretization = {
       isSubmitting,
       values,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} prefix="fundConcretization" values={values} />
+        <GeneralFormError
+          errors={errors}
+          prefix="fundConcretization"
+          excludeFields={["description", "maxLength", "question"]}
+        />
 
         <Field component={FormikInput}
           help="form.fundConcretization.question.help"

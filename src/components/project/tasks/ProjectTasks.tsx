@@ -47,7 +47,9 @@ const ProjectTasks: React.FC<IPlanProps> = ({ functions, project, updateProject 
       <span className="form-text">{t("page.projects.plan.tasks.taskIntro")}</span>
 
       <Row>
-        <Col lg={4}><EmptyProjectTaskCard onSubmit={functions.addTask} /></Col>
+        <Col lg={8}>
+          <EmptyProjectTaskCard onSubmit={functions.addTask} />
+        </Col>
       </Row>
 
       <ProjectTaskCardGrid

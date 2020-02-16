@@ -19,7 +19,7 @@ import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { createModelAction, loadCollectionAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectCollectionByIds } from "redux/reducer/data"
-import { selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
+import { selectIsProjectMember, selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
@@ -33,8 +33,9 @@ const mapStateToProps = (state: AppState, { slug }) => ({
   project: selectMyProjectByIdentifier(state, slug),
   projectRequest: state.requests.projectsLoading,
   fundsRequest: state.requests.fundsLoading,
-  selectableFunds: selectCollectionByIds(state, EntityType.FUND, state.myProjects.selectableFunds || []),
+  isMember: selectIsProjectMember(state, slug),
   isOwner: selectIsProjectOwner(state, slug),
+  selectableFunds: selectCollectionByIds(state, EntityType.FUND, state.myProjects.selectableFunds || []),
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
@@ -43,10 +44,13 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 }
 
 const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
-  const { createApplication, fundsRequest, isOwner, project, projectRequest, selectableFunds, t } = props
+  const { createApplication, fundsRequest, isMember, isOwner, project, projectRequest, selectableFunds, t } = props
 
   // @todo custom error message "project not found or no permission" etc.
-  if (!projectRequest.isLoading && (!project || project.isLocked || project.progress === ProjectProgress.CREATING_PROFILE)) {
+  if (!projectRequest.isLoading && (!project || project.isLocked
+    || project.progress === ProjectProgress.CREATING_PROFILE
+    || !isMember)
+  ) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={projectRequest.loadingError} />
     </StatusCode>

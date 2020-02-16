@@ -11,13 +11,13 @@ import {
 import { createModelSuccessAction, setLoadingAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
+import { selectNewMemberApplication } from "redux/reducer/memberApplication"
 import { selectNewIdea } from "redux/reducer/newIdea"
 import { selectNewProject } from "redux/reducer/newProject"
 import { Routes } from "services/routes"
 import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
 import { getCurrentProcess } from "./currentProcess"
-import { selectNewMemberApplication } from "redux/reducer/memberApplication"
 
 export function* registrationWatcherSaga() {
   yield all([

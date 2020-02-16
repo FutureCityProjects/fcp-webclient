@@ -72,7 +72,11 @@ const ProjectPlanForm: React.FC<IProps> = (props: IProps) => {
           </CardHeader>
           <CardBody>
             <Row>
-              <Col><GeneralFormError errors={errors} prefix="project" values={values} /></Col>
+              <Col><GeneralFormError
+                errors={errors}
+                prefix="project"
+                excludeFields={["impact", "outcome", "results", "targetGroups", "utilization"]}
+              /></Col>
             </Row>
             <Row>
               <Col lg>

@@ -1,8 +1,6 @@
 # Todo
-  * generalformerr: tatsächliche elemente übergeben damit hidden-fehler auch angezeigt werden,
-    bspw. project
-  * korrekte Fehlermeldung für "bereits mitglied" api + übersetz (wenn eingeloggt + nach Login)
-  * task screen but http://prntscr.com/r2gc21
+  * Mitgliederliste
+  * Bewerbung annehmen
   * einreichen: 2 boxen, eine mit Fördertopf + EInreichtungszeitraum + Warnings, unten eine mit Button
   * Ansicht Mitglieder/Bewerbungen: Keine BEwerbungen von inaktiven Usern anzeigen.
   * fix: profilansicht ausgeloggt kennt keine Mitgliedszahl

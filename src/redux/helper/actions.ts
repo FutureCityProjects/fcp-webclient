@@ -122,8 +122,8 @@ export const updateModelSuccessAction =
   })
 
 export const deleteModelAction =
-  (entityType: EntityType, model: any, actions: any, scope?: string): IModelFormAction<any> => ({
-    actions,
+  (entityType: EntityType, model: any, actions?: any, scope?: string): IModelFormAction<any> => ({
+    actions: actions || {},
     entityType,
     model,
     scope,

@@ -26,7 +26,11 @@ const LoginForm = ({ onSubmit, credentials = {
       isSubmitting,
       values,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} prefix="user" values={values} />
+        <GeneralFormError
+          errors={errors}
+          prefix="user"
+          excludeFields={["password", "username"]}
+        />
         <Field component={FormikInput}
           help="form.login.username.help"
           label="form.login.username.label"

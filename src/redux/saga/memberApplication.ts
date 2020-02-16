@@ -31,19 +31,18 @@ export function* memberApplicationWatcherSaga() {
  */
 function* createApplicationSaga(action: ICreateMemberApplicationAction) {
   yield put(setLoadingAction("projectMembership_operation", true))
-  console.log("start")
   const user: IUser = yield call(getCurrentUser)
   if (!user) {
     const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
     yield put(setLoadingAction("projectMembership_operation", false, err))
     return null
   }
-  console.log("got user")
+
   action.application.user = user["@id"]
   action.application.role = MembershipRole.APPLICANT
   const createdApplication = yield putWait(createModelAction(EntityType.PROJECT_MEMBERSHIP,
     action.application, action.actions))
-  console.log("created app")
+
   // refresh the user to get the new membership
   yield put(loadCurrentUserAction())
 
@@ -93,10 +92,17 @@ function* createSavedApplicationSaga(action: ISetAuthAction) {
 
     return savedApplication
   } catch (err) {
+    // reset the application or the saga will try to create it again each time the token
+    // is refreshed...
+    yield put(resetMemberApplicationAction())
+
     if (err instanceof SubmissionError) {
-      // we have no form where we could show individual messages per property, also the
-      // error returned from the API is not (easily) translateable -> use general message
-      yield put(addNotificationAction("validate.general.submissionFailed", "error"))
+      const keys = Object.keys(err.errors)
+      if (keys.length === 1 && typeof err.errors[keys[0]] === "string") {
+        yield put(addNotificationAction(err.errors[keys[0]], "error"))
+      } else {
+        yield put(addNotificationAction("validate.general.submissionFailed", "error"))
+      }
     } else {
       // @todo log RequestError for monitoring
       yield put(addNotificationAction(err.message, "error"))

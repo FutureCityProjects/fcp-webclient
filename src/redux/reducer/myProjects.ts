@@ -125,3 +125,35 @@ export const selectIsProjectOwner = (state: AppState, identifier: string | numbe
     .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role === MembershipRole.OWNER)
     .length > 0
 }
+
+export const selectIsProjectMember = (state: AppState, identifier: string | number): boolean => {
+  const project = selectMyProjectByIdentifier(state, identifier)
+  if (!project) {
+    return false
+  }
+
+  const memberships = selectMyMemberships(state)
+  if (!memberships || memberships.length === 0) {
+    return false
+  }
+
+  return memberships
+    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role !== MembershipRole.APPLICANT)
+    .length > 0
+}
+
+export const selectIsProjectApplicant = (state: AppState, identifier: string | number): boolean => {
+  const project = selectMyProjectByIdentifier(state, identifier)
+  if (!project) {
+    return false
+  }
+
+  const memberships = selectMyMemberships(state)
+  if (!memberships || memberships.length === 0) {
+    return false
+  }
+
+  return memberships
+    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role === MembershipRole.APPLICANT)
+    .length > 0
+}

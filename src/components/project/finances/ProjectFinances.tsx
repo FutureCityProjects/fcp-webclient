@@ -18,7 +18,7 @@ const ProjectFinances: React.FC<IPlanProps> = (props: IPlanProps) => {
 
   const packages = functions.sortWorkPackages(project.workPackages)
 
-  return <Card className="body-card project-resources">
+  return <Card className="body-card project-resources project-finances">
     <CardHeader>
       <div className="title-section">
         <h3>{project.name}</h3>

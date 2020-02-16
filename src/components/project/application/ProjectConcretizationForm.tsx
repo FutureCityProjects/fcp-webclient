@@ -49,7 +49,11 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
             </div>
           </CardHeader>
           <CardBody>
-            <GeneralFormError errors={errors} prefix="fundApplication" values={values} />
+            <GeneralFormError
+              errors={errors}
+              prefix="fundApplication"
+              excludeFields={["concretizations", "concretizationSelfAssessment"]}
+            />
 
             {fund.concretizations.map((concretization) => <Field component={FormikRTE}
               help={concretization.description}

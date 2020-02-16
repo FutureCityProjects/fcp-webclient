@@ -73,7 +73,13 @@ const FundForm = ({ onSubmit, fund = {
           </CardHeader>
 
           <CardBody>
-            <GeneralFormError errors={errors} prefix="fund" values={values} />
+            <GeneralFormError
+              errors={errors}
+              prefix="fund"
+              excludeFields={["briefingDate", "budget", "criteria", "description", "finalJuryDate",
+                "imprint", "jurorsPerApplication", "maximumGrant", "minimumGrant", "name", "ratingBegin",
+                "ratingEnd", "region", "sponsor", "submissionBegin", "submissionEnd"]}
+            />
 
             <Field component={FormikInput}
               help="form.fund.name.help"

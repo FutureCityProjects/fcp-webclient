@@ -77,7 +77,9 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
         as={project.progress !== ProjectProgress.CREATING_PROFILE ? routeWithParams(Routes.PROJECT_PLAN, { slug: project.slug || project.id }) : null}
       />
 
-      {project.progress === ProjectProgress.CREATING_PROFILE || project.progress === ProjectProgress.CREATING_PLAN
+      {project.progress === ProjectProgress.CREATING_PROFILE
+        || project.progress === ProjectProgress.CREATING_PLAN
+        || !project.applications
         ? <ProgressBox
           icon="money-bag"
           title="project.tableau.application"
@@ -111,6 +113,7 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
       {project.progress === ProjectProgress.CREATING_PROFILE
         || project.progress === ProjectProgress.CREATING_PLAN
         || project.progress === ProjectProgress.CREATING_APPLICATION
+        || !project.applications
         ? <ProgressBox
           icon="message"
           title="project.tableau.submitApplication"

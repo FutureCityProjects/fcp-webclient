@@ -478,8 +478,14 @@
       "logout": "Du wurdest erfolgreich abgemeldet.",
       "refreshFailed": "Deine Anmeldung konnte leider nicht verlängert werden"
     },
+    "fund": {
+      "confirmDelete": {
+        "concretization": "Soll diese Zuspitzung wirklich gelöscht werden?"
+      }
+    },
     "project": {
       "confirmDelete": {
+        "myApplication": "Möchtest du deine Bewerbung wirklich zurückziehen?",
         "taskWithResourceRequirements": "Dieser Aufgabe sind Leistungen/Ressourcen zugeordnet, sie werden ebenso gelöscht.\nDiese Aufgabe wirklich löschen?",
         "workPackageWithTasks": "Diesem Arbeitspaket sind Aufgaben zugeordnet, wenn es gelöscht wird werden diese als nicht-zugeordnet markiert.\nDieses Arbeitpaket wirklich löschen?"
       },
@@ -639,6 +645,7 @@
         "saveViaRegistration": "Noch kein Konto auf der Plattform? Nach der Registrierung wird deine Bewerbung abgeschickt und bei Freischaltung deines Kontos für den Teamleiter sichtbar.",
         "heading": "Bewerbung als Teammitglied",
         "intro": "Hier kannst du dich als Mitarbeiter für das gewählte Projekt bewerben, der Teamleiter kann dann nach Prüfung deine Bewerbung akzpetieren.",
+        "membershipExists": "Du bist bereits Mitglied dieses Projekts oder deine Bewerbung ist noch offen.",
         "title": "Mitgliedsbewerbung"
       },
       "profile": {
@@ -750,7 +757,9 @@
         "heading": "Login",
         "title": "Login"
       },
-      "myProjects": {
+      "projects": {
+        "applicationOpen": "Deine Bewerbung als Teammitglied ist noch offen.",
+        "deleteMyApplication": "Bewerbung zurückziehen",
         "title": "Meine Projekte"
       },
       "register": {

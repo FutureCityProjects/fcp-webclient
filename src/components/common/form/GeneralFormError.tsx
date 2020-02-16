@@ -5,15 +5,16 @@ import { flattenErrors } from "services/submissionError"
 
 interface IProps {
   errors: { [key: string]: any }
+  excludeFields?: string[]
   prefix?: string
-  values?: { [key: string]: any }
 }
 
-const GeneralFormError: React.FC<IProps> = ({ errors, prefix = "", values = {} }) => {
-  const elements = Object.keys(values)
+const GeneralFormError: React.FC<IProps> = ({ errors, excludeFields = [], prefix = "" }) => {
   const generalErrors = []
   Object.keys(errors).forEach((key) => {
-    if (elements.includes(key)) {
+
+    // these fields show their own errors, no need to show them here
+    if (excludeFields.includes(key)) {
       return
     }
 

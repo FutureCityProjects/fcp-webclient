@@ -17,6 +17,7 @@ import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { selectIsAuthenticated } from "redux/reducer/auth"
 import { EntityType, selectById, selectProjectBySlug } from "redux/reducer/data"
+import { selectMyProjectIDs } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
 
@@ -29,6 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 
 const mapStateToProps = (state: AppState, { id, slug }) => ({
   isAuthenticated: selectIsAuthenticated(state),
+  myProjectIds: selectMyProjectIDs(state),
   project: id
     ? selectById(state, EntityType.PROJECT, id)
     : selectProjectBySlug(state, slug),
@@ -43,7 +45,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 }
 
 const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
-  const { application, createMemberApplication, isAuthenticated, project, request,
+  const { application, createMemberApplication, isAuthenticated, myProjectIds, project, request,
     setNewMemberApplication, t } = props
   const [applicationSaved, setApplicationSaved] = useState(false)
   const [applicationCreated, setApplicationCreated] = useState(false)
@@ -99,7 +101,10 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
           <CardHeader>{t("form.project.apply.header")}</CardHeader>
           <CardBody>
             {!applicationSaved && !applicationCreated && <>
-              <MemberApplicationForm onSubmit={onSubmit} application={application} />
+              {myProjectIds && myProjectIds.includes(project.id)
+                ? <span className="text-danger">{t("page.projects.apply.membershipExists")}</span>
+                : <MemberApplicationForm onSubmit={onSubmit} application={application} />
+              }
             </>}
 
             {applicationCreated && <>

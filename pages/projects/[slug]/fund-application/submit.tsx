@@ -20,7 +20,7 @@ import { loadMyProjectsAction, submitFundApplicationAction } from "redux/actions
 import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectById } from "redux/reducer/data"
-import { selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
+import { selectIsProjectMember, selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
 
@@ -32,6 +32,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 const mapStateToProps = (state: AppState, { fundId, slug }) => ({
   fund: selectById<IFund>(state, EntityType.FUND, fundId),
   fundRequest: state.requests.fundLoading,
+  isMember: selectIsProjectMember(state, slug),
   isOwner: selectIsProjectOwner(state, slug),
   project: selectMyProjectByIdentifier(state, slug),
   projectRequest: state.requests.projectsLoading,
@@ -44,12 +45,13 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 }
 
 const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
-  const { fund, fundRequest, isOwner, project, projectRequest, submitApplication, t } = props
+  const { fund, fundRequest, isMember, isOwner, project, projectRequest, submitApplication, t } = props
 
   // @todo custom error message "project not found or no permission" etc.
   if (!projectRequest.isLoading && (!project || project.isLocked
     || project.progress === ProjectProgress.CREATING_PROFILE
-    || project.progress === ProjectProgress.CREATING_PLAN)
+    || project.progress === ProjectProgress.CREATING_PLAN
+    || !isMember)
   ) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={projectRequest.loadingError} />

@@ -34,6 +34,9 @@
     "project": {
       "duplicatePackageNames": "Arbeitspakete müssen unterschiedliche Namen verwenden."
     },
+    "projectMembership": {
+      "duplicateMembership": "Eine Mitgliedschaft oder Bewerbung existiert bereits!"
+    },
     "registration": {
       "acceptTerms": "Ohne Zustimmung ist leider keine Registrierung möglich."
     },

@@ -17,7 +17,7 @@ import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { updateModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
-import { selectMyProjectByIdentifier } from "redux/reducer/myProjects"
+import { selectIsProjectMember, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
@@ -27,6 +27,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 })
 
 const mapStateToProps = (state: AppState, { slug }) => ({
+  isMember: selectIsProjectMember(state, slug),
   project: selectMyProjectByIdentifier(state, slug),
   request: state.requests.projectsLoading,
 })
@@ -36,11 +37,12 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   slug: string,
 }
 
-const ProjectApplicationEditPage: I18nPage<PageProps> = ({ project, request, t, updateProject }) => {
+const ProjectApplicationEditPage: I18nPage<PageProps> = ({ isMember, project, request, t, updateProject }) => {
   // @todo custom error message "project not found or no permission" etc.
   if (!request.isLoading && (!project || project.isLocked
     || project.progress === ProjectProgress.CREATING_PROFILE
-    || project.progress === ProjectProgress.CREATING_PLAN)
+    || project.progress === ProjectProgress.CREATING_PLAN
+    || !isMember)
   ) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={request.loadingError} />

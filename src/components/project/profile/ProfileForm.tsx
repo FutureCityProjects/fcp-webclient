@@ -49,7 +49,12 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
         isSubmitting,
         values,
       }) => <Form className="profile-form" onSubmit={handleSubmit}>
-          <GeneralFormError errors={errors} prefix="project" values={values} />
+          <GeneralFormError
+            errors={errors}
+            prefix="project"
+            excludeFields={["challenges", "delimitation", "description", "goal", "name",
+              "profileSelfAssessment", "shortDescription", "vision"]}
+          />
 
           <CardHeader>
             <Field component={FormikInput}
