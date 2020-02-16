@@ -9,7 +9,7 @@ import { ICreateMemberApplicationAction, MemberApplicationActionTypes, resetMemb
 import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { addNotificationAction } from "redux/actions/notifications"
 import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
-import { createModelAction, createModelSuccessAction, setLoadingAction } from "redux/helper/actions"
+import { createModelAction, setLoadingAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
 import { selectNewMemberApplication } from "redux/reducer/memberApplication"
@@ -31,7 +31,6 @@ export function* memberApplicationWatcherSaga() {
  */
 function* createApplicationSaga(action: ICreateMemberApplicationAction) {
   yield put(setLoadingAction("projectMembership_operation", true))
-
   const user: IUser = yield call(getCurrentUser)
   if (!user) {
     const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
@@ -39,9 +38,10 @@ function* createApplicationSaga(action: ICreateMemberApplicationAction) {
     return null
   }
 
-  action.application.user = process["@id"]
+  action.application.user = user["@id"]
   action.application.role = MembershipRole.APPLICANT
-  const res = yield putWait(createModelAction(EntityType.PROJECT_MEMBERSHIP, action.application, action.actions, "new_member_application"))
+  const createdApplication = yield putWait(createModelAction(EntityType.PROJECT_MEMBERSHIP,
+    action.application, action.actions))
 
   // refresh the user to get the new membership
   yield put(loadCurrentUserAction())
@@ -49,7 +49,7 @@ function* createApplicationSaga(action: ICreateMemberApplicationAction) {
   // refresh list of projects
   yield put(loadMyProjectsAction())
 
-  return res
+  return createdApplication
 }
 
 /**
@@ -76,21 +76,33 @@ function* createSavedApplicationSaga(action: ISetAuthAction) {
       return null
     }
 
-    memberApplication.user = process["@id"]
+    memberApplication.user = user["@id"]
     memberApplication.role = MembershipRole.APPLICANT
     const savedApplication = yield call(apiClient.createProjectMembership, memberApplication)
 
-    yield put(createModelSuccessAction(EntityType.PROJECT_MEMBERSHIP, savedApplication, "new_member_application"))
     yield put(setLoadingAction("projectMembership_operation", false))
-    yield put(addNotificationAction("message.memberApplication.saved", "success"))
+    yield put(addNotificationAction("message.project.memberships.applicationSaved", "success"))
     yield put(resetMemberApplicationAction())
+
+    // refresh the user to get the new membership
+    yield put(loadCurrentUserAction())
+
+    // refresh list of projects
+    yield put(loadMyProjectsAction())
 
     return savedApplication
   } catch (err) {
+    // reset the application or the saga will try to create it again each time the token
+    // is refreshed...
+    yield put(resetMemberApplicationAction())
+
     if (err instanceof SubmissionError) {
-      // we have no form where we could show individual messages per property, also the
-      // error returned from the API is not (easily) translateable -> use general message
-      yield put(addNotificationAction("validate.general.submissionFailed", "error"))
+      const keys = Object.keys(err.errors)
+      if (keys.length === 1 && typeof err.errors[keys[0]] === "string") {
+        yield put(addNotificationAction(err.errors[keys[0]], "error"))
+      } else {
+        yield put(addNotificationAction("validate.general.submissionFailed", "error"))
+      }
     } else {
       // @todo log RequestError for monitoring
       yield put(addNotificationAction(err.message, "error"))
@@ -111,6 +123,11 @@ function* postRegistrationSaga(action: ISetRegisteredUserAction) {
     return
   }
 
-  // @todo checken ob der registered user eine application als membership hat
-  // yield put(addNotificationAction("message.memberApplication.saved", "success"))
+  const hasApplication = action.user.projectMemberships
+    .filter((m) => m.role === MembershipRole.APPLICANT)
+    .length > 0
+
+  if (hasApplication) {
+    yield put(addNotificationAction("message.project.memberships.applicationSaved", "success"))
+  }
 }

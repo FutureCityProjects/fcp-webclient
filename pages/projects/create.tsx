@@ -40,37 +40,38 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   inspirationId: any,
 }
 
-const ProjectCreationPage: I18nPage<PageProps> = (props) => {
-  if (!props.inspirationId || props.inspirationId <= 0) {
+const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
+  const { createProject, inspiration, inspirationId, inspirationRequest, isAuthenticated,
+    project, setNewProject, t } = props
+  const [projectSaved, setProjectSaved] = useState(false)
+  const [projectCreated, setProjectCreated] = useState(false)
+
+  if (!inspirationId || inspirationId <= 0) {
     return <StatusCode statusCode={400}>
       <ErrorPage statusCode={400} error={"failure.invalidRequest"} />
     </StatusCode>
   }
 
   // @todo custom error message "inspiration not found" etc.
-  if (!props.inspiration && !props.inspirationRequest.isLoading) {
+  if (!inspiration && !inspirationRequest.isLoading) {
     return <StatusCode statusCode={404}>
-      <ErrorPage statusCode={404} error={props.inspirationRequest.loadingError} />
+      <ErrorPage statusCode={404} error={inspirationRequest.loadingError} />
     </StatusCode>
   }
 
-  const { inspirationRequest, t } = props
-  const [projectSaved, setProjectSaved] = useState(false)
-  const [projectCreated, setProjectCreated] = useState(false)
+  const onSubmit = (values: IProjectCreation, actions: any) => {
+    project.inspiration = inspiration["@id"]
 
-  const onSubmit = (project: IProjectCreation, actions: any) => {
-    project.inspiration = props.inspiration["@id"]
-
-    if (props.isAuthenticated) {
+    if (isAuthenticated) {
       // @todo directly redirect to the profile form?
       actions.success = () => {
         setProjectCreated(true)
       }
-      props.createProject(project, actions)
+      createProject(values, actions)
       return
     }
 
-    props.setNewProject(project)
+    setNewProject(values)
     setProjectSaved(true)
   }
 
@@ -104,7 +105,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props) => {
           <CardHeader>{t("form.project.create.header")}</CardHeader>
           <CardBody>
             {!projectSaved && !projectCreated && <>
-              <ProjectCreationForm onSubmit={onSubmit} project={props.project} />
+              <ProjectCreationForm onSubmit={onSubmit} project={project} />
             </>}
 
             {projectCreated && <>

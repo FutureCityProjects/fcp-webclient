@@ -49,7 +49,7 @@ const EmptyProjectTaskCard: React.FC<IProps> = ({ onSubmit }: IProps) => {
               title={t("form.addElement")}
               type="submit"
             >
-              <Icon name="plus" size={24} />
+              <Icon name="plus" size={24} /> {t("project.task.label")}
             </Button>
           </Form>
         }

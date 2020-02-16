@@ -4,6 +4,9 @@ export enum Routes {
   ABOUT = "/about",
   IMPRINT = "/imprint",
   DATA_PROTECTION = "/data-protection",
+  OFFLINE_TOOL_PLANNING = "/offline-tools/planning",
+  OFFLINE_TOOL_PROFILE = "/offline-tools/profile",
+  OFFLINE_TOOL_TEAM = "/offline-tools/team",
 
   // user handling
   LOGIN = "/user/login",

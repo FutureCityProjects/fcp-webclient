@@ -20,7 +20,7 @@ import { loadMyProjectsAction, submitFundApplicationAction } from "redux/actions
 import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectById } from "redux/reducer/data"
-import { selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
+import { selectIsProjectMember, selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
 
@@ -32,6 +32,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 const mapStateToProps = (state: AppState, { fundId, slug }) => ({
   fund: selectById<IFund>(state, EntityType.FUND, fundId),
   fundRequest: state.requests.fundLoading,
+  isMember: selectIsProjectMember(state, slug),
   isOwner: selectIsProjectOwner(state, slug),
   project: selectMyProjectByIdentifier(state, slug),
   projectRequest: state.requests.projectsLoading,
@@ -44,12 +45,13 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 }
 
 const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
-  const { fund, fundRequest, isOwner, project, projectRequest, submitApplication, t } = props
+  const { fund, fundRequest, isMember, isOwner, project, projectRequest, submitApplication, t } = props
 
   // @todo custom error message "project not found or no permission" etc.
   if (!projectRequest.isLoading && (!project || project.isLocked
     || project.progress === ProjectProgress.CREATING_PROFILE
-    || project.progress === ProjectProgress.CREATING_PLAN)
+    || project.progress === ProjectProgress.CREATING_PLAN
+    || !isMember)
   ) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={projectRequest.loadingError} />
@@ -80,8 +82,8 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
   }
 
   const now = new Date()
-  const submissionBegin = parseISO(fund.submissionBegin as string)
-  const submissionEnd = parseISO(fund.submissionEnd as string)
+  const submissionBegin = fund && parseISO(fund.submissionBegin as string)
+  const submissionEnd = fund && parseISO(fund.submissionEnd as string)
 
   return <BaseLayout pageTitle={t("page.projects.application.submit.title")}>
     <Row>
@@ -109,10 +111,10 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
           </CardHeader>
           <CardBody>
             <h5>{t("fund.submissionBegin")}</h5>
-            <p className={now < submissionBegin && "text-danger"}>{t("default.longDateTime", { value: fund.submissionBegin })}</p>
+            <p className={now < submissionBegin ? "text-danger" : undefined}>{t("default.longDateTime", { value: fund.submissionBegin })}</p>
 
             <h5>{t("fund.submissionEnd")}</h5>
-            <p className={now > submissionEnd && "text-danger"}>{t("default.longDateTime", { value: fund.submissionEnd })}</p>
+            <p className={now > submissionEnd ? "text-danger" : undefined}>{t("default.longDateTime", { value: fund.submissionEnd })}</p>
 
             {isOwner
               ? submissionBegin <= now && now <= submissionEnd

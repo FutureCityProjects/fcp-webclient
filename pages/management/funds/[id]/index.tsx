@@ -47,7 +47,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
   }
 
   const confirmDelete = (concretization) => {
-    if (confirm("Soll diese Zuspitzung wirklich gelöscht werden?")) {
+    if (confirm(t("message.fund.confirmDelete.concretization"))) {
       return deleteConcretization(concretization)
     }
 

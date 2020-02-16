@@ -7,7 +7,6 @@ import { AnyAction, Dispatch } from "redux"
 
 import { IProject } from "api/schema"
 import BaseLayout from "components/BaseLayout"
-import PageError from "components/common/PageError"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import IdeaForm from "components/project/IdeaForm"
 import { createIdeaAction, setNewIdeaAction } from "redux/actions/newIdea"
@@ -24,27 +23,26 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 const mapStateToProps = (state: AppState) => ({
   idea: state.newIdea, // do not use selectNewIdea(), we want the emptyIdea here
   isAuthenticated: selectIsAuthenticated(state),
-  request: state.requests.projectOperation,
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const IdeaCreationPage: I18nPage<PageProps> = (props) => {
-  const { request, t } = props
+const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
+  const { createIdea, idea, isAuthenticated, setNewIdea, t } = props
   const [ideaSaved, setIdeaSaved] = useState(false)
   const [ideaCreated, setIdeaCreated] = useState(false)
 
-  const onSubmit = (idea: IProject, actions: any) => {
-    if (props.isAuthenticated) {
+  const onSubmit = (values: IProject, actions: any) => {
+    if (isAuthenticated) {
       actions.success = () => {
         setIdeaCreated(true)
       }
-      props.createIdea(idea, actions)
+      createIdea(values, actions)
       return
     }
 
-    props.setNewIdea(idea)
+    setNewIdea(values)
     setIdeaSaved(true)
   }
 
@@ -66,8 +64,7 @@ const IdeaCreationPage: I18nPage<PageProps> = (props) => {
           <CardHeader>{t("form.idea.header")}</CardHeader>
           <CardBody>
             {!ideaSaved && !ideaCreated && <>
-              <PageError error={request.loadingError} />
-              <IdeaForm onSubmit={onSubmit} idea={props.idea} />
+              <IdeaForm onSubmit={onSubmit} idea={idea} />
             </>}
 
             {ideaCreated && <>

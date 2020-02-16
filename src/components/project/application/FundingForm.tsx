@@ -23,7 +23,11 @@ const FundingForm = ({ application, onSubmit }: IProps) => {
       isSubmitting,
       values,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} prefix="fundAppliaction" values={values} />
+        <GeneralFormError
+          errors={errors}
+          prefix="fundAppliaction"
+          excludeFields={["requestedFunding"]}
+        />
 
         <Field component={FormikInput}
           help="form.fundApplication.requestedFunding.help"

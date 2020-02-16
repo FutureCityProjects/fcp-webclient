@@ -73,7 +73,7 @@ const ProjectWorkPackages: React.FC<IPlanProps> = ({ functions, project, updateP
             onClick={togglePackageModal}
             title={t("form.project.workPackages.addPackage")}
           >
-            <Icon name="plus" size={24} />
+            <Icon name="plus" size={24} /> {t("project.workPackage.label")}
           </Button>
 
           <WorkPackageModal
@@ -104,7 +104,7 @@ const ProjectWorkPackages: React.FC<IPlanProps> = ({ functions, project, updateP
                 id="task-creation-form"
                 title={t("form.project.tasks.addTask")}
               >
-                <Icon name="plus" size={24} />
+                <Icon name="plus" size={24} /> {t("project.task.label")}
               </Button>
 
               <TaskPopover

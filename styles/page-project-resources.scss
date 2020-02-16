@@ -2,11 +2,16 @@
   /* reset the defaults spacing, we want the borders to collapse table-like */
   .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-12,
   .col-md-3, .col-md-4, .col-md-5, .col-md-7, .col-md-8, .col-md-9,
+  .col-sm-5, .col-sm-6, .col-sm-7,
   .card-body {
     padding: 0;
   }
   .row {
     margin: 0;
+  }
+
+  .btn-add {
+    margin-top: 0.3em;
   }
 
   .work-package-card {
@@ -18,10 +23,6 @@
     }
 
     .work-package-summary {
-      .work-package-add-task {
-        display:flex;
-        align-items: center;
-      }
       .package-sum {
         margin-top: 1.5em;
 
@@ -40,7 +41,6 @@
 
   .task-summary {
     .task-add-resource {
-      text-align: center;
       padding-top: 0.5em;
       padding-bottom: 1em;
     }
@@ -51,12 +51,16 @@
   }
 
   /* to align the edit/delete icons */
-  .resource-description-content {
-    display: block;
+  .resource-card:not(.resource-form) {
+    .resource-cost-content {
+      .icon-navigation {
+        display: block;
+        width: 4em;
 
-   .icon-navigation {
-      align-items: center;
-      margin-right: 2em;
+        .navigation-item  {    
+            float: right
+        }
+      }
     }
   }
 
@@ -78,13 +82,16 @@
     .own-costs-description,
     .own-costs-content,
     .proceeds-sum-description,
-    .proceeds-sum-content  {
+    .proceeds-sum-content,
+    .unassigned-sum-description,
+    .unassigned-sum-content  {
       font-weight: 600;
     }
 
     .total-cost-description,
     .funding-sum-description,
     .own-costs-description,
+    .unassigned-sum-description,
     .proceeds-sum-description {
       margin-top: 1em;
     }
@@ -110,15 +117,15 @@
       .total-cost-description,
       .funding-sum-description,
       .own-costs-description,
+      .unassigned-sum-description,
       .proceeds-sum-description {
         margin-top: 0;
       }
+    }
 
-      .proceeds-sum-description,
-      .proceeds-sum-content  {
-        border-bottom: 1px solid $custom-gray;
-        margin-bottom: 0.5em;
-      }
+    .total-sum:not(:first-child) {
+      border-top: 1px solid $custom-gray;
+      margin-top: 0.5em;
     }
   }
 
@@ -133,8 +140,31 @@
         margin: 0;
       }
 
-      .resource-source-content .icon-navigation {
-        margin: 0 auto;
+      .resource-description-label,
+      .resource-description-content,
+      .resource-source-label,
+      .resource-source-content,
+      .resource-cost-label,
+      .resource-cost-content,
+      .work-package-add-task,
+      .package-cost-content,
+      .package-cost-description {
+        padding: 0.5em 0.8em 0em;
+      }
+
+
+      .resource-cost-label,
+      .package-sum .package-cost-content,
+      .package-table-header .cost-label {
+        padding-right: 4.8rem;
+      }
+
+      .own-costs-sum .own-costs-content,
+      .funding-sum .funding-sum-content,
+      .proceeds-sum .proceeds-sum-content,
+      .unassigned-sum .unassigned-sum-content,
+      .total-sum .total-cost-content {
+        padding-right: 4rem;
       }
     }
   }
@@ -155,29 +185,16 @@
         margin: 0;
       }
 
+      .task-summary .task-add-resource,
+      .work-package-summary .work-package-add-task {
+        padding-left: 2em;
+      }
+
       .task-description-label,
       .task-description-content {
         padding: 0.5em 0.8em;
         margin: 0
       }
-    }
-    .resource-description-label,
-    .resource-description-content,
-    .resource-source-label,
-    .resource-source-content
-    .resource-cost-label,
-    .resource-cost-content,
-    .resource-source-label,
-    .resource-source-content,
-    .work-package-add-task,
-    .package-cost-content,
-    .package-cost-description {
-      padding: 0.5em 0.8em 0em;
-    }
-
-    .task-empty-resources-header {
-      display: block;
-      height: 2.85em;
     }
 
     .resource-description-content .icon-navigation {

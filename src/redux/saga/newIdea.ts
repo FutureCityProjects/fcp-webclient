@@ -7,7 +7,7 @@ import { AuthActionTypes, ISetAuthAction } from "redux/actions/auth"
 import { ICreateIdeaAction, NewIdeaActionTypes, resetNewIdeaAction } from "redux/actions/newIdea"
 import { addNotificationAction } from "redux/actions/notifications"
 import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
-import { createModelAction, createModelSuccessAction, setLoadingAction } from "redux/helper/actions"
+import { createModelAction, setLoadingAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
 import { selectNewIdea } from "redux/reducer/newIdea"
@@ -40,7 +40,7 @@ function* createIdeaSaga(action: ICreateIdeaAction) {
   // inject the current process, it's required
   action.idea.process = process["@id"]
 
-  return yield putWait(createModelAction(EntityType.PROJECT, action.idea, action.actions, "new_idea"))
+  return yield putWait(createModelAction(EntityType.PROJECT, action.idea, action.actions))
 }
 
 /**
@@ -71,9 +71,8 @@ function* createSavedIdeaSaga(action: ISetAuthAction) {
     newIdea.process = process["@id"]
 
     const savedIdea: IProject = yield call(apiClient.createProject, newIdea)
-    yield put(createModelSuccessAction(EntityType.PROJECT, savedIdea, "new_idea"))
     yield put(setLoadingAction("project_operation", false))
-    yield put(addNotificationAction("message.projectIdea.saved", "success"))
+    yield put(addNotificationAction("message.project.ideaSaved", "success"))
     yield put(resetNewIdeaAction())
 
     return savedIdea
@@ -108,9 +107,8 @@ function* postRegistrationSaga(action: ISetRegisteredUserAction) {
     if (createdProjects.hasOwnProperty(key)) {
       const project = createdProjects[key]
       if (project.progress === ProjectProgress.IDEA) {
-        yield put(addNotificationAction("message.projectIdea.saved", "success"))
+        yield put(addNotificationAction("message.project.ideaSaved", "success"))
         yield put(resetNewIdeaAction())
-        yield put(createModelSuccessAction(EntityType.PROJECT, createdProjects[key], "new_idea"))
       }
     }
   }

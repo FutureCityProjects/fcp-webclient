@@ -8,7 +8,7 @@ interface IProps {
 
 const ProgressSubBox: React.FC<IProps> = (props: IProps) =>
   <Link href={props.href}>
-    <a className="sub-status-card" target="_blank">
+    <a className="sub-status-card">
       <h3>
         {props.title}
       </h3>

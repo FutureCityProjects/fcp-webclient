@@ -39,7 +39,7 @@ class FormikInput extends FormikElement<IProps> {
         invalid={this.hasError()}
         placeholder={placeholder ? t(placeholder) : null}
         type={"select"}
-        selected={value === null ? "" : value}
+        value={value === null ? "" : value}
       >
         {optionElements}
       </Input>

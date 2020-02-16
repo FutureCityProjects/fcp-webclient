@@ -32,7 +32,11 @@ const SelfAssessmentForm: React.FC<IProps> = (props: IProps) => {
           isSubmitting,
           values,
         }) => <Form onSubmit={handleSubmit}>
-            <GeneralFormError errors={errors} prefix="fundApplication" values={values} />
+            <GeneralFormError
+              errors={errors}
+              prefix="fundApplication"
+              excludeFields={["applicationSelfAssessment"]}
+            />
 
             <Field component={FormikRange}
               help="form.fundApplication.applicationSelfAssessment.help"

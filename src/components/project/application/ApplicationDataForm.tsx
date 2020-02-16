@@ -56,7 +56,12 @@ const ApplicationDataForm = ({ onSubmit, project }: IProps) => {
           </CardHeader>
           <CardBody>
             <Row>
-              <Col><GeneralFormError errors={errors} prefix="project" values={values} /></Col>
+              <Col><GeneralFormError
+                errors={errors}
+                prefix="project"
+                excludeFields={["contactEmail", "contactName", "contactPhone", "holderAddressInfo",
+                  "holderCity", "holderName", "holderStreet", "holderZipCode"]}
+              /></Col>
             </Row>
             <Row>
               <Col>

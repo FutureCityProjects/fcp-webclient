@@ -263,7 +263,7 @@ export interface IProjectMembership {
   role?: MembershipRole
   skills?: string
   tasks?: string
-  user?: IUser
+  user?: IUser | string
 }
 
 export enum UserRole {

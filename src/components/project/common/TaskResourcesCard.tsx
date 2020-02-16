@@ -47,7 +47,7 @@ const TaskResourcesCard: React.FC<IProps> = (props: IProps) => {
 
       <Row className="task-summary">
         <Col md={showFinances ? 5 : 8} className={"task-add-resource" + (resourceRequirements.length ? " has-resources" : "")}>
-          {t("form.project.resourceRequirements.addResource")}
+          <span className="d-block d-md-none">{t("form.project.resourceRequirements.addResource")}</span>
           <Button
             aria-label={t("form.project.resourceRequirements.addResource")}
             className="btn btn-add btn-inline"
@@ -56,7 +56,7 @@ const TaskResourcesCard: React.FC<IProps> = (props: IProps) => {
             onClick={(e) => { toggleResourceModal(); e.currentTarget.blur() }}
             title={t("form.project.resourceRequirements.addResource")}
           >
-            <Icon name="plus" size={24} />
+            <Icon name="plus" size={24} /> {t("project.resourceRequirement.label")}
           </Button>
 
           <ResourceModal

@@ -51,7 +51,11 @@ const MemberApplicationForm = ({ application, onSubmit }: IProps) => {
       isSubmitting,
       values,
     }) => <Form onSubmit={handleSubmit}>
-        <GeneralFormError errors={errors} prefix="user" values={values} />
+        <GeneralFormError
+          errors={errors}
+          prefix="user"
+          excludeFields={["motivation", "skills"]}
+        />
 
         <Field component={FormikInput}
           help="form.project.apply.motivation.help"
