@@ -1,7 +1,7 @@
 import { WithTranslation } from "next-i18next"
 import React from "react"
 
-import { IProject, ProjectProgress, SelfAssessment } from "api/schema"
+import { IProject, IProjectMembership, MembershipRole, ProjectProgress, SelfAssessment } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import MyProjectCard from "components/project/MyProjectCard"
 
@@ -46,10 +46,14 @@ const MyProjectsPage: I18nPage<PageProps> = () => {
     slug: null,
   }
 
+  const membership: IProjectMembership = {
+    role: MembershipRole.MEMBER,
+  }
+
   return (
     <BaseLayout pageTitle="Meine Projekte">
-      <MyProjectCard project={p1} />
-      <MyProjectCard project={p2} />
+      <MyProjectCard project={p1} deleteMembership={(m) => console.log(m)} membership={membership} />
+      <MyProjectCard project={p2} deleteMembership={(m) => console.log(m)} membership={membership} />
     </BaseLayout>
   )
 
