@@ -77,13 +77,13 @@
     },
     "fundApplication": {
       "applicationSelfAssessment": {
-        "help": "@todo"
+        "help": "Nach deiner Einschätzung: Wie weit ist der der Förderantrag fortgeschritten?"
       },
       "concretization": {
         "placeholder": "Maximal {{maxLength, number}} Zeichen"
       },
       "concretizationSelfAssessment": {
-        "help": "@todo"
+        "help": "Nach deiner Einschätzung: Wie weit ist ist die Zuspitzung des Projekts auf die Fördertopf-Anforderungen fortgeschritten?"
       },
       "requestedFunding": {
         "help": "@todo",
@@ -587,19 +587,19 @@
     },
     "offlineTools": {
       "planning": {
-        "heading": "Projekt-Planung",
-        "intro": "Download: <a href=\"/assets/files/Kneipentool_Planung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Planung\">Arbeitsblatt zur Planung</a>",
-        "title": "Projekt-Planung"
+        "heading": "Kneipentools zur Projekt-Planung",
+        "intro": "Download: <ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Material_B_Massnahmen-Arbeitspakete-Zeitplan_20171023.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Planung\">Arbeitsblatt \"Maßnahmen, Arbeitspakete, Zeitplan\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Zur Finanzplanung stehen zwei Kneipentools zur Verfügung. Welches hilft euch besser?<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Finanzierung_171114.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 1)</a> (einmal pro Gruppe auf A2 drucken)</li><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Material_C_RessourcenbedarfFinanzierung_20171016.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 2)</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Plant ihr eine CrowdFunding-Kampagne? Hier gibt es ein Kneipentool, mit dem ihr auch den Video-Dreh zum CrowdFunding vordenken könnt:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/04/Arbeitsmaterial-CrowdVoting.pdf\">Arbeitsmaterial \"Video&Voting\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul>",
+        "title": "Kneipentools: Projekt-Planung"
       },
       "profile": {
-        "heading": "Projekt-Profil",
-        "intro": "Download: <a href=\"/assets/files/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">@todo</a>",
-        "title": "Projekt-Profil"
+        "heading": "Kneipentools zum Projekt-Profil",
+        "intro": "<p>Ein Projekt-Profil ist wie ein Steckbrief: Kurz und knapp sollte man erfahren, worum es in dem Projekt geht. Das Kneipentool zum Projekt-Profil führt euch an die wichtigsten Fragen heran:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/DD2030_Projekt_Profil.pdf\" target=\"_blank\" title=\"Arbeitsblatt Projektprofil\">Arbeitsblatt \"Projektprofil\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Gute Projekte für die nachhaltige Stadtentwicklung folgen einer klaren Vision. Das Visions-Blatt hilft euch, eine gemeinsame Vision zu entwickeln, zu der euer Projekt beiträgt. Das Visions-Blatt ist in Dresden für die Zukunftsstadt-Phase I entstanden: setzt überall dort, wo \"Dresden\" steht, einfach den Namen eures Heimatortes ein. <strong>Achtung:</strong> Dieses Kneipentool bringt euch zum Zeichnen! Eure Vision sollte möglichst bildhaft sein! Nehmt Buntstifte mit!</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Visionsblatt_Zukunftsstadt_Dresden_druck-1.pdf\" target=\"_blank\" title=\"Arbeitsblatt Vision\">Das \"Visions-Blatt\" aus Zukunftsstadt-Phase I</a> (einmal pro Gruppe auf A2 drucken, bunte Stifte sind hilfreich)</li></ul>",
+        "title": "Kneipentools: Projekt-Profil"
       },
       "team": {
-        "heading": "Projekt-Planung",
-        "intro": "Download: <a href=\"/assets/files/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a>",
-        "title": "Projekt-Planung"
+        "heading": "Kneipentools zur Teamfindung",
+        "intro": "<blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Das Kneipentool zur Teamfindung wird für jeden Menschen in der Projektgruppe einmal auf A4 gedruckt. Dann arbeitet ihr immer paarweise: Zwei Leute fragen sich gegenseitig. Ihr lernt euch so gegenseitig kennen, und ihr lernt auch mehr über eure eigene Arbeitsweise in Projekten. So stellt ihr fest, welche Fähigkeiten in eurem Team schon vorhanden sind. Ihr merkt aber vielleicht auch, welche Fähigkeiten euch noch im Team fehlen. Besser ist es, solche Lücken frühzeitig zu erkennen. Je früher und besser sich das Team kennenlernt, umso besser ist das für das Projekt, an dem ihr arbeitet!</p><p>Downloads: <ul><li><a href=\"http://zukunftsstadt.de/wp-content/uploads/2020/02/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a> (so oft auf A4 drucken wie es Mitglieder im Team gibt)</li></ul></p><p>Das Arbeitsblatt aus dem Dresdner Zukunftsstadt-Prozess fragt euch, wie ihr als Team funktioniert:<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Workshop2_Team_Profil_final_2017_05_24.pdf\">Team-Profil aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul></p>",
+        "title": "Kneipentools: Teamfindung"
       }
     },
     "process": {
@@ -859,7 +859,7 @@
       "plan": "Plan",
       "planTool": "Planung",
       "profile": "Profil",
-      "profileTool": "Profile",
+      "profileTool": "Profil",
       "project": "Projekt",
       "selectFund": "Wählen",
       "submitApplication": "Einreichen",
