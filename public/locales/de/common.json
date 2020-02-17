@@ -29,7 +29,7 @@
         "help": "nach Beginn der Besprechung und nach Bewertungsabschluss"
       },
       "imprint": {
-        "help": "Verantwortliche (juristische) Person & Kontakt des Fördertopfes",
+        "help": "Welche (juristische) Person ist für den Fördertopf verantwortlich und wen kann man wie kontaktieren",
         "placeholder": "20 - 5.000 Zeichen"
       },
       "jurorsPerApplication": {
@@ -77,40 +77,40 @@
     },
     "fundApplication": {
       "applicationSelfAssessment": {
-        "help": "@todo"
+        "help": "Nach deiner Einschätzung: Wie weit ist der der Förderantrag fortgeschritten?"
       },
       "concretization": {
         "placeholder": "Maximal {{maxLength, number}} Zeichen"
       },
       "concretizationSelfAssessment": {
-        "help": "@todo"
+        "help": "Nach deiner Einschätzung: Wie weit ist ist die Zuspitzung des Projekts auf die Fördertopf-Anforderungen fortgeschritten?"
       },
       "requestedFunding": {
-        "help": "@todo",
+        "help": "Gib hier die Summe an, die ihr aus dem Fördertopf erhalten wollt. Es darf nicht mehr sein als die maximale Fördersumme und nicht weniger als die minimale Fördersumme.",
         "placeholder": "Ganzzahl"
       }
     },
     "fundConcretization": {
       "description": {
-        "help": "@todo",
-        "placeholder": "1 - 1.000 Zeichen"
+        "help": "Erläutern Sie hier, wie die Antragsteller diese Frage beantworten sollen oder was bei der Antwort wichtig ist.",
+        "placeholder": "Unsere Fördergelder sollen nur solchen Projekten zugute kommen, die unsere Stadt wirklich nachhaltiger machen. Projekte müssen deshalb gut begründen, wie sie dies erreichen wollen."
       },
       "maxLength": {
-        "help": "Maximallänge der vom Benutzer angebbaren Antwort",
+        "help": "Hinweis: auf eine A4-Seite passen fast 3000 Zeichen in Schriftgröße 12.",
         "placeholder": "Ganzzahl zwischen 1 und 2.000"
       },
       "question": {
-        "help": "@todo",
-        "placeholder": "1 - 1.000 Zeichen"
+        "help": "Eine gute Zuspitzungsfrage endet mit einem Fragezeichen: ? Sie muss vom Projektteam beantwortet werden und kann bei der Bewertung eingehender Förderanträge ausgewertet werden.",
+        "placeholder": "Wie stellen Sie sicher, dass ihr Projekt unsere Stadt nachhaltiger macht?"
       },
-      "header": "Zuspitzung definieren"
+      "header": "Zuspitzungsfrage definieren"
     },
     "idea": {
-      "header": "Idee eingeben",
+      "header": "Ich habe folgende Projektidee für unsere Stadt:",
       "shortDescription": {
-        "help": "Was willst du erreichen? Was soll getan werden?",
+        "help": "Um deine Idee zu formulieren kannst du dich fragen: Was willst du mit der Idee erreichen? Was soll getan werden?",
         "label": "",
-        "placeholder": "Kurze Beschreibung, 10 - 280 Zeichen"
+        "placeholder": "Kurze Beschreibung, maximal 280 Zeichen"
       }
     },
     "login": {
@@ -128,11 +128,11 @@
     },
     "process": {
       "criteria": {
-        "help": "@todo",
+        "help": "Wenn Sie sich Projekte vorstellen, deren Planung und Umsetzung in diesem Prozess unterstützt werden sollen, welche Eigenschaften sollen diese Projekte haben?",
         "placeholder": "5 - 1.000 Zeichen"
       },
       "description": {
-        "help": "Öffentliche Beschreibung des Prozesses",
+        "help": "Beschreibung des Prozesses",
         "placeholder": "20 - 5.000 Zeichen"
       },
       "goals": {
@@ -140,12 +140,12 @@
         "placeholder": "5 - 1.000 Zeichen"
       },
       "imprint": {
-        "help": "Verantwortliche (juristische) Person & Kontakt des Prozesses",
-        "placeholder": "@todo"
+        "help": "Welche (juristische) Person ist für den Prozess verantwortlich und wen kann man wie kontaktieren?",
+        "placeholder": "Große Kreisstadt\nMusterstadt\nDie Oberbürgermeisterin\nAm Mustermarkt 1\n01199 Musterstadt\n\nAnsprechpartner: Silvia Musterfrau\npartizipation@musterstadt.eu\nTelefon: 0331/7097110"
       },
       "name": {
-        "help": "Bezeichnung",
-        "placeholder": "@todo"
+        "help": "Geben Sie Ihrem Beteiligungsprozess einen verständlichen Namen.",
+        "placeholder": "Zukunftsstadt Musterstadt"
       },
       "region": {
         "help": "Auf welches geographische Gebiet ist dieser Prozess ausgerichtet?",
@@ -160,30 +160,30 @@
         "header": "Angaben zum Förderantrag"
       },
       "apply": {
-        "header": "Angaben zur Bewerbung",
+        "header": "Warum interessiert dich dieses Projekt?",
         "motivation": {
           "help": "Was motiviert dich an diesem Projekt mitzuwirken?",
-          "label": "Motivation",
+          "label": "Meine Motivation",
           "placeholder": "mindestens 10 Zeichen"
         },
         "skills": {
-          "help": "Welche deiner Fähigkeiten willst du in das Projekt einbringen?",
-          "label": "Fähigkeiten",
+          "help": "Welche deiner Fähigkeiten willst du in das neue Projekt einbringen?",
+          "label": "Meine Fähigkeiten",
           "placeholder": "mindestens 10 Zeichen"
         }
       },
       "create": {
         "motivation": {
           "help": "Was motiviert dich diese Idee umzusetzen?",
-          "label": "Motivation",
+          "label": "Meine Motivation",
           "placeholder": "mindestens 10 Zeichen"
         },
         "skills": {
           "help": "Welche deiner Fähigkeiten willst du in das neue Projekt einbringen?",
-          "label": "Fähigkeiten",
+          "label": "Meine Fähigkeiten",
           "placeholder": "mindestens 10 Zeichen"
         },
-        "header": "Angaben zu dir"
+        "header": "Warum interessiert dich diese Projekt-Idee?"
       },
       "plan": {
         "header": "Angaben zum Projektplan",
@@ -410,7 +410,7 @@
     "submit": "Absenden"
   },
   "fund": {
-    "briefingDate": "Jurybesprechung",
+    "briefingDate": "Jury-Briefing",
     "budget": "Gesamtbudget",
     "criteria": "Kriterien",
     "concretizations": "Zuspitzungen",
@@ -444,7 +444,7 @@
   "fundConcretization": {
     "description": "Erläuterung zur Frage",
     "question": "Zuspitzungsfrage",
-    "maxLength": "Maximale Antwortlänge: Wie viele Zeichen lang darf die Antwort auf diese Frage höchsten sein? Hinweis: auf eine A4-Seite passen fast 3000 Zeichen in Schriftgröße 12."
+    "maxLength": "Maximale Antwortlänge: Wie viele Zeichen lang darf die Antwort auf diese Frage höchsten sein?"
   },
   "goto": {
     "about": "Worum geht's?",
@@ -467,7 +467,7 @@
     "home": "Zur Startseite",
     "login": "Jetzt einloggen",
     "marketplace": "Zum Projektmarktplatz",
-    "memberApplication": "Als Mitarbeiter bewerben",
+    "memberApplication": "beim Projekt mitmachen",
     "myProjects": "Zur Projektübersicht",
     "planOverview": "Zur Projektplanübersicht",
     "profileOverview": "Zum Projektprofil",
@@ -516,7 +516,7 @@
   "page": {
     "about": {
       "heading": "Was ist die PROJEKT.WERK.STADT?",
-      "intro": "<p>Willkommen in der Projekt.Werk.Stadt! Sie haben eine Projektidee für Ihre Stadt oder Region? Sie wollen mit anderen zusammen Projekte planen und umsetzen?</p><p>Die Projekt.Werk.Stadt ist der Ort um miteinander Projekte zu durchdenken und vielleicht sogar Fördergelder dafür zu beantragen!</p><ul><li>Stadt- und Dorfbewohner und -bewohnerinnen planen hier Projekte.</li><li>Prozesssteuerer organisieren hier ihren Partizipationsprozess.</li><li>Gemeinsam machen Sie Ihre Stadt oder ihr Dorf zu einem nachhaltigeren und lebenswerteren Ort.</li></ul><p>Sie wollen die Projekt.Werk.Stadt in ihrer Kommune einsetzen oder Projekte darauf planen? Sprechen Sie uns an!</p><p>norbert.rost@zukunftsstadt.de, 0351/4466069</p>",
+      "intro": "<p>Willkommen in der Projekt.Werk.Stadt! Sie haben eine Projektidee für Ihre Stadt oder Region? Sie wollen mit anderen zusammen Projekte planen und umsetzen?</p><p>Die Projekt.Werk.Stadt ist der Ort um miteinander Projekte zu durchdenken und vielleicht sogar Fördergelder dafür zu beantragen!</p><ul><li>Stadt- und Dorfbewohner und -bewohnerinnen planen hier Projekte.</li><li>Prozesssteuerer organisieren hier ihren Partizipationsprozess.</li><li>Gemeinsam machen Sie Ihre Stadt oder ihr Dorf zu einem nachhaltigeren und lebenswerteren Ort.</li></ul><p>Die Projekt.Werk.Stadt bietet eine Online-Plattform, auf der Bürgerinnen digital Projekte planen, während sie mit sogenannten \"Kneipentools\" auch offline unterstützt werden. Die Fokussierung der Plattform auf <strong>Bürgerbeteiligung</strong> in <strong>Städten und Dörfern</strong> mit einer Ausrichtung auf <strong>nachhaltige Entwicklung</strong> und der <strong>Verbindung aus online und offline</strong> macht die Projekt.Werk.Stadt so nützlich!</p><p>Sie wollen die Projekt.Werk.Stadt in ihrer Kommune einsetzen oder Projekte darauf planen? Sprechen Sie uns an!</p><p>norbert.rost@zukunftsstadt.de, 0351/4466069</p>",
       "title": "Worum geht's?"
     },
     "dataProtection": {
@@ -529,7 +529,7 @@
         "title": "Projektidee eintragen",
         "heading": "Neue Projektidee",
         "intro": "Hier kannst du eine neue Projektidee eintragen. Du selbst oder jemand anderes kann sie dann zu einem Projekt weiterentwickeln.",
-        "ideaCreated": "Vielen Dank, deine Idee wurde gespeichert!",
+        "ideaCreated": "Vielen Dank, deine Projekt-Idee wurde dem Ideen-Marktplatz hinzugefügt!",
         "addOtherIdea": "Weitere Idee eintragen",
         "ideaNotSaved": "Vielen Dank, um deine Idee zu sichern brauchst du ein Benutzerkonto.",
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird die Idee abgepeichert!",
@@ -587,19 +587,19 @@
     },
     "offlineTools": {
       "planning": {
-        "heading": "Projekt-Planung",
-        "intro": "Download: <a href=\"/assets/files/Kneipentool_Planung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Planung\">Arbeitsblatt zur Planung</a>",
-        "title": "Projekt-Planung"
+        "heading": "Kneipentools zur Projekt-Planung",
+        "intro": "Download: <ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Material_B_Massnahmen-Arbeitspakete-Zeitplan_20171023.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Planung\">Arbeitsblatt \"Maßnahmen, Arbeitspakete, Zeitplan\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Zur Finanzplanung stehen zwei Kneipentools zur Verfügung. Welches hilft euch besser?<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Finanzierung_171114.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 1)</a> (einmal pro Gruppe auf A2 drucken)</li><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Material_C_RessourcenbedarfFinanzierung_20171016.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 2)</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Plant ihr eine CrowdFunding-Kampagne? Hier gibt es ein Kneipentool, mit dem ihr auch den Video-Dreh zum CrowdFunding vordenken könnt:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/04/Arbeitsmaterial-CrowdVoting.pdf\">Arbeitsmaterial \"Video&Voting\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul>",
+        "title": "Kneipentools: Projekt-Planung"
       },
       "profile": {
-        "heading": "Projekt-Profil",
-        "intro": "Download: <a href=\"/assets/files/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">@todo</a>",
-        "title": "Projekt-Profil"
+        "heading": "Kneipentools zum Projekt-Profil",
+        "intro": "<p>Ein Projekt-Profil ist wie ein Steckbrief: Kurz und knapp sollte man erfahren, worum es in dem Projekt geht. Das Kneipentool zum Projekt-Profil führt euch an die wichtigsten Fragen heran:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/DD2030_Projekt_Profil.pdf\" target=\"_blank\" title=\"Arbeitsblatt Projektprofil\">Arbeitsblatt \"Projektprofil\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Gute Projekte für die nachhaltige Stadtentwicklung folgen einer klaren Vision. Das Visions-Blatt hilft euch, eine gemeinsame Vision zu entwickeln, zu der euer Projekt beiträgt. Das Visions-Blatt ist in Dresden für die Zukunftsstadt-Phase I entstanden: setzt überall dort, wo \"Dresden\" steht, einfach den Namen eures Heimatortes ein. <strong>Achtung:</strong> Dieses Kneipentool bringt euch zum Zeichnen! Eure Vision sollte möglichst bildhaft sein! Nehmt Buntstifte mit!</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Visionsblatt_Zukunftsstadt_Dresden_druck-1.pdf\" target=\"_blank\" title=\"Arbeitsblatt Vision\">Das \"Visions-Blatt\" aus Zukunftsstadt-Phase I</a> (einmal pro Gruppe auf A2 drucken, bunte Stifte sind hilfreich)</li></ul>",
+        "title": "Kneipentools: Projekt-Profil"
       },
       "team": {
-        "heading": "Projekt-Planung",
-        "intro": "Download: <a href=\"/assets/files/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a>",
-        "title": "Projekt-Planung"
+        "heading": "Kneipentools zur Teamfindung",
+        "intro": "<blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Das Kneipentool zur Teamfindung wird für jeden Menschen in der Projektgruppe einmal auf A4 gedruckt. Dann arbeitet ihr immer paarweise: Zwei Leute fragen sich gegenseitig. Ihr lernt euch so gegenseitig kennen, und ihr lernt auch mehr über eure eigene Arbeitsweise in Projekten. So stellt ihr fest, welche Fähigkeiten in eurem Team schon vorhanden sind. Ihr merkt aber vielleicht auch, welche Fähigkeiten euch noch im Team fehlen. Besser ist es, solche Lücken frühzeitig zu erkennen. Je früher und besser sich das Team kennenlernt, umso besser ist das für das Projekt, an dem ihr arbeitet!</p><p>Downloads: <ul><li><a href=\"http://zukunftsstadt.de/wp-content/uploads/2020/02/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a> (so oft auf A4 drucken wie es Mitglieder im Team gibt)</li></ul></p><p>Das Arbeitsblatt aus dem Dresdner Zukunftsstadt-Prozess fragt euch, wie ihr als Team funktioniert:<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Workshop2_Team_Profil_final_2017_05_24.pdf\">Team-Profil aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul></p>",
+        "title": "Kneipentools: Teamfindung"
       }
     },
     "process": {
@@ -624,7 +624,7 @@
         "title": "Projekt erstellen",
         "heading": "Idee übernehmen",
         "intro": "Hier kannst du aus der gewählten Idee ein neues Projekt erstellen.",
-        "inspiration": "Deine Inspiration, die ursprüngliche Projektidee",
+        "inspiration": "Deine Inspiration ist folgende Projektidee:",
         "projectCreated": "Vielen Dank, dein Projekt wurde erstellt!",
         "projectNotSaved": "Vielen Dank, um dein Projekt zu sichern brauchst du ein Benutzerkonto.",
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird das Projekt erstellt!",
@@ -647,14 +647,14 @@
         }
       },
       "apply": {
-        "applicationCreated": "Vielen Dank, deine Bewerbung wurde abgeschickt!",
-        "applicationNotSaved": "Vielen Dank, um deine Bewerbung final einzureichen brauchst du ein Benutzerkonto.",
+        "applicationCreated": "Schön, dass du das Projekt unterstützen willst! Deine Bewerbung wurde abgeschickt!",
+        "applicationNotSaved": "Schön, dass du dieses Projekt unterstützen willst! Um deine Bewerbung einzureichen und mitzumachen brauchst du ein Benutzerkonto.",
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird die Bewerbung abgeschickt!",
         "saveViaRegistration": "Noch kein Konto auf der Plattform? Nach der Registrierung wird deine Bewerbung abgeschickt und bei Freischaltung deines Kontos für den Teamleiter sichtbar.",
-        "heading": "Bewerbung als Teammitglied",
-        "intro": "Hier kannst du dich als Mitarbeiter für das gewählte Projekt bewerben, der Teamleiter kann dann nach Prüfung deine Bewerbung akzpetieren.",
+        "heading": "Teammitglied werden",
+        "intro": "Hier kannst du dich zur Mitarbeit an folgendem Projekt bewerben. Der Teamleiter muss deiner Bewerbung zustimmen, bevor du mitarbeiten kannst.",
         "membershipExists": "Du bist bereits Mitglied dieses Projekts oder deine Bewerbung ist noch offen.",
-        "title": "Mitgliedsbewerbung"
+        "title": "Teammitglied werden"
       },
       "profile": {
         "index": {
@@ -743,7 +743,7 @@
         },
         "funding": {
           "heading": "Fördersumme bearbeiten",
-          "intro": "Hier kannst du die gewünschte Fördersumme des Projekts <em>{{projectName}}</em> bearbeiten.",
+          "intro": "Hier kannst du die gewünschte Fördersumme des Projekts <em>{{projectName}}</em> festlegen.",
           "title": "Fördersumme bearbeiten"
         },
         "submit": {
@@ -767,7 +767,7 @@
         "title": "Login"
       },
       "projects": {
-        "applicationOpen": "Deine Bewerbung als Teammitglied ist noch offen.",
+        "applicationOpen": "Deine Bewerbung als Teammitglied wurde noch nicht akzeptiert. Bitte gedulde dich noch etwas.",
         "deleteMyApplication": "Bewerbung zurückziehen",
         "title": "Meine Projekte"
       },
@@ -780,11 +780,11 @@
     }
   },
   "process": {
-    "criteria": "Kriterien",
+    "criteria": "Eigenschaften erwünschter Projekte",
     "description": "Beschreibung",
     "goals": "Ziele",
-    "imprint": "Impressum",
-    "name": "Name",
+    "imprint": "Impressum & Kontakt",
+    "name": "Name des Prozesses",
     "region": "Region"
   },
   "progress": {
@@ -859,7 +859,7 @@
       "plan": "Plan",
       "planTool": "Planung",
       "profile": "Profil",
-      "profileTool": "Profile",
+      "profileTool": "Profil",
       "project": "Projekt",
       "selectFund": "Wählen",
       "submitApplication": "Einreichen",
