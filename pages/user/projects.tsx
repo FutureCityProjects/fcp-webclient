@@ -43,9 +43,10 @@ const MyProjectsPage: I18nPage<PageProps> = (props: PageProps) => {
   const wrappedProjects = hasProjects
     ? myProjects.map((project) =>
       <MyProjectCard
+        deleteMembership={deleteMembership}
+        isSingle={myProjects.length === 1}
         key={project.id}
         project={project}
-        deleteMembership={deleteMembership}
         membership={myMemberships && myMemberships.find((m) => (m.project as IProject).id === project.id)}
       />)
     : null

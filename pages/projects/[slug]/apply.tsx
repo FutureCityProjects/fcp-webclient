@@ -12,10 +12,11 @@ import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import MemberApplicationForm from "components/project/MemberApplicationForm"
+import { loadCurrentUserAction } from "redux/actions/currentUser"
 import { createMemberApplicationAction, setNewMemberApplicationAction } from "redux/actions/memberApplication"
 import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
-import { selectIsAuthenticated } from "redux/reducer/auth"
+import { selectCurrentUser, selectIsAuthenticated } from "redux/reducer/auth"
 import { EntityType, selectById, selectProjectBySlug } from "redux/reducer/data"
 import { selectMyProjectIDs } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
@@ -102,14 +103,30 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
           <CardBody>
             {!applicationSaved && !applicationCreated && <>
               {myProjectIds && myProjectIds.includes(project.id)
-                ? <span className="text-danger">{t("page.projects.apply.membershipExists")}</span>
+                ? <CardText className="text-center">
+                  <span className="text-danger">{t("page.projects.apply.membershipExists")}</span>
+                  <br />
+                  <Link href={Routes.MY_PROJECTS}>
+                    <a className="btn btn-primary">{t("navigation.myProjects")}</a>
+                  </Link>
+                </CardText>
                 : <MemberApplicationForm onSubmit={onSubmit} application={application} />
               }
             </>}
 
             {applicationCreated && <>
-              <CardText className="text-success">
+              <CardText className="text-info">
                 <TranslatedHtml content="page.projects.apply.applicationCreated" />
+              </CardText>
+              <CardText className="text-center">
+                <Link href={Routes.MY_PROJECTS}>
+                  <a className="btn btn-primary">{t("navigation.myProjects")}</a>
+                </Link>
+              </CardText>
+              <CardText className="text-center">
+                <Link href={Routes.MARKETPLACE}>
+                  <a className="btn btn-secondary">{t("goto.marketplace")}</a>
+                </Link>
               </CardText>
             </>}
 
@@ -153,6 +170,11 @@ ProjectApplicationPage.getInitialProps = ({ store, query }: NextJSContext) => {
     }
   } else if (slug && !selectProjectBySlug(store.getState(), slug)) {
     store.dispatch(loadModelAction(EntityType.PROJECT, { slug }))
+  }
+
+  // fetch the user now, we want to check if he is already a member of the selected project
+  if (selectIsAuthenticated(store.getState()) && !selectCurrentUser(store.getState())) {
+    store.dispatch(loadCurrentUserAction())
   }
 
   return { id, slug, namespacesRequired: includeDefaultNamespaces() }

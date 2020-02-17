@@ -60,7 +60,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
   }
 
   const onSubmit = (values: IProjectCreation, actions: any) => {
-    project.inspiration = inspiration["@id"]
+    values.inspiration = inspiration["@id"]
 
     if (isAuthenticated) {
       // @todo directly redirect to the profile form?

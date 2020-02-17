@@ -9,6 +9,7 @@ import FormikInput from "components/common/form/FormikInput"
 import FormikRTE from "components/common/form/FormikRTE"
 import GeneralFormError from "components/common/form/GeneralFormError"
 import Icon from "components/common/Icon"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import Link from "next/link"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
@@ -162,6 +163,8 @@ const FundForm = ({ onSubmit, fund = {
             </div>
           </CardHeader>
           <CardBody>
+            <p><TranslatedHtml content="form.fund.fundingHelp" /></p>
+
             <Field component={FormikInput}
               help="form.fund.budget.help"
               label="fund.budget"
@@ -224,6 +227,8 @@ const FundForm = ({ onSubmit, fund = {
             </div>
           </CardHeader>
           <CardBody>
+            <p><TranslatedHtml content="form.fund.applicationHelp" /></p>
+
             <Field component={FormikDate}
               help="form.fund.submissionBegin.help"
               label="fund.submissionBegin"
@@ -264,6 +269,8 @@ const FundForm = ({ onSubmit, fund = {
             </div>
           </CardHeader>
           <CardBody>
+            <p><TranslatedHtml content="form.fund.juryHelp" /></p>
+
             <Field component={FormikInput}
               help="form.fund.jurorsPerApplication.help"
               label="fund.jurorsPerApplication"

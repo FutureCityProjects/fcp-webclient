@@ -6,6 +6,8 @@ import { Col, Row, Spinner } from "reactstrap"
 
 import { UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
+import PageError from "components/common/PageError"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { withAuth } from "components/hoc/withAuth"
 import { loadCurrentUserAction } from "redux/actions/currentUser"
 import { AppState } from "redux/reducer"
@@ -20,19 +22,19 @@ const mapStateToProps = (state: AppState) => ({
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
-const ProfilePage: I18nPage<PageProps> = ({ currentUser, request }) => {
-  return <BaseLayout pageTitle="Dein Profil">
+const ProfilePage: I18nPage<PageProps> = ({ currentUser, request, t }) => {
+  return <BaseLayout pageTitle={t("page.user.profile.title")}>
     <Row>
       <Col>
-        <h1>Profil</h1>
-        {request.loadingError && <p className="text-danger">{request.loadingError}</p>}
-
-        {currentUser
-          ? <>
-            <p>Hallo {currentUser.username}!</p>
-            <p>Deine Email-Adresse: {currentUser.email}</p>
-          </>
-          : <Spinner />
+        {request.isLoading
+          ? <Spinner />
+          : !currentUser
+            ? <PageError error={request.loadingError} />
+            : <>
+              <h1>{t("page.user.profile.heading", { username: currentUser.username })}</h1>
+              <p><TranslatedHtml content="page.user.profile.intro" params={{ username: currentUser.username }} /></p>
+              <p>Deine Email-Adresse: {currentUser.email}</p>
+            </>
         }
       </Col>
     </Row>

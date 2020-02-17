@@ -64,7 +64,7 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
         }
       }
 
-      Router.push(Routes.USER_PROFILE)
+      Router.push(Routes.MY_PROJECTS)
     }
 
     setLoggingIn(true)

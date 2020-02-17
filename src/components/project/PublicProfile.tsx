@@ -15,6 +15,7 @@ interface IProps {
 
 const PublicProfile: React.FC<IProps> = ({ project }: IProps) => {
   const { t } = useTranslation()
+
   return <Card>
     <div className="project-profile">
       <CardHeader>

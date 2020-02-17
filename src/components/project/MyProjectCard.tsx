@@ -8,6 +8,7 @@ import ProjectStatus from "./ProjectStatus"
 
 interface IProps {
   deleteMembership: any
+  isSingle?: boolean
   membership: IProjectMembership
   project: IProject
 }
@@ -24,11 +25,11 @@ const hashMatchesProject = (project) => {
   return window.location.hash === "#project-" + project.id
 }
 
-const MyProjectCard: React.FC<IProps> = ({ deleteMembership, membership, project }: IProps) => {
+const MyProjectCard: React.FC<IProps> = ({ deleteMembership, isSingle = false, membership, project }: IProps) => {
   const { t } = useTranslation()
   const [isOpen, setIsOpen] = useState(false)
   const toggle = () => { setIsOpen(!isOpen) }
-  useEffect(() => { setIsOpen(hashMatchesProject(project)) }, [])
+  useEffect(() => { setIsOpen(isSingle || hashMatchesProject(project)) }, [])
 
   const confirmDeleteApplication = (application) => {
     if (confirm(t("message.project.confirmDelete.myApplication"))) {
@@ -75,9 +76,9 @@ const MyProjectCard: React.FC<IProps> = ({ deleteMembership, membership, project
           {membership.role === MembershipRole.APPLICANT
             ? <>
               {t("page.user.projects.applicationOpen")}
-              <a className="btn btn-inline text-danger" onClick={() => confirmDeleteApplication(membership)}
+              <a className="btn btn-inline" onClick={() => confirmDeleteApplication(membership)}
                 title={t("page.user.projects.deleteMyApplication")}>
-                <Icon name="cancel" size={24} />
+                <Icon name="trash" size={24} />
               </a>
             </>
             : <ProjectStatus project={project} />

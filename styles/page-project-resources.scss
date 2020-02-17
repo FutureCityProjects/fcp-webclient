@@ -123,6 +123,7 @@
       }
     }
 
+    /* show border only if there are other rows before (finances view) */
     .total-sum:not(:first-child) {
       border-top: 1px solid $custom-gray;
       margin-top: 0.5em;

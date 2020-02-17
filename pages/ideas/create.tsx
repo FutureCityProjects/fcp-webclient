@@ -5,7 +5,7 @@ import { connect, ConnectedProps } from "react-redux"
 import { Button, Card, CardBody, CardHeader, CardText, Col, Row } from "reactstrap"
 import { AnyAction, Dispatch } from "redux"
 
-import { IProject } from "api/schema"
+import { IProject, IProjectCreation } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import IdeaForm from "components/project/IdeaForm"
@@ -13,11 +13,11 @@ import { createIdeaAction, setNewIdeaAction } from "redux/actions/newIdea"
 import { AppState } from "redux/reducer"
 import { selectIsAuthenticated } from "redux/reducer/auth"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
-import { Routes } from "services/routes"
+import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  createIdea: (idea: IProject, actions: any) => dispatch(createIdeaAction(idea, actions)),
-  setNewIdea: (idea: IProject) => dispatch(setNewIdeaAction(idea)),
+  createIdea: (idea: IProjectCreation, actions: any) => dispatch(createIdeaAction(idea, actions)),
+  setNewIdea: (idea: IProjectCreation) => dispatch(setNewIdeaAction(idea)),
 })
 
 const mapStateToProps = (state: AppState) => ({
@@ -31,12 +31,12 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
   const { createIdea, idea, isAuthenticated, setNewIdea, t } = props
   const [ideaSaved, setIdeaSaved] = useState(false)
-  const [ideaCreated, setIdeaCreated] = useState(false)
+  const [ideaCreated, setIdeaCreated] = useState<IProject>(null)
 
-  const onSubmit = (values: IProject, actions: any) => {
+  const onSubmit = (values: IProjectCreation, actions: any) => {
     if (isAuthenticated) {
-      actions.success = () => {
-        setIdeaCreated(true)
+      actions.success = (result) => {
+        setIdeaCreated(result)
       }
       createIdea(values, actions)
       return
@@ -48,7 +48,7 @@ const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
 
   const resetIdea = () => {
     setIdeaSaved(false)
-    setIdeaCreated(false)
+    setIdeaCreated(null)
   }
 
   return <BaseLayout pageTitle={t("page.ideas.create.title")}>
@@ -68,11 +68,24 @@ const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
             </>}
 
             {ideaCreated && <>
-              <CardText className="text-success">
+              <CardText className="text-info">
                 <TranslatedHtml content="page.ideas.create.ideaCreated" />
+              </CardText>
+              <CardText className="quote">
+                <blockquote>{ideaCreated.shortDescription}</blockquote>
+              </CardText>
+              <CardText className="text-center">
+                <Link href={routeWithParams(Routes.CREATE_PROJECT, { id: ideaCreated.id })}>
+                  <a className="btn btn-primary">{t("goto.newProject")}</a>
+                </Link>
               </CardText>
               <CardText className="text-center">
                 <Button onClick={resetIdea}>{t("page.ideas.create.addOtherIdea")}</Button>
+              </CardText>
+              <CardText className="text-center">
+                <Link href={Routes.MARKETPLACE}>
+                  <a className="btn btn-secondary">{t("goto.marketplace")}</a>
+                </Link>
               </CardText>
             </>}
 

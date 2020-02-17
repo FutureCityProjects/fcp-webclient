@@ -482,7 +482,7 @@
       "validated": "Dein Benutzerkonto wurde erfolgreich bestätigt!"
     },
     "auth": {
-      "idleLogout": "Du wurdest wegen Inaktivität abgemeldet",
+      "idleLogout": "Du wurdest wegen Inaktivität abgemeldet.",
       "logout": "Du wurdest erfolgreich abgemeldet.",
       "refreshFailed": "Deine Anmeldung konnte leider nicht verlängert werden"
     },
