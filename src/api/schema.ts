@@ -83,7 +83,7 @@ export interface IFundApplication extends INumericIdentifierModel {
   ratings?: IJuryRating[]
   requestedFunding?: number
   state?: FundApplicationState
-  submissionData: ISubmissionData
+  submissionData?: ISubmissionData
 }
 
 export interface IFundConcretization extends INumericIdentifierModel {
