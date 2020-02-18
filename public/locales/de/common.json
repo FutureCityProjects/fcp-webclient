@@ -170,7 +170,7 @@
           "placeholder": "mindestens 10 Zeichen"
         },
         "skills": {
-          "help": "Welche deiner Fähigkeiten willst du in das neue Projekt einbringen?",
+          "help": "Was kannst du in dieses Projekt einbringen? Welche Fähigkeiten hast du, die für dieses Projekt nützlich sein könnten?",
           "label": "Meine Fähigkeiten",
           "placeholder": "mindestens 10 Zeichen"
         }
