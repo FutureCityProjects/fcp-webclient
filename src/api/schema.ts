@@ -83,6 +83,7 @@ export interface IFundApplication extends INumericIdentifierModel {
   ratings?: IJuryRating[]
   requestedFunding?: number
   state?: FundApplicationState
+  submissionData: ISubmissionData
 }
 
 export interface IFundConcretization extends INumericIdentifierModel {
@@ -309,4 +310,44 @@ export interface IUserObjectRoles {
   objectType?: string
   role?: OBJECT_ROLES
   user?: IUser
+}
+
+// The data stored with each submitted application,
+// immutable copy of most project properties.
+export interface ISubmissionData {
+  projectId?: number
+  submissionDate?: string | Date
+  submittedBy?: {
+    userId: number
+    username: string
+    firstName: string
+    lastName: string
+  }
+  name: string
+  shortDescription: string
+  description: string
+  goal: string
+  challenges: string
+  vision: string
+  delimitation: string
+  implementationBegin: string
+  implementationTime: number
+  impact: string[]
+  outcome: string[]
+  targetGroups: string[]
+  results: string[]
+  utilization: string
+  tasks: IProjectTask[]
+  workPackages: IWorkPackage[]
+  resourceRequirements: IResourceRequirement[]
+  contactEmail: string
+  contactName: string
+  contactPhone: string
+  holderAddressInfo: string
+  holderCity: string
+  holderName: string
+  holderStreet: string
+  holderZipCode: string
+  concretizations: { [id: number]: string }
+  requestedFunding: number
 }

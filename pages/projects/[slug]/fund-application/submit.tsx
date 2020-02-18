@@ -6,7 +6,7 @@ import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from "reactstrap"
 
-import { FundState, IFund, ProjectProgress, UserRole } from "api/schema"
+import { FundState, IFund, ISubmissionData, ProjectProgress, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import ConfirmationForm from "components/common/form/ConfirmationForm"
 import PageError from "components/common/PageError"
@@ -23,6 +23,8 @@ import { EntityType, selectById } from "redux/reducer/data"
 import { selectIsProjectMember, selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
+// tslint:disable-next-line: ordered-imports
+import SubmissionView from "components/project/application/SubmissionView"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   submitApplication: (application, actions) =>
@@ -85,6 +87,36 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
   const submissionBegin = fund && parseISO(fund.submissionBegin as string)
   const submissionEnd = fund && parseISO(fund.submissionEnd as string)
 
+  const submissionData: ISubmissionData = project && fundApplication && {
+    name: project.name,
+    shortDescription: project.shortDescription,
+    description: project.description,
+    goal: project.goal,
+    challenges: project.challenges,
+    vision: project.vision,
+    delimitation: project.delimitation,
+    implementationBegin: project.implementationBegin as string,
+    implementationTime: project.implementationTime,
+    impact: project.impact,
+    outcome: project.outcome,
+    targetGroups: project.targetGroups,
+    results: project.results,
+    utilization: project.utilization,
+    tasks: project.tasks,
+    workPackages: project.workPackages,
+    resourceRequirements: project.resourceRequirements,
+    contactEmail: project.contactEmaiL,
+    contactName: project.contactName,
+    contactPhone: project.contactPhone,
+    holderAddressInfo: project.holderAddressInfo,
+    holderCity: project.holderCity,
+    holderName: project.holderName,
+    holderStreet: project.holderStreet,
+    holderZipCode: project.holderZipCode,
+    concretizations: fundApplication.concretizations,
+    requestedFunding: fundApplication.requestedFunding,
+  }
+
   return <BaseLayout pageTitle={t("page.projects.application.submit.title")}>
     <Row>
       <Col>
@@ -104,10 +136,12 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
     </Row>
 
     {(!projectRequest.isLoading && !fundRequest.isLoading) && <Row>
-      <Col lg={8}>
-        <Card>
+      <Col>
+        <SubmissionView fund={fund} submission={submissionData} />
+
+        <Card className="body-card">
           <CardHeader>
-            {t("fundApplication.fund") + ": " + fund.name}
+            {t("page.projects.fundApplication.submit.submissionHeader")}
           </CardHeader>
           <CardBody>
             <h5>{t("fund.submissionBegin")}</h5>
