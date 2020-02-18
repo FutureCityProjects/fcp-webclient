@@ -10,6 +10,7 @@
   },
   "form": {
     "fund": {
+      "applicationHelp": "Benennen Sie hier den Zeitraum, in dem der Fördertopf für Anträge offen ist. Vor dem Beginn und nach dem Ende des Zeitraumes werden keine Förderanträge akzeptiert.",
       "briefingDate": {
         "help": "nach Beginn der Bewertung, vor finaler Sitzung"
       },
@@ -28,6 +29,7 @@
       "finalJuryDate": {
         "help": "nach Beginn der Besprechung und nach Bewertungsabschluss"
       },
+      "fundingHelp": "Die Antragsteller müssen wissen, wie viel Geld sie mindestens und höchstens beantragen können. Transparenz über die Gesamtsumme des Fördertopfes hilft.",
       "imprint": {
         "help": "Welche (juristische) Person ist für den Fördertopf verantwortlich und wen kann man wie kontaktieren",
         "placeholder": "20 - 5.000 Zeichen"
@@ -36,6 +38,7 @@
         "help": "Wieviele Juroren sollen jedem Förderantrag zur Bewertung zugeteilt werden?",
         "placeholder": "Ganzzahl"
       },
+      "juryHelp": "Um eingegangene Förderanträge zu beurteilen, sollte eine Jury eingesetzt werden. Jedes Jury-Mitglied bewertet die ihm zugewiesenen Förderanträge nach den oben definierten Bewertungs-Kriterien. Alle Einzelbewertungen werden im Jury-Bereich gesammelt und von der Software strukturiert zusammengefasst.<br />Den Juroren sollte ein klar definierter Bewertungszeitraum vorgegeben werden, damit sie sich frühzeitig Zeit für die Bewertungen reservieren können. Außerdem sollte die Juroren rund um den Bewertungsstart in einem \"Briefing-Treffen\" über das Jury-Verfahren und die Art der Bewertung informiert werden. Nach dem Ende des Bewertungszeitraumes sollte es eine finale Jury-Sitzung geben, die die Endergebnisse abwägt und festlegt. Die hier abgefragten Termine zwingen Sie als Prozessmanager dazu, sich über den Ablauf frühzeitig klar zu werden und den Juroren und Antragstellern frühzeitig Planungssicherheit zu geben.",
       "maximumGrant": {
         "help": "Bis zu welcher Höchstsumme können Förderungen beantragt werden?",
         "placeholder": "Ganzzahl"
@@ -167,7 +170,7 @@
           "placeholder": "mindestens 10 Zeichen"
         },
         "skills": {
-          "help": "Welche deiner Fähigkeiten willst du in das neue Projekt einbringen?",
+          "help": "Was kannst du in dieses Projekt einbringen? Welche Fähigkeiten hast du, die für dieses Projekt nützlich sein könnten?",
           "label": "Meine Fähigkeiten",
           "placeholder": "mindestens 10 Zeichen"
         }
@@ -498,10 +501,10 @@
         "workPackageWithTasks": "Diesem Arbeitspaket sind Aufgaben zugeordnet. Wenn es gelöscht wird werden diese Aufgaben als nicht-zugeordnet markiert.\nDieses Arbeitpaket wirklich löschen?"
       },
       "memberships": {
-        "applicationSaved": "Deine Bewerbung als Teammitglied wurde gespeichert!"
+        "applicationSaved": "Deine Bewerbung als Teammitglied wurde registriert!"
       },
-      "ideaSaved": "Deine Projektidee wurde gespeichert!",
-      "newProjectSaved": "Dein neues Projekt wurde gespeichert!"
+      "ideaSaved": "Deine Projektidee wurde im Projektmarkt gespeichert!",
+      "newProjectSaved": "Das neue Projekt wurde im Projektmarkt angelegt!"
     }
   },
   "navigation": {
@@ -596,17 +599,17 @@
     "offlineTools": {
       "planning": {
         "heading": "Kneipentools zur Projekt-Planung",
-        "intro": "Download: <ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Material_B_Massnahmen-Arbeitspakete-Zeitplan_20171023.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Planung\">Arbeitsblatt \"Maßnahmen, Arbeitspakete, Zeitplan\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Zur Finanzplanung stehen zwei Kneipentools zur Verfügung. Welches hilft euch besser?<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Finanzierung_171114.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 1)</a> (einmal pro Gruppe auf A2 drucken)</li><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Material_C_RessourcenbedarfFinanzierung_20171016.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 2)</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Plant ihr eine CrowdFunding-Kampagne? Hier gibt es ein Kneipentool, mit dem ihr auch den Video-Dreh zum CrowdFunding vordenken könnt:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/04/Arbeitsmaterial-CrowdVoting.pdf\">Arbeitsmaterial \"Video&Voting\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul>",
+        "intro": "<div className=\"row\"><div class=\"card col-md-8\"><div class=\"card-header\">...über die Projektplanng nachdenken</div><div class=\"card-body\"><blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Download: <ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Material_B_Massnahmen-Arbeitspakete-Zeitplan_20171023.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Planung\">Arbeitsblatt \"Maßnahmen, Arbeitspakete, Zeitplan\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Zur Finanzplanung stehen zwei Kneipentools zur Verfügung. Welches hilft euch besser?<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Finanzierung_171114.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 1)</a> (einmal pro Gruppe auf A2 drucken)</li><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Material_C_RessourcenbedarfFinanzierung_20171016.pdf\">Arbeitsblatt \"Ressourcenbedarf&Finanzierung\" (Variante 2)</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Plant ihr eine CrowdFunding-Kampagne? Hier gibt es ein Kneipentool, mit dem ihr auch den Video-Dreh zum CrowdFunding vordenken könnt:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/04/Arbeitsmaterial-CrowdVoting.pdf\">Arbeitsmaterial \"Video&Voting\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul></div></div></div>",
         "title": "Kneipentools: Projekt-Planung"
       },
       "profile": {
         "heading": "Kneipentools zum Projekt-Profil",
-        "intro": "<p>Ein Projekt-Profil ist wie ein Steckbrief: Kurz und knapp sollte man erfahren, worum es in dem Projekt geht. Das Kneipentool zum Projekt-Profil führt euch an die wichtigsten Fragen heran:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/DD2030_Projekt_Profil.pdf\" target=\"_blank\" title=\"Arbeitsblatt Projektprofil\">Arbeitsblatt \"Projektprofil\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Gute Projekte für die nachhaltige Stadtentwicklung folgen einer klaren Vision. Das Visions-Blatt hilft euch, eine gemeinsame Vision zu entwickeln, zu der euer Projekt beiträgt. Das Visions-Blatt ist in Dresden für die Zukunftsstadt-Phase I entstanden: setzt überall dort, wo \"Dresden\" steht, einfach den Namen eures Heimatortes ein. <strong>Achtung:</strong> Dieses Kneipentool bringt euch zum Zeichnen! Eure Vision sollte möglichst bildhaft sein! Nehmt Buntstifte mit!</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Visionsblatt_Zukunftsstadt_Dresden_druck-1.pdf\" target=\"_blank\" title=\"Arbeitsblatt Vision\">Das \"Visions-Blatt\" aus Zukunftsstadt-Phase I</a> (einmal pro Gruppe auf A2 drucken, bunte Stifte sind hilfreich)</li></ul>",
+        "intro": "<div className=\"row\"><div class=\"card col-md-8\"><div class=\"card-header\">...übers Projektprofil nachdenken</div><div class=\"card-body\"><blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Ein Projekt-Profil ist wie ein Steckbrief: Kurz und knapp sollte man erfahren, worum es in dem Projekt geht. Das Kneipentool zum Projekt-Profil führt euch an die wichtigsten Fragen heran:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/DD2030_Projekt_Profil.pdf\" target=\"_blank\" title=\"Arbeitsblatt Projektprofil\">Arbeitsblatt \"Projektprofil\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Gute Projekte für die nachhaltige Stadtentwicklung folgen einer klaren Vision. Das Visions-Blatt hilft euch, eine gemeinsame Vision zu entwickeln, zu der euer Projekt beiträgt. Das Visions-Blatt ist in Dresden für die Zukunftsstadt-Phase I entstanden: setzt überall dort, wo \"Dresden\" steht, einfach den Namen eures Heimatortes ein. <strong>Achtung:</strong> Dieses Kneipentool bringt euch zum Zeichnen! Eure Vision sollte möglichst bildhaft sein! Nehmt Buntstifte mit!</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Visionsblatt_Zukunftsstadt_Dresden_druck-1.pdf\" target=\"_blank\" title=\"Arbeitsblatt Vision\">Das \"Visions-Blatt\" aus Zukunftsstadt-Phase I</a> (einmal pro Gruppe auf A2 drucken, bunte Stifte sind hilfreich)</li></ul></div></div></div>",
         "title": "Kneipentools: Projekt-Profil"
       },
       "team": {
         "heading": "Kneipentools zur Teamfindung",
-        "intro": "<blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Das Kneipentool zur Teamfindung wird für jeden Menschen in der Projektgruppe einmal auf A4 gedruckt. Dann arbeitet ihr immer paarweise: Zwei Leute fragen sich gegenseitig. Ihr lernt euch so gegenseitig kennen, und ihr lernt auch mehr über eure eigene Arbeitsweise in Projekten. So stellt ihr fest, welche Fähigkeiten in eurem Team schon vorhanden sind. Ihr merkt aber vielleicht auch, welche Fähigkeiten euch noch im Team fehlen. Besser ist es, solche Lücken frühzeitig zu erkennen. Je früher und besser sich das Team kennenlernt, umso besser ist das für das Projekt, an dem ihr arbeitet!</p><p>Downloads: <ul><li><a href=\"http://zukunftsstadt.de/wp-content/uploads/2020/02/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a> (so oft auf A4 drucken wie es Mitglieder im Team gibt)</li></ul></p><p>Das Arbeitsblatt aus dem Dresdner Zukunftsstadt-Prozess fragt euch, wie ihr als Team funktioniert:<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Workshop2_Team_Profil_final_2017_05_24.pdf\">Team-Profil aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul></p>",
+        "intro": "<div className=\"row\"><div class=\"card col-md-8\"><div class=\"card-header\">Kneipentool: Teamfindung</div><div class=\"card-body\"><blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Das Kneipentool zur Teamfindung wird für jeden Menschen in der Projektgruppe einmal auf A4 gedruckt. Dann arbeitet ihr immer paarweise: Zwei Leute fragen sich gegenseitig. Ihr lernt euch so gegenseitig kennen, und ihr lernt auch mehr über eure eigene Arbeitsweise in Projekten. So stellt ihr fest, welche Fähigkeiten in eurem Team schon vorhanden sind. Ihr merkt aber vielleicht auch, welche Fähigkeiten euch noch im Team fehlen. Besser ist es, solche Lücken frühzeitig zu erkennen. Je früher und besser sich das Team kennenlernt, umso besser ist das für das Projekt, an dem ihr arbeitet!</p><p>Downloads: <ul><li><a href=\"http://zukunftsstadt.de/wp-content/uploads/2020/02/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a> (so oft auf A4 drucken wie es Mitglieder im Team gibt)</li></ul></p><p>Das Arbeitsblatt aus dem Dresdner Zukunftsstadt-Prozess fragt euch, wie ihr als Team funktioniert:<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Workshop2_Team_Profil_final_2017_05_24.pdf\">Team-Profil aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul></p></div></div></div>",
         "title": "Kneipentools: Teamfindung"
       }
     },
@@ -773,6 +776,11 @@
       "login": {
         "heading": "Login",
         "title": "Login"
+      },
+      "profile": {
+        "title": "Mein Profil",
+        "heading": "Das bin ich: {{username}}",
+        "intro": "Hier gibt es künftig ein umfangreicheres Nutzerprofil, mit dem du etwas zu dir sagen kannst, {{username}}."
       },
       "projects": {
         "applicationOpen": "Deine Bewerbung als Teammitglied wurde noch nicht akzeptiert. Bitte gedulde dich noch etwas.",
