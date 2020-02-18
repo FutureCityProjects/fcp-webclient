@@ -43,10 +43,12 @@ const UtilizationView: React.FC<IProps> = (props: IProps) => {
 
     <UncontrolledCollapse toggler={"#toggler-utilization"}>
       <CardBody>
-        {project.utilization
-          ? <HtmlContent content={project.utilization} />
-          : <p>{t("default.empty")}</p>
-        }
+        <div className="rte-content">
+          {project.utilization
+            ? <HtmlContent content={project.utilization} />
+            : t("default.empty")
+          }
+        </div>
       </CardBody>
     </UncontrolledCollapse>
   </Card>

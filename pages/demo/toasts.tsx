@@ -1,7 +1,7 @@
 import { WithTranslation } from "next-i18next"
 import React from "react"
 import { toast } from "react-toastify"
-import { Col, Row, Card, Spinner, Button, CardBody, CardHeader, Label } from "reactstrap"
+import { Button, Card, CardBody, CardHeader, Col, Label, Row, Spinner } from "reactstrap"
 
 import BaseLayout from "components/BaseLayout"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"

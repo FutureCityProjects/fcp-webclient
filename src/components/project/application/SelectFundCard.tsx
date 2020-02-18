@@ -38,46 +38,54 @@ const SelectFundCard: React.FC<IProps> = ({ fund, selectable, selectFund }: IPro
         <Row>
           <Col lg>
             <h5>{t("fund.description")}</h5>
-            <HtmlContent content={fund.description} />
+            <div className="rte-content">
+              <HtmlContent content={fund.description} />
+            </div>
 
             <h5>{t("fund.region")}</h5>
-            <p><HtmlContent content={fund.region} /></p>
+            <div className="rte-content">
+              <HtmlContent content={fund.region} />
+            </div>
 
             <h5>{t("fund.criteria")}</h5>
             {fund.criteria && fund.criteria.length
               ? <ul>
                 {fund.criteria.map((c, index) => <li key={index}>{c}</li>)}
               </ul>
-              : <p>{t("default.empty")}</p>
+              : t("default.empty")
             }
 
             <h5>{t("fund.sponsor")}</h5>
-            <HtmlContent content={fund.sponsor} />
+            <div className="rte-content">
+              <HtmlContent content={fund.sponsor} />
+            </div>
 
             <h5>{t("fund.imprint")}</h5>
-            <HtmlContent content={fund.imprint} />
+            <div className="rte-content">
+              <HtmlContent content={fund.imprint} />
+            </div>
           </Col>
           <Col lg>
             <h5>{t("fund.budget")}</h5>
-            <p>{fund.budget
+            {fund.budget
               ? t("default.currency", { value: fund.budget })
-              : t("default.empty")}</p>
+              : t("default.empty")}
 
             <h5>{t("fund.minimumGrant")}</h5>
-            <p>{fund.minimumGrant
+            {fund.minimumGrant
               ? t("default.currency", { value: fund.minimumGrant })
-              : t("default.empty")}</p>
+              : t("default.empty")}
 
             <h5>{t("fund.maximumGrant")}</h5>
-            <p>{fund.maximumGrant
+            {fund.maximumGrant
               ? t("default.currency", { value: fund.maximumGrant })
-              : t("default.empty")}</p>
+              : t("default.empty")}
 
             <h5>{t("fund.submissionBegin")}</h5>
-            <p>{t("default.longDateTime", { value: fund.submissionBegin })}</p>
+            {t("default.longDateTime", { value: fund.submissionBegin })}
 
             <h5>{t("fund.submissionEnd")}</h5>
-            <p>{t("default.longDateTime", { value: fund.submissionEnd })}</p>
+            {t("default.longDateTime", { value: fund.submissionEnd })}
           </Col>
         </Row>
         {selectable && <Row>

@@ -1,11 +1,10 @@
 # Todo
+  * FundState überall übersetzen
+  * "Projektansicht" + "Fördertopfansicht" übersetzen
   * Mitgliederliste
   * Bewerbung annehmen
   * einreichen: 2 boxen, eine mit Fördertopf + EInreichtungszeitraum + Warnings, unten eine mit Button
   * Ansicht Mitglieder/Bewerbungen: Keine BEwerbungen von inaktiven Usern anzeigen.
-  * fix: profilansicht ausgeloggt kennt keine Mitgliedszahl
-  * fix: https://fcp.vrok.de/projects/30 - vmtl aufgrund fehlendem updatedAt
-  * upd: membership für registrierungen in der api
   * set focus on taskpopover input + package first input + resource first input when 
     popover/modal opens
   * Einreichen nur mit owner PW

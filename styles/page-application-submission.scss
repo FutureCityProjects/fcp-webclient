@@ -1,0 +1,31 @@
+.submission-finances {
+  .funding-sum {
+    padding-top: 1em;
+  }
+
+  .funding-sum,
+  .proceeds-sum,
+  .own-costs-sum {
+    font-weight: 600;
+  }
+
+  .total-sum {
+    font-size: 1.1em;
+    font-weight: 600;
+  }
+
+  @include media-breakpoint-down(sm) {
+    .funding-sum,
+    .proceeds-sum,
+    .own-costs-sum,
+    .total-sum {
+      padding-top: 1em;
+    }
+  }
+
+  @include media-breakpoint-up(md) {
+    .total-sum {
+      border-top: 1px solid black;
+    }
+  }
+}

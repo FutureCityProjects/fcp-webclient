@@ -16,8 +16,9 @@
       "notFound": "Der angefragte Förderantrag wurde leider nicht gefunden."
     },
     "invalidRequest": "Die Anfrage ist leider ungültig, ist die URL korrekt?",
-    "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort",
-    "notLoggedIn": "Du bist nicht (mehr) eingeloggt!"
+    "noNetworkResponse": "Eine Netzwerkanfrage lieferte keine Antwort.",
+    "notLoggedIn": "Du bist nicht (mehr) eingeloggt!",
+    "sendingRequest": "Beim Senden einer Netzwerkanfrage ist leider etwas schiefgegangen."
   },
   "validate": {
     "fund": {

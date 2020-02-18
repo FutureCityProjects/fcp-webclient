@@ -24,14 +24,11 @@ const HeaderIconNavigation: React.FC<IProps> = (props) => {
       <AuthElement roles={props.roles} requiredRole={UserRole.PROCESS_OWNER}>
         <li><NavIcon href={Routes.FUND_OVERVIEW} icon="pot" title="goto.fundManagement" /></li>
       </AuthElement>
-      <AuthElement roles={props.roles} requiredRole={UserRole.PROCESS_OWNER}>
-        <li><NavIcon href={Routes.PROCESS_OVERVIEW} icon="to-do" title="goto.processManagement" /></li>
-      </AuthElement>
       <AuthElement roles={props.roles} requiredRole={UserRole.ADMIN}>
         <li><NavIcon href={Routes.USER_OVERVIEW} icon="user-multiple" title="goto.userManagement" /></li>
       </AuthElement>
       <li><NavIcon href={Routes.MARKETPLACE} icon="light-bulb" title="goto.marketplace" /></li>
-      <li><NavIcon href={Routes.ABOUT} icon="info-bubble" title="goto.about" /></li>
+      <li><NavIcon href={Routes.PROCESS_OVERVIEW} icon="info-bubble" title="goto.processOverview" /></li>
       {/*<li><NavIcon href={Routes.MARKETPLACE} icon="search" title="goto.search" /></li>*/}
 
       <li><DropdownComponent

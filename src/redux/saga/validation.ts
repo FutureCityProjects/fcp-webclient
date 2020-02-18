@@ -37,7 +37,6 @@ function* confirmAccountSaga(action: IConfirmAccountAction) {
       err.message = "validation.account.notFound"
     }
 
-    // @todo log RequestError for monitoring
     yield action.actions
       ? call(action.actions.setErrors, { _error: err.message })
       : put(setLoadingAction("validation_operation", false, err.message))
@@ -67,7 +66,6 @@ function* confirmEmailSaga(action: IConfirmEmailAction) {
       err.message = "validation.changeEmail.notFound"
     }
 
-    // @todo log RequestError for monitoring
     yield action.actions
       ? call(action.actions.setErrors, { _error: err.message })
       : put(setLoadingAction("validation_operation", false, err.message))
@@ -97,7 +95,6 @@ function* confirmPasswordResetSaga(action: IResetPasswordAction) {
       err.message = "validation.resetPassword.notFound"
     }
 
-    // @todo log RequestError for monitoring
     yield action.actions
       ? call(action.actions.setErrors, { _error: err.message })
       : put(setLoadingAction("validation_operation", false, err.message))

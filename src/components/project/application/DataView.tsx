@@ -43,44 +43,44 @@ const DataView: React.FC<IProps> = (props: IProps) => {
     <UncontrolledCollapse toggler={"#toggler-application"}>
       <CardBody>
         <h5>{t("project.contactName")}</h5>
-        <p>{project.contactName
+        {project.contactName
           ? project.contactName
-          : t("default.empty")}</p>
+          : t("default.empty")}
 
         <h5>{t("project.contactEmail")}</h5>
-        <p>{project.contactEmail
+        {project.contactEmail
           ? project.contactEmail
-          : t("default.empty")}</p>
+          : t("default.empty")}
 
         <h5>{t("project.contactPhone")}</h5>
-        <p>{project.contactPhone
+        {project.contactPhone
           ? project.contactPhone
-          : t("default.empty")}</p>
+          : t("default.empty")}
 
         <h5>{t("project.holderName")}</h5>
-        <p>{project.holderName
+        {project.holderName
           ? project.holderName
-          : t("default.empty")}</p>
+          : t("default.empty")}
 
         <h5>{t("project.holderStreet")}</h5>
-        <p>{project.holderStreet
+        {project.holderStreet
           ? project.holderStreet
-          : t("default.empty")}</p>
+          : t("default.empty")}
 
         <h5>{t("project.holderAddressInfo")}</h5>
-        <p>{project.holderAddressInfo
+        {project.holderAddressInfo
           ? project.holderAddressInfo
-          : t("default.empty")}</p>
+          : t("default.empty")}
 
         <h5>{t("project.holderZipCode")}</h5>
-        <p>{project.holderZipCode
+        {project.holderZipCode
           ? project.holderZipCode
-          : t("default.empty")}</p>
+          : t("default.empty")}
 
         <h5>{t("project.holderCity")}</h5>
-        <p>{project.holderCity
+        {project.holderCity
           ? project.holderCity
-          : t("default.empty")}</p>
+          : t("default.empty")}
       </CardBody>
     </UncontrolledCollapse>
   </Card>

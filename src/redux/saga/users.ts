@@ -16,7 +16,6 @@ import {
   updateModelSuccessAction,
 } from "redux/helper/actions"
 import { EntityType } from "redux/reducer/data"
-import { RequestError } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
 export function* usersWatcherSaga() {
@@ -49,9 +48,7 @@ function* loadUserSaga(action: ILoadByAction) {
 
     return user
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("user_loading", false, msg))
+    yield put(setLoadingAction("user_loading", false, err.message))
 
     return null
   }
@@ -69,10 +66,7 @@ function* loadUserCollectionSaga(action: ILoadByAction) {
 
     return users
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("user_collection_loading", false, msg))
-
+    yield put(setLoadingAction("user_collection_loading", false, err.message))
     return null
   }
 }
@@ -95,7 +89,6 @@ function* createUserSaga(action: IModelFormAction<IUser>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -124,7 +117,6 @@ function* updateUserSaga(action: IModelFormAction<IUser>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -153,7 +145,6 @@ function* deleteUserSaga(action: IModelFormAction<IUser>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 

@@ -16,7 +16,6 @@ import {
   updateModelSuccessAction,
 } from "redux/helper/actions"
 import { EntityType } from "redux/reducer/data"
-import { RequestError } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
 export function* processesWatcherSaga() {
@@ -50,9 +49,7 @@ function* loadProcessSaga(action: ILoadByAction) {
 
     return process
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("process_loading", false, msg))
+    yield put(setLoadingAction("process_loading", false, err.message))
 
     return null
   }
@@ -70,9 +67,7 @@ function* loadProcessCollectionSaga(action: ILoadByAction) {
 
     return processes
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("process_collection_loading", false, msg))
+    yield put(setLoadingAction("process_collection_loading", false, err.message))
 
     return null
   }
@@ -96,7 +91,6 @@ function* createProcessSaga(action: IModelFormAction<IProcess>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -125,7 +119,6 @@ function* updateProcessSaga(action: IModelFormAction<IProcess>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -154,7 +147,6 @@ function* deleteProcessSaga(action: IModelFormAction<IProcess>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 

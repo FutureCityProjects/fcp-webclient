@@ -1,5 +1,6 @@
 import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
+import Router from "next/router"
 import React, { useEffect } from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row } from "reactstrap"
@@ -13,7 +14,6 @@ import { confirmAccountAction, resetValidationResultAction } from "redux/actions
 import { AppState } from "redux/reducer"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
-import Router from "next/router"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   confirmValidation: (id: string, token: string, actions: any) =>

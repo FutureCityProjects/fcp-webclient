@@ -48,7 +48,7 @@ export const selectCurrentUserId = (state: AppState): number =>
  *
  * @returns array of role names, may be empty
  */
-export const selectRoles = (state: AppState): string[] =>
+export const selectRoles = (state: AppState): UserRole[] =>
   state.auth ? state.auth.roles : []
 
 /**

@@ -16,7 +16,7 @@ import {
   updateModelSuccessAction,
 } from "redux/helper/actions"
 import { EntityType } from "redux/reducer/data"
-import { RequestError, REQUEST_ERRORS } from "services/requestError"
+import { REQUEST_ERRORS } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
 export function* projectsWatcherSaga() {
@@ -55,9 +55,7 @@ function* loadProjectSaga(action: ILoadByAction) {
 
     return project
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("project_loading", false, msg))
+    yield put(setLoadingAction("project_loading", false, err.message))
 
     return null
   }
@@ -75,9 +73,7 @@ export function* loadProjectCollectionSaga(action: ILoadByAction) {
 
     return projects
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("project_collection_loading", false, msg))
+    yield put(setLoadingAction("project_collection_loading", false, err.message))
 
     return null
   }
@@ -102,7 +98,6 @@ function* createProjectSaga(action: IModelFormAction<IProject>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -134,7 +129,6 @@ function* updateProjectSaga(action: IModelFormAction<IProject>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -163,7 +157,6 @@ function* deleteProjectSaga(action: IModelFormAction<IProject>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 

@@ -1,12 +1,13 @@
 import jwtDecode from "jwt-decode"
 
+import { UserRole } from "api/schema"
 import { IWebToken } from "redux/helper/state"
 
 export interface IDecodedToken {
   readonly id: number
   readonly username: string
   readonly exp: number
-  readonly roles: string[],
+  readonly roles: UserRole[],
 }
 
 export class AuthToken {

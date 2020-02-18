@@ -36,31 +36,41 @@ const PublicProfile: React.FC<IProps> = ({ project }: IProps) => {
             {project.description && <div className="form-group">
               <br />
               <h3>{t("project.description")}</h3>
-              <HtmlContent content={project.description} />
+              <div className="rte-content">
+                <HtmlContent content={project.description} />
+              </div>
             </div>}
 
             {project.challenges && <div className="form-group">
               <br />
               <h3>{t("project.challenges")}</h3>
-              <HtmlContent content={project.challenges} />
+              <div className="rte-content">
+                <HtmlContent content={project.challenges} />
+              </div>
             </div>}
 
             {project.goal && <div className="form-group">
               <br />
               <h3>{t("project.goal")}</h3>
-              <HtmlContent content={project.goal} />
+              <div className="rte-content">
+                <HtmlContent content={project.goal} />
+              </div>
             </div>}
 
             {project.vision && <div className="form-group">
               <br />
               <h3>{t("project.vision")}</h3>
-              <HtmlContent content={project.vision} />
+              <div className="rte-content">
+                <HtmlContent content={project.vision} />
+              </div>
             </div>}
 
             {project.delimitation && <div className="form-group">
               <br />
               <h3>{t("project.delimitation")}</h3>
-              <HtmlContent content={project.delimitation} />
+              <div className="rte-content">
+                <HtmlContent content={project.delimitation} />
+              </div>
             </div>}
           </Col>
 

@@ -46,7 +46,7 @@ const TargetGroupsView: React.FC<IProps> = (props: IProps) => {
           ? <ul>
             {project.targetGroups.map((group, index) => <li key={index}>{group}</li>)}
           </ul>
-          : <p>{t("default.empty")}</p>
+          : t("default.empty")
         }
       </CardBody>
     </UncontrolledCollapse>

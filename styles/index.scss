@@ -51,7 +51,7 @@ h1 {
   color: $custom-gray;
   padding: 0;
   margin-left: 0.8em;
-  vertical-align: bottom;
+  vertical-align: middle;
   &:hover, &:active, &:focus {
     color: $custom-dark;
   }
@@ -338,6 +338,17 @@ blockquote {
       color: $custom-gray;
       font-size: $font-size-sm;
     }
+  }
+}
+
+.card-body {
+  h1:not(:first-child),
+   h2:not(:first-child),
+   h3:not(:first-child),
+   h4:not(:first-child),
+   h5:not(:first-child),
+   h6:not(:first-child) {
+    margin-top: 1em;
   }
 }
 
@@ -903,24 +914,6 @@ a.sub-status-card {
 .form-general-error {
   margin-bottom: 0.5em;
 }
-
-.rte-container {
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  background-color: $custom-light;
-  .ql-container.ql-snow {
-    font-size: 15px;
-    border: none;
-    .ql-editor {
-      padding-top: 1rem;
-    }
-  }
-  .ql-toolbar.ql-snow {
-    border: none;
-    background: white;
-    border-radius: 0.25rem;
-  }
-}
 /**
  * <<< Forms
  */
@@ -1249,4 +1242,5 @@ a.sub-status-card {
   max-width: none;
 }
 
-@import "page-project-resources.scss"
+@import "page-project-resources";
+@import "page-application-submission";

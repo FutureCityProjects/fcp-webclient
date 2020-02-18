@@ -18,7 +18,7 @@ import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { updateModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
-import { selectMyProjectByIdentifier, selectIsProjectMember } from "redux/reducer/myProjects"
+import { selectIsProjectMember, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 

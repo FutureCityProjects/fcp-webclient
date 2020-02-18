@@ -104,7 +104,6 @@ function* createSavedApplicationSaga(action: ISetAuthAction) {
         yield put(addNotificationAction("validate.general.submissionFailed", "error"))
       }
     } else {
-      // @todo log RequestError for monitoring
       yield put(addNotificationAction(err.message, "error"))
     }
 

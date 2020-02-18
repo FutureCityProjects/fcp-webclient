@@ -82,7 +82,6 @@ function* createSavedIdeaSaga(action: ISetAuthAction) {
       // error returned from the API is not (easily) translateable -> use general message
       yield put(addNotificationAction("validate.general.submissionFailed", "error"))
     } else {
-      // @todo log RequestError for monitoring
       yield put(addNotificationAction(err.message, "error"))
     }
 

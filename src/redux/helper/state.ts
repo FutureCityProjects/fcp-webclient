@@ -1,4 +1,4 @@
-import { INumericIdentifierModel } from "api/schema"
+import { INumericIdentifierModel, UserRole } from "api/schema"
 
 export interface IRequestState {
   isLoading: boolean,
@@ -20,6 +20,6 @@ export interface IWebToken {
   encoded: string
   expiresAt: number
   id: number
-  roles: string[]
+  roles: UserRole[]
   username: string
 }

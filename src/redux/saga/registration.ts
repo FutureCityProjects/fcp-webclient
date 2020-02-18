@@ -92,7 +92,6 @@ function* registerUserSaga(action: IRegisterUserAction) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 

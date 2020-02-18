@@ -24,26 +24,24 @@ const FundingView: React.FC<IProps> = ({ application, fund, project }: IProps) =
     </CardHeader>
     <CardBody>
       <h5>{t("fundApplication.fund")}</h5>
-      <p>{fund.name}</p>
+      {fund.name}
 
       <h5>{t("fundApplication.requestedFunding")}</h5>
-      <p>
-        {application.requestedFunding
-          ? t("default.currency", { value: application.requestedFunding })
-          : t("default.empty")}
-        <Link href={{
-          pathname: Routes.PROJECT_FUNDING_EDIT,
-          // @todo support multiple applications, how to store which one is the active application?
-          query: { fund: fund.id }
-        }} as={{
-          pathname: routeWithParams(Routes.PROJECT_FUNDING_EDIT, { slug: project.slug || project.id }),
-          // @todo support multiple applications, how to store which one is the active application?
-          query: { fund: fund.id }
-        }} >
-          <a className="btn" title={t("goto.editRequestedFunding")}>
-            <Icon name="pencil" size={24} /></a>
-        </Link>
-      </p>
+      {application.requestedFunding
+        ? t("default.currency", { value: application.requestedFunding })
+        : t("default.empty")}
+      <Link href={{
+        pathname: Routes.PROJECT_FUNDING_EDIT,
+        // @todo support multiple applications, how to store which one is the active application?
+        query: { fund: fund.id }
+      }} as={{
+        pathname: routeWithParams(Routes.PROJECT_FUNDING_EDIT, { slug: project.slug || project.id }),
+        // @todo support multiple applications, how to store which one is the active application?
+        query: { fund: fund.id }
+      }} >
+        <a className="btn" title={t("goto.editRequestedFunding")}>
+          <Icon name="pencil" size={24} /></a>
+      </Link>
     </CardBody>
   </Card>
 }

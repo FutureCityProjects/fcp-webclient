@@ -11,6 +11,33 @@
    height: auto !important;
 }
 
+
+.rte-container {
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background-color: $custom-light;
+
+  .ql-container.ql-snow {
+    font-size: 15px;
+    border: none;
+  }
+
+  .ql-toolbar.ql-snow {
+    border: none;
+    background: $custom-light;
+    color: white;
+    border-bottom: 2px solid black;
+    padding-top: 0px;
+    padding-bottom: 3px;
+    margin-bottom: 5px;
+  }
+
+  .ql-snow .ql-picker {
+    border: 1px solid black;
+    border-radius: 3px;
+  }
+}
+
 // bar below the editor showing the number of current characters
 .ql-textlength {
   font-size: 0.8em;
@@ -18,13 +45,32 @@
   margin-top: 0.7em;
 }
 
+/* fix multi-line placeholder overflow */
+.ql-editor.ql-blank::before {
+	content: none;
+}
+.ql-editor.ql-blank::after {
+	color: rgba(0, 0, 0, 0.6);
+	content: attr(data-placeholder);
+	display: block;
+	font-style: italic;
+	margin-top: -1.42em;
+	min-height: 1em;
+	pointer-events: none;
+}
+
 // for displaying the formatted content
-.ql-size-small {
-  font-size: 0.8em;
-}
-.ql-size-large {
-  font-size: 1.4em;
-}
-.ql-size-huge {
-   font-size: 2em;
+.rte-content {
+  p {
+    margin: 0
+  }
+  .ql-size-small {
+    font-size: 0.8em;
+  }
+  .ql-size-large {
+    font-size: 1.4em;
+  }
+  .ql-size-huge {
+    font-size: 2em;
+  }
 }

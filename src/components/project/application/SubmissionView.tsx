@@ -1,7 +1,7 @@
 import React from "react"
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap"
 
-import { IFund, ISubmissionData } from "api/schema"
+import { IFund, IResourceRequirement, ISubmissionData, ResourceSourceType } from "api/schema"
 import HtmlContent from "components/common/HtmlContent"
 import { useTranslation } from "services/i18n"
 
@@ -13,9 +13,18 @@ interface IProps {
 const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
   const { t } = useTranslation()
 
+  const sumCosts = (requirements: IResourceRequirement[]): number =>
+    requirements.reduce((s, r) => s + (r.cost || 0), 0)
+
+
   const unassignedTasks = submission.tasks.filter((task) => !task.workPackage)
   const unassignedTaskIds = unassignedTasks.map((task) => task.id)
   const unassignedResources = submission.resourceRequirements.filter((res) => unassignedTaskIds.includes(res.task))
+
+  const total = sumCosts(submission.resourceRequirements)
+  const fundingSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_FUNDING))
+  const proceedsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_PROCEEDS))
+  const ownCostsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_OWN_FUNDS))
 
   return <>
     <Card className="body-card">
@@ -56,19 +65,29 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
         {submission.shortDescription}
 
         <h4>{t("project.description")}</h4>
-        <HtmlContent content={submission.description} />
+        <div className="rte-content">
+          <HtmlContent content={submission.description} />
+        </div>
 
         <h4>{t("project.goal")}</h4>
-        <HtmlContent content={submission.goal} />
+        <div className="rte-content">
+          <HtmlContent content={submission.goal} />
+        </div>
 
         <h4>{t("project.challenges")}</h4>
-        <HtmlContent content={submission.challenges} />
+        <div className="rte-content">
+          <HtmlContent content={submission.challenges} />
+        </div>
 
         <h4>{t("project.vision")}</h4>
-        <HtmlContent content={submission.vision} />
+        <div className="rte-content">
+          <HtmlContent content={submission.vision} />
+        </div>
 
         <h4>{t("project.delimitation")}</h4>
-        <HtmlContent content={submission.delimitation} />
+        <div className="rte-content">
+          <HtmlContent content={submission.delimitation} />
+        </div>
 
         <h3>{t("fundApplication.submission.concretizationHeader")}</h3>
 
@@ -77,7 +96,9 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
 
           return <>
             <h4>{concretization.question}</h4>
-            <HtmlContent content={answer} />
+            <div className="rte-content">
+              <HtmlContent content={answer} />
+            </div>
           </>
         })}
       </CardBody>
@@ -118,7 +139,9 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
         </ul>
 
         <h4>{t("project.utilization")}</h4>
-        <HtmlContent content={submission.utilization} />
+        <div className="rte-content">
+          <HtmlContent content={submission.utilization} />
+        </div>
 
       </CardBody>
     </Card>
@@ -157,7 +180,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
       </CardBody>
     </Card>
 
-    <Card className="body-card">
+    <Card className="body-card submission-finances">
       <CardHeader>
         <h3>{t("fundApplication.submission.financesHeader")}</h3>
       </CardHeader>
@@ -170,14 +193,14 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
           return <>
             <h4>{t("project.workPackage.abbreviation")}{wp.order}: {wp.name}</h4>
             {resources.map((resource) => <Row>
-              <Col lg={6}>
+              <Col md={6}>
                 {resource.description}
               </Col>
-              <Col lg={3}>
+              <Col md={3}>
                 {resource.source}
                 {resource.sourceType}
               </Col>
-              <Col lg={3}>
+              <Col md={3} className="text-md-right">
                 {t("default.currency", { value: resource.cost })}
               </Col>
             </Row>
@@ -189,19 +212,56 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
           <h4>{t("project.resourceRequirements")}</h4>
           <ul>
             {unassignedResources.map((resource) => <Row>
-              <Col lg={6}>
+              <Col md={6}>
                 {resource.description}
               </Col>
-              <Col lg={3}>
+              <Col md={3}>
                 {resource.source}
                 {resource.sourceType}
               </Col>
-              <Col lg={3}>
+              <Col md={3} className="text-md-right">
                 {t("default.currency", { value: resource.cost })}
               </Col>
             </Row>)}
           </ul>
         </>}
+
+        <Row className="funding-sum">
+          <Col md={6} />
+          <Col md={3} className="text-md-right">
+            {t("project.resourceRequirement.fundingSum")}:
+          </Col>
+          <Col md={3} className="text-md-right">
+            {t("default.currency", { value: fundingSum })}
+          </Col>
+        </Row>
+        <Row className="own-costs-sum">
+          <Col md={6} />
+          <Col md={3} className="text-md-right">
+            {t("project.resourceRequirement.ownCostsSum")}:
+          </Col>
+          <Col md={3} className="text-md-right">
+            {t("default.currency", { value: ownCostsSum })}
+          </Col>
+        </Row>
+        <Row className="proceeds-sum">
+          <Col md={6} />
+          <Col md={3} className="text-md-right">
+            {t("project.resourceRequirement.proceedsSum")}:
+          </Col>
+          <Col md={3} className="text-md-right">
+            {t("default.currency", { value: proceedsSum })}
+          </Col>
+        </Row>
+        <Row className="total-sum">
+          <Col md={6} />
+          <Col md={3} className="text-md-right">
+            {t("project.resourceRequirement.totalSum")}:
+          </Col>
+          <Col md={3} className="text-md-right">
+            {t("default.currency", { value: total })}
+          </Col>
+        </Row>
       </CardBody>
     </Card>
   </>

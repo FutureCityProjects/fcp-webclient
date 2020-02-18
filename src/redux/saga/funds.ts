@@ -18,7 +18,7 @@ import {
 } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
-import { RequestError, REQUEST_ERRORS } from "services/requestError"
+import { REQUEST_ERRORS } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 import { getCurrentProcess } from "./currentProcess"
 
@@ -59,10 +59,7 @@ function* loadFundSaga(action: ILoadByAction) {
 
     return fund
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("fund_loading", false, msg))
-
+    yield put(setLoadingAction("fund_loading", false, err.message))
     return null
   }
 }
@@ -80,9 +77,7 @@ export function* loadFundCollectionSaga(action: ILoadByAction) {
 
     return funds
   } catch (err) {
-    // @todo log RequestError for monitoring
-    const msg = err instanceof RequestError ? "message.requestError" : err.message
-    yield put(setLoadingAction("fund_collection_loading", false, msg))
+    yield put(setLoadingAction("fund_collection_loading", false, err.message))
 
     return null
   }
@@ -113,7 +108,6 @@ function* createFundSaga(action: IModelFormAction<IFund>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -138,7 +132,6 @@ function* updateFundSaga(action: IModelFormAction<IFund>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -163,7 +156,6 @@ function* deleteFundSaga(action: IModelFormAction<IFund>) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -188,7 +180,6 @@ function* activateFundSaga(action: IActivateFundAction) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 

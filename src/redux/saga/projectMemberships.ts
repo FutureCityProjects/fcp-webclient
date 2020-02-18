@@ -57,7 +57,6 @@ function* createProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -96,7 +95,6 @@ function* updateProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -148,7 +146,6 @@ function* deleteProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
         yield call(setErrors, err.errors)
       }
     } else {
-      // @todo log RequestError for monitoring
       if (setErrors) {
         yield call(setErrors, { _error: err.message })
       }

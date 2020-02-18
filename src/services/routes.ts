@@ -7,6 +7,8 @@ export enum Routes {
   OFFLINE_TOOL_PLANNING = "/offline-tools/planning",
   OFFLINE_TOOL_PROFILE = "/offline-tools/profile",
   OFFLINE_TOOL_TEAM = "/offline-tools/team",
+  PROCESS_OVERVIEW = "/process",
+  FUND_PAGE = "/funds/[slug]",
 
   // user handling
   LOGIN = "/user/login",
@@ -41,7 +43,6 @@ export enum Routes {
   PROJECT_FUNDING_EDIT = "/projects/[slug]/fund-application/funding",
 
   // administrative pages for process owner / admin
-  PROCESS_OVERVIEW = "/process",
   PROCESS_CREATE = "/process/create",
   PROCESS_EDIT = "/process/edit",
 

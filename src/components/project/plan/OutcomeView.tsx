@@ -46,7 +46,7 @@ const OutcomeView: React.FC<IProps> = (props: IProps) => {
           ? <ul>
             {project.outcome.map((group, index) => <li key={index}>{group}</li>)}
           </ul>
-          : <p>{t("default.empty")}</p>
+          : t("default.empty")
         }
       </CardBody>
     </UncontrolledCollapse>

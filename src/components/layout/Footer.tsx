@@ -19,7 +19,9 @@ const Footer: React.FC<IProps> = (props: IProps) => {
         {props.isFrontPage && <SocialLinks />}
       </Col>
       <Col className="footer-links">
-        <Link href={Routes.IMPRINT} >
+        <Link href={Routes.ABOUT} >
+          <a title={t("goto.about")}>{t("navigation.about")}</a>
+        </Link> | <Link href={Routes.IMPRINT} >
           <a>{t("navigation.imprint")}</a>
         </Link> | <Link href={Routes.DATA_PROTECTION} >
           <a>{t("navigation.dataProtection")}</a>

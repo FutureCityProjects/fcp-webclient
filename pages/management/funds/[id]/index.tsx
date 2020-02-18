@@ -81,42 +81,48 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             </CardHeader>
             <CardBody>
               <h5>{t("fund.state")}</h5>
-              <p>
-                {fund.state === FundState.ACTIVE
-                  ? <span className="text-success">{t("fund.states.active")}</span>
-                  : (fund.state === FundState.FINISHED
-                    ? <span className="text-muted">{t("fund.states.finished")}</span>
-                    : <span className="text-warning">{t("fund.states.inactive")}</span>
-                  )}
-                {fund.state === FundState.INACTIVE && <>
-                  <br />
-                  <Link href={Routes.FUND_ACTIVATE} as={routeWithParams(Routes.FUND_ACTIVATE, { id: fund.id })}>
-                    <Button color="primary" className="btn-sm">
-                      {t("goto.activateFund")}
-                    </Button>
-                  </Link>
-                </>}
-              </p>
+              {fund.state === FundState.ACTIVE
+                ? <span className="text-success">{t("fund.states.active")}</span>
+                : (fund.state === FundState.FINISHED
+                  ? <span className="text-muted">{t("fund.states.finished")}</span>
+                  : <span className="text-warning">{t("fund.states.inactive")}</span>
+                )}
+              {fund.state === FundState.INACTIVE && <>
+                <br />
+                <Link href={Routes.FUND_ACTIVATE} as={routeWithParams(Routes.FUND_ACTIVATE, { id: fund.id })}>
+                  <Button color="primary" className="btn-sm">
+                    {t("goto.activateFund")}
+                  </Button>
+                </Link>
+              </>}
 
               <h5>{t("fund.description")}</h5>
-              <HtmlContent content={fund.description} />
+              <div className="rte-content">
+                <HtmlContent content={fund.description} />
+              </div>
 
               <h5>{t("fund.region")}</h5>
-              <p><HtmlContent content={fund.region} /></p>
+              <div className="rte-content">
+                <HtmlContent content={fund.region} />
+              </div>
 
               <h5>{t("fund.criteria")}</h5>
               {fund.criteria && fund.criteria.length
                 ? <ul>
                   {fund.criteria.map((c, index) => <li key={index}>{c}</li>)}
                 </ul>
-                : <p>{t("default.empty")}</p>
+                : t("default.empty")
               }
 
               <h5>{t("fund.sponsor")}</h5>
-              <HtmlContent content={fund.sponsor} />
+              <div className="rte-content">
+                <HtmlContent content={fund.sponsor} />
+              </div>
 
               <h5>{t("fund.imprint")}</h5>
-              <HtmlContent content={fund.imprint} />
+              <div className="rte-content">
+                <HtmlContent content={fund.imprint} />
+              </div>
             </CardBody>
           </Card>
 
@@ -132,21 +138,22 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                 </Link>
               </div>
             </CardHeader>
+            <CardBody>
+              <h5>{t("fund.budget")}</h5>
+              {fund.budget
+                ? t("default.currency", { value: fund.budget })
+                : t("default.empty")}
 
-            <h5>{t("fund.budget")}</h5>
-            <p>{fund.budget
-              ? t("default.currency", { value: fund.budget })
-              : t("default.empty")}</p>
+              <h5>{t("fund.minimumGrant")}</h5>
+              {fund.minimumGrant
+                ? t("default.currency", { value: fund.minimumGrant })
+                : t("default.empty")}
 
-            <h5>{t("fund.minimumGrant")}</h5>
-            <p>{fund.minimumGrant
-              ? t("default.currency", { value: fund.minimumGrant })
-              : t("default.empty")}</p>
-
-            <h5>{t("fund.maximumGrant")}</h5>
-            <p>{fund.maximumGrant
-              ? t("default.currency", { value: fund.maximumGrant })
-              : t("default.empty")}</p>
+              <h5>{t("fund.maximumGrant")}</h5>
+              {fund.maximumGrant
+                ? t("default.currency", { value: fund.maximumGrant })
+                : t("default.empty")}
+            </CardBody>
           </Card>
 
           <Card>
@@ -163,14 +170,14 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             </CardHeader>
             <CardBody>
               <h5>{t("fund.submissionBegin")}</h5>
-              <p>{fund.submissionBegin
+              {fund.submissionBegin
                 ? t("default.longDateTime", { value: fund.submissionBegin })
-                : t("default.empty")}</p>
+                : t("default.empty")}
 
               <h5>{t("fund.submissionEnd")}</h5>
-              <p>{fund.submissionEnd
+              {fund.submissionEnd
                 ? t("default.longDateTime", { value: fund.submissionEnd })
-                : t("default.empty")}</p>
+                : t("default.empty")}
 
               <h5 id="concretizations">{t("fund.concretizations")}</h5>
               {fund.concretizations && fund.concretizations.length > 0
@@ -190,7 +197,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                         <Icon name="trash" size={24} />
                       </a>
                     </dt>
-                    {c.description && <dd><HtmlContent content={c.description} /></dd>}
+                    {c.description && <dd className="rte-content"><HtmlContent content={c.description} /></dd>}
                     <small>{t("fundConcretization.maxLength")}: {c.maxLength}</small>
                   </li>)}
                 </ul>
@@ -216,37 +223,37 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             </CardHeader>
             <CardBody>
               <h5>{t("fund.jurorsPerApplication")}</h5>
-              <p>{fund.jurorsPerApplication}</p>
+              {fund.jurorsPerApplication}
 
               <h5>{t("fund.juryCriteria")}</h5>
               {(!fund.juryCriteria || fund.juryCriteria.length === 0) && <p>{t("default.empty")}</p>}
               {fund.juryCriteria && fund.juryCriteria.map((c) => <p>{c}</p>)}
 
               <h5>{t("fund.ratingBegin")}</h5>
-              <p>{fund.ratingBegin
+              {fund.ratingBegin
                 ? t("default.longDateTime", { value: fund.ratingBegin })
-                : t("default.empty")}</p>
+                : t("default.empty")}
 
               <h5>{t("fund.ratingEnd")}</h5>
-              <p>{fund.ratingEnd
+              {fund.ratingEnd
                 ? t("default.longDateTime", { value: fund.ratingEnd })
-                : t("default.empty")}</p>
+                : t("default.empty")}
 
               <h5>{t("fund.briefingDate")}</h5>
-              <p>{fund.briefingDate
+              {fund.briefingDate
                 ? t("default.longDateTime", { value: fund.briefingDate })
-                : t("default.empty")}</p>
+                : t("default.empty")}
 
               <h5>{t("fund.finalJuryDate")}</h5>
-              <p>{fund.finalJuryDate
+              {fund.finalJuryDate
                 ? t("default.longDateTime", { value: fund.finalJuryDate })
-                : t("default.empty")}</p>
+                : t("default.empty")}
             </CardBody>
           </Card>
         </>}
       </Col>
     </Row>
-  </BaseLayout>
+  </BaseLayout >
 }
 
 FundDetailsPage.getInitialProps = ({ store, query }: NextJSContext) => {

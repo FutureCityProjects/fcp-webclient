@@ -54,11 +54,16 @@ const FundManagementCard: React.FC<IProps> = ({ fund }: IProps) => {
               </a>
             </Link>
           </div>
+
           <h4>{t("fund.description")}</h4>
-          <HtmlContent content={fund.description} />
+          <div className="rte-content">
+            <HtmlContent content={fund.description} />
+          </div>
 
           <h4>{t("fund.region")}</h4>
-          <HtmlContent content={fund.region} />
+          <div className="rte-content">
+            <HtmlContent content={fund.region} />
+          </div>
         </CardBody>
       </UncontrolledCollapse>
 

@@ -473,7 +473,7 @@
     "profileOverview": "Zum Projektprofil",
     "newIdea": "Neue Projektidee eintragen",
     "newProject": "Projekt-Idee zum Projekt-Plan weiterentwickeln",
-    "processManagement": "Prozess-Verwaltung",
+    "processOverview": "Prozess-Details",
     "registration": "Jetzt registrieren",
     "search": "Suchen"
   },
@@ -505,6 +505,7 @@
     }
   },
   "navigation": {
+    "about": "FutureCityProjects",
     "dataProtection": "Datenschutz",
     "imprint": "Impressum",
     "login": "Login",
@@ -514,6 +515,13 @@
     "userProfile": "Meine Daten"
   },
   "page": {
+    "index": {
+      "button": "Hier findest du alle Ideen und laufende Projekte",
+      "buttonTitle": "zum Marktplatz",
+      "heading": "Gemeinsam Dresden nachhaltig gestalten",
+      "quote": "&quot;Deine Plattform für nachhaltige Stadtentwicklung&quot;",
+      "title": "FCP Startseite"
+    },
     "about": {
       "heading": "Was ist die PROJEKT.WERK.STADT?",
       "intro": "<p>Willkommen in der Projekt.Werk.Stadt! Sie haben eine Projektidee für Ihre Stadt oder Region? Sie wollen mit anderen zusammen Projekte planen und umsetzen?</p><p>Die Projekt.Werk.Stadt ist der Ort um miteinander Projekte zu durchdenken und vielleicht sogar Fördergelder dafür zu beantragen!</p><ul><li>Stadt- und Dorfbewohner und -bewohnerinnen planen hier Projekte.</li><li>Prozesssteuerer organisieren hier ihren Partizipationsprozess.</li><li>Gemeinsam machen Sie Ihre Stadt oder ihr Dorf zu einem nachhaltigeren und lebenswerteren Ort.</li></ul><p>Die Projekt.Werk.Stadt bietet eine Online-Plattform, auf der Bürgerinnen digital Projekte planen, während sie mit sogenannten \"Kneipentools\" auch offline unterstützt werden. Die Fokussierung der Plattform auf <strong>Bürgerbeteiligung</strong> in <strong>Städten und Dörfern</strong> mit einer Ausrichtung auf <strong>nachhaltige Entwicklung</strong> und der <strong>Verbindung aus online und offline</strong> macht die Projekt.Werk.Stadt so nützlich!</p><p>Sie wollen die Projekt.Werk.Stadt in ihrer Kommune einsetzen oder Projekte darauf planen? Sprechen Sie uns an!</p><p>norbert.rost@zukunftsstadt.de, 0351/4466069</p>",

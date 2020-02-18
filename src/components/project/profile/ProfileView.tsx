@@ -47,14 +47,14 @@ const ProfileView: React.FC<IProps> = (props: IProps) => {
             </div>
             <div className="form-group">
               <h3>{t("project.description")}</h3>
-              <div>{project.description
+              <div className="rte-content">{project.description
                 ? <HtmlContent content={project.description} />
                 : t("default.empty")}
               </div>
             </div>
             <div className="form-group">
               <h3>{t("project.challenges")}</h3>
-              <div>{project.challenges
+              <div className="rte-content">{project.challenges
                 ? <HtmlContent content={project.challenges} />
                 : t("default.empty")}
               </div>
@@ -63,21 +63,21 @@ const ProfileView: React.FC<IProps> = (props: IProps) => {
           <Col lg>
             <div className="form-group">
               <h3>{t("project.goal")}</h3>
-              <div>{project.goal
+              <div className="rte-content">{project.goal
                 ? <HtmlContent content={project.goal} />
                 : t("default.empty")}
               </div>
             </div>
             <div className="form-group">
               <h3>{t("project.vision")}</h3>
-              <div>{project.vision
+              <div className="rte-content">{project.vision
                 ? <HtmlContent content={project.vision} />
                 : t("default.empty")}
               </div>
             </div>
             <div className="form-group">
               <h3>{t("project.delimitation")}</h3>
-              <div>{project.delimitation
+              <div className="rte-content">{project.delimitation
                 ? <HtmlContent content={project.delimitation} />
                 : t("default.empty")}
               </div>

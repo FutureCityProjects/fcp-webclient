@@ -39,7 +39,6 @@ function* createFundApplicationSaga(action: IModelFormAction<IFundApplication>) 
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -69,7 +68,6 @@ function* updateFundApplicationSaga(action: IModelFormAction<IFundApplication>) 
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -94,7 +92,6 @@ function* deleteFundApplicationSaga(action: IModelFormAction<IFundApplication>) 
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
@@ -124,7 +121,6 @@ function* submitFundApplicationSaga(action: ISubmitFundApplicationAction) {
     if (err instanceof SubmissionError) {
       yield call(setErrors, err.errors)
     } else {
-      // @todo log RequestError for monitoring
       yield call(setErrors, { _error: err.message })
     }
 
