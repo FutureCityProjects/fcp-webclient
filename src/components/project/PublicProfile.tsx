@@ -71,20 +71,8 @@ const PublicProfile: React.FC<IProps> = ({ project }: IProps) => {
 
             <br />
             <p>
-              {t("project.memberships.count")}: {project.memberships ? project.memberships.length : 0}
-              <Link href={Routes.PROJECT_APPLICATION}
-                as={routeWithParams(Routes.PROJECT_APPLICATION, { slug: project.slug || project.id })}
-              >
-                <a className="btn btn-inline" title={t("goto.memberApplication")}>
-                  <Icon name="user-add" size={24} />
-                </a>
-              </Link>
-            </p>
-
-            <p>
               {t("project.progress.label")}: {t("project.progress." + project.progress)}
             </p>
-
             <p>
               {t("project.updatedAt")}: {t("default.longDate", { value: project.updatedAt })}
             </p>

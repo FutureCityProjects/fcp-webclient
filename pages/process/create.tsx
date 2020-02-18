@@ -8,6 +8,7 @@ import { AnyAction, Dispatch } from "redux"
 
 import { UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
+import PageError from "components/common/PageError"
 import Redirect from "components/common/Redirect"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import { withAuth } from "components/hoc/withAuth"
@@ -39,7 +40,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
 // @todo move to /management/processes for multi-mandant
 const ProcessCreationPage: I18nPage<PageProps> = ({ onSubmit, process, request, t }) => {
-  if (process || request.loadingError) {
+  if (process) {
     return <Redirect route={Routes.PROCESS_OVERVIEW} />
   }
 
@@ -48,6 +49,8 @@ const ProcessCreationPage: I18nPage<PageProps> = ({ onSubmit, process, request, 
       <Col sm={8}>
         <h1>{t("page.process.create.heading")}</h1>
         <p><TranslatedHtml content="page.process.create.intro" /></p>
+
+        <PageError error={request.loadingError} />
 
         {request.isLoading
           ? <Spinner />
