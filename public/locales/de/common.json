@@ -130,7 +130,7 @@
         "label": "",
         "placeholder": "Dein Passwort"
       },
-      "submit": "Login"
+      "submit": "Einloggen"
     },
     "process": {
       "criteria": {
@@ -199,8 +199,8 @@
         "addTargetGroup": "Zielgruppe hinzufügen"
       },
       "challenges": {
-        "help": "Beschreibe deine Lösung eines Problems in einfachen Worten",
-        "placeholder": "@todo"
+        "help": "Irgendetwas läuft nicht so, wie es sollte? Etwas fehlt, obwohl es das in deiner Stadt geben sollte? Beschreibe das Problem, das gelöst werden soll!",
+        "placeholder": "Der Energieverbrauch in unserer Stadt ist zu hoch"
       },
       "contactEmail": {
         "help": "Wie erreicht dich der Fördermittelgeber?",
@@ -216,11 +216,11 @@
       },
       "delimitation": {
         "help": "Was soll durch das Projekt nicht bearbeitet werden, obwohl es naheliegt?",
-        "placeholder": "@todo"
+        "placeholder": "Wir wollen zwar den Energieverbrauch in unserer Stadt senken, aber wir wollen dies im Verkehr und bei den Unternehmen tun, und nicht in den Haushalten."
       },
       "description": {
-        "help": "Hier kann deine Projektidee weiterentwickelt werden",
-        "placeholder": "@todo"
+        "help": "Beschreibe deine Projektidee ausführlicher! Was passiert in dem Projekt?",
+        "placeholder": "Wir wollen zuerst den Energieverbrauch bei allen Unternehmen messen und dann mit ihnen gemeinsam..."
       },
       "goal": {
         "help": "Ziele, die im Projekt mit eigenen Mitteln realistisch erreichbar sind",
@@ -228,7 +228,7 @@
       },
       "holderAddressInfo": {
         "help": "Zusatzangaben, bspw. &quot;im Hinterhaus&quot;",
-        "placeholder": "@todo"
+        "placeholder": "Postfach 143"
       },
       "holderCity": {
         "help": "Adresse des Projektträgers",
@@ -690,12 +690,27 @@
           "financeParts": "davon",
           "heading": "Projektplan: {{projectName}}",
           "intro": "Der Projektplan beschreibt, <strong>wer wann was</strong> zu tun hat, <strong>wofür Geld gebraucht wird</strong> und <strong>woher</strong> dieses Geld kommen soll. <br />Wie sieht euer Projektplan für <em>{{projectName}}</em> aus?",
+          "timetable": "Zeitplan",
           "title": "Projektplan"
         },
         "edit": {
           "heading": "Projektplan bearbeiten",
           "intro": "An wen richtet sich das Projekt? Wen soll es erreichen?<br />Welche Ergebnisse werden im Projektverlauf produziert?<br />Wie wirkt das Projekt auf die beteiligten Leute?<br />Wie wirkt das Projekt auf dein Dorf/deine Stadt oder die Gesellschaft?<br />Was bleibt, wenn das Projekt vorbei ist? Was läßt sich dann weiternutzen?",
           "title": "Projektplan: Was kommt hinten raus?"
+        },
+        "finances": {
+          "fincancesHeading": "Finanzierung",
+          "financesIntro": "Wer stellt welche Mittel bereit?",
+          "heading": "Projektfinanzierung",
+          "intro": "Hier kannst du angeben aus welchen Quellen die einzelnen Bedarfe gedeckt werden sollen.",
+          "title": "Projektfinanzierung"
+        },
+        "resourceRequirements": {
+          "heading": "Ressourcenbedarf des Projekts",
+          "intro": "Hier kannst du die Bedarfe deines Projekt <em>{{projectName}}</em> eintragen.",
+          "resourceHeading": "Leistungen und Kosten",
+          "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
+          "title": "Ressourcenbedarf"
         },
         "tasks": {
           "heading": "Aufgaben bearbeiten",
@@ -704,6 +719,15 @@
           "taskHeading": "Aufgaben",
           "taskIntro": "Hier kannst du einzelne Aufgaben eintragen.",
           "packageIntro": "Wenn ein Projekt sehr viele Aufgaben hat, kann man die Aufgaben in Arbeitspaketen zusammenpacken. Der Name jedes Arbeitspakats läßt erkennen, welche Art von Aufgaben drin sind. An ein Arbeitspaket kann man außerdem ranschreiben, wer es zu erledigen hat. So kann man Projektpartnern ganze Aufgabenbündel zuweisen."
+        },
+        "timetable": {
+          "heading": "Der Zeitplan",
+          "intro": "Der Zeitplan gibt einen Überlick, wann was passieren soll. Natürlich kommt immer mal was dazwischen, aber einen Plan zu haben ist dennoch sehr wertvoll!",
+          "modalHeader": "Projektdauer festlegen",
+          "timespan": "Projektzeitraum",
+          "timetableHeader": "Startzeitpunkt & Dauer festlegen, Aufgaben & Arbeitspakete einordnen",
+          "timetableIntro": "Irgendwann muss das Projekt starten. Benenne einen Startzeitpunkt! Alles, was im Projekt passiert, braucht seine Zeit. Wie lange soll das Projekt wohl laufen?<br />Ordne dann die Aufgaben und Arbeitspakete einem oder mehreren Monaten in der Zukunft zu! So entsteht dein Zeitplan.",
+          "title": "Zeitplan"
         },
         "workPackages": {
           "heading": "Arbeitspakete bearbeiten",
@@ -714,24 +738,6 @@
           "packageIntro": "Wähle deine einzelnen Aufgaben aus und organisiere sie in Arbeitspaketen.",
           "subHeader": "Aufgaben und Arbeitspakete",
           "title": "Arbeitspakete bearbeiten"
-        },
-        "timetable": {
-          "modalHeader": "Projektdauer festlegen",
-          "timespan": "Projektzeitraum"
-        },
-        "resourceRequirements": {
-          "heading": "Ressourcenbedarf des Projekts",
-          "intro": "Hier kannst du die Bedarfe deines Projekt <em>{{projectName}}</em> eintragen.",
-          "resourceHeading": "Leistungen und Kosten",
-          "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
-          "title": "Ressourcenbedarf"
-        },
-        "finances": {
-          "fincancesHeading": "Finanzierung",
-          "financesIntro": "Wer stellt welche Mittel bereit?",
-          "heading": "Projektfinanzierung",
-          "intro": "Hier kannst du angeben aus welchen Quellen die einzelnen Bedarfe gedeckt werden sollen.",
-          "title": "Projektfinanzierung"
         }
       },
       "application": {
@@ -823,13 +829,15 @@
     "delimitation": "Abgrenzung",
     "description": "Beschreibung",
     "fundingData": "Angaben zur Förderung",
-    "goal": "Ziel",
+    "goal": "Ziele des Projekts",
     "holderAddressInfo": "Adresszusatz",
     "holderCity": "Ort",
     "holderName": "Projektträger",
     "holderStreet": "Straße",
     "holderZipCode": "Postleitzahl",
     "impact": "Weitergehende Wirkungen auf den Ort",
+    "implementationBegin": "Projekt-Start",
+    "implementationTime": "Projekt-Laufzeit",
     "memberships": {
       "count": "Teammitglieder"
     },
