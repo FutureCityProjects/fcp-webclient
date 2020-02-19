@@ -61,7 +61,7 @@ const IdeaForm = ({ onSubmit, idea }: IProps) => {
         <FormGroup>
           <Button color="primary" className="btn-action btn-icon" type="submit" disabled={isSubmitting}>
             <Icon name="message" size={18} />
-            {t("form.submit")} {isSubmitting && <Spinner />}
+            {t("form.idea.submit")} {isSubmitting && <Spinner />}
           </Button>
         </FormGroup>
 

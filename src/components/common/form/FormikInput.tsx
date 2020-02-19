@@ -30,6 +30,7 @@ class FormikInput extends FormikElement<IProps> {
       <Input
         {...field}
         {...props}
+        children={children}
         id={id || field.name}
         name={field.name}
         invalid={this.hasError()}

@@ -62,3 +62,5 @@
     * FOrmularelemente synchronisieren, nicht nur für spezifische Forms:
       http://prntscr.com/r1cqmx
     * Close Button etwas knapp: http://prntscr.com/r2njjp
+    * Dropdown droppt nicht immer nach unten, bspw. am Bildschirmrand, Pfeil fixen: http://prntscr.com/r4hopj
+    * Caret der AP beim Zeitplan dreht sich nicht

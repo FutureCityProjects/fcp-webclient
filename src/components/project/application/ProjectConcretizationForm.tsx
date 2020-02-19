@@ -38,9 +38,6 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
           <CardHeader>
             {t("fundApplication.fund") + ": " + fund.name}
             <div className="icon-navigation">
-              {isSubmitting
-                ? <a className="navigation-item"><Spinner /></a>
-                : <a onClick={() => handleSubmit()} className="navigation-item" title={t("form.saveChanges")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
                   <a>{t("goto.myProjects")}</a>
@@ -49,6 +46,14 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
             </div>
           </CardHeader>
           <CardBody>
+            <div className="button-area">
+              <FormGroup>
+                <Button color="primary" className="btn-action btn-icon" type="submit" disabled={isSubmitting}>
+                  <Icon name="save" size={18} />
+                  {t("form.saveChanges")} {isSubmitting && <Spinner />}
+                </Button>
+              </FormGroup>
+            </div>
             <GeneralFormError
               errors={errors}
               prefix="fundApplication"
@@ -80,12 +85,15 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
               value={values.concretizationSelfAssessment}
             />
 
-            <FormGroup>
+            <div className="button-area">
               <Button color="primary" className="btn-action btn-icon" type="submit" disabled={isSubmitting}>
                 <Icon name="save" size={18} />
                 {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
-            </FormGroup>
+              <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+                <a className="btn btn-light">{t("goto.myProjects")}</a>
+              </Link>
+            </div>
           </CardBody>
         </Form>
       }}

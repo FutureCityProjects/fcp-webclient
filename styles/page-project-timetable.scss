@@ -1,0 +1,140 @@
+.select-date {
+  margin: 0;
+  .form-group { margin-right: 0.5rem; }
+}
+
+.schedule {
+  .card-body {
+    overflow-x: auto;
+  }
+}
+
+.project-schedule-table {
+  min-width: 1000px;
+  width: 99%;
+  .timespan {
+    th {
+      border: none;
+      text-align: center;
+      .timespan-display {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .timespan-undefined {
+        border: 1px solid $red;
+      }
+      .calendar {
+        margin-left: 0.5rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+      }
+    }
+  }
+  td {
+    border-right: 1px solid $custom-dark;
+    border-left: 1px solid $custom-dark;
+    border-top: 1px solid adjust_color($custom-dark, $alpha: -0.9);
+  }
+  th:first-child, td:first-child {
+    border: none;
+    width: 18rem;
+    font-size: $font-size-sm;
+  }
+  .first-of-year {
+    border-left: 2px solid $custom-dark;
+  }
+  tr {
+    td:nth-child(2) {
+      border-left: 1px solid $custom-dark;
+    }
+  }
+  tr.years {
+    td {
+      border: none;
+      padding: 0;
+      font-weight: bold;
+    }
+  }
+  tr.months {
+    td {
+      height: 6rem;
+      padding: 0;
+      div {
+        display: flex;
+      }
+      span {
+        display: flex;
+        justify-content: center;
+        padding: 0.25rem;
+        background: $custom-light;
+        width: 100%;
+      }
+    }
+  }
+  .task-row {
+    td.task-cell {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 2.5rem;
+    }
+    td:not(:first-child) {
+      &:hover {
+        background: lighten($custom-primary, 35%);
+        cursor: pointer;
+      }
+    }
+    td.active {
+      background: lighten($custom-primary, 25%);
+    }
+  }
+  .wp-row {
+    td {
+      padding: 0 2rem 0 0;
+      border-left: none;
+      border-right: none;
+      &:last-child {
+        border-right: 1px solid $custom-dark;
+      }
+    }
+    td.active {
+      background: lighten($green, 45%);
+    }
+    .work-package-card {
+      width: auto;
+      font-size: 1.125rem;
+      padding: 0.5rem 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+    }
+    .no-tasks {
+      cursor: auto;
+    }
+    .caret {
+      display: flex;
+      align-items: center;
+      transform: rotate(90deg)
+    }
+  }
+  .wp-collapse {
+    display: contents;
+    .collapse.show, .collapsing {
+      display: contents;
+    }
+    &:nth-child(even) {
+      .work-package-card {
+        background: white;
+        border-top: 1px solid $custom-light;
+        border-bottom: 1px solid $custom-light;
+      }
+    }
+  }
+  .wp-area {
+    display: contents;
+  }
+}
