@@ -17,17 +17,18 @@ const ScheduleTableHeader: React.FC<IProps> = (props: IProps) => {
   const [timeModalOpen, setTimeModalOpen] = useState(false)
   const toggleTimeModal = () => setTimeModalOpen(!timeModalOpen)
 
-  const { project, onSetImplementationTime } = props
+  const { onSetImplementationTime } = props
   const { t } = useTranslation()
 
+  const implementationTime = props.functions.getImplementationTime()
   const implementationBegin = props.functions.getImplementationBegin()
   const implementationEnd = new Date(implementationBegin)
-  implementationEnd.setMonth(implementationEnd.getMonth() + project.implementationTime - 1)
+  implementationEnd.setMonth(implementationEnd.getMonth() + implementationTime - 1)
 
   const yearCells = []
   const monthCells = []
 
-  for (let i = 0; i < project.implementationTime; i++) {
+  for (let i = 0; i < implementationTime; i++) {
     const currentMonth = new Date(implementationBegin)
     currentMonth.setMonth(currentMonth.getMonth() + i)
 
@@ -44,10 +45,11 @@ const ScheduleTableHeader: React.FC<IProps> = (props: IProps) => {
   return <thead className="timespan">
     <tr>
       <th />
-      <th colSpan={project.implementationTime}>
-        <div className={"timespan-display " + (project.implementationBegin && project.implementationTime ? "" : "timespan-undefined")} onClick={toggleTimeModal}>
-          {t("page.projects.plan.timetable.timespan")} {project.implementationBegin && project.implementationTime
-            && <><TranslatedHtml content="default.monthYear" params={{ value: project.implementationBegin }} /> - <TranslatedHtml content="default.monthYear" params={{ value: implementationEnd }} /></>}
+      <th colSpan={implementationTime}>
+        <div className="timespan-display" onClick={toggleTimeModal}>
+          {t("page.projects.plan.timetable.timespan")
+          } <TranslatedHtml content="default.monthYear" params={{ value: implementationBegin }}
+          /> - <TranslatedHtml content="default.monthYear" params={{ value: implementationEnd }} />
           <span className="calendar" onClick={toggleTimeModal}>
             <Icon name="calendar" size={20} />
           </span>
@@ -63,7 +65,8 @@ const ScheduleTableHeader: React.FC<IProps> = (props: IProps) => {
       {monthCells}
     </tr>
     <ImplementationTimeForm
-      project={project}
+      implementationBegin={implementationBegin}
+      implementationTime={implementationTime}
       onSubmit={onSetImplementationTime}
       toggle={toggleTimeModal}
       modalOpen={timeModalOpen}

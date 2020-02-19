@@ -20,12 +20,13 @@ const ProjectScheduleTable: React.FC<IProps> = (props: IProps) => {
   const { project, onSetImplementationTime, toggleTaskMonth, functions } = props
   const { t } = useTranslation()
 
+  const implementationTime = functions.getImplementationTime()
   const implementationBegin = functions.getImplementationBegin()
 
   const taskMonthCols = (task) => {
     const cols = []
 
-    for (let i = 0; i < project.implementationTime; i++) {
+    for (let i = 0; i < implementationTime; i++) {
       const currentMonth = new Date(implementationBegin)
       currentMonth.setMonth(currentMonth.getMonth() + i)
 
@@ -44,19 +45,23 @@ const ProjectScheduleTable: React.FC<IProps> = (props: IProps) => {
   }
 
   const unassignedTaskRows = functions.getWorkPackageTasks(null).map((task) => <tr key={task.id} className="task-row">
-    <ScheduleTaskCell availablePackages={project.workPackages} task={task} onAssign={functions.updateTask} />
+    <ScheduleTaskCell
+      availablePackages={functions.getWorkPackages()}
+      task={task}
+      onAssign={functions.updateTask}
+    />
     {taskMonthCols(task)}
   </tr>)
 
   const workPackageMonths = (wp: IWorkPackage) => {
     const cols = []
-    for (let i = 0; i < project.implementationTime; i++) {
+    for (let i = 0; i < implementationTime; i++) {
       cols.push(<td key={i} className={functions.getWorkPackageMonths(wp.id).includes(i + 1) ? "active" : ""} />)
     }
     return cols
   }
 
-  const workPackageRows = project.workPackages.map((wp) => <div key={wp.id} className="wp-collapse">
+  const workPackageRows = functions.getWorkPackages().map((wp) => <div key={wp.id} className="wp-collapse">
     <tr className="wp-row">
       <td>
         <div className={"work-package-card" + (functions.getWorkPackageTasks(wp.id).length ? "" : " no-tasks")} id={"toggle-" + wp.id}>
@@ -70,7 +75,11 @@ const ProjectScheduleTable: React.FC<IProps> = (props: IProps) => {
       {
         functions.getWorkPackageTasks(wp.id).map(task =>
           <tr key={task.id} className="task-row">
-            <ScheduleTaskCell availablePackages={project.workPackages} task={task} onAssign={functions.updateTask} />
+            <ScheduleTaskCell
+              availablePackages={functions.getWorkPackages()}
+              task={task}
+              onAssign={functions.updateTask}
+            />
             {taskMonthCols(task)}
           </tr>)
       }
