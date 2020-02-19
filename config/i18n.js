@@ -6,7 +6,10 @@ if (!process.browser) {
 }
 
 const formatDate = require("../src/services/formatDate").formatDate
+const dateFormats = require("../src/services/formatDate").formats
 const NextI18Next = require("next-i18next").default;
+
+const dateFormatNames = Object.keys(dateFormats)
 
 module.exports = new NextI18Next({
   defaultLanguage: "de",
@@ -28,7 +31,7 @@ module.exports = new NextI18Next({
         return new Intl.NumberFormat(locale).format(value);
       }
 
-      if (format === "date" || format === "longDate" || format === "longDateTime") {
+      if (dateFormatNames.includes(format)) {
         return formatDate(locale, value, format)
       }
 

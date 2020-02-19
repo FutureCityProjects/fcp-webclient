@@ -46,6 +46,22 @@ const ProjectTasks: React.FC<IPlanProps> = ({ functions, project, updateProject 
       <h4>{t("page.projects.plan.tasks.taskHeading")} <Icon name="to-do" size={24} /></h4>
       <span className="form-text">{t("page.projects.plan.tasks.taskIntro")}</span>
 
+      <div className="button-area">
+        <ConfirmationForm
+          buttonLabel="form.saveChanges"
+          onSubmit={(_values, actions) => {
+            // only update the tasks/resourceRequirements, we don't want to overwrite other data meanwhile updated
+            const update: IProject = {
+              "@id": project["@id"],
+              resourceRequirements: project.resourceRequirements,
+              tasks: project.tasks,
+            }
+
+            updateProject(update, actions)
+          }}
+        />
+      </div>
+
       <Row>
         <Col lg={8}>
           <EmptyProjectTaskCard onSubmit={functions.addTask} />

@@ -12,7 +12,11 @@ var intlFormats = {
 var formats = {
   date: "P",
   longDate: "PPPP",
-  longDateTime: "PPPPp"
+  longDateTime: "PPPPp",
+  month: "MMMM",
+  monthYear: "LL'/'y",
+  longMonthYear: "MMMM y",
+  shortMonth: "MMM",
 }
 
 var supportedLocales = {
@@ -39,7 +43,6 @@ function formatDate(locale, date, format) {
     // @todo log error?
     return "[invalid datetime format]"
   }
-
   // @todo node per default only includes small-icu (english)
   // return new Intl.DateTimeFormat(locale, intlFormats[format]).format(date))
 

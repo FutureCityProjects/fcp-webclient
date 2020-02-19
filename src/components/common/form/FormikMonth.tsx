@@ -7,13 +7,15 @@ import { includeDefaultNamespaces, withTranslation } from "services/i18n"
 import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
+  minDate?: Date,
+  maxDate?: Date,
   value: string
   labels: object,
 }
 
 class FormikDate extends FormikElement<IProps> {
   public render() {
-    const { id, field, form, value } = this.props
+    const { id, field, form, minDate, maxDate, value } = this.props
     const labelText = this.labelText()
 
     return <FormGroup>
@@ -23,14 +25,17 @@ class FormikDate extends FormikElement<IProps> {
 
       <DatePicker
         className="form-control"
-        dateFormat="P"
+        dateFormat="LL/y"
         id={id || field.name}
         name={field.name}
         locale={de} // @todo customize
+        minDate={minDate}
+        maxDate={maxDate}
         onChange={(val) => {
           form.setFieldValue(field.name, val)
         }}
         selected={(value && new Date(value)) || null}
+        showMonthYearPicker
       />
 
       {this.errorElement()}

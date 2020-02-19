@@ -35,7 +35,7 @@ const ProgressBox: React.FC<IProps> = (props: IProps) => {
     <div><Icon name={icon} size={34} /></div>
     <div className="progress-box-text">
       <span className="project-milestone-prefix">{t(subtitle)}</span>
-      <h4 className={"progress-box-title" + (translatedTitle.length > 7 && " title-smaller")}>{translatedTitle}</h4>
+      <h4 className={"progress-box-title " + (translatedTitle.length > 7 ? " title-smaller" : "")}>{translatedTitle}</h4>
       <span className="progress-box-status">{t(progressToText(progress))}</span>
     </div>
     {statusIcon(complete)}

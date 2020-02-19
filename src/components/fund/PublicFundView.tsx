@@ -24,7 +24,7 @@ const PublicFundView: React.FC<IProps> = ({ fund }: IProps) => {
     <Card>
       <CardHeader      >
         <div className="title-section">
-          <h3>{fund.name} <Icon name="pot" size={24} /></h3>
+          <h3><Icon name="pot" size={24} /> {fund.name}</h3>
           {stateText}
         </div>
       </CardHeader>

@@ -54,9 +54,6 @@ const ProjectPlanForm: React.FC<IProps> = (props: IProps) => {
           <CardHeader>
             {t("form.project.plan.header")}
             <div className="icon-navigation">
-              {isSubmitting
-                ? <a className="navigation-item" aria-label={t("form.saveChanges")}><Spinner /></a>
-                : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.saveChanges")} title={t("form.saveChanges")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 <Link
                   href={Routes.PROJECT_PLAN}
@@ -72,11 +69,26 @@ const ProjectPlanForm: React.FC<IProps> = (props: IProps) => {
           </CardHeader>
           <CardBody>
             <Row>
-              <Col><GeneralFormError
-                errors={errors}
-                prefix="project"
-                excludeFields={["impact", "outcome", "results", "targetGroups", "utilization"]}
-              /></Col>
+              <Col>
+                <div className="button-area">
+                  <Button className="btn-action btn-icon" type="submit" color="primary" disabled={isSubmitting}>
+                    <Icon name="save" size={18} />
+                    {t("form.saveChanges")} {isSubmitting && <Spinner />}
+                  </Button>
+                  <Link
+                    href={Routes.PROJECT_PLAN}
+                    as={routeWithParams(Routes.PROJECT_PLAN, { slug: project.slug || project.id }) + "#project-" + project.id}
+                  >
+                    <a className="btn btn-light">{t("goto.planOverview")}</a>
+                  </Link>
+                </div>
+                <GeneralFormError
+                  errors={errors}
+                  prefix="project"
+                  excludeFields={["impact", "outcome", "results", "targetGroups", "utilization"]}
+                />
+                <br />
+              </Col>
             </Row>
             <Row>
               <Col lg>

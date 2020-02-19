@@ -9,6 +9,8 @@ export interface IPlanFunctions {
   addTask: any
   addWorkPackage: any
   getIDs: any
+  getImplementationBegin: any
+  getImplementationTime: any
   getResourceRequirement: any
   getResourceRequirements: any
   getResourceRequirementSources: any
@@ -27,7 +29,8 @@ export interface IPlanFunctions {
   sortResourceRequirements,
   sortTasks,
   sortWorkPackages,
-  sumResourceRequirementCosts: any
+  sumResourceRequirementCosts: any,
+  updateImplementationTime: any,
   updateResourceRequirement: any
   updateTask: any
   updateWorkPackage: any
@@ -109,6 +112,9 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
   const sumResourceRequirementCosts = (requirements: IResourceRequirement[]): number =>
     requirements.reduce((s, r) => s + (r.cost || 0), 0)
 
+  const getImplementationBegin = () => project.implementationBegin || new Date()
+  const getImplementationTime = () => project.implementationTime || 3
+
   const addResourceRequirement = (resource: IResourceRequirement) => {
     resource.id = uuidv1()
     setProject({ ...project, resourceRequirements: [...getResourceRequirements(), resource] })
@@ -188,12 +194,29 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     })
   }
 
+  const updateImplementationTime = (implementationTime: number, implementationBegin: Date) => {
+    // if the implementationTime is reduced, remove any planned monthe after the new value
+    const updatedTasks = getTasks().map((task) => ({
+      ...task,
+      months: task.months.filter((m) => m <= implementationTime)
+    }))
+
+    setProject({
+      ...project,
+      implementationBegin,
+      implementationTime,
+      tasks: updatedTasks,
+    })
+  }
+
   return <props.component
     functions={{
       addResourceRequirement,
       addTask,
       addWorkPackage,
       getIDs,
+      getImplementationBegin,
+      getImplementationTime,
       getResourceRequirement,
       getResourceRequirements,
       getResourceRequirementSources,
@@ -213,6 +236,7 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
       sortTasks,
       sortWorkPackages,
       sumResourceRequirementCosts,
+      updateImplementationTime,
       updateResourceRequirement,
       updateTask,
       updateWorkPackage,
