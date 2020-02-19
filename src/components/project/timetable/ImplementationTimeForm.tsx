@@ -8,17 +8,16 @@ import FormikMonth from "components/common/form/FormikMonth"
 import { useTranslation } from "services/i18n"
 
 interface IProps {
-  project: IProject,
+  implementationBegin: Date
+  implementationTime: number
   onSubmit: any,
   toggle: any,
   modalOpen: boolean,
 }
 
 const ImplementationTimeForm: React.FC<IProps> = (props: IProps) => {
-  const { project, onSubmit, toggle, modalOpen } = props
+  const { implementationBegin, implementationTime, onSubmit, toggle, modalOpen } = props
   const { t } = useTranslation()
-
-  const begin = project.implementationBegin ? new Date(project.implementationBegin) : new Date()
 
   return <Modal isOpen={modalOpen} toggle={toggle} className="work-package-form-container">
     <ModalHeader>
@@ -27,8 +26,8 @@ const ImplementationTimeForm: React.FC<IProps> = (props: IProps) => {
     <ModalBody>
       <Formik<IProject>
         initialValues={{
-          implementationBegin: begin,
-          implementationTime: project.implementationTime || 1
+          implementationBegin,
+          implementationTime,
         }}
         onSubmit={(values) => {
           onSubmit(values)
