@@ -250,6 +250,12 @@
         "help": "Gute Projekte können sich auf die ganze Stadt auswirken oder sogar darüber hinaus. Welche über die Zielgruppe(n) hinaus gehenden Wirkungen soll das Projekt erreichen? Welche Wirkungen in deiner Stadt/deinem Dorf oder der Gesellschaft sollen spürbar sein?",
         "placeholder": "Unsere Stadt wird grüner, dem Klimawandel wird vorgebeugt, die Menschen sind freundlicher zueinander..."
       },
+      "implementationBegin": {
+        "help": "Wähle einen Start-Monat für dein Projekt!"
+      },
+      "implementationTime": {
+        "help": "Gib die Dauer des Projekts in Monaten an."
+      },
       "name": {
         "help": "Gib deinem Projekt einen Namen",
         "placeholder": "DasBesteProjektInUnsererStadt"
@@ -468,6 +474,7 @@
     "editResourceRequirements": "Um Aufgaben erledigen zu können, muss man manchmal Sachen oder Fachleute besorgen. Welche sind das?",
     "editProjectFinances": "Was man für ein Projekt zukaufen muss, muss bezahl werden. Woher kommt welches Geld?",
     "editRequestedFunding": "Wieviel Geld braucht ihr aus dem Fördertopf?",
+    "editTimetable": "Wie sieht der Zeitplan für das Projekt aus?",
     "fundDetails": "Detailansicht",
     "fundManagement": "Fördertopf-Verwaltung",
     "home": "Zur Startseite",
