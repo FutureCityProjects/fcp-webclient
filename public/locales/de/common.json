@@ -130,7 +130,7 @@
         "label": "",
         "placeholder": "Dein Passwort"
       },
-      "submit": "Einloggen"
+      "submit": "Login"
     },
     "process": {
       "criteria": {
@@ -199,8 +199,8 @@
         "addTargetGroup": "Zielgruppe hinzufügen"
       },
       "challenges": {
-        "help": "Irgendetwas läuft nicht so, wie es sollte? Etwas fehlt, obwohl es das in deiner Stadt geben sollte? Beschreibe das Problem, das gelöst werden soll!",
-        "placeholder": "Der Energieverbrauch in unserer Stadt ist zu hoch"
+        "help": "Beschreibe deine Lösung eines Problems in einfachen Worten",
+        "placeholder": "@todo"
       },
       "contactEmail": {
         "help": "Wie erreicht dich der Fördermittelgeber?",
@@ -216,11 +216,11 @@
       },
       "delimitation": {
         "help": "Was soll durch das Projekt nicht bearbeitet werden, obwohl es naheliegt?",
-        "placeholder": "Wir wollen zwar den Energieverbrauch in unserer Stadt senken, aber wir wollen dies im Verkehr und bei den Unternehmen tun, und nicht in den Haushalten."
+        "placeholder": "@todo"
       },
       "description": {
-        "help": "Beschreibe deine Projektidee ausführlicher! Was passiert in dem Projekt?",
-        "placeholder": "Wir wollen zuerst den Energieverbrauch bei allen Unternehmen messen und dann mit ihnen gemeinsam..."
+        "help": "Hier kann deine Projektidee weiterentwickelt werden",
+        "placeholder": "@todo"
       },
       "goal": {
         "help": "Ziele, die im Projekt mit eigenen Mitteln realistisch erreichbar sind",
@@ -228,7 +228,7 @@
       },
       "holderAddressInfo": {
         "help": "Zusatzangaben, bspw. &quot;im Hinterhaus&quot;",
-        "placeholder": "Postfach 143"
+        "placeholder": "@todo"
       },
       "holderCity": {
         "help": "Adresse des Projektträgers",
@@ -249,12 +249,6 @@
       "impact": {
         "help": "Gute Projekte können sich auf die ganze Stadt auswirken oder sogar darüber hinaus. Welche über die Zielgruppe(n) hinaus gehenden Wirkungen soll das Projekt erreichen? Welche Wirkungen in deiner Stadt/deinem Dorf oder der Gesellschaft sollen spürbar sein?",
         "placeholder": "Unsere Stadt wird grüner, dem Klimawandel wird vorgebeugt, die Menschen sind freundlicher zueinander..."
-      },
-      "implementationBegin": {
-        "help": "Wähle einen Start-Monat für dein Projekt!"
-      },
-      "implementationTime": {
-        "help": "Gib die Dauer des Projekts in Monaten an."
       },
       "name": {
         "help": "Gib deinem Projekt einen Namen",
@@ -474,7 +468,6 @@
     "editResourceRequirements": "Um Aufgaben erledigen zu können, muss man manchmal Sachen oder Fachleute besorgen. Welche sind das?",
     "editProjectFinances": "Was man für ein Projekt zukaufen muss, muss bezahl werden. Woher kommt welches Geld?",
     "editRequestedFunding": "Wieviel Geld braucht ihr aus dem Fördertopf?",
-    "editTimetable": "Wie sieht der Zeitplan für das Projekt aus?",
     "fundDetails": "Detailansicht",
     "fundManagement": "Fördertopf-Verwaltung",
     "home": "Zur Startseite",
@@ -533,11 +526,10 @@
       "buttonTitle": "zum Marktplatz",
       "heading": "Gemeinsam Dresden nachhaltig gestalten",
       "quote": "&quot;Deine Plattform für nachhaltige Stadtentwicklung&quot;",
-      "title": "FutureCityProjects - Nachhaltige Stadtentwicklung mit smarter Bürgerbeteiligung"
+      "title": "FCP Startseite"
     },
     "about": {
       "heading": "Was ist die PROJEKT.WERK.STADT?",
-     
       "intro": "<p>Willkommen in der Projekt.Werk.Stadt! Sie haben eine Projektidee für Ihre Stadt oder Region? Sie wollen mit anderen zusammen Projekte planen und umsetzen?</p><p>Die Projekt.Werk.Stadt ist der Ort um miteinander Projekte zu durchdenken und vielleicht sogar Fördergelder dafür zu beantragen!</p><ul><li>Stadt- und Dorfbewohner und -bewohnerinnen planen hier Projekte.</li><li>Prozesssteuerer organisieren hier ihren Partizipationsprozess.</li><li>Gemeinsam machen Sie Ihre Stadt oder ihr Dorf zu einem nachhaltigeren und lebenswerteren Ort.</li></ul><p>Die Projekt.Werk.Stadt bietet eine Online-Plattform, auf der Bürgerinnen digital Projekte planen, während sie mit sogenannten \"Kneipentools\" auch offline unterstützt werden. Die Fokussierung der Plattform auf <strong>Bürgerbeteiligung</strong> in <strong>Städten und Dörfern</strong> mit einer Ausrichtung auf <strong>nachhaltige Entwicklung</strong> und der <strong>Verbindung aus online und offline</strong> macht die Projekt.Werk.Stadt so nützlich!</p><p>Sie wollen die Projekt.Werk.Stadt in ihrer Kommune einsetzen oder Projekte darauf planen? Sprechen Sie uns an!</p><p>norbert.rost@zukunftsstadt.de, 0351/4466069</p>",
       "title": "Worum geht's?"
     },
@@ -545,12 +537,6 @@
       "heading": "Datenschutzerklärung",
       "intro": "<p>Allgemeiner Hinweis und Pflichtinformationen</p><p>Benennung der verantwortlichen Stelle</p><p>Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:</p><p><span id=\"s3-t-firma\">Name der Firma</span><br><span id=\"s3-t-ansprechpartner\">Ansprechpartner</span><br><span id=\"s3-t-strasse\">Straße und Hausnummer</span><br><span id=\"s3-t-plz\">PLZ</span> <span id=\"s3-t-ort\">Ort</span></p><p></p><p>Die verantwortliche Stelle entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.).</p><p><strong>Widerruf Ihrer Einwilligung zur Datenverarbeitung</strong></p><p>Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p><p><strong>Recht auf Beschwerde bei der zuständigen Aufsichtsbehörde</strong></p><p>Als Betroffener steht Ihnen im Falle eines datenschutzrechtlichen Verstoßes ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde bezüglich datenschutzrechtlicher Fragen ist der Landesdatenschutzbeauftragte des Bundeslandes, in dem sich der Sitz unseres Unternehmens befindet. Der folgende Link stellt eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten bereit: <a href=\"https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html\" target=\"_blank\">https://www.bfdi.bund.de/DE/Infothek/Anschriften_Links/anschriften_links-node.html</a></p><p><strong>Recht auf Datenübertragbarkeit</strong></p><p>Ihnen steht das Recht zu, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an Dritte aushändigen zu lassen. Die Bereitstellung erfolgt in einem maschinenlesbaren Format. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist.</p><p><strong>Recht auf Auskunft, Berichtigung, Sperrung, Löschung</strong></p><p>Sie haben jederzeit im Rahmen der geltenden gesetzlichen Bestimmungen das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, Herkunft der Daten, deren Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Diesbezüglich und auch zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit über die im Impressum aufgeführten Kontaktmöglichkeiten an uns wenden.</p><p><strong>SSL- bzw. TLS-Verschlüsselung</strong></p><p>Aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, die Sie an uns als Seitenbetreiber senden, nutzt unsere Website eine SSL-bzw. TLS-Verschlüsselung. Damit sind Daten, die Sie über diese Website übermitteln, für Dritte nicht mitlesbar. Sie erkennen eine verschlüsselte Verbindung an der „https://“ Adresszeile Ihres Browsers und am Schloss-Symbol in der Browserzeile.</p><p><strong>Server-Log-Dateien</strong></p><p>In Server-Log-Dateien erhebt und speichert der Provider der Website automatisch Informationen, die Ihr Browser automatisch an uns übermittelt. Dies sind:</p><ul><li>Besuchte Seite auf unserer Domain</li><li>Datum und Uhrzeit der Serveranfrage</li><li>Browsertyp und Browserversion</li><li>Verwendetes Betriebssystem</li><li>Referrer URL</li><li>Hostname des zugreifenden Rechners</li><li>IP-Adresse</li></ul><p>Es findet keine Zusammenführung dieser Daten mit anderen Datenquellen statt. Grundlage der Datenverarbeitung bildet Art. 6 Abs. 1 lit. b DSGVO, der die Verarbeitung von Daten zur Erfüllung eines Vertrags oder vorvertraglicher Maßnahmen gestattet.</p><p><strong>Registrierung auf dieser Website</strong></p><p>Zur Nutzung bestimmter Funktionen können Sie sich auf unserer Website registrieren. Die übermittelten Daten dienen ausschließlich zum Zwecke der Nutzung des jeweiligen Angebotes oder Dienstes. Bei der Registrierung abgefragte Pflichtangaben sind vollständig anzugeben. Andernfalls werden wir die Registrierung ablehnen.</p><p>Im Falle wichtiger Änderungen, etwa aus technischen Gründen, informieren wir Sie per E-Mail. Die E-Mail wird an die Adresse versendet, die bei der Registrierung angegeben wurde.</p><p>Die Verarbeitung der bei der Registrierung eingegebenen Daten erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bereits erfolgten Datenverarbeitung bleibt vom Widerruf unberührt.</p><p>Wir speichern die bei der Registrierung erfassten Daten während des Zeitraums, den Sie auf unserer Website registriert sind. Ihren Daten werden gelöscht, sollten Sie Ihre Registrierung aufheben. Gesetzliche Aufbewahrungsfristen bleiben unberührt.</p><p><strong>Kontaktformular</strong></p><p>Per Kontaktformular übermittelte Daten werden einschließlich Ihrer Kontaktdaten gespeichert, um Ihre Anfrage bearbeiten zu können oder um für Anschlussfragen bereitzustehen. Eine Weitergabe dieser Daten findet ohne Ihre Einwilligung nicht statt.</p><p>Die Verarbeitung der in das Kontaktformular eingegebenen Daten erfolgt ausschließlich auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.</p><p>Über das Kontaktformular übermittelte Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder keine Notwendigkeit der Datenspeicherung mehr besteht. Zwingende gesetzliche Bestimmungen - insbesondere Aufbewahrungsfristen - bleiben unberührt.</p><p><strong>Speicherdauer von Beiträgen und Kommentaren</strong></p><p>Beiträge und Kommentare sowie damit in Verbindung stehende Daten, wie beispielsweise IP-Adressen, werden gespeichert. Der Inhalt verbleibt auf unserer Website, bis er vollständig gelöscht wurde oder aus rechtlichen Gründen gelöscht werden musste.</p><p>Die Speicherung der Beiträge und Kommentare erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. DieRechtmäßigkeit bereits erfolgter Datenverarbeitungsvorgänge bleibt vom Widerruf unberührt.</p><p><strong>Google Web Fonts</strong></p><p>Unsere Website verwendet Web Fonts von Google. Anbieter ist die Google Inc., 1600 Amphitheatre Parkway, Mountain View, CA 94043, USA.</p><p>Durch den Einsatz dieser Web Fonts wird es möglich Ihnen die von uns gewünschte Darstellung unserer Website zu präsentieren, unabhängig davon welche Schriften Ihnen lokal zur Verfügung stehen. Dies erfolgt über den Abruf der Google Web Fonts von einem Server von Google in den USA und der damit verbundenen Weitergabe Ihre Daten an Google. Dabei handelt es sich um Ihre IP-Adresse und welche Seite Sie bei uns besucht haben. Der Einsatz von Google Web Fonts erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Als Betreiber dieser Website haben wir ein berechtigtes Interesse an der optimalen Darstellung und Übertragung unseres Webauftritts.</p><p>Das Unternehmen Google ist für das us-europäische Datenschutzübereinkommen \"Privacy Shield\" zertifiziert. Dieses Datenschutzübereinkommen soll die Einhaltung des in der EU geltenden Datenschutzniveaus gewährleisten.</p><p>Einzelheiten über Google Web Fonts finden Sie unter: <a href=\"https://www.google.com/fonts#AboutPlace:about\">https://www.google.com/fonts#AboutPlace:about</a> und weitere Informationen in den Datenschutzbestimmungen von Google: <a href=\"https://policies.google.com/privacy/partners?hl=de\">https://policies.google.com/privacy/partners?hl=de</a></p><p><small>Quelle: Datenschutz-Konfigurator von <a href=\"http://www.mein-datenschutzbeauftragter.de\" target=\"_blank\">mein-datenschutzbeauftragter.de</a></small></p>",
       "title": "Datenschutz"
-    },
-    "funds": {
-      "slug": {
-        "heading": "Informationen zum Fördertopf",
-        "intro": "<p>Dieser Fördertopf ist aktiv. Du kannst dein Projekt so ausrichten, dass du es aus diesem Fördertopf finanzieren kannst.<br />Um Geld aus diesem Fördertopf zu beantragen, musst du ihn für dein Projekt auswählen.</p>"
-      }
     },
     "ideas": {
       "create": {
@@ -586,7 +572,7 @@
           "heading": "Details zum Fördertopf",
           "intro": "Hier können Sie alle Daten zum Fördertopf einsehen und Bewertungskriterien und Zuspitzungen anlegen.",
           "title": "Fördertopf Details",
-          "fundingHeader": "Finanzierung: Gesamtbudget & Fördersumme",
+          "fundingHeader": "Angaben zur Finanzierung",
           "applicationHeader": "Angaben zur Antragstellung",
           "juryHeader": "Angaben zur Bewertung"
         },
@@ -626,13 +612,12 @@
       },
       "team": {
         "heading": "Kneipentools zur Teamfindung",
-        "intro": "<blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Das Kneipentool zur Teamfindung wird für jeden Menschen in der Projektgruppe einmal auf A4 gedruckt. Dann arbeitet ihr immer paarweise: Zwei Leute fragen sich gegenseitig. Ihr lernt euch so gegenseitig kennen, und ihr lernt auch mehr über eure eigene Arbeitsweise in Projekten. So stellt ihr fest, welche Fähigkeiten in eurem Team schon vorhanden sind. Ihr merkt aber vielleicht auch, welche Fähigkeiten euch noch im Team fehlen. Besser ist es, solche Lücken frühzeitig zu erkennen. Je früher und besser sich das Team kennenlernt, umso besser ist das für das Projekt, an dem ihr arbeitet!</p><p>Downloads: <ul><li><a href=\"http://zukunftsstadt.de/wp-content/uploads/2020/02/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a> (so oft auf A4 drucken wie es Mitglieder im Team gibt)</li></ul></p><p>Das Arbeitsblatt aus dem Dresdner Zukunftsstadt-Prozess fragt euch, wie ihr als Team funktioniert:<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Workshop2_Team_Profil_final_2017_05_24.pdf\">Team-Profil aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul></p>",
+        "intro": "<blockquote>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</blockquote><p>Das Kneipentool zur Teamfindung wird für jeden Menschen in der Projektgruppe einmal auf A4 gedruckt. Dann arbeitet ihr immer paarweise: Zwei Leute fragen sich gegenseitig. Ihr lernt euch so gegenseitig kennen, und ihr lernt auch mehr über eure eigene Arbeitsweise in Projekten. So stellt ihr fest, welche Fähigkeiten in eurem Team schon vorhanden sind. Ihr merkt aber vielleicht auch, welche Fähigkeiten euch noch im Team fehlen. Besser ist es, solche Lücken frühzeitig zu erkennen. Je früher und besser sich das Team kennenlernt, umso besser ist das für das Projekt, an dem ihr arbeitet!</p><p>Downloads: <ul><li><a href=\"http://zukunftsstadt.de/wp-content/uploads/2020/02/Kneipentool_Teamfindung.pdf\" target=\"_blank\" title=\"Arbeitsblatt zur Teamfindung\">Arbeitsblatt zur Teamfindung</a> (so oft auf A4 drucken wie es Mitglieder im Team gibt)</li></ul></p><p>Das Arbeitsblatt aus dem Dresdner Zukunftsstadt-Prozess fragt euch, wie ihr als Team funktioniert:<ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/Workshop2_Team_Profil_final_2017_05_24.pdf\">Team-Profil aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul></p>",
         "title": "Kneipentools: Teamfindung"
       }
     },
     "process": {
       "index": {
-        "fundsHelp": "In diesem Bürgerbeteiligungsprozess sind folgende Fördertöpfe aktiv.",
         "heading": "Prozessdetails",
         "intro": "Hier sehen Sie alle Angaben zum laufenden Beteiligungs-Prozess",
         "title": "Prozessdetails"
@@ -654,7 +639,6 @@
         "heading": "Idee übernehmen",
         "intro": "Hier kannst du aus der gewählten Idee ein neues Projekt erstellen.",
         "inspiration": "Deine Inspiration ist folgende Projektidee:",
-        "projectCreated": "Vielen Dank, dein Projekt wurde erstellt!",
         "projectNotSaved": "Vielen Dank, um dein Projekt zu sichern brauchst du ein Benutzerkonto.",
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird das Projekt erstellt!",
         "saveViaRegistration": "Noch kein Konto auf der Plattform? Nach der Registrierung wird dein Projekt erstellt und bei Freischaltung deines Kontos sichtbar."
@@ -705,27 +689,12 @@
           "financeParts": "davon",
           "heading": "Projektplan: {{projectName}}",
           "intro": "Der Projektplan beschreibt, <strong>wer wann was</strong> zu tun hat, <strong>wofür Geld gebraucht wird</strong> und <strong>woher</strong> dieses Geld kommen soll. <br />Wie sieht euer Projektplan für <em>{{projectName}}</em> aus?",
-          "timetable": "Zeitplan",
           "title": "Projektplan"
         },
         "edit": {
           "heading": "Projektplan bearbeiten",
           "intro": "An wen richtet sich das Projekt? Wen soll es erreichen?<br />Welche Ergebnisse werden im Projektverlauf produziert?<br />Wie wirkt das Projekt auf die beteiligten Leute?<br />Wie wirkt das Projekt auf dein Dorf/deine Stadt oder die Gesellschaft?<br />Was bleibt, wenn das Projekt vorbei ist? Was läßt sich dann weiternutzen?",
           "title": "Projektplan: Was kommt hinten raus?"
-        },
-        "finances": {
-          "fincancesHeading": "Finanzierung",
-          "financesIntro": "Wer stellt welche Mittel bereit?",
-          "heading": "Projektfinanzierung",
-          "intro": "Hier kannst du angeben aus welchen Quellen die einzelnen Bedarfe gedeckt werden sollen.",
-          "title": "Projektfinanzierung"
-        },
-        "resourceRequirements": {
-          "heading": "Ressourcenbedarf des Projekts",
-          "intro": "Hier kannst du die Bedarfe deines Projekt <em>{{projectName}}</em> eintragen.",
-          "resourceHeading": "Leistungen und Kosten",
-          "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
-          "title": "Ressourcenbedarf"
         },
         "tasks": {
           "heading": "Aufgaben bearbeiten",
@@ -734,15 +703,6 @@
           "taskHeading": "Aufgaben",
           "taskIntro": "Hier kannst du einzelne Aufgaben eintragen.",
           "packageIntro": "Wenn ein Projekt sehr viele Aufgaben hat, kann man die Aufgaben in Arbeitspaketen zusammenpacken. Der Name jedes Arbeitspakats läßt erkennen, welche Art von Aufgaben drin sind. An ein Arbeitspaket kann man außerdem ranschreiben, wer es zu erledigen hat. So kann man Projektpartnern ganze Aufgabenbündel zuweisen."
-        },
-        "timetable": {
-          "heading": "Der Zeitplan",
-          "intro": "Der Zeitplan gibt einen Überlick, wann was passieren soll. Natürlich kommt immer mal was dazwischen, aber einen Plan zu haben ist dennoch sehr wertvoll!",
-          "modalHeader": "Projektdauer festlegen",
-          "timespan": "Projektzeitraum",
-          "timetableHeader": "Startzeitpunkt & Dauer festlegen, Aufgaben & Arbeitspakete einordnen",
-          "timetableIntro": "Irgendwann muss das Projekt starten. Benenne einen Startzeitpunkt! Alles, was im Projekt passiert, braucht seine Zeit. Wie lange soll das Projekt wohl laufen?<br />Ordne dann die Aufgaben und Arbeitspakete einem oder mehreren Monaten in der Zukunft zu! So entsteht dein Zeitplan.",
-          "title": "Zeitplan"
         },
         "workPackages": {
           "heading": "Arbeitspakete bearbeiten",
@@ -753,6 +713,24 @@
           "packageIntro": "Wähle deine einzelnen Aufgaben aus und organisiere sie in Arbeitspaketen.",
           "subHeader": "Aufgaben und Arbeitspakete",
           "title": "Arbeitspakete bearbeiten"
+        },
+        "timetable": {
+          "modalHeader": "Projektdauer festlegen",
+          "timespan": "Projektzeitraum"
+        },
+        "resourceRequirements": {
+          "heading": "Ressourcenbedarf des Projekts",
+          "intro": "Hier kannst du die Bedarfe deines Projekt <em>{{projectName}}</em> eintragen.",
+          "resourceHeading": "Leistungen und Kosten",
+          "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
+          "title": "Ressourcenbedarf"
+        },
+        "finances": {
+          "fincancesHeading": "Finanzierung",
+          "financesIntro": "Wer stellt welche Mittel bereit?",
+          "heading": "Projektfinanzierung",
+          "intro": "Hier kannst du angeben aus welchen Quellen die einzelnen Bedarfe gedeckt werden sollen.",
+          "title": "Projektfinanzierung"
         }
       },
       "application": {
@@ -803,12 +781,7 @@
       },
       "login": {
         "heading": "Login",
-        "title": "Einloggen in die Projekt.Werk.Stadt"
-      },
-      "profile": {
-        "heading": "Das bin ich...",
-        "intro": "Hier kannst du bald etwas über dich sagen und deine persönlichen Daten anpassen.",
-        "title": "Mein Profil"
+        "title": "Login"
       },
       "projects": {
         "applicationOpen": "Deine Bewerbung als Teammitglied wurde noch nicht akzeptiert. Bitte gedulde dich noch etwas.",
@@ -849,15 +822,13 @@
     "delimitation": "Abgrenzung",
     "description": "Beschreibung",
     "fundingData": "Angaben zur Förderung",
-    "goal": "Ziele des Projekts",
+    "goal": "Ziel",
     "holderAddressInfo": "Adresszusatz",
     "holderCity": "Ort",
     "holderName": "Projektträger",
     "holderStreet": "Straße",
     "holderZipCode": "Postleitzahl",
     "impact": "Weitergehende Wirkungen auf den Ort",
-    "implementationBegin": "Projekt-Start",
-    "implementationTime": "Projekt-Laufzeit",
     "memberships": {
       "count": "Teammitglieder"
     },

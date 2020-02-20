@@ -1,6 +1,7 @@
 import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
 import Link from "next/link"
+import Router from "next/router"
 import React, { useState } from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Card, CardBody, CardHeader, CardText, Col, Row, Spinner } from "reactstrap"
@@ -19,7 +20,7 @@ import { AppState } from "redux/reducer"
 import { selectIsAuthenticated } from "redux/reducer/auth"
 import { EntityType, selectById } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
-import { Routes } from "services/routes"
+import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   createProject: (project: IProjectCreation, actions: any) =>
@@ -44,7 +45,6 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
   const { createProject, inspiration, inspirationId, inspirationRequest, isAuthenticated,
     project, setNewProject, t } = props
   const [projectSaved, setProjectSaved] = useState(false)
-  const [projectCreated, setProjectCreated] = useState(false)
 
   if (!inspirationId || inspirationId <= 0) {
     return <StatusCode statusCode={400}>
@@ -63,9 +63,10 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
     values.inspiration = inspiration["@id"]
 
     if (isAuthenticated) {
-      // @todo directly redirect to the profile form?
-      actions.success = () => {
-        setProjectCreated(true)
+      actions.success = (res) => {
+        Router.push(Routes.PROJECT_PROFILE_EDIT,
+          routeWithParams(Routes.PROJECT_PROFILE_EDIT, { slug: res.id })
+        )
       }
       createProject(values, actions)
       return
@@ -104,14 +105,8 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
         <Card>
           <CardHeader>{t("form.project.create.header")}</CardHeader>
           <CardBody>
-            {!projectSaved && !projectCreated && <>
+            {!projectSaved && <>
               <ProjectCreationForm onSubmit={onSubmit} project={project} />
-            </>}
-
-            {projectCreated && <>
-              <CardText className="text-success">
-                <TranslatedHtml content="page.projects.create.projectCreated" />
-              </CardText>
             </>}
 
             {projectSaved && <>

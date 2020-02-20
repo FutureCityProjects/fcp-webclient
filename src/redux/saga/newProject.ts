@@ -44,10 +44,10 @@ function* createProjectSaga(action: ICreateProjectAction) {
   const project = yield putWait(createModelAction(EntityType.PROJECT, action.project, action.actions))
 
   // refresh the user to get the new membership
-  yield put(loadCurrentUserAction())
+  yield putWait(loadCurrentUserAction())
 
   // refresh list of projects
-  yield put(loadMyProjectsAction())
+  yield putWait(loadMyProjectsAction())
 
   return project
 }
