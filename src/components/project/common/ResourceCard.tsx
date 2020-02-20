@@ -39,7 +39,7 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
     {({
       values,
       handleSubmit,
-      handleReset
+      handleReset,
     }) => <Form onSubmit={handleSubmit}>
         <Row className={"resource-card resource-form " + (isFirst ? "first-resource" : "")}>
           <Col md={showFinances ? 4 : 8} className="resource-description">
@@ -94,6 +94,7 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
                 max={99999999}
                 name="cost"
                 placeholder="form.project.resourceRequirement.cost.placeholder"
+                step={0.01}
                 type="number"
                 value={values.cost || 0}
               />
@@ -102,7 +103,6 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
                 <Button
                   className="navigation-item btn-inline"
                   color="none"
-                  onClick={() => handleSubmit()}
                   title={t("form.save")}
                   type="submit"
                 >

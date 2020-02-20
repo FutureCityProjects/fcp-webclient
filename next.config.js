@@ -3,6 +3,10 @@ var withFonts = require("next-fonts")
 // re-use the baseUrl + paths set in tsconfig.json for webpacks resolve.alias config:
 var TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
+const execSync = require('child_process').execSync;
+const version = execSync('git rev-parse HEAD').toString().trim();
+process.env['APP_VERSION'] = version;
+
 var config = withFonts({
   experimental: { scss: true },
 
@@ -17,6 +21,7 @@ var config = withFonts({
     BASE_URL: process.env.BASE_URL,
     CLIENT_ENV: process.env.NODE_ENV,
     FCP_API_ENTRYPOINT: process.env.FCP_API_ENTRYPOINT,
+    APP_VERSION: process.env.APP_VERSION,
   },
 
   onDemandEntries: {

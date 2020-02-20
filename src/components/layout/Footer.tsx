@@ -29,6 +29,13 @@ const Footer: React.FC<IProps> = (props: IProps) => {
       </Col>
       <Col></Col>
     </Row>
+    <Row className="footer-content">
+      <Col className="footer-links text-right">
+        <a href={"https://github.com/FutureCityProjects/fcp-webclient/commit/" + process.env.APP_VERSION}>
+          rev {process.env.APP_VERSION.substr(0, 6)}
+        </a>
+      </Col>
+    </Row>
   </footer>
 }
 

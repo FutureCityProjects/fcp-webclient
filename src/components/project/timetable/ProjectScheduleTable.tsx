@@ -30,7 +30,7 @@ const ProjectScheduleTable: React.FC<IProps> = (props: IProps) => {
       const currentMonth = new Date(implementationBegin)
       currentMonth.setMonth(currentMonth.getMonth() + i)
 
-      const newYear = i === 0 || currentMonth.getMonth() === 1
+      const newYear = i === 0 || currentMonth.getMonth() === 0
 
       cols.push(<TogglableTaskMonthCell
         key={i}

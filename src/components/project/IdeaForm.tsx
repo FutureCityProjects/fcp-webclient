@@ -51,6 +51,7 @@ const IdeaForm = ({ onSubmit, idea }: IProps) => {
         <Field component={FormikInput}
           help="form.idea.shortDescription.help"
           label="form.idea.shortDescription.label"
+          maxLength={280}
           name="shortDescription"
           placeholder="form.idea.shortDescription.placeholder"
           required
