@@ -1,9 +1,8 @@
+import Link from "next/link"
 import React from "react"
 import { Card, CardBody, CardHeader } from "reactstrap"
 
 import Icon from "components/common/Icon"
-import TranslatedHtml from "components/common/TranslatedHtml"
-import Link from "next/link"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 import { IPlanProps } from "../common/PlanContainer"
@@ -50,7 +49,7 @@ const TasksView: React.FC<IPlanProps> = (props: IPlanProps) => {
         </Link>
       </p>}
 
-      {tasks.length > 0 && <p>
+      {tasks.length > 0 && <>
         {t("project.resourceRequirements")}: {resourceRequirements.length}
         <Link
           href={Routes.PROJECT_PLAN_RESOURCE_REQUIREMENTS}
@@ -60,24 +59,6 @@ const TasksView: React.FC<IPlanProps> = (props: IPlanProps) => {
             <Icon name={"pencil"} size={24} />
           </a>
         </Link>
-      </p>}
-
-      {tasks.length > 1 && <>
-        <h5>{t("page.projects.plan.index.timetable")} <Link
-          href={Routes.PROJECT_PLAN_TIMETABLE}
-          as={routeWithParams(Routes.PROJECT_PLAN_TIMETABLE, { slug: project.slug || project.id })}
-        >
-          <a className="btn btn-inline" aria-label={t("goto.editTimetable")} title={t("goto.editTimetable")}>
-            <Icon name={"pencil"} size={24} />
-          </a>
-        </Link></h5>
-        {t("project.implementationTime")}: {project.implementationTime
-          ? t("default.months", { count: project.implementationTime })
-          : t("default.empty")} <br />
-        {t("project.implementationBegin")}: {project.implementationBegin
-          ? <TranslatedHtml content="default.longMonthYear" params={{ value: project.implementationBegin }} />
-          : t("default.empty")}
-
       </>}
     </CardBody>
   </Card>

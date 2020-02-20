@@ -6,6 +6,7 @@ import { Routes, routeWithParams } from "services/routes"
 import ProgressActionIcons from "./status/ProgressActionIcons"
 import ProgressBox from "./status/ProgressBox"
 import ProgressSubBox from "./status/ProgressSubBox"
+import SubmissionBox from "./status/SubmissionBox"
 
 interface IProps {
   project: IProject
@@ -110,35 +111,7 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
         />
       }
 
-      {project.progress === ProjectProgress.CREATING_PROFILE
-        || project.progress === ProjectProgress.CREATING_PLAN
-        || project.progress === ProjectProgress.CREATING_APPLICATION
-        || !project.applications
-        ? <ProgressBox
-          icon="message"
-          title="project.tableau.submitApplication"
-          subtitle="project.tableau.fundApplication"
-          active={false}
-        />
-        : <ProgressBox
-          icon="message"
-          title="project.tableau.submitApplication"
-          subtitle="project.tableau.fundApplication"
-          progress={project.progress === ProjectProgress.APPLICATION_SUBMITTED ? 100 : null}
-          complete={project.progress === ProjectProgress.APPLICATION_SUBMITTED}
-          active={true}
-          href={project.progress === ProjectProgress.APPLICATION_SUBMITTED ? null : {
-            pathname: Routes.PROJECT_FUND_APPLICATION_SUBMIT,
-            // @todo support multiple applications, how to store which one is the active application?
-            query: { fund: project.applications[0].fund.id }
-          }}
-          as={project.progress === ProjectProgress.APPLICATION_SUBMITTED ? null : {
-            pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION_SUBMIT, { slug: project.slug || project.id }),
-            // @todo support multiple applications, how to store which one is the active application?
-            query: { fund: project.applications[0].fund.id }
-          }}
-        />
-      }
+      <SubmissionBox project={project} />
     </div>
 
     <div className="sub-step-container">

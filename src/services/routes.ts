@@ -41,6 +41,7 @@ export enum Routes {
   PROJECT_FUND_APPLICATION = "/projects/[slug]/fund-application",
   PROJECT_FUND_APPLICATION_EDIT = "/projects/[slug]/fund-application/edit",
   PROJECT_FUND_APPLICATION_SUBMIT = "/projects/[slug]/fund-application/submit",
+  PROJECT_FUND_APPLICATION_SUBMISSION = "/projects/[slug]/fund-application/submission",
   PROJECT_FUNDING_EDIT = "/projects/[slug]/fund-application/funding",
 
   // administrative pages for process owner / admin

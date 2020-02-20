@@ -445,7 +445,15 @@
     "applicationSelfAssessment": "Selbsteinschätzung zum Förderantrag",
     "fund": "Gewählter Fördertopf",
     "concretizationSelfAssessment": "Selbsteinschätzung zur Zuspitzung",
-    "requestedFunding": "Gewünschte Fördersumme"
+    "requestedFunding": "Gewünschte Fördersumme",
+    "submission": {
+      "submittedBy": "Eingereicht von",
+      "submissionDate": "Eingereicht am",
+      "timetable": {
+        "header": "Zeitplan (Gantt-Chart)",
+        "months": "Umsetzungsmonate"
+      }
+    }
   },
   "fundConcretization": {
     "description": "Erläuterung zur Frage",
