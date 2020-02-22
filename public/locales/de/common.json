@@ -117,7 +117,8 @@
         "help": "Um deine Idee zu formulieren kannst du dich fragen: Was willst du mit der Idee erreichen? Was soll getan werden?",
         "label": "",
         "placeholder": "Kurze Beschreibung, maximal 280 Zeichen"
-      }
+      },
+      "submit": "Diese Projektidee herausposaunen..."
     },
     "login": {
       "username": {
