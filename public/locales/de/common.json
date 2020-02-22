@@ -633,7 +633,7 @@
     "process": {
       "index": {
         "fundsHelp": "In diesem Bürgerbeteiligungsprozess sind folgende Fördertöpfe aktiv.",
-        "heading": "Prozessdetails",
+        "heading": "Unsere Bürgerbeteiligung",
         "intro": "Hier sehen Sie alle Angaben zum laufenden Beteiligungs-Prozess",
         "title": "Prozessdetails"
       },
@@ -826,7 +826,7 @@
   "process": {
     "criteria": "Eigenschaften erwünschter Projekte",
     "description": "Beschreibung",
-    "funds": "Fördertöpfe",
+    "funds": "Förderung",
     "goals": "Ziele",
     "imprint": "Impressum & Kontakt",
     "name": "Name des Prozesses",
