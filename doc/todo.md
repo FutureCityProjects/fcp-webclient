@@ -1,4 +1,5 @@
 # Todo
+  * Förderantrag nicht einreichbar ohne holder-Daten
   * FundState überall übersetzen
   * "Projektansicht" + "Fördertopfansicht" übersetzen
   * Mitgliederliste

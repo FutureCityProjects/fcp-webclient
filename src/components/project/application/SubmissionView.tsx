@@ -55,7 +55,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
         {submission.submissionDate &&
           <p>{t("fundApplication.submission.submissionDate")}: {t("default.longDate", { value: submission.submissionDate })}</p>
         }
-        {submission.submittedBy.username &&
+        {submission.submittedBy && submission.submittedBy.username &&
           <p>
             {t("fundApplication.submission.submittedBy")}
             : {submission.submittedBy.firstName} {submission.submittedBy.lastName}
@@ -80,8 +80,8 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
 
         <p>
           {submission.contactName}<br />
-          {t("project.contactPhone")}: {submission.contactPhone}<br />
-          {t("project.contactEmail")}: {submission.contactEmail}<br />
+          {t("project.contactPhone")}: {submission.contactPhone || t("default.empty")}<br />
+          {t("project.contactEmail")}: {submission.contactEmail || t("default.empty")}<br />
         </p>
 
         <p>

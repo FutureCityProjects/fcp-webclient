@@ -15,7 +15,7 @@ import ProjectTaskCardGrid from "./ProjectTaskCardGrid"
 const ProjectTasks: React.FC<IPlanProps> = ({ functions, project, updateProject }: IPlanProps) => {
   const { t } = useTranslation()
 
-  const tasks = project.tasks
+  const tasks = functions.getTasks()
 
   return <Card className="body-card project-tasks">
     <CardHeader>
