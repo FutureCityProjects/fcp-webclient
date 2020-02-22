@@ -250,6 +250,12 @@
         "help": "Gute Projekte können sich auf die ganze Stadt auswirken oder sogar darüber hinaus. Welche über die Zielgruppe(n) hinaus gehenden Wirkungen soll das Projekt erreichen? Welche Wirkungen in deiner Stadt/deinem Dorf oder der Gesellschaft sollen spürbar sein?",
         "placeholder": "Unsere Stadt wird grüner, dem Klimawandel wird vorgebeugt, die Menschen sind freundlicher zueinander..."
       },
+      "implementationBegin": {
+        "help": "Wann soll das Projekt voraussichtlich starten?"
+      },
+      "implementationTime": {
+        "help": "Wie lange soll das Projekt voraussichtlich laufen?"
+      },
       "name": {
         "help": "Gib deinem Projekt einen Namen",
         "placeholder": "DasBesteProjektInUnsererStadt"
@@ -698,6 +704,7 @@
           "financeParts": "davon",
           "heading": "Projektplan: {{projectName}}",
           "intro": "Der Projektplan beschreibt, <strong>wer wann was</strong> zu tun hat, <strong>wofür Geld gebraucht wird</strong> und <strong>woher</strong> dieses Geld kommen soll. <br />Wie sieht euer Projektplan für <em>{{projectName}}</em> aus?",
+          "timetable": "Zeitplan",
           "title": "Projektplan"
         },
         "edit": {
@@ -713,6 +720,15 @@
           "taskIntro": "Hier kannst du einzelne Aufgaben eintragen.",
           "packageIntro": "Wenn ein Projekt sehr viele Aufgaben hat, kann man die Aufgaben in Arbeitspaketen zusammenpacken. Der Name jedes Arbeitspakats läßt erkennen, welche Art von Aufgaben drin sind. An ein Arbeitspaket kann man außerdem ranschreiben, wer es zu erledigen hat. So kann man Projektpartnern ganze Aufgabenbündel zuweisen."
         },
+        "timetable": {
+          "heading": "Zeitplan festlegen",
+          "intro": "Jedes Projekt braucht seine Zeit. Innerhalb der Projektlaufzeit müssen die notwendigen Aufgaben bearbeitet werden. Wann wird welche Aufgabe in diesem Projekt bearbeitet?",
+          "modalHeader": "Projektdauer festlegen",
+          "title": "Zeitplan",
+          "timetableHeader": "Startzeitpunkt & Dauer festlegen, Aufgaben & Arbeitspakete einordnen",
+          "timetableIntro": "Irgendwann muss das Projekt starten. Benenne einen Startzeitpunkt! Alles, was im Projekt passiert, braucht seine Zeit. Wie lange soll das Projekt wohl laufen?<br />Ordne dann die Aufgaben einem oder mehreren Monaten in der Zukunft zu! So entsteht dein Zeitplan.",
+          "timespan": "Projektzeitraum"
+        },
         "workPackages": {
           "heading": "Arbeitspakete bearbeiten",
           "intro": "Hier kannst du die Arbeitspakete zu deinem Projekt <em>{{projectName}}</em> bearbeiten.",
@@ -722,10 +738,6 @@
           "packageIntro": "Wähle deine einzelnen Aufgaben aus und organisiere sie in Arbeitspaketen.",
           "subHeader": "Aufgaben und Arbeitspakete",
           "title": "Arbeitspakete bearbeiten"
-        },
-        "timetable": {
-          "modalHeader": "Projektdauer festlegen",
-          "timespan": "Projektzeitraum"
         },
         "resourceRequirements": {
           "heading": "Ressourcenbedarf des Projekts",
@@ -838,6 +850,8 @@
     "holderStreet": "Straße",
     "holderZipCode": "Postleitzahl",
     "impact": "Weitergehende Wirkungen auf den Ort",
+    "implementationBegin": "Startmonat",
+    "implementationTime": "Projektdauer in Monaten",
     "memberships": {
       "count": "Teammitglieder"
     },
