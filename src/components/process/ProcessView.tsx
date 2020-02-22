@@ -64,6 +64,15 @@ export default function ProcessView({ process, roles }: IProps) {
     <Card>
       <CardHeader>
         <h3>{t("process.funds")}</h3>
+        <AuthElement requiredRole={UserRole.PROCESS_OWNER} roles={roles}>
+          <div role="actions" className="icon-navigation">
+            <Link href={Routes.FUND_OVERVIEW}>
+              <a aria-label={t("goto.fundManagement")} className="navigation-item" title={t("goto.fundManagement")}>
+                <Icon name={"pot"} size={24} />
+              </a>
+            </Link>
+          </div>
+        </AuthElement>
       </CardHeader>
       <CardBody>
         <p>{t("page.process.index.fundsHelp")}</p>

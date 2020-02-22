@@ -46,6 +46,7 @@ function* createIdeaSaga(action: ICreateIdeaAction) {
 /**
  * After the user logged in: check if we have a previously entered but
  * not submitted project idea, if yes push it to the API now.
+ * This is also called at each token refresh (SET_AUTH).
  */
 function* createSavedIdeaSaga(action: ISetAuthAction) {
   // no token -> no successful login -> do nothing

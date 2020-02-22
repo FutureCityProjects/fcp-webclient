@@ -57,6 +57,8 @@ interface IProps {
  * composition rather than inheritance.
  * @see https://reactjs.org/docs/react-component.html
  *
+ * @todo refactor all the functions to a separate helper in /services
+ *
  * @param props IPlanProps
  */
 const PlanContainer: React.FC<IProps> = (props: IProps) => {
@@ -112,8 +114,16 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
   const sumResourceRequirementCosts = (requirements: IResourceRequirement[]): number =>
     requirements.reduce((s, r) => s + (r.cost || 0), 0)
 
-  const getImplementationBegin = () => project.implementationBegin || new Date()
-  const getImplementationTime = () => project.implementationTime || 3
+  const getImplementationBegin = () => {
+    if (project.implementationBegin) {
+      return project.implementationBegin
+    }
+
+    const month = new Date()
+    month.setMonth(month.getMonth() + 1, 1)
+    return month
+  }
+  const getImplementationTime = () => project.implementationTime || 12
 
   const addResourceRequirement = (resource: IResourceRequirement) => {
     resource.id = uuidv1()

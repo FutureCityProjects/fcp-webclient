@@ -24,6 +24,7 @@ const ProjectTimetable: React.FC<IPlanProps> = ({ functions, project, updateProj
 
   const updateImplementationTime = (values: { implementationBegin: Date, implementationTime: number }) => {
     // reset to first day of month
+    values.implementationBegin = new Date(values.implementationBegin)
     values.implementationBegin.setMonth(values.implementationBegin.getMonth(), 1)
     values.implementationBegin.setHours(0)
     values.implementationBegin.setMinutes(0)

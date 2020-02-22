@@ -61,6 +61,7 @@ const ResourceModal: React.FC<IProps> = (props: IProps) => {
               max={99999999}
               name="cost"
               placeholder="form.project.resourceRequirement.cost.placeholder"
+              step={0.01}
               type="number"
               value={values.cost}
             />

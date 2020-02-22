@@ -9,7 +9,7 @@
   },
   "scripts": {
     "analyze": "ANALYZE=true next build",
-    "build": "next build",
+    "build": "LAST_COMMIT=`git rev-parse HEAD` next build",
     "dev": "node index.js",
     "export": "yarn build && next export",
     "lint-fix": "tslint --fix --project . -t verbose",

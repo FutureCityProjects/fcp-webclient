@@ -14,14 +14,15 @@ interface IProps {
 }
 
 const ScheduleTableHeader: React.FC<IProps> = (props: IProps) => {
-  const [timeModalOpen, setTimeModalOpen] = useState(false)
+  const { functions, onSetImplementationTime, project } = props
+  const { t } = useTranslation()
+  const implementationTime = functions.getImplementationTime()
+
+  // open the modal automatically if the project not yet has a custom time set
+  const [timeModalOpen, setTimeModalOpen] = useState(implementationTime !== project.implementationTime)
   const toggleTimeModal = () => setTimeModalOpen(!timeModalOpen)
 
-  const { onSetImplementationTime } = props
-  const { t } = useTranslation()
-
-  const implementationTime = props.functions.getImplementationTime()
-  const implementationBegin = props.functions.getImplementationBegin()
+  const implementationBegin = functions.getImplementationBegin()
   const implementationEnd = new Date(implementationBegin)
   implementationEnd.setMonth(implementationEnd.getMonth() + implementationTime - 1)
 
@@ -32,7 +33,7 @@ const ScheduleTableHeader: React.FC<IProps> = (props: IProps) => {
     const currentMonth = new Date(implementationBegin)
     currentMonth.setMonth(currentMonth.getMonth() + i)
 
-    const newYear = i === 0 || currentMonth.getMonth() === 1
+    const newYear = i === 0 || currentMonth.getMonth() === 0
 
     yearCells.push(<td key={i}>{newYear ? currentMonth.getFullYear() : ""}</td>)
     monthCells.push(<td key={i} className={newYear ? "first-of-year" : ""}>
