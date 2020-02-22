@@ -1,4 +1,8 @@
 .submission-finances {
+  .resource-requirement-row {
+    margin-bottom: 0.5em;
+  }
+
   .funding-sum {
     padding-top: 1em;
   }
@@ -27,5 +31,28 @@
     .total-sum {
       border-top: 1px solid black;
     }
+  }
+}
+
+table.submission-timetable {
+  width: 100%;
+  empty-cells: show;
+  border-collapse: separate;
+  border-spacing:0 5px;
+
+  .first-col {
+    width: 10em;
+  }
+
+  th, td {
+    padding: 0.3em;
+  }
+ 
+  th:not(.first-col) {
+    text-align: center;
+  }
+
+  td.active{ 
+    background-color: lighten($custom-primary, 25%);
   }
 }

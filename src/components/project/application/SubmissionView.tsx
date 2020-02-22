@@ -1,8 +1,10 @@
 import React from "react"
-import { Card, CardBody, CardHeader, Col, Row } from "reactstrap"
+import { Card, CardBody, CardHeader, Col, Row, UncontrolledCollapse } from "reactstrap"
 
 import { IFund, IResourceRequirement, ISubmissionData, ResourceSourceType } from "api/schema"
 import HtmlContent from "components/common/HtmlContent"
+import Icon from "components/common/Icon"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { useTranslation } from "services/i18n"
 
 interface IProps {
@@ -26,6 +28,21 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
   const proceedsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_PROCEEDS))
   const ownCostsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_OWN_FUNDS))
 
+  const getWorkPackageMonths = (id: string) => {
+    const wpTasks = submission.tasks.filter((task) => task.workPackage === id)
+    const months = []
+    wpTasks.forEach((e) => months.push(...e.months))
+
+    return months
+      .filter((m, i, self) => self.indexOf(m) === i)
+      .sort((a, b) => a > b ? 1 : -1)
+  }
+
+  const timetableHeaderCells = []
+  for (let i = 1; i <= submission.implementationTime; i++) {
+    timetableHeaderCells.push(<th key={i}>{i}</th>)
+  }
+
   return <>
     <Card className="body-card">
       <CardHeader>
@@ -34,8 +51,26 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
         </div>
       </CardHeader>
       <CardBody>
-        <h3>{t("fundApplication.submission.generalHeader")}</h3>
         <p>{t("fundApplication.fund")}: {fund.name}</p>
+        {submission.submissionDate &&
+          <p>{t("fundApplication.submission.submissionDate")}: {t("default.longDate", { value: submission.submissionDate })}</p>
+        }
+        {submission.submittedBy && submission.submittedBy.username &&
+          <p>
+            {t("fundApplication.submission.submittedBy")}
+            : {submission.submittedBy.firstName} {submission.submittedBy.lastName}
+            {submission.submittedBy.firstName || submission.submittedBy.lastName
+              ? " ("
+              : ""}
+            {submission.submittedBy.username}
+            {submission.submittedBy.firstName || submission.submittedBy.lastName
+              ? ")"
+              : ""}
+          </p>
+        }
+
+        <h3>{t("fundApplication.submission.generalHeader")}</h3>
+
         <p>
           {submission.holderName}<br />
           {submission.holderStreet}<br />
@@ -45,8 +80,8 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
 
         <p>
           {submission.contactName}<br />
-          {t("project.contactPhone")}: {submission.contactPhone}<br />
-          {t("project.contactEmail")}: {submission.contactEmail}<br />
+          {t("project.contactPhone")}: {submission.contactPhone || t("default.empty")}<br />
+          {t("project.contactEmail")}: {submission.contactEmail || t("default.empty")}<br />
         </p>
 
         <p>
@@ -58,211 +93,320 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
     <Card className="body-card">
       <CardHeader>
         <h3>{t("fundApplication.submission.projectHeader")}</h3>
+        <div className={"icon-navigation"}>
+          <a id={"toggler-project"}
+            className="toggler navigation-item caret"
+            onClick={() => document.getElementById("caret-project").classList.toggle("caret-toggled")}
+          >
+            <span id={"caret-project"} className="caret-toggled"><Icon name="caret" size={24} /></span>
+          </a>
+        </div>
       </CardHeader>
-      <CardBody>
+      <UncontrolledCollapse toggler={"#toggler-project"} defaultOpen={true}>
+        <CardBody>
 
-        <h4>{t("project.shortDescription")}</h4>
-        {submission.shortDescription}
+          <h4>{t("project.shortDescription")}</h4>
+          {submission.shortDescription}
 
-        <h4>{t("project.description")}</h4>
-        <div className="rte-content">
-          <HtmlContent content={submission.description} />
-        </div>
+          <h4>{t("project.description")}</h4>
+          <div className="rte-content">
+            <HtmlContent content={submission.description} />
+          </div>
 
-        <h4>{t("project.goal")}</h4>
-        <div className="rte-content">
-          <HtmlContent content={submission.goal} />
-        </div>
+          <h4>{t("project.goal")}</h4>
+          <div className="rte-content">
+            <HtmlContent content={submission.goal} />
+          </div>
 
-        <h4>{t("project.challenges")}</h4>
-        <div className="rte-content">
-          <HtmlContent content={submission.challenges} />
-        </div>
+          <h4>{t("project.challenges")}</h4>
+          <div className="rte-content">
+            <HtmlContent content={submission.challenges} />
+          </div>
 
-        <h4>{t("project.vision")}</h4>
-        <div className="rte-content">
-          <HtmlContent content={submission.vision} />
-        </div>
+          <h4>{t("project.vision")}</h4>
+          <div className="rte-content">
+            <HtmlContent content={submission.vision} />
+          </div>
 
-        <h4>{t("project.delimitation")}</h4>
-        <div className="rte-content">
-          <HtmlContent content={submission.delimitation} />
-        </div>
+          <h4>{t("project.delimitation")}</h4>
+          <div className="rte-content">
+            <HtmlContent content={submission.delimitation} />
+          </div>
 
-        <h3>{t("fundApplication.submission.concretizationHeader")}</h3>
+          <h3>{t("fundApplication.submission.concretizationHeader")}</h3>
 
-        {fund.concretizations.map((concretization) => {
-          const answer = submission.concretizations[concretization.id]
+          {fund.concretizations.map((concretization) => {
+            const answer = submission.concretizations[concretization.id]
 
-          return <>
-            <h4>{concretization.question}</h4>
-            <div className="rte-content">
-              <HtmlContent content={answer} />
-            </div>
-          </>
-        })}
-      </CardBody>
+            return <>
+              <h4>{concretization.question}</h4>
+              <div className="rte-content">
+                <HtmlContent content={answer} />
+              </div>
+            </>
+          })}
+        </CardBody>
+      </UncontrolledCollapse>
     </Card>
 
     <Card className="body-card">
       <CardHeader>
         <h3>{t("fundApplication.submission.resultsHeader")}</h3>
-      </CardHeader>
-      <CardBody>
-
-        <h4>{t("project.targetGroups")}</h4>
-        <ul>
-          {submission.targetGroups.map((group) => <li>
-            {group}
-          </li>)}
-        </ul>
-
-        <h4>{t("project.results")}</h4>
-        <ul>
-          {submission.results.map((result) => <li>
-            {result}
-          </li>)}
-        </ul>
-
-        <h4>{t("project.impact")}</h4>
-        <ul>
-          {submission.impact.map((impact) => <li>
-            {impact}
-          </li>)}
-        </ul>
-
-        <h4>{t("project.outcome")}</h4>
-        <ul>
-          {submission.outcome.map((outcome) => <li>
-            {outcome}
-          </li>)}
-        </ul>
-
-        <h4>{t("project.utilization")}</h4>
-        <div className="rte-content">
-          <HtmlContent content={submission.utilization} />
+        <div className={"icon-navigation"}>
+          <a id={"toggler-results"}
+            className="toggler navigation-item caret"
+            onClick={() => document.getElementById("caret-results").classList.toggle("caret-toggled")}
+          >
+            <span id={"caret-results"} className="caret-toggled"><Icon name="caret" size={24} /></span>
+          </a>
         </div>
+      </CardHeader>
+      <UncontrolledCollapse toggler={"#toggler-results"} defaultOpen={true}>
+        <CardBody>
+          <h4>{t("project.targetGroups")}</h4>
+          <ul>
+            {submission.targetGroups.map((group) => <li>
+              {group}
+            </li>)}
+          </ul>
 
-      </CardBody>
+          <h4>{t("project.results")}</h4>
+          <ul>
+            {submission.results.map((result) => <li>
+              {result}
+            </li>)}
+          </ul>
+
+          <h4>{t("project.impact")}</h4>
+          <ul>
+            {submission.impact.map((impact) => <li>
+              {impact}
+            </li>)}
+          </ul>
+
+          <h4>{t("project.outcome")}</h4>
+          <ul>
+            {submission.outcome.map((outcome) => <li>
+              {outcome}
+            </li>)}
+          </ul>
+
+          <h4>{t("project.utilization")}</h4>
+          <div className="rte-content">
+            <HtmlContent content={submission.utilization} />
+          </div>
+        </CardBody>
+      </UncontrolledCollapse>
     </Card>
 
     <Card className="body-card">
       <CardHeader>
         <h3>{t("fundApplication.submission.workPlanHeader")}</h3>
+        <div className={"icon-navigation"}>
+          <a id={"toggler-work"}
+            className="toggler navigation-item caret"
+            onClick={() => document.getElementById("caret-work").classList.toggle("caret-toggled")}
+          >
+            <span id={"caret-work"} className="caret-toggled"><Icon name="caret" size={24} /></span>
+          </a>
+        </div>
       </CardHeader>
-      <CardBody>
-        {submission.workPackages.map((wp) => {
-          const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
+      <UncontrolledCollapse toggler={"#toggler-work"} defaultOpen={true}>
+        <CardBody>
+          {submission.workPackages.map((wp) => {
+            const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
 
-          return <>
-            <h4>{t("project.workPackage.abbreviation")}{wp.order}: {wp.name}</h4>
-            <Row>
-              <Col lg={4}>
-                {wp.mainResponsibility && <>{t("project.workPackage.mainResponsibility")}: {wp.mainResponsibility}</>}
-                {wp.description && <p>{wp.description}</p>}
-              </Col>
-              <Col lg={8}>
-                <h5>{t("project.tasks")}</h5>
-                <ul>
-                  {tasks.map((task) => <li>{task.description}</li>)}
-                </ul>
-              </Col>
-            </Row>
-          </>
-        })}
+            return <>
+              <h4>{t("project.workPackage.abbreviation")}{wp.order}: {wp.name}</h4>
+              <Row>
+                <Col lg={4}>
+                  {wp.mainResponsibility && <>{t("project.workPackage.mainResponsibility")}: {wp.mainResponsibility}</>}
+                  {wp.description && <p>{wp.description}</p>}
+                </Col>
+                <Col lg={8}>
+                  <h5>{t("project.tasks")}</h5>
+                  <ul>
+                    {tasks.map((task) => <li>{task.description}</li>)}
+                  </ul>
+                </Col>
+              </Row>
+            </>
+          })}
 
-        {unassignedTasks.length > 0 && <>
-          <h4>{t("project.tasks")}</h4>
-          <ul>
-            {unassignedTasks.map((task) => <li>{task.description}</li>)}
-          </ul>
-        </>}
-      </CardBody>
+          {unassignedTasks.length > 0 && <>
+            <h4>{t("project.tasks")}</h4>
+            <ul>
+              {unassignedTasks.map((task) => <li>{task.description}</li>)}
+            </ul>
+          </>}
+        </CardBody>
+      </UncontrolledCollapse>
+    </Card>
+
+    <Card className="body-card">
+      <CardHeader>
+        <h3>{t("fundApplication.submission.timetable.header")}</h3>
+        <div className={"icon-navigation"}>
+          <a id={"toggler-timetable"}
+            className="toggler navigation-item caret"
+            onClick={() => document.getElementById("caret-timetable").classList.toggle("caret-toggled")}
+          >
+            <span id={"caret-timetable"} className="caret-toggled"><Icon name="caret" size={24} /></span>
+          </a>
+        </div>
+      </CardHeader>
+      <UncontrolledCollapse toggler={"#toggler-timetable"} defaultOpen={true}>
+        <CardBody>
+          {t("project.implementationBegin")}: {submission.implementationBegin
+            ? <TranslatedHtml content="default.longMonthYear" params={{ value: submission.implementationBegin }} />
+            : t("default.empty")}
+          <br />
+          {t("project.implementationTime")}: {submission.implementationTime
+            ? t("default.months", { count: submission.implementationTime })
+            : t("default.empty")} <br />
+
+          <table className="submission-timetable package-timetable">
+            <thead>
+              <tr>
+                <th className="first-col">{t("fundApplication.submission.timetable.months")}</th>
+                {timetableHeaderCells}
+              </tr>
+            </thead>
+            <tbody>
+              {submission.workPackages.map((wp) => {
+                const wpCells = []
+                const wpMonths = getWorkPackageMonths(wp.id)
+                for (let i = 1; i <= submission.implementationTime; i++) {
+                  wpCells.push(<td key={i} className={wpMonths.includes(i) ? "active" : "inactive"}></td>)
+                }
+
+                return <tr key={wp.id}>
+                  <td className="first-col">{t("project.workPackage.abbreviation")}{wp.order}</td>
+                  {wpCells}
+                </tr>
+              })}
+            </tbody>
+          </table>
+
+          {unassignedTasks.length > 0 && <table className="submission-timetable">
+            <thead>
+              <tr>
+                <th className="first-col">{t("fundApplication.submission.timetable.months")}</th>
+                {timetableHeaderCells}
+              </tr>
+            </thead>
+            <tbody>
+              {unassignedTasks.map((task) => {
+                const taskCells = []
+                for (let i = 1; i <= submission.implementationTime; i++) {
+                  taskCells.push(<td key={i} className={task.months.includes(i) ? "active" : "inactive"}></td>)
+                }
+
+                return <tr key={task.id}>
+                  <td className="first-col">{task.description}</td>
+                  {taskCells}
+                </tr>
+              })}
+            </tbody>
+          </table>}
+        </CardBody>
+      </UncontrolledCollapse>
     </Card>
 
     <Card className="body-card submission-finances">
       <CardHeader>
         <h3>{t("fundApplication.submission.financesHeader")}</h3>
+        <div className={"icon-navigation"}>
+          <a id={"toggler-finances"}
+            className="toggler navigation-item caret"
+            onClick={() => document.getElementById("caret-finances").classList.toggle("caret-toggled")}
+          >
+            <span id={"caret-finances"} className="caret-toggled"><Icon name="caret" size={24} /></span>
+          </a>
+        </div>
       </CardHeader>
-      <CardBody>
-        {submission.workPackages.map((wp) => {
-          const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
-          const taskIds = tasks.map((task) => task.id)
-          const resources = submission.resourceRequirements.filter((res) => taskIds.includes(res.task))
+      <UncontrolledCollapse toggler={"#toggler-finances"} defaultOpen={true}>
+        <CardBody>
+          {submission.workPackages.map((wp) => {
+            const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
+            const taskIds = tasks.map((task) => task.id)
+            const resources = submission.resourceRequirements.filter((res) => taskIds.includes(res.task))
 
-          return <>
-            <h4>{t("project.workPackage.abbreviation")}{wp.order}: {wp.name}</h4>
-            {resources.map((resource) => <Row>
+            return <>
+              <h4>{t("project.workPackage.abbreviation")}{wp.order}: {wp.name}</h4>
+              {resources.map((resource) => <Row className="resource-requirement-row" key={resource.id}>
+                <Col md={6}>
+                  {resource.description}
+                </Col>
+                <Col md={3}>
+                  {resource.source}
+                  {resource.source && resource.sourceType && " ("}
+                  {resource.sourceType && t("resourceRequirement.sourceType." + resource.sourceType)}
+                  {resource.source && resource.sourceType && ")"}
+                </Col>
+                <Col md={3} className="text-md-right">
+                  {t("default.currency", { value: resource.cost })}
+                </Col>
+              </Row>
+              )}
+            </>
+          })}
+
+          {unassignedResources.length > 0 && <>
+            <h4>{t("project.resourceRequirements")}</h4>
+            {unassignedResources.map((resource) => <Row className="resource-requirement-row" key={resource.id}>
               <Col md={6}>
                 {resource.description}
               </Col>
               <Col md={3}>
-                {resource.source}
-                {resource.sourceType}
-              </Col>
-              <Col md={3} className="text-md-right">
-                {t("default.currency", { value: resource.cost })}
-              </Col>
-            </Row>
-            )}
-          </>
-        })}
+                {resource.source
+                } {resource.sourceType && t("resourceRequirement.sourceType." + resource.sourceType)}
 
-        {unassignedResources.length > 0 && <>
-          <h4>{t("project.resourceRequirements")}</h4>
-          <ul>
-            {unassignedResources.map((resource) => <Row>
-              <Col md={6}>
-                {resource.description}
-              </Col>
-              <Col md={3}>
-                {resource.source}
-                {resource.sourceType}
               </Col>
               <Col md={3} className="text-md-right">
                 {t("default.currency", { value: resource.cost })}
               </Col>
             </Row>)}
-          </ul>
-        </>}
+          </>}
 
-        <Row className="funding-sum">
-          <Col md={6} />
-          <Col md={3} className="text-md-right">
-            {t("project.resourceRequirement.fundingSum")}:
+          <Row className="funding-sum">
+            <Col md={6} />
+            <Col md={3} className="text-md-right">
+              {t("project.resourceRequirement.fundingSum")}:
           </Col>
-          <Col md={3} className="text-md-right">
-            {t("default.currency", { value: fundingSum })}
+            <Col md={3} className="text-md-right">
+              {t("default.currency", { value: fundingSum })}
+            </Col>
+          </Row>
+          <Row className="own-costs-sum">
+            <Col md={6} />
+            <Col md={3} className="text-md-right">
+              {t("project.resourceRequirement.ownCostsSum")}:
           </Col>
-        </Row>
-        <Row className="own-costs-sum">
-          <Col md={6} />
-          <Col md={3} className="text-md-right">
-            {t("project.resourceRequirement.ownCostsSum")}:
+            <Col md={3} className="text-md-right">
+              {t("default.currency", { value: ownCostsSum })}
+            </Col>
+          </Row>
+          <Row className="proceeds-sum">
+            <Col md={6} />
+            <Col md={3} className="text-md-right">
+              {t("project.resourceRequirement.proceedsSum")}:
           </Col>
-          <Col md={3} className="text-md-right">
-            {t("default.currency", { value: ownCostsSum })}
+            <Col md={3} className="text-md-right">
+              {t("default.currency", { value: proceedsSum })}
+            </Col>
+          </Row>
+          <Row className="total-sum">
+            <Col md={6} />
+            <Col md={3} className="text-md-right">
+              {t("project.resourceRequirement.totalSum")}:
           </Col>
-        </Row>
-        <Row className="proceeds-sum">
-          <Col md={6} />
-          <Col md={3} className="text-md-right">
-            {t("project.resourceRequirement.proceedsSum")}:
-          </Col>
-          <Col md={3} className="text-md-right">
-            {t("default.currency", { value: proceedsSum })}
-          </Col>
-        </Row>
-        <Row className="total-sum">
-          <Col md={6} />
-          <Col md={3} className="text-md-right">
-            {t("project.resourceRequirement.totalSum")}:
-          </Col>
-          <Col md={3} className="text-md-right">
-            {t("default.currency", { value: total })}
-          </Col>
-        </Row>
-      </CardBody>
+            <Col md={3} className="text-md-right">
+              {t("default.currency", { value: total })}
+            </Col>
+          </Row>
+        </CardBody>
+      </UncontrolledCollapse>
     </Card>
   </>
 }

@@ -30,29 +30,28 @@ const FinancesView: React.FC<IPlanProps> = (props: IPlanProps) => {
         <h3>{t("page.projects.plan.index.financesHeader")}</h3>
       </div>
       <div className={"icon-navigation"}>
-
+        <Link
+          href={Routes.PROJECT_PLAN_FINANCES}
+          as={routeWithParams(Routes.PROJECT_PLAN_FINANCES, { slug: project.slug || project.id })}
+        >
+          <a className="navigation-item" aria-label={t("goto.editProjectFinances")} title={t("goto.editProjectFinances")}>
+            <Icon name={"pencil"} size={24} />
+          </a>
+        </Link>
       </div>
     </CardHeader>
     <CardBody>
       {t("project.resourceRequirement.totalSum")}: {t("default.currency", { value: totalSum })}
-      <Link
-        href={Routes.PROJECT_PLAN_FINANCES}
-        as={routeWithParams(Routes.PROJECT_PLAN_FINANCES, { slug: project.slug || project.id })}
-      >
-        <a className="btn btn-inline" aria-label={t("goto.editProjectFinances")} title={t("goto.editProjectFinances")}>
-          <Icon name={"pencil"} size={24} />
-        </a>
-      </Link>
 
-      {totalSum > 0 && <p>
-        <br />{t("page.projects.plan.index.financeParts")}:
+      {totalSum > 0 && <>
+        <br /><br />{t("page.projects.plan.index.financeParts")}:
         <br />
         {t("project.resourceRequirement.fundingSum")}: {t("default.currency", { value: fundingSum })}
         <br />
         {t("project.resourceRequirement.ownCostsSum")}: {t("default.currency", { value: ownCosts })}
         <br />
         {t("project.resourceRequirement.proceedsSum")}: {t("default.currency", { value: proceeds })}
-      </p>}
+      </>}
     </CardBody>
   </Card>
 }

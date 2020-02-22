@@ -67,10 +67,10 @@ const DataView: React.FC<IProps> = (props: IProps) => {
           ? project.holderStreet
           : t("default.empty")}
 
-        <h5>{t("project.holderAddressInfo")}</h5>
-        {project.holderAddressInfo
-          ? project.holderAddressInfo
-          : t("default.empty")}
+        {project.holderAddressInfo && <>
+          <h5>{t("project.holderAddressInfo")}</h5>
+          {project.holderAddressInfo}
+        </>}
 
         <h5>{t("project.holderZipCode")}</h5>
         {project.holderZipCode

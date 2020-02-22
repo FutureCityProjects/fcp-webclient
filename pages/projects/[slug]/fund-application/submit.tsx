@@ -1,3 +1,4 @@
+import { parseISO } from "date-fns"
 import { WithTranslation } from "next-i18next"
 import { NextJSContext } from "next-redux-wrapper"
 import Link from "next/link"
@@ -5,6 +6,7 @@ import Router from "next/router"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Card, CardBody, CardHeader, Col, Row, Spinner } from "reactstrap"
+import { AnyAction, Dispatch } from "redux"
 
 import { FundState, IFund, ISubmissionData, ProjectProgress, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
@@ -14,8 +16,7 @@ import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import { withAuth } from "components/hoc/withAuth"
-import { parseISO } from "date-fns"
-import { AnyAction, Dispatch } from "redux"
+import SubmissionView from "components/project/application/SubmissionView"
 import { loadMyProjectsAction, submitFundApplicationAction } from "redux/actions/myProjects"
 import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
@@ -23,8 +24,6 @@ import { EntityType, selectById } from "redux/reducer/data"
 import { selectIsProjectMember, selectIsProjectOwner, selectMyProjectByIdentifier } from "redux/reducer/myProjects"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes } from "services/routes"
-// tslint:disable-next-line: ordered-imports
-import SubmissionView from "components/project/application/SubmissionView"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   submitApplication: (application, actions) =>
@@ -46,7 +45,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   slug: string,
 }
 
-const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
+const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
   const { fund, fundRequest, isMember, isOwner, project, projectRequest, submitApplication, t } = props
 
   // @todo custom error message "project not found or no permission" etc.
@@ -167,7 +166,7 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout >
 }
 
-ApplicationFundingPage.getInitialProps = ({ store, query }: NextJSContext) => {
+SubmitApplicationPage.getInitialProps = ({ store, query }: NextJSContext) => {
   const state = store.getState()
 
   // slug could also be the ID
@@ -190,7 +189,7 @@ ApplicationFundingPage.getInitialProps = ({ store, query }: NextJSContext) => {
 
 export default withAuth(
   connector(
-    withTranslation(includeDefaultNamespaces())(ApplicationFundingPage),
+    withTranslation(includeDefaultNamespaces())(SubmitApplicationPage),
   ),
   UserRole.USER,
 )

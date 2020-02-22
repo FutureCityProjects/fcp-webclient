@@ -4,6 +4,7 @@ import Link from "next/link"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
+import { AnyAction, Dispatch } from "redux"
 
 import { ProjectProgress, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
@@ -14,13 +15,13 @@ import { withAuth } from "components/hoc/withAuth"
 import PlanContainer from "components/project/common/PlanContainer"
 import FinancesView from "components/project/plan/FinancesView"
 import ImpactView from "components/project/plan/ImpactView"
+import ImplementationView from "components/project/plan/ImplementationView"
 import OutcomeView from "components/project/plan/OutcomeView"
 import ResultsView from "components/project/plan/ResultsView"
 import SelfAssessment from "components/project/plan/SelfAssessment"
 import TargetGroupsView from "components/project/plan/TargetGroupsView"
 import TasksView from "components/project/plan/TasksView"
 import UtilizationView from "components/project/plan/UtilizationView"
-import { AnyAction, Dispatch } from "redux"
 import { loadMyProjectsAction } from "redux/actions/myProjects"
 import { updateModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
@@ -91,11 +92,22 @@ const ProjectPlanPage: I18nPage<PageProps> = ({ isMember, project, request, t, u
             project={project}
             updateProject={onSubmit}
           />
-          <PlanContainer
-            component={FinancesView}
-            project={project}
-            updateProject={onSubmit}
-          />
+
+          {project.tasks && project.tasks.length &&
+            <PlanContainer
+              component={ImplementationView}
+              project={project}
+              updateProject={onSubmit}
+            />
+          }
+
+          {project.resourceRequirements && project.resourceRequirements.length &&
+            <PlanContainer
+              component={FinancesView}
+              project={project}
+              updateProject={onSubmit}
+            />
+          }
           <SelfAssessment project={project} onSubmit={onSubmit} />
         </Col>
       </Row>
