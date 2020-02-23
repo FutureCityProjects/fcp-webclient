@@ -74,7 +74,7 @@ const ProjectTasksPage: I18nPage<PageProps> = ({ isMember, project, request, t, 
 
     <Row>
       <Col>
-        {request.isLoading &&
+        {!request.isLoading &&
           <PlanContainer
             component={ProjectTasks}
             project={project}

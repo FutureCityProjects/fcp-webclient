@@ -74,7 +74,7 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = ({ isMember, project, reque
 
     <Row>
       <Col>
-        {request.isLoading &&
+        {!request.isLoading &&
           <PlanContainer
             component={ProjectWorkPackages}
             project={project}

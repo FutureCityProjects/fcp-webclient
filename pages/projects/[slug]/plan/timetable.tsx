@@ -71,7 +71,7 @@ const ProjectTimetablePage: I18nPage<PageProps> = ({ isMember, project, request,
 
     <Row>
       <Col>
-        {request.isLoading &&
+        {!request.isLoading &&
           <PlanContainer
             component={ProjectTimetable}
             project={project}

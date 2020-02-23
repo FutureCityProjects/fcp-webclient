@@ -74,7 +74,7 @@ const ProjectResourceRequirementsPage: I18nPage<PageProps> = ({ isMember, projec
 
     <Row>
       <Col>
-        {request.isLoading &&
+        {!request.isLoading &&
           <PlanContainer
             component={ProjectResources}
             project={project}
