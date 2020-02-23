@@ -13,6 +13,7 @@ import Redirect from "components/common/Redirect"
 import LoginForm from "components/user/LoginForm"
 import { loginAction } from "redux/actions/auth"
 import { AppState } from "redux/reducer"
+import { selectIsAuthenticated } from "redux/reducer/auth"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
@@ -22,8 +23,8 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 })
 
 const mapStateToProps = (state: AppState) => ({
+  isAuthenticated: selectIsAuthenticated(state),
   request: state.requests.userOperation,
-  token: state.auth,
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
@@ -32,17 +33,19 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 }
 
 const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
+  const { doLogin, isAuthenticated, redirectBack, request, t } = props
+
   // prevent redirecting to the profile when the state changes while a login is running
   const [loggingIn, setLoggingIn] = useState(false)
 
-  if (!loggingIn && props.token) {
+  if (!loggingIn && isAuthenticated) {
     return <Redirect route={Routes.USER_PROFILE} />
   }
 
   const onSubmit = (credentials: ICredentials, actions: any) => {
     actions.success = (user: IUser) => {
-      if (props.redirectBack) {
-        Router.push(props.redirectBack)
+      if (redirectBack) {
+        Router.push(redirectBack)
         return
       }
 
@@ -68,10 +71,8 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
     }
 
     setLoggingIn(true)
-    props.doLogin(credentials, actions)
+    doLogin(credentials, actions)
   }
-
-  const { request, t } = props
 
   return <BaseLayout pageTitle={t("page.user.login.title")}>
     <Row>
