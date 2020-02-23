@@ -114,7 +114,7 @@
     "idea": {
       "header": "Ich habe folgende Projektidee für unsere Stadt:",
       "shortDescription": {
-        "help": "Um deine Idee zu formulieren kannst du dich fragen: Was willst du mit der Idee erreichen? Was soll getan werden?",
+        "help": "Um deine Idee zu formulieren kannst du dich fragen: Was willst du mit der Idee erreichen? Was soll getan werden?<br />Maximal 280 Zeichen.",
         "label": "",
         "placeholder": "Kurze Beschreibung, maximal 280 Zeichen"
       },
@@ -454,12 +454,18 @@
     "concretizationSelfAssessment": "Selbsteinschätzung zur Zuspitzung",
     "requestedFunding": "Gewünschte Fördersumme",
     "submission": {
+      "concretizationHeader": "Zuspitzung: Ausrichtung auf die Förderkriterien",
+      "financesHeader": "Finanzplan",
+      "generalHeader": "Antragsteller, Kontaktdaten, Fördersumme",
+      "projectHeader": "Projektbeschreibung",
+      "resultsHeader": "Zielgruppe, Ergebnisse & Verwertung",
       "submittedBy": "Eingereicht von",
       "submissionDate": "Eingereicht am",
       "timetable": {
         "header": "Zeitplan (Gantt-Chart)",
         "months": "Umsetzungsmonate"
-      }
+      },
+      "workPlanHeader": "Arbeitsplan"
     }
   },
   "fundConcretization": {
@@ -799,6 +805,7 @@
           "heading": "Förderantrag einreichen",
           "intro": "Hier kannst du den Förderantrag zum Projekt <em>{{projectName}}</em> einreichen.<br>Diese Aktion kann <strong>nicht</strong> rückgängig gemacht werden, eine nachträgliche Bearbeitung der Antragsdaten ist dann nicht mehr möglich. Bitte prüfe daher alle Daten auf Vollständigkeit!",
           "outsideSubmissionPeriod": "Eine Einreichen ist leider nur im Antragszeitraum möglich!",
+          "submissionHeader": "Informationen zum Fördertopf",
           "title": "Förderantrag einreichen"
         }
       }
