@@ -1,4 +1,6 @@
 # Todo
+  * Logo / Bild Platzhalter für Demo
+  * Förderantrag nicht einreichbar ohne holder-Daten
   * FundState überall übersetzen
   * "Projektansicht" + "Fördertopfansicht" übersetzen
   * Mitgliederliste
@@ -11,9 +13,7 @@
   * Keine Bearbeitung Antragsdaten wenn bereits eingereicht?
   * DropdownComponent rendert leere Buttons im Menu weil sie <AuthElement> als nicht-leer
     erkennt. (autowrap true/false)
-  * logout wegen inaktivität notice nicht verschwinden lassen
   * RTE toolbar konfigurierbar für PO + Members etc
-  * Logo / Bild Platzhalter für Demo
   * refactor form error messages: before submit display only errors from touched fields
     (client validation), after submit from all fields (server validation, e.g. empty field is
     required, formik setState?)

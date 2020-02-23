@@ -31,7 +31,7 @@ const FundManagementPage: I18nPage<PageProps> = ({ funds, request, t }) => {
     <Row>
       <Col>
         <h1>{t("page.management.funds.index.heading")}</h1>
-        <p><TranslatedHtml content={t("page.management.funds.index.intro")} /></p>
+        <p><TranslatedHtml content="page.management.funds.index.intro" /></p>
 
         <Link href={Routes.FUND_CREATE}>
           <Button color="primary">{t("goto.createFund")}</Button>

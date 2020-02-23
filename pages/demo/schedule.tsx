@@ -47,7 +47,7 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = () => {
         id: "3"
       },
       {
-        description: "Organisation",
+        description: "Organisation apdoj püfo opAJK SLdjd alsdj ASÄLKdjsä ldfkjsäldkj sdälkfj äflkjl kaljd lakj kld j",
         workPackage: "tj843kf84",
         months: [2, 3, 4, 5],
         id: "4"

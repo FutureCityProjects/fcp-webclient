@@ -7,6 +7,8 @@ FROM node:current-alpine as build
 ARG BASE_URL
 ARG FCP_API_ENTRYPOINT
 
+RUN apk add --no-cache git
+
 RUN mkdir -p /usr/src/client
 
 WORKDIR /usr/src/client

@@ -5,6 +5,7 @@ import { IProject, IProjectTask } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
 import ConfirmationForm from "components/common/form/ConfirmationForm"
 import Icon from "components/common/Icon"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { IPlanProps } from "components/project/common/PlanContainer"
 import Link from "next/link"
 import { useTranslation } from "services/i18n"
@@ -62,7 +63,7 @@ const ProjectTimetable: React.FC<IPlanProps> = ({ functions, project, updateProj
     </CardHeader>
     <CardBody>
       <h3 className="card-title">{t("page.projects.plan.timetable.timetableHeader")}</h3>
-      <span className="form-text">{t("page.projects.plan.timetable.timetableIntro")}</span>
+      <span className="form-text"><TranslatedHtml content="page.projects.plan.timetable.timetableIntro" /></span>
       <div className="button-area">
         <ConfirmationForm
           buttonLabel="form.saveChanges"

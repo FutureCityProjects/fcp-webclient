@@ -505,6 +505,8 @@
     },
     "auth": {
       "idleLogout": "Du wurdest wegen Inaktivität abgemeldet.",
+      "loginExpired": "Deine Sitzung ist abgelaufen, du musst dich erneut einloggen.",
+      "loginRequired": "Du musst dich einloggen um die gewünschte Seite zu sehen.",
       "logout": "Du wurdest erfolgreich abgemeldet.",
       "refreshFailed": "Deine Anmeldung konnte leider nicht verlängert werden"
     },

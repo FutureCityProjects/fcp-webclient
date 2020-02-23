@@ -158,7 +158,7 @@ export function* saveToken(encodedToken: string) {
     sameSite: "lax",
     // @todo: should the env be exposed? Because of:
     // The key "NODE_ENV" under "env" in next.config.js is not allowed.
-    secure: process.env.CLIENT_ENV === "production",
+    secure: process.env.BASE_URL.indexOf("//localhost") === -1 && process.env.CLIENT_ENV === "production",
   })
 
   // save the token in the localStorage to signal the auth state to other browser tabs

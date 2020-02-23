@@ -80,9 +80,11 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
     <Row>
       <Col>
         <h1>{t("page.projects.application.selectFund.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.application.selectFund.intro" params={{ projectName: project.name }} /></p>
 
-        {(projectRequest.isLoading || fundsRequest.isLoading) && <Spinner />}
+        {(projectRequest.isLoading || fundsRequest.isLoading)
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.application.selectFund.intro" params={{ projectName: project.name }} /></p>
+        }
       </Col>
     </Row>
 

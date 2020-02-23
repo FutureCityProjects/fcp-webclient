@@ -26,14 +26,16 @@ const ScheduleTaskCell: React.FC<IProps> = (props: IProps) => {
 )
 
   return <td className="task-cell">
-    {task.description}
-    <DropdownComponent
-      button={<Icon name="plus" size={18} />}
-      className="navigation-item"
-      title={t("form.project.tasks.assignWorkPackage")}
-    >
-      {wrappedPackages}
-    </DropdownComponent>
+    <div className="icon-navigation">
+      <DropdownComponent
+        button={<Icon name="plus" size={18} />}
+        className="navigation-item"
+        title={t("form.project.tasks.assignWorkPackage")}
+      >
+        {wrappedPackages}
+      </DropdownComponent>
+    </div>
+    <p>{task.description}</p>
   </td>
 }
 

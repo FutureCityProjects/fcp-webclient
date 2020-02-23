@@ -62,13 +62,16 @@ const ProjectTimetablePage: I18nPage<PageProps> = ({ isMember, project, request,
     <Row>
       <Col>
         <h1>{t("page.projects.plan.timetable.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.plan.timetable.intro" params={{ projectName: project.name }} /></p>
+        {request.isLoading
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.plan.timetable.intro" params={{ projectName: project.name }} /></p>
+        }
       </Col>
     </Row>
 
     <Row>
       <Col>
-        {request.isLoading ? <Spinner /> :
+        {!request.isLoading &&
           <PlanContainer
             component={ProjectTimetable}
             project={project}

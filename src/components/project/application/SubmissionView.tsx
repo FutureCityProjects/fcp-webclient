@@ -18,6 +18,8 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
   const sumCosts = (requirements: IResourceRequirement[]): number =>
     requirements.reduce((s, r) => s + (r.cost || 0), 0)
 
+  // workPackages are optional...
+  const workPackages = submission.workPackages || []
 
   const unassignedTasks = submission.tasks.filter((task) => !task.workPackage)
   const unassignedTaskIds = unassignedTasks.map((task) => task.id)
@@ -55,7 +57,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
         {submission.submissionDate &&
           <p>{t("fundApplication.submission.submissionDate")}: {t("default.longDate", { value: submission.submissionDate })}</p>
         }
-        {submission.submittedBy.username &&
+        {submission.submittedBy && submission.submittedBy.username &&
           <p>
             {t("fundApplication.submission.submittedBy")}
             : {submission.submittedBy.firstName} {submission.submittedBy.lastName}
@@ -80,8 +82,8 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
 
         <p>
           {submission.contactName}<br />
-          {t("project.contactPhone")}: {submission.contactPhone}<br />
-          {t("project.contactEmail")}: {submission.contactEmail}<br />
+          {t("project.contactPhone")}: {submission.contactPhone || t("default.empty")}<br />
+          {t("project.contactEmail")}: {submission.contactEmail || t("default.empty")}<br />
         </p>
 
         <p>
@@ -138,12 +140,12 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
           {fund.concretizations.map((concretization) => {
             const answer = submission.concretizations[concretization.id]
 
-            return <>
+            return <div key={concretization.id}>
               <h4>{concretization.question}</h4>
               <div className="rte-content">
                 <HtmlContent content={answer} />
               </div>
-            </>
+            </div>
           })}
         </CardBody>
       </UncontrolledCollapse>
@@ -165,28 +167,28 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
         <CardBody>
           <h4>{t("project.targetGroups")}</h4>
           <ul>
-            {submission.targetGroups.map((group) => <li>
+            {submission.targetGroups.map((group, i) => <li key={i}>
               {group}
             </li>)}
           </ul>
 
           <h4>{t("project.results")}</h4>
           <ul>
-            {submission.results.map((result) => <li>
+            {submission.results.map((result, i) => <li key={i}>
               {result}
             </li>)}
           </ul>
 
           <h4>{t("project.impact")}</h4>
           <ul>
-            {submission.impact.map((impact) => <li>
+            {submission.impact.map((impact, i) => <li key={i}>
               {impact}
             </li>)}
           </ul>
 
           <h4>{t("project.outcome")}</h4>
           <ul>
-            {submission.outcome.map((outcome) => <li>
+            {submission.outcome.map((outcome, i) => <li key={i}>
               {outcome}
             </li>)}
           </ul>
@@ -213,10 +215,10 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
       </CardHeader>
       <UncontrolledCollapse toggler={"#toggler-work"} defaultOpen={true}>
         <CardBody>
-          {submission.workPackages.map((wp) => {
+          {workPackages.map((wp) => {
             const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
 
-            return <>
+            return <div key={wp.id}>
               <h4>{t("project.workPackage.abbreviation")}{wp.order}: {wp.name}</h4>
               <Row>
                 <Col lg={4}>
@@ -226,17 +228,17 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
                 <Col lg={8}>
                   <h5>{t("project.tasks")}</h5>
                   <ul>
-                    {tasks.map((task) => <li>{task.description}</li>)}
+                    {tasks.map((task, i) => <li key={i}>{task.description}</li>)}
                   </ul>
                 </Col>
               </Row>
-            </>
+            </div>
           })}
 
           {unassignedTasks.length > 0 && <>
             <h4>{t("project.tasks")}</h4>
             <ul>
-              {unassignedTasks.map((task) => <li>{task.description}</li>)}
+              {unassignedTasks.map((task, i) => <li key={i}>{task.description}</li>)}
             </ul>
           </>}
         </CardBody>
@@ -273,7 +275,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
               </tr>
             </thead>
             <tbody>
-              {submission.workPackages.map((wp) => {
+              {workPackages.map((wp) => {
                 const wpCells = []
                 const wpMonths = getWorkPackageMonths(wp.id)
                 for (let i = 1; i <= submission.implementationTime; i++) {
@@ -327,12 +329,12 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
       </CardHeader>
       <UncontrolledCollapse toggler={"#toggler-finances"} defaultOpen={true}>
         <CardBody>
-          {submission.workPackages.map((wp) => {
+          {workPackages.map((wp) => {
             const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
             const taskIds = tasks.map((task) => task.id)
             const resources = submission.resourceRequirements.filter((res) => taskIds.includes(res.task))
 
-            return <>
+            return <div key={wp.id}>
               <h4>{t("project.workPackage.abbreviation")}{wp.order}: {wp.name}</h4>
               {resources.map((resource) => <Row className="resource-requirement-row" key={resource.id}>
                 <Col md={6}>
@@ -349,7 +351,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
                 </Col>
               </Row>
               )}
-            </>
+            </div>
           })}
 
           {unassignedResources.length > 0 && <>

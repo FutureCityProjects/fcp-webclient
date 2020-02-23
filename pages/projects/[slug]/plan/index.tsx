@@ -8,6 +8,7 @@ import { AnyAction, Dispatch } from "redux"
 
 import { ProjectProgress, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
+import PageError from "components/common/PageError"
 import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
@@ -64,16 +65,22 @@ const ProjectPlanPage: I18nPage<PageProps> = ({ isMember, project, request, t, u
   return <BaseLayout pageTitle={t("page.projects.plan.index.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.plan.index.heading", { projectName: project.name })}</h1>
-        <p><TranslatedHtml content="page.projects.plan.index.intro" /></p>
+        {request.isLoading
+          ? <Spinner />
+          : <>
+            <h1>{t("page.projects.plan.index.heading", { projectName: project.name })}</h1>
+            <p><TranslatedHtml content="page.projects.plan.index.intro" /></p>
 
-        <Link
-          href={Routes.MY_PROJECTS}
-          as={Routes.MY_PROJECTS + "#project-" + project.id}
-        >
-          <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
-        </Link>
-        {request.isLoading && <Spinner />}
+            <Link
+              href={Routes.MY_PROJECTS}
+              as={Routes.MY_PROJECTS + "#project-" + project.id}
+            >
+              <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
+            </Link>
+          </>
+        }
+
+        <PageError error={request.loadingError} />
       </Col>
     </Row>
 

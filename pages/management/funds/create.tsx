@@ -34,7 +34,7 @@ const FundCreationPage: I18nPage<PageProps> = ({ onSubmit, t }) => {
     <Row>
       <Col>
         <h1>{t("page.management.funds.create.heading")}</h1>
-        <p><TranslatedHtml content={t("page.management.funds.create.intro")} /></p>
+        <p><TranslatedHtml content="page.management.funds.create.intro" /></p>
 
         <FundForm onSubmit={onSubmit} />
       </Col>

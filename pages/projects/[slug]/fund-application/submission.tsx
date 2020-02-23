@@ -65,17 +65,21 @@ const ApplicationSubmissionPage: I18nPage<PageProps> = (props: PageProps) => {
     <Row>
       <Col>
         <h1>{t("page.projects.application.submission.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.application.submission.intro" params={{ projectName: project.name }} /></p>
+        {(projectRequest.isLoading || fundRequest.isLoading)
+          ? <Spinner />
+          : <>
+            <p><TranslatedHtml content="page.projects.application.submission.intro" params={{ projectName: project.name }} /></p>
 
-        {(projectRequest.isLoading || fundRequest.isLoading) && <Spinner />}
+            <Link
+              href={Routes.MY_PROJECTS}
+              as={Routes.MY_PROJECTS + "#project-" + project.id}
+            >
+              <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
+            </Link>
+          </>
+        }
+
         <PageError error={projectRequest.loadingError || fundRequest.loadingError} />
-
-        <Link
-          href={Routes.MY_PROJECTS}
-          as={Routes.MY_PROJECTS + "#project-" + project.id}
-        >
-          <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
-        </Link>
       </Col>
     </Row>
 
