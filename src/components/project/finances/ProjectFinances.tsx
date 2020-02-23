@@ -17,7 +17,7 @@ const ProjectFinances: React.FC<IPlanProps> = (props: IPlanProps) => {
   const { t } = useTranslation()
   const { functions, project, updateProject } = props
 
-  const packages = functions.sortWorkPackages(project.workPackages)
+  const packages = functions.sortWorkPackages(functions.getWorkPackages())
 
   return <Card className="body-card project-resources project-finances">
     <CardHeader>
