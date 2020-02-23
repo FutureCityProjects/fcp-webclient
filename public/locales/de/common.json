@@ -76,10 +76,13 @@
       },
       "addCriterion": "Kriterium hinzufügen",
       "addConcretization": "Zuspitzung hinzufügen",
-      "applicationHeader": "Angaben zur Antragstellung",
+      "applicationHeader": "Zeitraum zur Antragstellung",
+      "applicationHelp": "Benennen Sie den Zeitraum, in welchem Anträge an den Fördertopf eingereicht werden dürfen. Außerhalb dieses Zeitraumes werden keine Förderanträge entgegengenommen!",
       "fundingHeader": "Angaben zur Finanzierung",
+      "fundingHelp": "Benennen Sie das Gesamtbudget des Fördertopfes sowie Minimal- und Maximalsummen, die beantragt werden können.",
       "generalHeader": "Allgemeine Angaben",
-      "juryHeader": "Angaben zur Bewertung"
+      "juryHeader": "Angaben zur Bewertung",
+      "juryHelp": "Eingegangene Förderanträge müssen von einer Jury beurteilt werden.<br />Wie viele Juroren sollen einen Antrag bewerten?<br />Ab wann sollen die Juroren mit ihrer Bewertung beginnen?<br />Wann gibt es ein Treffen, in dem die Juroren darüber informiert werden, wie die Bewertung ablaufen soll? (Jury-Briefing)?<br />Wann endet der Bewertungszeitraum für die Juroren?<br />Und wann findet die finale Jury-Sitzung statt, in der beschlossen wird, welche Förderanträge tatsächlich gefördert werden?"
     },
     "fundApplication": {
       "applicationSelfAssessment": {
