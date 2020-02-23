@@ -7,6 +7,7 @@ import { Col, Row, Spinner } from "reactstrap"
 
 import { ProjectProgress, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
+import PageError from "components/common/PageError"
 import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
@@ -69,9 +70,11 @@ const ProjectApplicationEditPage: I18nPage<PageProps> = ({ isMember, project, re
     <Row>
       <Col>
         <h1>{t("page.projects.application.edit.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.application.edit.intro" params={{ projectName: project.name }} /></p>
-
-        {request.isLoading && <Spinner />}
+        {request.isLoading
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.application.edit.intro" params={{ projectName: project.name }} /></p>
+        }
+        <PageError error={request.loadingError} />
       </Col>
     </Row>
 

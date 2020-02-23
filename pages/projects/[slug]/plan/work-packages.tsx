@@ -65,13 +65,16 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = ({ isMember, project, reque
     <Row>
       <Col>
         <h1>{t("page.projects.plan.workPackages.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.plan.workPackages.intro" params={{ projectName: project.name }} /></p>
+        {request.isLoading
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.plan.workPackages.intro" params={{ projectName: project.name }} /></p>
+        }
       </Col>
     </Row>
 
     <Row>
       <Col>
-        {request.isLoading ? <Spinner /> :
+        {request.isLoading &&
           <PlanContainer
             component={ProjectWorkPackages}
             project={project}

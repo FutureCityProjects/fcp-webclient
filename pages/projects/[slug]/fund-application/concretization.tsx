@@ -81,9 +81,10 @@ const ProjectConcretizationPage: I18nPage<PageProps> = (props: PageProps) => {
     <Row>
       <Col>
         <h1>{t("page.projects.application.concretization.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.application.concretization.intro" params={{ projectName: project.name }} /></p>
-
-        {(projectRequest.isLoading || fundRequest.isLoading) && <Spinner />}
+        {(projectRequest.isLoading || fundRequest.isLoading)
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.application.concretization.intro" params={{ projectName: project.name }} /></p>
+        }
       </Col>
     </Row>
 

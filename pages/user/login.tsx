@@ -37,7 +37,6 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
 
   // prevent redirecting to the profile when the state changes while a login is running
   const [loggingIn, setLoggingIn] = useState(false)
-
   if (!loggingIn && isAuthenticated) {
     return <Redirect route={Routes.USER_PROFILE} />
   }

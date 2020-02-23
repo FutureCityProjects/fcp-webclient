@@ -89,20 +89,24 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
     <Row>
       <Col>
         <h1>{t("page.projects.application.funding.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.application.funding.intro" params={{ projectName: project.name }} /></p>
+        {(projectRequest.isLoading || fundRequest.isLoading)
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.application.funding.intro" params={{ projectName: project.name }} /></p>
+        }
 
-        {(projectRequest.isLoading || fundRequest.isLoading) && <Spinner />}
         <PageError error={projectRequest.loadingError || fundRequest.loadingError} />
 
-        <Link href={{
-          pathname: Routes.PROJECT_FUND_APPLICATION,
-          query: { fund: fund.id }
-        }} as={{
-          pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }),
-          query: { fund: fund.id }
-        }} >
-          <a className="btn btn-secondary btn-sm">{t("goto.projectApplication")}</a>
-        </Link>
+        {(!projectRequest.isLoading && !fundRequest.isLoading) &&
+          <Link href={{
+            pathname: Routes.PROJECT_FUND_APPLICATION,
+            query: { fund: fund.id }
+          }} as={{
+            pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }),
+            query: { fund: fund.id }
+          }} >
+            <a className="btn btn-secondary btn-sm">{t("goto.projectApplication")}</a>
+          </Link>
+        }
       </Col>
     </Row>
 

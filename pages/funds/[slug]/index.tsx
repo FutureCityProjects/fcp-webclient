@@ -7,6 +7,7 @@ import { Col, Row, Spinner } from "reactstrap"
 import { FundState, IFund } from "api/schema"
 import BaseLayout from "components/BaseLayout"
 import StatusCode from "components/common/StatusCode"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
 import PublicFundView from "components/fund/PublicFundView"
 import { loadModelAction } from "redux/helper/actions"
@@ -42,7 +43,7 @@ const PublicFuncPage: I18nPage<PageProps> = (props: PageProps) => {
       <Row>
         <Col>
           <h1>{t("page.funds.slug.heading")}</h1>
-          <p>{t("page.funds.slug.intro")}</p>
+          <p><TranslatedHtml content="page.funds.slug.intro" /></p>
           <PublicFundView fund={fund} />
         </Col>
       </Row>

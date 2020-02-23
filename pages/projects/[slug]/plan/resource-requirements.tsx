@@ -8,6 +8,7 @@ import { AnyAction, Dispatch } from "redux"
 
 import { ProjectProgress, UserRole } from "api/schema"
 import BaseLayout from "components/BaseLayout"
+import PageError from "components/common/PageError"
 import StatusCode from "components/common/StatusCode"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import ErrorPage from "components/ErrorPage"
@@ -62,13 +63,18 @@ const ProjectResourceRequirementsPage: I18nPage<PageProps> = ({ isMember, projec
     <Row>
       <Col>
         <h1>{t("page.projects.plan.resourceRequirements.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.plan.resourceRequirements.intro" params={{ projectName: project.name }} /></p>
+        {request.isLoading
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.plan.resourceRequirements.intro" params={{ projectName: project.name }} /></p>
+        }
+
+        <PageError error={request.loadingError} />
       </Col>
     </Row>
 
     <Row>
       <Col>
-        {request.isLoading ? <Spinner /> :
+        {request.isLoading &&
           <PlanContainer
             component={ProjectResources}
             project={project}

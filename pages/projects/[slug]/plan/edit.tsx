@@ -61,13 +61,16 @@ const ProjectPlanEditPage: I18nPage<PageProps> = ({ isMember, project, request, 
     <Row>
       <Col>
         <h1>{t("page.projects.plan.edit.heading")}</h1>
-        <p><TranslatedHtml content="page.projects.plan.edit.intro" params={{ projectName: project.name }} /></p>
+        {request.isLoading
+          ? <Spinner />
+          : <p><TranslatedHtml content="page.projects.plan.edit.intro" params={{ projectName: project.name }} /></p>
+        }
       </Col>
     </Row>
 
     <Row>
       <Col>
-        {request.isLoading ? <Spinner /> :
+        {!request.isLoading &&
           <ProjectPlanForm onSubmit={onSubmit} project={project} />
         }
       </Col>

@@ -6,6 +6,7 @@ import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
 import ConfirmationForm from "components/common/form/ConfirmationForm"
 import Icon from "components/common/Icon"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { IPlanProps } from "components/project/common/PlanContainer"
 import TotalSumCard from "components/project/common/TotalSumCard"
 import WorkPackageResourcesCard from "components/project/common/WorkPackageResourcesCard"
@@ -45,7 +46,7 @@ const ProjectFinances: React.FC<IPlanProps> = (props: IPlanProps) => {
     <CardBody>
       <h3 className="card-title">{t("page.projects.plan.resourceRequirementsHeader")}</h3>
       <h4>{t("page.projects.plan.finances.fincancesHeading")} <Icon name="money-bag" size={24} /></h4>
-      <span className="form-text">{t("page.projects.plan.finances.financesIntro")}</span>
+      <span className="form-text"><TranslatedHtml content="page.projects.plan.finances.financesIntro" /></span>
       <div className="button-area">
         <ConfirmationForm
           buttonLabel="form.saveChanges"

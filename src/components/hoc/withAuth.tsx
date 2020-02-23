@@ -5,11 +5,11 @@ import { ProviderProps } from "react-redux"
 
 import { UserRole } from "api/schema"
 import ErrorPage from "components/ErrorPage"
+import { addNotificationAction } from "redux/actions/notifications"
 import { AppState } from "redux/reducer"
-import { selectHasRole, selectIsAuthenticated, selectAuthExpired } from "redux/reducer/auth"
+import { selectAuthExpired, selectHasRole, selectIsAuthenticated } from "redux/reducer/auth"
 import { includeDefaultNamespaces } from "services/i18n"
 import { Routes } from "services/routes"
-import { addNotificationAction } from "redux/actions/notifications"
 
 interface IProps extends ProviderProps {
   hasRequiredRole: boolean
@@ -57,7 +57,7 @@ export function withAuth(WrappedComponent: any, requiredRole: UserRole) {
 
     public render() {
       return this.props.hasRequiredRole
-        ? < WrappedComponent {...this.props} />
+        ? <WrappedComponent {...this.props} />
         : <ErrorPage statusCode={403} />
     }
   }

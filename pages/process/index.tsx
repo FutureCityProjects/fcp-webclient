@@ -34,11 +34,11 @@ const ProcessDetailPage: I18nPage<PageProps> = ({ process, request, roles, t }) 
   return <BaseLayout pageTitle={t("page.process.index.title")}>
     <Row>
       <Col sm={8}>
-        {request.isLoading && <Spinner />}
-        <PageError error={request.loadingError} />
         <h1>{t("page.process.index.heading")}</h1>
         <p><TranslatedHtml content="page.process.index.intro" /></p>
 
+        {request.isLoading && <Spinner />}
+        <PageError error={request.loadingError} />
         {process && <ProcessView process={process} roles={roles} />}
       </Col>
     </Row>

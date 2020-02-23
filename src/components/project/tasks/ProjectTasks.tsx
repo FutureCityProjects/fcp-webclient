@@ -6,6 +6,7 @@ import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
 import ConfirmationForm from "components/common/form/ConfirmationForm"
 import Icon from "components/common/Icon"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { IPlanProps } from "components/project/common/PlanContainer"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
@@ -44,7 +45,7 @@ const ProjectTasks: React.FC<IPlanProps> = ({ functions, project, updateProject 
     <CardBody>
       <h3 className="card-title">{t("page.projects.plan.workHeader")}</h3>
       <h4>{t("page.projects.plan.tasks.taskHeading")} <Icon name="to-do" size={24} /></h4>
-      <span className="form-text">{t("page.projects.plan.tasks.taskIntro")}</span>
+      <span className="form-text"><TranslatedHtml content="page.projects.plan.tasks.taskIntro" /></span>
 
       <div className="button-area">
         <ConfirmationForm
