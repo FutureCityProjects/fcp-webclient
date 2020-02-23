@@ -799,6 +799,11 @@
           "intro": "Hier kannst du die gewünschte Fördersumme des Projekts <em>{{projectName}}</em> festlegen.",
           "title": "Fördersumme bearbeiten"
         },
+        "submission": {
+          "heading": "Der Förderantrag",
+          "intro": "Eure Projektplanung hat folgenden Förderantrag produziert.",
+          "title": "Der Förderantrag"
+        },
         "submit": {
           "allowedOnlyForProjectOwner": "Die Einreichung des Förderantrags kann nur vom Projektleiter vorgenommen werden.",
           "confirmSubmit": "Antrag jetzt einreichen",
