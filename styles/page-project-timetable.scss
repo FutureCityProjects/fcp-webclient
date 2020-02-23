@@ -16,14 +16,11 @@
     th {
       border: none;
       text-align: center;
-      .timespan-display {
+      div {
         display: flex;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-      }
-      .timespan-undefined {
-        border: 1px solid $red;
       }
       .calendar {
         margin-left: 0.5rem;
@@ -60,7 +57,6 @@
   }
   tr.months {
     td {
-      height: 6rem;
       padding: 0;
       div {
         display: flex;
@@ -76,9 +72,13 @@
   }
   .task-row {
     td.task-cell {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      p {
+        margin-bottom: 0;
+        flex-grow: 1;
+      }
+      .icon-navigation {
+        float: right;
+      }
       padding-right: 2.5rem;
     }
     td:not(:first-child) {
@@ -133,8 +133,5 @@
         border-bottom: 1px solid $custom-light;
       }
     }
-  }
-  .wp-area {
-    display: contents;
   }
 }

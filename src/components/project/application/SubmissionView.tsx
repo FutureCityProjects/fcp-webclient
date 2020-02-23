@@ -18,6 +18,8 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
   const sumCosts = (requirements: IResourceRequirement[]): number =>
     requirements.reduce((s, r) => s + (r.cost || 0), 0)
 
+  // workPackages are optional...
+  const workPackages = submission.workPackages || []
 
   const unassignedTasks = submission.tasks.filter((task) => !task.workPackage)
   const unassignedTaskIds = unassignedTasks.map((task) => task.id)
@@ -213,7 +215,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
       </CardHeader>
       <UncontrolledCollapse toggler={"#toggler-work"} defaultOpen={true}>
         <CardBody>
-          {submission.workPackages.map((wp) => {
+          {workPackages.map((wp) => {
             const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
 
             return <div key={wp.id}>
@@ -273,7 +275,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
               </tr>
             </thead>
             <tbody>
-              {submission.workPackages.map((wp) => {
+              {workPackages.map((wp) => {
                 const wpCells = []
                 const wpMonths = getWorkPackageMonths(wp.id)
                 for (let i = 1; i <= submission.implementationTime; i++) {
@@ -327,7 +329,7 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
       </CardHeader>
       <UncontrolledCollapse toggler={"#toggler-finances"} defaultOpen={true}>
         <CardBody>
-          {submission.workPackages.map((wp) => {
+          {workPackages.map((wp) => {
             const tasks = submission.tasks.filter((task) => task.workPackage === wp.id)
             const taskIds = tasks.map((task) => task.id)
             const resources = submission.resourceRequirements.filter((res) => taskIds.includes(res.task))
