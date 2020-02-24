@@ -69,7 +69,7 @@ const ProjectPlanPage: I18nPage<PageProps> = ({ isMember, project, request, t, u
           ? <Spinner />
           : <>
             <h1>{t("page.projects.plan.index.heading", { projectName: project.name })}</h1>
-            <p><TranslatedHtml content="page.projects.plan.index.intro" /></p>
+            <p><TranslatedHtml content="page.projects.plan.index.intro" params={{ projectName: project.name }} /></p>
 
             <Link
               href={Routes.MY_PROJECTS}
