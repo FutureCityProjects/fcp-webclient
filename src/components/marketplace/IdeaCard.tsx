@@ -18,7 +18,7 @@ const ProjectIdeaCard: React.FC<IProps> = ({ project }) => {
   return <Card className="marketplace-card">
     <CardHeader>
       <h3>{t("page.projects.index.idea.header")}</h3>
-      <DropdownComponent button={<Icon name="hand" size={24} />}>
+      <DropdownComponent button={<Icon name="hand" size={24} />} title={t("goto.newProject")}>
         <Link href={routeWithParams(Routes.CREATE_PROJECT, { id: project.id })}>
           <a>{t("goto.newProject")}</a>
         </Link>

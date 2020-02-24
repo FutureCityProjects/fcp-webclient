@@ -39,7 +39,7 @@ const TaskCard: React.FC<IProps> = (props: IProps) => {
           <Icon name="trash" size={18} />
         </a>
         <DropdownComponent
-          button={<Icon name="plus" size={18} />}
+          button={<Icon name="sort" size={18} />}
           className="navigation-item"
           title={t("form.project.tasks.assignWorkPackage")}
         >

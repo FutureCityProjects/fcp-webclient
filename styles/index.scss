@@ -918,13 +918,9 @@ a.sub-status-card {
 .form-group .react-datepicker-wrapper {
   display:block;
 }
-/**
- * <<< Forms
- */
 
 .form-control, .ql-editor {
   background-color: $custom-light;
-  transition: all ease-in-out 0.175s;
 }
 
 .form-control:focus, .rte-active {
@@ -950,6 +946,9 @@ a.sub-status-card {
     margin: 0 0 0.5rem;
   }
 }
+/**
+ * <<< Forms
+ */
 
 .project-tasks {
   padding: 0 2.25rem;

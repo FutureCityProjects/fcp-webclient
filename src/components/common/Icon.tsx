@@ -13,6 +13,7 @@ export const Icons: string[] = [
   "check",
   "compasses",
   "document",
+  "download",
   "download-cloud",
   "facebook",
   "grid",
@@ -20,6 +21,7 @@ export const Icons: string[] = [
   "info-bubble",
   "instagram",
   "light-bulb",
+  "market",
   "message",
   "minus",
   "money-bag",
@@ -28,6 +30,7 @@ export const Icons: string[] = [
   "pot",
   "save",
   "search",
+  "sort",
   "to-do",
   "trash",
   "twitter",
@@ -35,6 +38,7 @@ export const Icons: string[] = [
   "user",
   "user-add",
   "user-multiple",
+  "work-package",
 ]
 
 const Icon = (props: IProps) => {

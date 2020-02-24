@@ -23,12 +23,12 @@ const ScheduleTaskCell: React.FC<IProps> = (props: IProps) => {
     >
       {workPackage.name.substr(0, 23)}{workPackage.name.length > 23 && "…"}
     </a>
-)
+  )
 
   return <td className="task-cell">
     <div className="icon-navigation">
       <DropdownComponent
-        button={<Icon name="plus" size={18} />}
+        button={<Icon name="sort" size={18} />}
         className="navigation-item"
         title={t("form.project.tasks.assignWorkPackage")}
       >

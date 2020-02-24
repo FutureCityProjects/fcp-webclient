@@ -41,7 +41,7 @@ const ProjectCard: React.FC<IProps> = ({ project }) => {
           })}</span>
       </div>
 
-      <DropdownComponent button={<Icon name="user-add" size={24} />}>
+      <DropdownComponent button={<Icon name="user-add" size={24} />} title={t("goto.memberApplication")}>
         <Link href={Routes.PROJECT_APPLICATION}
           as={routeWithParams(Routes.PROJECT_APPLICATION, { slug: project.slug || project.id })}
         >

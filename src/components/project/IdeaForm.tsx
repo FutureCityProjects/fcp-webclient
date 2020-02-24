@@ -65,8 +65,6 @@ const IdeaForm = ({ onSubmit, idea }: IProps) => {
             {t("form.idea.submit")} {isSubmitting && <Spinner />}
           </Button>
         </FormGroup>
-
-        <p className="text-danger">{t("form.requiredFieldsHint")}</p>
       </Form>
     }
   </Formik>

@@ -53,7 +53,7 @@ const ProjectWorkPackages: React.FC<IPlanProps> = ({ functions, project, updateP
     </CardHeader>
     <CardBody>
       <h3 className="card-title">{t("page.projects.plan.workHeader")}</h3>
-      <h4>{t("page.projects.plan.workPackages.packageHeading")} <Icon name="to-do" size={24} /></h4>
+      <h4>{t("page.projects.plan.workPackages.packageHeading")} <Icon name="work-package" size={24} /></h4>
       <span className="form-text"><TranslatedHtml content="page.projects.plan.tasks.packageIntro" /></span>
 
       <div className="button-area">
