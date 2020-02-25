@@ -76,14 +76,14 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
     return createApplication(application, actions)
   }
 
-  return <BaseLayout pageTitle={t("page.projects.application.selectFund.title")}>
+  return <BaseLayout pageTitle={t("page.projects.fundApplication.selectFund.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.application.selectFund.heading")}</h1>
+        <h1>{t("page.projects.fundApplication.selectFund.heading")}</h1>
 
         {(projectRequest.isLoading || fundsRequest.isLoading)
           ? <Spinner />
-          : <p><TranslatedHtml content="page.projects.application.selectFund.intro" params={{ projectName: project.name }} /></p>
+          : <p><TranslatedHtml content="page.projects.fundApplication.selectFund.intro" params={{ projectName: project.name }} /></p>
         }
       </Col>
     </Row>
@@ -98,12 +98,12 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
           </Link>
           <br />
 
-          {!isOwner && <p className="text-danger">{t("page.projects.application.selectFund.allowedOnlyForProjectOwner")}</p>}
+          {!isOwner && <p className="text-danger">{t("page.projects.fundApplication.selectFund.allowedOnlyForProjectOwner")}</p>}
 
           <br />
           {selectableFunds.length
             ? <>
-              <h3>{t("page.projects.application.selectFund.availableFunds")}</h3>
+              <h3>{t("page.projects.fundApplication.selectFund.availableFunds")}</h3>
               {selectableFunds.map((fund: IFund) => <SelectFundCard
                 fund={fund}
                 selectable={isOwner}
@@ -111,7 +111,7 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
                 selectFund={(_values, actions) => selectFund(fund, actions)}
               />)}
             </>
-            : <p>{t("page.projects.application.selectFund.noAvailableFunds")}</p>
+            : <p>{t("page.projects.fundApplication.selectFund.noAvailableFunds")}</p>
           }
         </>}
       </Col>

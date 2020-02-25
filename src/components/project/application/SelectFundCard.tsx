@@ -91,7 +91,7 @@ const SelectFundCard: React.FC<IProps> = ({ fund, selectable, selectFund }: IPro
         {selectable && <Row>
           <Col lg={12} className="text-center">
             <ConfirmationForm
-              buttonLabel="page.projects.application.selectFund.selectThisFund"
+              buttonLabel="page.projects.fundApplication.selectFund.selectThisFund"
               onSubmit={selectFund}
             />
           </Col>

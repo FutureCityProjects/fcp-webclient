@@ -116,14 +116,14 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
     requestedFunding: fundApplication.requestedFunding,
   }
 
-  return <BaseLayout pageTitle={t("page.projects.application.submit.title")}>
+  return <BaseLayout pageTitle={t("page.projects.fundApplication.submit.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.application.submit.heading")}</h1>
+        <h1>{t("page.projects.fundApplication.submit.heading")}</h1>
         {(projectRequest.isLoading || fundRequest.isLoading) ?
           <Spinner />
           : <>
-            <p><TranslatedHtml content="page.projects.application.submit.intro" params={{ projectName: project.name }} /></p>
+            <p><TranslatedHtml content="page.projects.fundApplication.submit.intro" params={{ projectName: project.name }} /></p>
             <Link
               href={Routes.MY_PROJECTS}
               as={Routes.MY_PROJECTS + "#project-" + project.id}
@@ -155,12 +155,12 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
             {isOwner
               ? submissionBegin <= now && now <= submissionEnd
                 ? <ConfirmationForm
-                  buttonLabel="page.projects.application.submit.confirmSubmit"
+                  buttonLabel="page.projects.fundApplication.submit.confirmSubmit"
                   onSubmit={onSubmit}
                 />
-                : t("page.projects.application.submit.outsideSubmissionPeriod")
+                : t("page.projects.fundApplication.submit.outsideSubmissionPeriod")
 
-              : <p className="text-danger">{t("page.projects.application.submit.allowedOnlyForProjectOwner")}</p>
+              : <p className="text-danger">{t("page.projects.fundApplication.submit.allowedOnlyForProjectOwner")}</p>
             }
           </CardBody>
         </Card>

@@ -77,13 +77,13 @@ const ProjectConcretizationPage: I18nPage<PageProps> = (props: PageProps) => {
     return updateApplication(application, actions)
   }
 
-  return <BaseLayout pageTitle={t("page.projects.application.concretization.title")}>
+  return <BaseLayout pageTitle={t("page.projects.fundApplication.concretization.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.application.concretization.heading")}</h1>
+        <h1>{t("page.projects.fundApplication.concretization.heading")}</h1>
         {(projectRequest.isLoading || fundRequest.isLoading)
           ? <Spinner />
-          : <p><TranslatedHtml content="page.projects.application.concretization.intro" params={{ projectName: project.name }} /></p>
+          : <p><TranslatedHtml content="page.projects.fundApplication.concretization.intro" params={{ projectName: project.name }} /></p>
         }
       </Col>
     </Row>
