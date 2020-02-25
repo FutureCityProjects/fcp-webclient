@@ -454,12 +454,18 @@
     "concretizationSelfAssessment": "Selbsteinschätzung zur Zuspitzung",
     "requestedFunding": "Gewünschte Fördersumme",
     "submission": {
+      "concretizationHeader": "Zuspitzung auf die Förderkriterien",
+      "financesHeader": "Finanzplan",
+      "generalHeader": "Antragsteller & Fördersumme",
+      "projectHeader": "Projektprofil: Beschreibung, Ziele, Vision",
+      "resultsHeader": "Zielgruppe, Ergebnisse, Wirkungen, Verwertung",
       "submittedBy": "Eingereicht von",
       "submissionDate": "Eingereicht am",
       "timetable": {
         "header": "Zeitplan (Gantt-Chart)",
         "months": "Umsetzungsmonate"
-      }
+      },
+      "workPlanHeader": "Arbeitsplan"
     }
   },
   "fundConcretization": {
@@ -799,7 +805,13 @@
           "heading": "Förderantrag einreichen",
           "intro": "Hier kannst du den Förderantrag zum Projekt <em>{{projectName}}</em> einreichen.<br>Diese Aktion kann <strong>nicht</strong> rückgängig gemacht werden, eine nachträgliche Bearbeitung der Antragsdaten ist dann nicht mehr möglich. Bitte prüfe daher alle Daten auf Vollständigkeit!",
           "outsideSubmissionPeriod": "Eine Einreichen ist leider nur im Antragszeitraum möglich!",
+          "submissionHeader": "Diesen Förderantrag einreichen",
           "title": "Förderantrag einreichen"
+        },
+        "submission": {
+          "heading": "Dein eingereichter Förderantrag",
+          "intro": "Folgenden Förderantrag hast du erfolgreich eingereicht.",
+          "title": "Der Förderantrag"
         }
       }
     },
