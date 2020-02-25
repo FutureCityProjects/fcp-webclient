@@ -124,7 +124,7 @@
       "username": {
         "help": "",
         "label": "",
-        "placeholder": "Benutzername oder Email-Adresse"
+        "placeholder": "Benutzername oder E-Mail-Adresse"
       },
       "password": {
         "help": "",
@@ -212,7 +212,7 @@
         "placeholder": "Vorname Nachname"
       },
       "contactPhone": {
-        "help": "Hier kann deine Projektidee weiterentwickelt werden",
+        "help": "Unter welcher Telefonnummer kann der Fördermittelgeber dich erreichen?",
         "placeholder": "Vorwahl + Nummer"
       },
       "delimitation": {
@@ -229,7 +229,7 @@
       },
       "holderAddressInfo": {
         "help": "Zusatzangaben, bspw. &quot;im Hinterhaus&quot;",
-        "placeholder": "@todo"
+        "placeholder": "Hinterhaus"
       },
       "holderCity": {
         "help": "Adresse des Projektträgers",
@@ -352,7 +352,7 @@
       },
       "email": {
         "help": "An diese Adresse senden wir Benachrichtigungen zu deinen Projekten.",
-        "label": "Email-Adresse",
+        "label": "E-Mail-Adresse",
         "placeholder": "email@domain.de"
       },
       "firstName": {
@@ -388,12 +388,12 @@
       "id": {
         "help": "",
         "label": "Identifikator",
-        "placeholder": "Nummer aus der Bestätigungs-Email"
+        "placeholder": "Nummer aus der Bestätigungs-E-Mail"
       },
       "token": {
         "help": "",
         "label": "Sicherheitscode",
-        "placeholder": "Zeichenkette aus der Bestätigungs-Email"
+        "placeholder": "Zeichenkette aus der Bestätigungs-E-Mail"
       }
     },
     "RTE": {
@@ -553,7 +553,7 @@
     },
     "about": {
       "heading": "Was ist die PROJEKT.WERK.STADT?",
-      "intro": "<p>Willkommen in der Projekt.Werk.Stadt! Sie haben eine Projektidee für Ihre Stadt oder Region? Sie wollen mit anderen zusammen Projekte planen und umsetzen?</p><p>Die Projekt.Werk.Stadt ist der Ort um miteinander Projekte zu durchdenken und vielleicht sogar Fördergelder dafür zu beantragen!</p><ul><li>Stadt- und Dorfbewohner und -bewohnerinnen planen hier Projekte.</li><li>Prozesssteuerer organisieren hier ihren Partizipationsprozess.</li><li>Gemeinsam machen Sie Ihre Stadt oder ihr Dorf zu einem nachhaltigeren und lebenswerteren Ort.</li></ul><p>Die Projekt.Werk.Stadt bietet eine Online-Plattform, auf der Bürgerinnen digital Projekte planen, während sie mit sogenannten \"Kneipentools\" auch offline unterstützt werden. Die Fokussierung der Plattform auf <strong>Bürgerbeteiligung</strong> in <strong>Städten und Dörfern</strong> mit einer Ausrichtung auf <strong>nachhaltige Entwicklung</strong> und der <strong>Verbindung aus online und offline</strong> macht die Projekt.Werk.Stadt so nützlich!</p><p>Sie wollen die Projekt.Werk.Stadt in ihrer Kommune einsetzen oder Projekte darauf planen? Sprechen Sie uns an!</p><p>norbert.rost@zukunftsstadt.de, 0351/4466069</p>",
+      "intro": "<p>Willkommen in der Projekt.Werk.Stadt! Sie haben eine Projektidee für Ihre Stadt oder Region? Sie wollen mit anderen zusammen Projekte planen und umsetzen?</p><p>Die Projekt.Werk.Stadt ist der Ort um miteinander Projekte zu durchdenken und vielleicht sogar Fördergelder dafür zu beantragen!</p><ul><li>Stadt- und Dorfbewohner und -bewohnerinnen planen hier Projekte.</li><li>Prozessmanager organisieren hier ihren Partizipationsprozess.</li><li>Gemeinsam machen Sie Ihre Stadt oder Ihr Dorf zu einem nachhaltigeren und lebenswerteren Ort.</li></ul><p>Die Projekt.Werk.Stadt bietet eine Online-Plattform, auf der BürgerInnen digital Projekte planen, während sie mit sogenannten \"Kneipentools\" auch offline unterstützt werden. Die Fokussierung der Plattform auf <strong>Bürgerbeteiligung</strong> in <strong>Städten und Dörfern</strong> mit einer Ausrichtung auf <strong>nachhaltige Entwicklung</strong> und der <strong>Verbindung aus online und offline</strong> macht die Projekt.Werk.Stadt so nützlich!</p><p>Sie wollen die Projekt.Werk.Stadt in Ihrer Kommune einsetzen oder Projekte darauf planen? Sprechen Sie uns an!</p><p>norbert.rost@zukunftsstadt.de, 0351/4466069</p>",
       "title": "Worum geht's?"
     },
     "dataProtection": {
@@ -574,7 +574,7 @@
         "intro": "Hier kannst du eine neue Projektidee eintragen. Du selbst oder jemand anderes kann sie dann zu einem Projekt weiterentwickeln.",
         "ideaCreated": "Vielen Dank, deine Projekt-Idee wurde dem Ideen-Marktplatz hinzugefügt!",
         "addOtherIdea": "Weitere Idee eintragen",
-        "ideaNotSaved": "Vielen Dank, um deine Idee zu sichern brauchst du ein Benutzerkonto.",
+        "ideaNotSaved": "Vielen Dank! Um deine Idee zu sichern brauchst du ein BenutzerInnen-Konto.",
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird die Idee abgepeichert!",
         "saveViaRegistration": "Noch kein Konto auf der Plattform? Nach der Registrierung wird deine Idee gespeichert und bei Freischaltung deines Kontos sichtbar."
       }
@@ -636,7 +636,7 @@
       },
       "profile": {
         "heading": "Kneipentools zum Projekt-Profil",
-        "intro": "<div className=\"row\"><div class=\"card col-md-8\"><div class=\"card-header\"></div><div class=\"card-body\"><blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Ein Projekt-Profil ist wie ein Steckbrief: Kurz und knapp sollte man erfahren, worum es in dem Projekt geht. Das Kneipentool zum Projekt-Profil führt euch an die wichtigsten Fragen heran:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/DD2030_Projekt_Profil.pdf\" target=\"_blank\" title=\"Arbeitsblatt Projektprofil\">Arbeitsblatt \"Projektprofil\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Gute Projekte für die nachhaltige Stadtentwicklung folgen einer klaren Vision. Das Visions-Blatt hilft euch, eine gemeinsame Vision zu entwickeln, zu der euer Projekt beiträgt. Das Visions-Blatt ist in Dresden für die Zukunftsstadt-Phase I entstanden: setzt überall dort, wo \"Dresden\" steht, einfach den Namen eures Heimatortes ein. <strong>Achtung:</strong> Dieses Kneipentool bringt euch zum Zeichnen! Eure Vision sollte möglichst bildhaft sein! Nehmt Buntstifte mit!</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Visionsblatt_Zukunftsstadt_Dresden_druck-1.pdf\" target=\"_blank\" title=\"Arbeitsblatt Vision\">Das \"Visions-Blatt\" aus Zukunftsstadt-Phase I</a> (einmal pro Gruppe auf A2 drucken, bunte Stifte sind hilfreich)</li></ul></div></div></div>",
+        "intro": "<div className=\"row\"><div class=\"card col-md-8\"><div class=\"card-header\"></div><div class=\"card-body\"><blockquote><p>\"Kneipentools\" sind Arbeitsmaterial, mit dem man super in der Kneipe arbeiten kann. Oder am Küchentisch. Oder im Büro. Oder im Workshop.<br />Kneipentools kann man runterladen und ausdrucken. Wenn man in der Projektgruppe zusammensitzt, helfen sie beim kollektiven Nachdenken, sorgen für den Austausch in der Gruppe und man kann auf ihnen die besten Gedanken festhalten.<br />Was man mit Hilfe von Kneipentools offline in der Gruppe überlegt hat, kann man danach wunderbar hier in der Online-Projekt.Werk.Stadt eintragen.</p></blockquote><p>Ein Projekt-Profil ist wie ein Steckbrief: Kurz und knapp sollte man erfahren, worum es in dem Projekt geht. Das Kneipentool zum Projekt-Profil führt euch an die wichtigsten Fragen heran:</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2017/11/DD2030_Projekt_Profil.pdf\" target=\"_blank\" title=\"Arbeitsblatt Projektprofil\">Arbeitsblatt \"Projektprofil\" aus Zukunftsstadt-Phase II</a> (einmal pro Gruppe auf A2 drucken)</li></ul><p>Gute Projekte für die nachhaltige Stadtentwicklung folgen einer klaren Vision. Das Visions-Blatt hilft euch, eine gemeinsame Vision zu entwickeln, zu der euer Projekt beiträgt. Das Visions-Blatt ist in Dresden für die Zukunftsstadt-Phase I entstanden: setzt überall dort, wo \"Dresden\" steht, einfach den Namen eures Heimatortes ein. <strong>Achtung:</strong> Dieses Kneipentool bringt euch zum Zeichnen! Eure Vision sollte möglichst bildhaft sein! Nehmt Buntstifte mit!</p><ul><li><a href=\"https://www.zukunftsstadt-dresden.de/wp-content/uploads/2018/01/Visionsblatt_Zukunftsstadt_Dresden_druck-1.pdf\" target=\"_blank\" title=\"Arbeitsblatt Vision\">Das \"Visions-Blatt\" aus Zukunftsstadt-Phase I</a> (einmal pro Gruppe auf A2 drucken, bunte Stifte sind hilfreich)</li></ul></div></div></div>",
         "title": "Kneipentools: Projekt-Profil"
       },
       "team": {
@@ -679,11 +679,11 @@
           "header": "Projektidee"
         },
         "newIdea": {
-          "header": "Werde Visionär und teile deine Idee!"
+          "header": "Werde VisionärIn und teile deine Idee!"
         },
         "newProject": {
-          "header": "Werde ein Macher und erstelle ein Projekt!",
-          "body": "Übernimm eine eigene oder fremde Projektidee um ein neues Projekt anzulegen!"
+          "header": "Werde Macher oder Macherin und erstelle ein Projekt!",
+          "body": "Übernimm eine eigene oder fremde Projektidee, um ein neues Projekt anzulegen!"
         },
         "project": {
           "subHeader": "Erstellt am {{date, date}} von {{user}}"
@@ -819,11 +819,16 @@
       "confirmAccount": {
         "title": "Benutzerkonto bestätigen",
         "heading": "Benutzerkonto bestätigen",
-        "intro": "Hier kannst du dein Benutzerkonto bestätigen wenn der Link in der Bestätigungs-Email nicht automatisch funktioniert."
+        "intro": "Hier kannst du dein Benutzerkonto bestätigen wenn der Link in der Bestätigungs-E-Mail nicht automatisch funktioniert."
       },
       "login": {
         "heading": "Login",
         "title": "Login"
+      },
+      "profile": {
+        "heading": "Das bin ich",
+        "intro": "Hier kannst du dich künftig vorstellen.",
+        "title": "Benutzerprofil"
       },
       "projects": {
         "applicationOpen": "Deine Bewerbung als Teammitglied wurde noch nicht akzeptiert. Bitte gedulde dich noch etwas.",
@@ -834,7 +839,7 @@
         "title": "Registrierung",
         "heading": "Neues Benutzerkonto",
         "intro": "Hier kannst du ein neues Benutzerkonto für diese Plattform anlegen um Projekte zu erstellen oder daran mitzuarbeiten.",
-        "userCreated": "Vielen Dank, dein Benutzerkonto wurde angelegt!<br />Um dich einloggen zu können klicke bitte auf den Link in der Bestätigungs-Email die wir an deine Adresse geschickt haben.<br />Dieser Link ist zwei Tage lang gültig, danach wird das inaktive Konto entfernt. Der Email-Versand kann einige Minuten dauern, bitte prüfe auch den Spam-Ordner!"
+        "userCreated": "Vielen Dank, dein Benutzerkonto wurde angelegt!<br />Um dich einloggen zu können, klicke bitte auf den Link in der Bestätigungs-E-Mail, die wir an deine Adresse geschickt haben.<br />Dieser Link ist zwei Tage lang gültig, danach wird das inaktive Konto entfernt. Der E-Mail-Versand kann einige Minuten dauern, bitte prüfe auch den Spam-Ordner!"
       }
     }
   },
@@ -858,7 +863,7 @@
   "project": {
     "applicationData": "Antragsdaten",
     "challenges": "Was sind die Probleme oder Herausforderungen, auf die das Projekt antworten soll?",
-    "contactEmail": "Kontakt-Emailadresse",
+    "contactEmail": "Kontakt-E-Mailadresse",
     "contactName": "Ansprechpartner",
     "contactPhone": "Kontakt-Telefonnummer",
     "delimitation": "Abgrenzung",
