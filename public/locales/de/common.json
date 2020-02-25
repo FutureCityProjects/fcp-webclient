@@ -76,10 +76,13 @@
       },
       "addCriterion": "Kriterium hinzufügen",
       "addConcretization": "Zuspitzung hinzufügen",
-      "applicationHeader": "Angaben zur Antragstellung",
+      "applicationHeader": "Zeitraum zur Antragstellung",
+      "applicationHelp": "Benennen Sie den Zeitraum, in welchem Anträge an den Fördertopf eingereicht werden dürfen. Außerhalb dieses Zeitraumes werden keine Förderanträge entgegengenommen!",
       "fundingHeader": "Angaben zur Finanzierung",
+      "fundingHelp": "Benennen Sie das Gesamtbudget des Fördertopfes sowie Minimal- und Maximalsummen, die beantragt werden können.",
       "generalHeader": "Allgemeine Angaben",
-      "juryHeader": "Angaben zur Bewertung"
+      "juryHeader": "Angaben zur Bewertung",
+      "juryHelp": "Eingegangene Förderanträge müssen von einer Jury beurteilt werden.<br />Wie viele Juroren sollen einen Antrag bewerten?<br />Ab wann sollen die Juroren mit ihrer Bewertung beginnen?<br />Wann gibt es ein Treffen, in dem die Juroren darüber informiert werden, wie die Bewertung ablaufen soll? (Jury-Briefing)?<br />Wann endet der Bewertungszeitraum für die Juroren?<br />Und wann findet die finale Jury-Sitzung statt, in der beschlossen wird, welche Förderanträge tatsächlich gefördert werden?"
     },
     "fundApplication": {
       "applicationSelfAssessment": {
@@ -114,7 +117,7 @@
     "idea": {
       "header": "Ich habe folgende Projektidee für unsere Stadt:",
       "shortDescription": {
-        "help": "Um deine Idee zu formulieren kannst du dich fragen: Was willst du mit der Idee erreichen? Was soll getan werden?",
+        "help": "Um deine Idee zu formulieren kannst du dich fragen: Was willst du mit der Idee erreichen? Was soll getan werden?<br />Maximal 280 Zeichen.",
         "label": "",
         "placeholder": "Kurze Beschreibung, maximal 280 Zeichen"
       },
@@ -200,8 +203,8 @@
         "addTargetGroup": "Zielgruppe hinzufügen"
       },
       "challenges": {
-        "help": "Beschreibe deine Lösung eines Problems in einfachen Worten",
-        "placeholder": "@todo"
+        "help": "Irgendetwas läuft nicht so, wie es sollte? Etwas fehlt, obwohl es das in deiner Stadt geben sollte? Beschreibe das Problem, das gelöst werden soll!",
+        "placeholder": "Der Energieverbrauch in unserer Stadt ist zu hoch"
       },
       "contactEmail": {
         "help": "Wie erreicht dich der Fördermittelgeber?",
@@ -217,11 +220,11 @@
       },
       "delimitation": {
         "help": "Was soll durch das Projekt nicht bearbeitet werden, obwohl es naheliegt?",
-        "placeholder": "@todo"
+        "placeholder": "Wir wollen zwar den Energieverbrauch in unserer Stadt senken, aber wir wollen dies im Verkehr und bei den Unternehmen tun, und nicht in den Haushalten."
       },
       "description": {
-        "help": "Hier kann deine Projektidee weiterentwickelt werden",
-        "placeholder": "@todo"
+        "help": "Beschreibe deine Projektidee ausführlicher! Was passiert in dem Projekt?",
+        "placeholder": "Wir wollen zuerst den Energieverbrauch bei allen Unternehmen messen und dann mit ihnen gemeinsam..."
       },
       "goal": {
         "help": "Ziele, die im Projekt mit eigenen Mitteln realistisch erreichbar sind",
@@ -252,10 +255,10 @@
         "placeholder": "Unsere Stadt wird grüner, dem Klimawandel wird vorgebeugt, die Menschen sind freundlicher zueinander..."
       },
       "implementationBegin": {
-        "help": "Wann soll das Projekt voraussichtlich starten?"
+        "help": "Wähle einen Start-Monat für dein Projekt!"
       },
       "implementationTime": {
-        "help": "Wie lange soll das Projekt voraussichtlich laufen?"
+        "help": "Gib die Dauer des Projekts in Monaten an."
       },
       "name": {
         "help": "Gib deinem Projekt einen Namen",
@@ -489,6 +492,7 @@
     "editResourceRequirements": "Um Aufgaben erledigen zu können, muss man manchmal Sachen oder Fachleute besorgen. Welche sind das?",
     "editProjectFinances": "Was man für ein Projekt zukaufen muss, muss bezahl werden. Woher kommt welches Geld?",
     "editRequestedFunding": "Wieviel Geld braucht ihr aus dem Fördertopf?",
+    "editTimetable": "Wie sieht der Zeitplan für das Projekt aus?",
     "fundDetails": "Detailansicht",
     "fundManagement": "Fördertopf-Verwaltung",
     "home": "Zur Startseite",
@@ -549,7 +553,7 @@
       "buttonTitle": "zum Marktplatz",
       "heading": "Gemeinsam Dresden nachhaltig gestalten",
       "quote": "&quot;Deine Plattform für nachhaltige Stadtentwicklung&quot;",
-      "title": "FCP Startseite"
+      "title": "FutureCityProjects - Nachhaltige Stadtentwicklung mit smarter Bürgerbeteiligung"
     },
     "about": {
       "heading": "Was ist die PROJEKT.WERK.STADT?",
@@ -586,11 +590,16 @@
     },
     "management": {
       "funds": {
-        "index": {
-          "heading": "Fördertopf-Verwaltung",
-          "intro": "Hier können Sie neue Fördertöpfe anlegen und bestehende bearbeiten oder aktivieren.",
-          "noFunds": "Keine Födertöpfe gefunden.",
-          "title": "Fördertöpfe"
+        "activate": {
+          "heading": "Fördertopf freischalten",
+          "intro": "Hier können Sie den gewählten Fördertopf freischalten. Er wird damit für die Öffentlichkeit sichtbar.<br />Sobald der Antragszeitraum beginnt wird automatisch die Antragseinreichung freigeschaltet.",
+          "title": "Fördertopf freischalten",
+          "confirm": "Soll dieser Fördertopf wirklich freigeschaltet werden? Änderungen an den öffentlichen Angaben sind dann nur noch begrenzt möglich."
+        },
+        "addConcretization": {
+          "heading": "Zuspitzung hinzufügen",
+          "intro": "Hier können Sie eine Zuspitzung zum gewählten Fördertopf hinzufügen. Zuspitzungen sind Aufforderungen an die Projektplaner, ihr Projekt so auszurichten, dass sie dem Zweck des Fördertopfes besser entsprechen. Den Projektplanern werden die Zuspitzungsfragen als auszufüllendes Formular angezeigt. Die Antworten auf die Zuspitzungsfragen sollten bei der Beurteilung eingehender Förderanträge eine zentrale Rolle spielen.",
+          "title": "Zuspitzung hinzufügen"
         },
         "create": {
           "heading": "Fördertopf anlegen",
@@ -601,7 +610,7 @@
           "heading": "Details zum Fördertopf",
           "intro": "Hier können Sie alle Daten zum Fördertopf einsehen und Bewertungskriterien und Zuspitzungen anlegen.",
           "title": "Fördertopf Details",
-          "fundingHeader": "Angaben zur Finanzierung",
+          "fundingHeader": "Finanzierung: Gesamtbudget & Fördersumme",
           "applicationHeader": "Angaben zur Antragstellung",
           "juryHeader": "Angaben zur Bewertung"
         },
@@ -610,21 +619,20 @@
           "intro": "Hier können Sie alle Daten zum Fördertopf bearbeiten.",
           "title": "Fördertopf bearbeiten"
         },
-        "addConcretization": {
-          "heading": "Zuspitzung hinzufügen",
-          "intro": "Hier können Sie eine Zuspitzung zum gewählten Fördertopf hinzufügen. Zuspitzungen sind Aufforderungen an die Projektplaner, ihr Projekt so auszurichten, dass sie dem Zweck des Fördertopfes besser entsprechen. Den Projektplanern werden die Zuspitzungsfragen als auszufüllendes Formular angezeigt. Die Antworten auf die Zuspitzungsfragen sollten bei der Beurteilung eingehender Förderanträge eine zentrale Rolle spielen.",
-          "title": "Zuspitzung hinzufügen"
-        },
         "editConcretization": {
           "heading": "Zuspitzung bearbeiten",
           "intro": "Hier können Sie die gewählte Zuspitzung bearbeiten.",
           "title": "Zuspitzung bearbeiten"
         },
-        "activate": {
-          "heading": "Fördertopf freischalten",
-          "intro": "Hier können Sie den gewählten Fördertopf freischalten. Er wird damit für die Öffentlichkeit sichtbar.<br />Sobald der Antragszeitraum beginnt wird automatisch die Antragseinreichung freigeschaltet.",
-          "title": "Fördertopf freischalten",
-          "confirm": "Soll dieser Fördertopf wirklich freigeschaltet werden? Änderungen an den öffentlichen Angaben sind dann nur noch begrenzt möglich."
+        "index": {
+          "heading": "Fördertopf-Verwaltung",
+          "intro": "Hier können Sie neue Fördertöpfe anlegen und bestehende bearbeiten oder aktivieren.",
+          "noFunds": "Keine Födertöpfe gefunden.",
+          "title": "Fördertöpfe"
+        },
+        "slug": {
+          "heading": "Informationen zum Fördertopf",
+          "intro": "<p>Dieser Fördertopf ist aktiv. Du kannst dein Projekt so ausrichten, dass du es aus diesem Fördertopf finanzieren kannst.<br />Um Geld aus diesem Fördertopf zu beantragen, musst du ihn für dein Projekt auswählen.</p>"
         }
       }
     },
@@ -669,6 +677,7 @@
         "heading": "Idee übernehmen",
         "intro": "Hier kannst du aus der gewählten Idee ein neues Projekt erstellen.",
         "inspiration": "Deine Inspiration ist folgende Projektidee:",
+        "projectCreated": "Vielen Dank, dein Projekt wurde erstellt!",
         "projectNotSaved": "Vielen Dank, um dein Projekt zu sichern brauchst du ein Benutzerkonto.",
         "saveViaLogin": "Du hast bereits ein Benutzerkonto? Nach dem Login wird das Projekt erstellt!",
         "saveViaRegistration": "Noch kein Konto auf der Plattform? Nach der Registrierung wird dein Projekt erstellt und bei Freischaltung deines Kontos sichtbar."
@@ -714,6 +723,18 @@
       "plan": {
         "workHeader": "Aufgaben und Arbeitspakete",
         "resourceRequirementsHeader": "Ressourcenbedarf",
+        "edit": {
+          "heading": "Projektplan bearbeiten",
+          "intro": "An wen richtet sich das Projekt? Wen soll es erreichen?<br />Welche Ergebnisse werden im Projektverlauf produziert?<br />Wie wirkt das Projekt auf die beteiligten Leute?<br />Wie wirkt das Projekt auf dein Dorf/deine Stadt oder die Gesellschaft?<br />Was bleibt, wenn das Projekt vorbei ist? Was läßt sich dann weiternutzen?",
+          "title": "Projektplan: Was kommt hinten raus?"
+        },
+        "finances": {
+          "fincancesHeading": "Finanzierung",
+          "financesIntro": "Wer stellt welche Mittel bereit?",
+          "heading": "Projektfinanzierung",
+          "intro": "Hier kannst du angeben aus welchen Quellen die einzelnen Bedarfe gedeckt werden sollen.",
+          "title": "Projektfinanzierung"
+        },
         "index": {
           "financesHeader": "Finanzen",
           "financeParts": "davon",
@@ -722,10 +743,12 @@
           "timetable": "Zeitplan",
           "title": "Projektplan"
         },
-        "edit": {
-          "heading": "Projektplan bearbeiten",
-          "intro": "An wen richtet sich das Projekt? Wen soll es erreichen?<br />Welche Ergebnisse werden im Projektverlauf produziert?<br />Wie wirkt das Projekt auf die beteiligten Leute?<br />Wie wirkt das Projekt auf dein Dorf/deine Stadt oder die Gesellschaft?<br />Was bleibt, wenn das Projekt vorbei ist? Was läßt sich dann weiternutzen?",
-          "title": "Projektplan: Was kommt hinten raus?"
+        "resourceRequirements": {
+          "heading": "Ressourcenbedarf des Projekts",
+          "intro": "Hier kannst du die Bedarfe deines Projekt <em>{{projectName}}</em> eintragen.",
+          "resourceHeading": "Leistungen und Kosten",
+          "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
+          "title": "Ressourcenbedarf"
         },
         "tasks": {
           "heading": "Aufgaben bearbeiten",
@@ -737,12 +760,12 @@
         },
         "timetable": {
           "heading": "Zeitplan festlegen",
-          "intro": "Jedes Projekt braucht seine Zeit. Innerhalb der Projektlaufzeit müssen die notwendigen Aufgaben bearbeitet werden. Wann wird welche Aufgabe in diesem Projekt bearbeitet?",
+          "intro": "Der Zeitplan gibt einen Überlick, wann was passieren soll. Natürlich kommt immer mal was dazwischen, aber einen Plan zu haben ist dennoch sehr wertvoll! Wann wird welche Aufgabe in diesem Projekt bearbeitet?",
           "modalHeader": "Projektdauer festlegen",
-          "title": "Zeitplan",
           "timetableHeader": "Startzeitpunkt & Dauer festlegen, Aufgaben & Arbeitspakete einordnen",
           "timetableIntro": "Irgendwann muss das Projekt starten. Benenne einen Startzeitpunkt! Alles, was im Projekt passiert, braucht seine Zeit. Wie lange soll das Projekt wohl laufen?<br />Ordne dann die Aufgaben einem oder mehreren Monaten in der Zukunft zu! So entsteht dein Zeitplan.",
-          "timespan": "Projektzeitraum"
+          "timespan": "Projektzeitraum",
+          "title": "Zeitplan"
         },
         "workPackages": {
           "heading": "Arbeitspakete bearbeiten",
@@ -753,20 +776,6 @@
           "packageIntro": "Wähle deine einzelnen Aufgaben aus und organisiere sie in Arbeitspaketen.",
           "subHeader": "Aufgaben und Arbeitspakete",
           "title": "Arbeitspakete bearbeiten"
-        },
-        "resourceRequirements": {
-          "heading": "Ressourcenbedarf des Projekts",
-          "intro": "Hier kannst du die Bedarfe deines Projekt <em>{{projectName}}</em> eintragen.",
-          "resourceHeading": "Leistungen und Kosten",
-          "resourceIntro": "Welche Leistungen oder Ressourcen benötigt die Umsetzung?",
-          "title": "Ressourcenbedarf"
-        },
-        "finances": {
-          "fincancesHeading": "Finanzierung",
-          "financesIntro": "Wer stellt welche Mittel bereit?",
-          "heading": "Projektfinanzierung",
-          "intro": "Hier kannst du angeben aus welchen Quellen die einzelnen Bedarfe gedeckt werden sollen.",
-          "title": "Projektfinanzierung"
         }
       },
       "fundApplication": {
@@ -799,6 +808,11 @@
           "intro": "Hier kannst du die gewünschte Fördersumme des Projekts <em>{{projectName}}</em> festlegen.",
           "title": "Fördersumme bearbeiten"
         },
+        "submission": {
+          "heading": "Dein eingereichter Förderantrag",
+          "intro": "Folgenden Förderantrag hast du erfolgreich eingereicht.",
+          "title": "Der Förderantrag"
+        },
         "submit": {
           "allowedOnlyForProjectOwner": "Die Einreichung des Förderantrags kann nur vom Projektleiter vorgenommen werden.",
           "confirmSubmit": "Antrag jetzt einreichen",
@@ -807,11 +821,6 @@
           "outsideSubmissionPeriod": "Eine Einreichen ist leider nur im Antragszeitraum möglich!",
           "submissionHeader": "Diesen Förderantrag einreichen",
           "title": "Förderantrag einreichen"
-        },
-        "submission": {
-          "heading": "Dein eingereichter Förderantrag",
-          "intro": "Folgenden Förderantrag hast du erfolgreich eingereicht.",
-          "title": "Der Förderantrag"
         }
       }
     },
@@ -823,11 +832,11 @@
       },
       "login": {
         "heading": "Login",
-        "title": "Login"
+        "title": "Einloggen in die Projekt.Werk.Stadt"
       },
       "profile": {
-        "heading": "Das bin ich",
-        "intro": "Hier kannst du dich künftig vorstellen.",
+        "heading": "Das bin ich...",
+        "intro": "Hier kannst du bald etwas über dich sagen und deine persönlichen Daten anpassen.",
         "title": "Benutzerprofil"
       },
       "projects": {
@@ -869,22 +878,22 @@
     "delimitation": "Abgrenzung",
     "description": "Projektbeschreibung",
     "fundingData": "Angaben zur Förderung",
-    "goal": "Ziel",
+    "goal": "Ziele des Projekts",
     "holderAddressInfo": "Adresszusatz",
     "holderCity": "Ort",
     "holderName": "Projektträger",
     "holderStreet": "Straße",
     "holderZipCode": "Postleitzahl",
     "impact": "Weitergehende Wirkungen auf den Ort",
-    "implementationBegin": "Startmonat",
-    "implementationTime": "Projektdauer in Monaten",
+    "implementationBegin": "Projekt-Start",
+    "implementationTime": "Projekt-Laufzeit",
     "memberships": {
       "count": "Teammitglieder"
     },
     "outcome": "Auswirkung auf die Leute",
     "planSelfAssessment": "Selbsteinschätzung zum Fortschritt des Projektplans",
     "profile": "Projektprofil",
-    "profileSelfAssessment": "Selbsteinschätzung zum Projektfortschritt",
+    "profileSelfAssessment": "Selbsteinschätzung zum Projektprofil",
     "progress": {
       "creating_profile": "Projektprofil vorhanden",
       "creating_plan": "Projektplan wird erstellt",
