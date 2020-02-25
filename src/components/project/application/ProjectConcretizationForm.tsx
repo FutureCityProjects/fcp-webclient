@@ -62,7 +62,9 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
 
             {fund.concretizations.map((concretization) => <Field component={FormikRTE}
               help={concretization.description}
+              translateHelp={false}
               label={concretization.question}
+              translateLabel={false}
               id={"concretizations-" + concretization.id}
               key={concretization.id}
               name={"concretizations." + concretization.id}

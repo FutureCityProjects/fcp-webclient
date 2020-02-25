@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader } from "reactstrap"
 
 import { FundState, IProcess, UserRole } from "api/schema"
 import AuthElement from "components/common/AuthElement"
+import HtmlContent from "components/common/HtmlContent"
 import Icon from "components/common/Icon"
 import TranslatedHtml from "components/common/TranslatedHtml"
 import Link from "next/link"
@@ -31,7 +32,8 @@ export default function ProcessView({ process, roles }: IProps) {
         </AuthElement>
       </CardHeader>
       <CardBody>
-        <TranslatedHtml content={process.description} />
+        <div className="rte-content"><HtmlContent content={process.description} /></div>
+
         <h5>{t("process.region")}</h5>
         {process.region}
 

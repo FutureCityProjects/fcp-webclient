@@ -3,6 +3,7 @@ import React from "react"
 
 import { FieldProps } from "formik"
 import { FormText } from "reactstrap"
+import HtmlContent from "../HtmlContent"
 import TranslatedHtml from "../TranslatedHtml"
 
 export interface IBaseFormikProps extends FieldProps, WithTranslation {
@@ -11,6 +12,8 @@ export interface IBaseFormikProps extends FieldProps, WithTranslation {
   label?: string
   name: string
   required?: boolean
+  translateHelp?: boolean
+  translateLabel?: boolean
 }
 
 abstract class FormikElement<Props extends IBaseFormikProps> extends React.Component<Props> {
@@ -26,7 +29,12 @@ abstract class FormikElement<Props extends IBaseFormikProps> extends React.Compo
 
     // translate now, maybe a translation string was given but the translation was empty
     // -> don't show
-    if (label.length > 0) {
+    if (label.length > 0
+      // if the given label was already translated or should not be translated because it is a
+      // user-entered string: don't try to translate, this will possibly strip some text if the
+      // string contains ":" or "." (i18n-next keySeparator, nsSeparator)
+      && (typeof this.props.translateLabel === "undefined" || this.props.translateLabel === true)
+    ) {
       label = this.props.t(label)
     }
 
@@ -42,7 +50,14 @@ abstract class FormikElement<Props extends IBaseFormikProps> extends React.Compo
   </div>
 
   protected helpElement = () => this.props.help && <FormText>
-    <TranslatedHtml content={this.props.help} />
+    {
+      // if the given help was already translated or should not be translated because it is a
+      // user-entered string: don't try to translate, this will possibly strip some text if the
+      // string contains ":" or "." (i18n-next keySeparator, nsSeparator)
+      (typeof this.props.translateHelp === "undefined" || this.props.translateHelp === true)
+        ? <TranslatedHtml content={this.props.help} />
+        : <HtmlContent content={this.props.help} />
+    }
   </FormText>
 }
 
