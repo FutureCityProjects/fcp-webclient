@@ -66,13 +66,13 @@ const ProjectApplicationEditPage: I18nPage<PageProps> = ({ isMember, project, re
     updateProject(values, actions)
   }
 
-  return <BaseLayout pageTitle={t("page.projects.application.edit.title")}>
+  return <BaseLayout pageTitle={t("page.projects.fundApplication.edit.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.application.edit.heading")}</h1>
+        <h1>{t("page.projects.fundApplication.edit.heading")}</h1>
         {request.isLoading
           ? <Spinner />
-          : <p><TranslatedHtml content="page.projects.application.edit.intro" params={{ projectName: project.name }} /></p>
+          : <p><TranslatedHtml content="page.projects.fundApplication.edit.intro" params={{ projectName: project.name }} /></p>
         }
         <PageError error={request.loadingError} />
       </Col>

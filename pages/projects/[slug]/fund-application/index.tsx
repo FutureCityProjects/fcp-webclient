@@ -72,14 +72,14 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
     </StatusCode>
   }
 
-  return <BaseLayout pageTitle={t("page.projects.application.index.title")}>
+  return <BaseLayout pageTitle={t("page.projects.fundApplication.index.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.application.index.heading")}</h1>
+        <h1>{t("page.projects.fundApplication.index.heading")}</h1>
         {(projectRequest.isLoading || fundRequest.isLoading)
           ? <Spinner />
           : <>
-            <p><TranslatedHtml content="page.projects.application.index.intro" params={{ projectName: project.name }} /></p>
+            <p><TranslatedHtml content="page.projects.fundApplication.index.intro" params={{ projectName: project.name }} /></p>
 
             <Link
               href={Routes.MY_PROJECTS}

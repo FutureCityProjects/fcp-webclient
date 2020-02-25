@@ -85,13 +85,13 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
     updateApplication(values, actions)
   }
 
-  return <BaseLayout pageTitle={t("page.projects.application.funding.title")}>
+  return <BaseLayout pageTitle={t("page.projects.fundApplication.funding.title")}>
     <Row>
       <Col>
-        <h1>{t("page.projects.application.funding.heading")}</h1>
+        <h1>{t("page.projects.fundApplication.funding.heading")}</h1>
         {(projectRequest.isLoading || fundRequest.isLoading)
           ? <Spinner />
-          : <p><TranslatedHtml content="page.projects.application.funding.intro" params={{ projectName: project.name }} /></p>
+          : <p><TranslatedHtml content="page.projects.fundApplication.funding.intro" params={{ projectName: project.name }} /></p>
         }
 
         <PageError error={projectRequest.loadingError || fundRequest.loadingError} />
