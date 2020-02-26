@@ -22,7 +22,7 @@
   },
   "validate": {
     "fund": {
-      "activationNotPossible": "Der Fördertopf konnte nicht aktiviert werden.<br />Dies kann mehrere Ursachen haben: <ul><li>der Fördertopf ist bereits aktiviert (oder abgeschlossen)</li><li>es ist keine Zuspitzung angegeben</li><li>der Antragszeitraum ist nicht vollständig konfiguriert sein oder liegt nicht in der Zukunft</li></ul>"
+      "activationNotPossible": "Der Fördertopf konnte nicht aktiviert werden.<br />Dies kann mehrere Ursachen haben: <ul><li>der Fördertopf ist bereits aktiviert (oder abgeschlossen)</li><li>es ist keine Zuspitzung angegeben</li><li>der Antragszeitraum ist nicht vollständig konfiguriert oder liegt nicht in der Zukunft</li></ul>"
     },
     "general": {
       "notBlank": "Dies ist ein Pflichtfeld.",
