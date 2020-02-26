@@ -118,7 +118,7 @@ class FCPApp extends App<Props> {
           ? <IdleTimer
             events={activeEvents}
             onIdle={this.props.isIdle}
-            timeout={AUTH_IDLE_TIMEOUT * 1000}
+            timeout={AUTH_IDLE_TIMEOUT * 10000} // @todo reset to sensible value
           />
           : <></>
         }
