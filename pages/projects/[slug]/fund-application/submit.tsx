@@ -104,7 +104,7 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
     tasks: project.tasks,
     workPackages: project.workPackages,
     resourceRequirements: project.resourceRequirements,
-    contactEmail: project.contactEmaiL,
+    contactEmail: project.contactEmail,
     contactName: project.contactName,
     contactPhone: project.contactPhone,
     holderAddressInfo: project.holderAddressInfo,

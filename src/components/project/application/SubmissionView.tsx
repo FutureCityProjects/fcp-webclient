@@ -134,18 +134,33 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
           <div className="rte-content">
             <HtmlContent content={submission.delimitation} />
           </div>
+        </CardBody>
+      </UncontrolledCollapse>
+    </Card>
 
-          <h3>{t("fundApplication.submission.concretizationHeader")}</h3>
-
+    <Card className="body-card">
+      <CardHeader>
+        <h3>{t("fundApplication.submission.concretizationHeader")}</h3>
+        <div className={"icon-navigation"}>
+          <a id={"toggler-concretization"}
+            className="toggler navigation-item caret"
+            onClick={() => document.getElementById("caret-concretization").classList.toggle("caret-toggled")}
+          >
+            <span id={"caret-concretization"} className="caret-toggled"><Icon name="caret" size={24} /></span>
+          </a>
+        </div>
+      </CardHeader>
+      <UncontrolledCollapse toggler={"#toggler-concretization"} defaultOpen={true}>
+        <CardBody>
           {fund.concretizations.map((concretization) => {
             const answer = submission.concretizations[concretization.id]
 
-            return <div key={concretization.id}>
+            return <React.Fragment key={concretization.id}>
               <h4>{concretization.question}</h4>
               <div className="rte-content">
                 <HtmlContent content={answer} />
               </div>
-            </div>
+            </React.Fragment>
           })}
         </CardBody>
       </UncontrolledCollapse>
@@ -167,28 +182,28 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
         <CardBody>
           <h4>{t("project.targetGroups")}</h4>
           <ul>
-            {submission.targetGroups.map((group, i) => <li key={i}>
+            {(submission.targetGroups || []).map((group, i) => <li key={i}>
               {group}
             </li>)}
           </ul>
 
           <h4>{t("project.results")}</h4>
           <ul>
-            {submission.results.map((result, i) => <li key={i}>
+            {(submission.results || []).map((result, i) => <li key={i}>
               {result}
             </li>)}
           </ul>
 
           <h4>{t("project.impact")}</h4>
           <ul>
-            {submission.impact.map((impact, i) => <li key={i}>
+            {(submission.impact || []).map((impact, i) => <li key={i}>
               {impact}
             </li>)}
           </ul>
 
           <h4>{t("project.outcome")}</h4>
           <ul>
-            {submission.outcome.map((outcome, i) => <li key={i}>
+            {(submission.outcome || []).map((outcome, i) => <li key={i}>
               {outcome}
             </li>)}
           </ul>

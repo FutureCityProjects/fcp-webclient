@@ -18,6 +18,9 @@ import { Routes } from "services/routes"
 import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
 import { getCurrentProcess } from "./currentProcess"
+import { resetMemberApplicationAction } from "redux/actions/memberApplication"
+import { resetNewIdeaAction } from "redux/actions/newIdea"
+import { resetNewProjectAction } from "redux/actions/newProject"
 
 export function* registrationWatcherSaga() {
   yield all([
@@ -86,6 +89,11 @@ function* registerUserSaga(action: IRegisterUserAction) {
     yield put(setLoadingAction("user_operation", false))
     yield put(setRegisteredUserAction(newUser))
     yield call(success)
+
+    // just needed for instances where no user validation is required
+    yield put(resetMemberApplicationAction())
+    yield put(resetNewIdeaAction())
+    yield put(resetNewProjectAction())
 
     return newUser
   } catch (err) {

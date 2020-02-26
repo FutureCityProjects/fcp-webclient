@@ -1,5 +1,4 @@
 # Todo
-  * Ticket + Script für Update lokal
   * Projektprofil: In den Textfeldern wird deutsche Sprache nicht erkannt und rot unterkringelt
   * Logo / Bild Platzhalter für Demo
   * Förderantrag nicht einreichbar ohne holder-Daten
