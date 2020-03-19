@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Router from "next/router"
 import React, { useState } from "react" // { useEffect, useRef, useState }
 import { connect, ConnectedProps } from "react-redux"
@@ -88,7 +88,7 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout>
 }
 
-LoginPage.getInitialProps = async ({ query }: NextJSContext) => ({
+LoginPage.getInitialProps = async ({ query }: NextPageContext) => ({
   namespacesRequired: includeDefaultNamespaces(),
   redirectBack: query.redirectBack,
 })

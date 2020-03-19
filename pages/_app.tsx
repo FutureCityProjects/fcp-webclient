@@ -1,6 +1,7 @@
 import ServerCookie from "next-cookies"
 import withReduxSaga from "next-redux-saga"
-import withRedux, { AppProps as ReduxProps, NextJSAppContext } from "next-redux-wrapper"
+import withRedux, { ReduxWrapperAppProps as ReduxProps } from "next-redux-wrapper"
+import { AppContext } from "next/app"
 import App, { AppProps } from "next/app"
 import { Router } from "next/router"
 import NextNprogress from "nextjs-progressbar"
@@ -32,7 +33,7 @@ class FCPApp extends App<Props> {
 
   // called once server-side
   // called client-side also on page changes
-  public static async getInitialProps({ Component, ctx }: NextJSAppContext) {
+  public static async getInitialProps({ Component, ctx }: AppContext) {
     let pageProps = {}
 
     if (ctx.isServer) {

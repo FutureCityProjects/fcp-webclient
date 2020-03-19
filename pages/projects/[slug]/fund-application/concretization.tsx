@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Router from "next/router"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -104,7 +104,7 @@ const ProjectConcretizationPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout >
 }
 
-ProjectConcretizationPage.getInitialProps = ({ store, query }: NextJSContext) => {
+ProjectConcretizationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const state: AppState = store.getState()
 
   // slug could also be the ID

@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Router from "next/router"
 import React, { useEffect } from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -84,7 +84,7 @@ const ConfirmAccountPage: I18nPage<PageProps> = (props) => {
   </BaseLayout>
 }
 
-ConfirmAccountPage.getInitialProps = ({ query, store }: NextJSContext) => {
+ConfirmAccountPage.getInitialProps = ({ query, store }: NextPageContext) => {
   const token: string = typeof query.token === "string" ? query.token : null
   const id: string = typeof query.id === "string" && query.id.toString().match(/^\d+$/)
     ? query.id.toString()

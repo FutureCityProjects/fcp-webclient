@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Button, Card, CardBody, CardHeader, Col, Row, Spinner } from "reactstrap"
@@ -256,7 +256,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
   </BaseLayout >
 }
 
-FundDetailsPage.getInitialProps = ({ store, query }: NextJSContext) => {
+FundDetailsPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
   if (typeof query.id === "string" && query.id.match(/^\d+$/)) {
     id = parseInt(query.id, 10)

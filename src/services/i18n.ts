@@ -1,6 +1,5 @@
-import { NextComponentType } from "next"
+import { NextComponentType, NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 
 export {
   appWithTranslation,
@@ -13,7 +12,7 @@ export const includeDefaultNamespaces = (namespaces: string[] = []) =>
   ["common", "_error"].concat(namespaces)
 
 export type I18nPage<P = {} & WithTranslation> = NextComponentType<
-  NextJSContext,
+  NextPageContext,
   { namespacesRequired: string[] },
   P & { namespacesRequired: string[] }
 >

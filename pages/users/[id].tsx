@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Spinner } from "reactstrap"
@@ -64,7 +64,7 @@ const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
   </BaseLayout>
 }
 
-UserDetailPage.getInitialProps = ({ store, query }: NextJSContext) => {
+UserDetailPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const id = parseInt(query.id as string, 10)
 
   // @todo use custom reducer to keep track of users loaded with admin privileges

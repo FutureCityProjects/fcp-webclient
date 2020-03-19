@@ -3,6 +3,9 @@ import { all, call, put, select, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
 import { IProcess, IRegistration, IUser, MembershipRole } from "api/schema"
+import { resetMemberApplicationAction } from "redux/actions/memberApplication"
+import { resetNewIdeaAction } from "redux/actions/newIdea"
+import { resetNewProjectAction } from "redux/actions/newProject"
 import {
   IRegisterUserAction,
   RegistrationActionTypes,
@@ -18,9 +21,6 @@ import { Routes } from "services/routes"
 import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
 import { getCurrentProcess } from "./currentProcess"
-import { resetMemberApplicationAction } from "redux/actions/memberApplication"
-import { resetNewIdeaAction } from "redux/actions/newIdea"
-import { resetNewProjectAction } from "redux/actions/newProject"
 
 export function* registrationWatcherSaga() {
   yield all([

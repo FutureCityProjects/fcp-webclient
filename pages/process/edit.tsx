@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Router from "next/router"
 import React, { useState } from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -66,7 +66,7 @@ const ProcessEditPage: I18nPage<PageProps> = ({ updateProcess, process, request,
   </BaseLayout>
 }
 
-ProcessEditPage.getInitialProps = async ({ store }: NextJSContext) => {
+ProcessEditPage.getInitialProps = async ({ store }: NextPageContext) => {
   if (!selectCurrentProcess(store.getState())) {
     store.dispatch(loadCurrentProcessAction())
   }

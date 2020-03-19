@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
@@ -39,7 +39,7 @@ const MarketPage: I18nPage<PageProps> = ({ ideas, projects, request, t }) => {
   </BaseLayout>
 }
 
-MarketPage.getInitialProps = ({ store }: NextJSContext) => {
+MarketPage.getInitialProps = ({ store }: NextPageContext) => {
   const projectIds = store.getState().marketplace.projects
   if (!projectIds) {
     store.dispatch(loadMarketplaceAction())

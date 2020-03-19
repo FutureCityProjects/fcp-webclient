@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Link from "next/link"
 import React, { useState } from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -158,7 +158,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout >
 }
 
-ProjectApplicationPage.getInitialProps = ({ store, query }: NextJSContext) => {
+ProjectApplicationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const slug: string = typeof query.slug === "string" ? query.slug : null
   let id: number = null
 

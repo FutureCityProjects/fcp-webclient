@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React, { useEffect } from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row } from "reactstrap"
@@ -74,7 +74,7 @@ const ResetPasswordPage: I18nPage<PageProps> = (props) => {
   </BaseLayout>
 }
 
-ResetPasswordPage.getInitialProps = ({ query, store }: NextJSContext) => {
+ResetPasswordPage.getInitialProps = ({ query, store }: NextPageContext) => {
   const token: string = typeof query.token === "string" ? query.token : null
   const id: string = typeof query.id === "string" && query.id.toString().match(/^\d+$/)
     ? query.id.toString()

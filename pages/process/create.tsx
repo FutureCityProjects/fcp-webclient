@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Router from "next/router"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -61,7 +61,7 @@ const ProcessCreationPage: I18nPage<PageProps> = ({ onSubmit, process, request, 
   </BaseLayout>
 }
 
-ProcessCreationPage.getInitialProps = ({ store }: NextJSContext) => {
+ProcessCreationPage.getInitialProps = ({ store }: NextPageContext) => {
   if (!selectCurrentProcess(store.getState())) {
     store.dispatch(loadCurrentProcessAction())
   }

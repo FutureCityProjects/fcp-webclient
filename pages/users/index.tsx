@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
@@ -59,7 +59,7 @@ const UserAdministrationPage: I18nPage<PageProps> = ({ request, users }: PagePro
   </BaseLayout>
 }
 
-UserAdministrationPage.getInitialProps = async ({ store }: NextJSContext) => {
+UserAdministrationPage.getInitialProps = async ({ store }: NextPageContext) => {
   // @todo custom reducer to track the management list, else
   // only the current user will be shown
   if (selectCollection(store.getState(), EntityType.USER).length <= 0) {

@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
@@ -41,7 +41,7 @@ const ProfilePage: I18nPage<PageProps> = ({ currentUser, request, t }) => {
   </BaseLayout>
 }
 
-ProfilePage.getInitialProps = ({ store }: NextJSContext) => {
+ProfilePage.getInitialProps = ({ store }: NextPageContext) => {
   if (!selectCurrentUser(store.getState())) {
     store.dispatch(loadCurrentUserAction())
   }

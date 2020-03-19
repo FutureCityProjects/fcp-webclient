@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
@@ -51,7 +51,7 @@ const PublicFuncPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout >
 }
 
-PublicFuncPage.getInitialProps = ({ store, query }: NextJSContext) => {
+PublicFuncPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const slug: string = typeof query.slug === "string" ? query.slug : null
   let id: number = null
 

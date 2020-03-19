@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Router from "next/router"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -78,7 +78,7 @@ const ProjectPlanEditPage: I18nPage<PageProps> = ({ isMember, project, request, 
   </BaseLayout>
 }
 
-ProjectPlanEditPage.getInitialProps = ({ store, query }: NextJSContext) => {
+ProjectPlanEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
   // slug could also be the ID
   const slug: string = typeof query.slug === "string" ? query.slug : null
   if (slug && !selectMyProjectByIdentifier(store.getState(), slug)) {

@@ -1,6 +1,6 @@
 import { parseISO } from "date-fns"
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Link from "next/link"
 import Router from "next/router"
 import React from "react"
@@ -169,7 +169,7 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout >
 }
 
-SubmitApplicationPage.getInitialProps = ({ store, query }: NextJSContext) => {
+SubmitApplicationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const state = store.getState()
 
   // slug could also be the ID

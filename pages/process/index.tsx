@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
 import { Col, Row, Spinner } from "reactstrap"
@@ -45,7 +45,7 @@ const ProcessDetailPage: I18nPage<PageProps> = ({ process, request, roles, t }) 
   </BaseLayout>
 }
 
-ProcessDetailPage.getInitialProps = async ({ store }: NextJSContext) => {
+ProcessDetailPage.getInitialProps = async ({ store }: NextPageContext) => {
   if (!selectCurrentProcess(store.getState())) {
     store.dispatch(loadCurrentProcessAction())
   }

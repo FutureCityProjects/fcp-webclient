@@ -10,8 +10,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 var config = withFonts({
-  experimental: { scss: true },
-
   // Which environment variables should be exposed to the client?
   // We expose the same variables here that are used in the config so we don't have 
   // to pass them via redux store and check for isServer / process.browser etc.

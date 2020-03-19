@@ -1,4 +1,4 @@
-import { NextJSContext } from "next-redux-wrapper"
+import { NextPageContext } from "next"
 import Router from "next/router"
 import React, { Component } from "react"
 import { ProviderProps } from "react-redux"
@@ -17,7 +17,7 @@ interface IProps extends ProviderProps {
 
 export function withAuth(WrappedComponent: any, requiredRole: UserRole) {
   return class WithAuth extends Component<IProps> {
-    public static async getInitialProps(ctx: NextJSContext) {
+    public static async getInitialProps(ctx: NextPageContext) {
       // the FCPApp fills the state.auth server-side if there
       // is an auth cookie, so we can simply check the state here
       const state: AppState = ctx.store.getState()

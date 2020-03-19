@@ -4,8 +4,10 @@ import React from "react"
 import { UserRole } from "api/schema"
 import HeaderIconNavigation from "../../src/components/layout/Header/HeaderIconNavigation"
 
+// mock ActiveLink as it requires next/router and Icon as it requires react-inlinesvg which uses fetch()
 // tslint:disable: no-var-requires
 jest.mock("../../src/components/common/ActiveLink", require("../mocks").mockComponentWithChildren)
+jest.mock("../../src/components/common/Icon", require("../mocks").mockComponentWithChildren)
 
 jest.mock("popper.js", () => class {
   constructor() {
@@ -26,8 +28,7 @@ describe("Component:HeaderIconNavigation", () => {
       doLogout={logout}
       roles={[UserRole.USER]} />)
 
-    // shows the username
-    expect(queryByText("Profil " + loggedInAs)).toBeInTheDocument()
+    expect(queryByText("navigation.userProfile")).toBeInTheDocument()
 
     // contains the logout button
     const logoutButton = queryByText(/Logout/i)

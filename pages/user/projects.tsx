@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Link from "next/link"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -76,7 +76,7 @@ const MyProjectsPage: I18nPage<PageProps> = (props: PageProps) => {
   )
 }
 
-MyProjectsPage.getInitialProps = ({ store }: NextJSContext) => {
+MyProjectsPage.getInitialProps = ({ store }: NextPageContext) => {
   if (!selectMyProjectsLoaded(store.getState())) {
     store.dispatch(loadMyProjectsAction())
   }

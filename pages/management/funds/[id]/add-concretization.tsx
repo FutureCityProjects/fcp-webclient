@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Router from "next/router"
 import React from "react"
 import { connect, ConnectedProps } from "react-redux"
@@ -78,7 +78,7 @@ const ConcretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, cre
   </BaseLayout>
 }
 
-ConcretizationCreationPage.getInitialProps = ({ store, query }: NextJSContext) => {
+ConcretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
   if (typeof query.id === "string" && query.id.match(/^\d+$/)) {
     id = parseInt(query.id, 10)

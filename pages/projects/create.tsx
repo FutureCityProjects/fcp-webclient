@@ -1,5 +1,5 @@
+import { NextPageContext } from "next"
 import { WithTranslation } from "next-i18next"
-import { NextJSContext } from "next-redux-wrapper"
 import Link from "next/link"
 import Router from "next/router"
 import React, { useState } from "react"
@@ -137,7 +137,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout>
 }
 
-ProjectCreationPage.getInitialProps = ({ store, query }: NextJSContext) => {
+ProjectCreationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const inspirationId = parseInt(query.inspiration as string, 10)
   if (inspirationId > 0 && !selectById(store.getState(), EntityType.PROJECT, inspirationId)) {
     store.dispatch(loadModelAction(EntityType.PROJECT, { id: inspirationId }))

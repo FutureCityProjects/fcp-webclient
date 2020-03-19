@@ -27,7 +27,7 @@ export class SubmissionError extends Error {
  * @param prefix string
  */
 export const flattenErrors = (errors: any, prefix: string = ""): ISubmissionErrorList => {
-  let flattened = {}
+  let flattened: ISubmissionErrorList = {}
   Object.keys(errors).forEach((k) => {
     if (typeof errors[k] !== "string") {
       const newPrefix = k.match(/^\d+$/)

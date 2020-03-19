@@ -5,8 +5,10 @@ import { IWebToken } from "redux/helper/state"
 import BaseLayout from "../../src/components/BaseLayout"
 import { getInitialState, renderWithRedux } from "../helpers"
 
+// mock ActiveLink as it requires next/router and Icon as it requires react-inlinesvg which uses fetch()
 // tslint:disable: no-var-requires
 jest.mock("../../src/components/common/ActiveLink", require("../mocks").mockComponentWithChildren)
+jest.mock("../../src/components/common/Icon", require("../mocks").mockComponentWithChildren)
 
 describe("Component:BaseLayout", () => {
   test("renders children with initial state", () => {
@@ -42,8 +44,7 @@ describe("Component:BaseLayout", () => {
       initialstate,
     )
 
-    // contains the logged in user
-    expect(getByText("Profil " + token.username)).toBeInTheDocument()
+    expect(getByText("navigation.userProfile")).toBeInTheDocument()
 
     // renders a logout (and no login) button (initialstate contains no user)
     expect(queryByText(/Logout/i)).toBeInTheDocument()
