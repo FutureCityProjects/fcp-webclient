@@ -1,4 +1,6 @@
 # Todo
+  * Alle ToDo als Tickets ins Redmine oder Github legen
+  * https://fcp.vrok.de/funds/klimaschulen liefert 404, auch bei Link über den Prozess während ZSDD funktioniert?
   * Projektprofil: In den Textfeldern wird deutsche Sprache nicht erkannt und rot unterkringelt
   * Logo / Bild Platzhalter für Demo
   * Förderantrag nicht einreichbar ohne holder-Daten
