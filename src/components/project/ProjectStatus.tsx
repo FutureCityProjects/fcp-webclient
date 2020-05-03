@@ -17,7 +17,7 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
   const project = props.project
 
   return <>
-    <ProgressActionIcons />
+    <ProgressActionIcons project={project} />
     <div className="step-container">
       <ProgressBox
         complete={true}
