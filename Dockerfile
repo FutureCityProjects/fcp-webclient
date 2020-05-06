@@ -7,7 +7,7 @@ FROM node:current-alpine as build
 ARG BASE_URL
 ARG FCP_API_ENTRYPOINT
 
-RUN apk add --no-cache git
+RUN apk add --no-cache make g++ git python2
 
 RUN mkdir -p /usr/src/client
 
