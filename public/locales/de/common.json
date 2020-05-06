@@ -505,6 +505,7 @@
     "newIdea": "Neue Projektidee eintragen",
     "newProject": "Projekt-Idee zum Projekt-Plan weiterentwickeln",
     "processOverview": "Prozess-Details",
+    "projectMemberships": "zur Mitgliederliste",
     "registration": "Jetzt registrieren",
     "search": "Suchen"
   },
@@ -822,6 +823,13 @@
           "submissionHeader": "Diesen Förderantrag einreichen",
           "title": "Förderantrag einreichen"
         }
+      },
+      "members": {
+        "acceptApplication": "Bewerbung annehmen",
+        "heading": "Mitglieder & Bewerbungen",
+        "intro": "Mitgliederliste",
+        "rejectApplication": "Bewerbung ablehnen",
+        "title": "Projektmitglieder"
       }
     },
     "user": {
@@ -887,6 +895,13 @@
     "impact": "Weitergehende Wirkungen auf den Ort",
     "implementationBegin": "Projekt-Start",
     "implementationTime": "Projekt-Laufzeit",
+    "membership": {
+      "applicant": "Bewerber",
+      "member": "Mitglied",
+      "motivation": "Motivation",
+      "owner": "Besitzer",
+      "skills": "Fähigkeiten"
+    },
     "memberships": {
       "count": "Teammitglieder"
     },

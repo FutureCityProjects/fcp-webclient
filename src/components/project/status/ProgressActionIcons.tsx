@@ -1,15 +1,27 @@
-// import Icon from "components/common/Icon"
-// import Link from "next/link"
+import Link from "next/link"
 import React from "react"
 
-const ProgressActionIcons: React.FC = () =>
-  <div role="actions" className="icon-navigation">
-    {/*<Link href="/">
-      <a aria-label="view participants" className="navigation-item">
-        <Icon name={"user"} size={24} />
+import { IProject } from "api/schema"
+import Icon from "components/common/Icon"
+import { useTranslation } from "services/i18n"
+import { Routes, routeWithParams } from "services/routes"
+
+interface IProps {
+  project: IProject
+}
+
+const ProgressActionIcons: React.FC<IProps> = ({ project }: IProps) => {
+  const { t } = useTranslation()
+
+  return <div role="actions" className="icon-navigation">
+    <Link href={Routes.PROJECT_MEMBERS}
+      as={routeWithParams(Routes.PROJECT_MEMBERS, { slug: project.slug || project.id })}
+    >
+      <a className="navigation-item" title={t("goto.projectMemberships")} aria-label={t("goto.projectMemberships")}>
+        <Icon name="user-multiple" size={24} />
       </a>
     </Link>
-    <Link href="/">
+    {/*<Link href="/">
       <a aria-label="add participants" className="navigation-item">
         <Icon name={"user-multiple"} size={24} />
       </a>
@@ -20,5 +32,6 @@ const ProgressActionIcons: React.FC = () =>
       </a>
 </Link>*/}
   </div>
+}
 
 export default ProgressActionIcons

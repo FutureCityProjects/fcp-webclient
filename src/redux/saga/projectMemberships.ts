@@ -68,16 +68,19 @@ function* createProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
 }
 
 function* updateProjectMembershipSaga(action: IModelFormAction<IProjectMembership>) {
-  const { success, setErrors, setSubmitting } = action.actions
+  const { success, setErrors, setSubmitting } = action.actions || {}
   try {
     yield put(setLoadingAction("projectMembership_operation", true))
     const projectMembership: IProjectMembership = yield call(apiClient.updateProjectMembership, action.model)
     yield put(updateModelSuccessAction(EntityType.PROJECT_MEMBERSHIP, projectMembership))
 
-    // refresh the project, this also sets the loadingSuccess
-    yield put(loadModelAction(EntityType.PROJECT, { id: (action.model.project as IProject).id }, action.scope))
+    // refresh the project (using the updated membership, the original may not contain the project),
+    // this also sets the loadingSuccess
+    yield put(loadModelAction(EntityType.PROJECT, { id: (projectMembership.project as IProject).id }, action.scope))
 
-    yield call(setSubmitting, false)
+    if (setSubmitting) {
+      yield call(setSubmitting, false)
+    }
     if (success) {
       yield call(success, projectMembership)
     }
@@ -92,14 +95,23 @@ function* updateProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
 
     return projectMembership
   } catch (err) {
-    if (err instanceof SubmissionError) {
-      yield call(setErrors, err.errors)
-    } else {
-      yield call(setErrors, { _error: err.message })
-    }
+    if (setErrors) {
+      if (err instanceof SubmissionError) {
+        yield call(setErrors, err.errors)
+      } else {
+        yield call(setErrors, { _error: err.message })
+      }
 
-    yield put(setLoadingAction("projectMembership_operation", false))
-    yield call(setSubmitting, false)
+      yield put(setLoadingAction("projectMembership_operation", false))
+    } else {
+      yield put(setLoadingAction("projectMembership_operation", false, err instanceof SubmissionError
+        ? err.errors
+        : err.message
+      ))
+    }
+    if (setSubmitting) {
+      yield call(setSubmitting, false)
+    }
 
     return null
   }
@@ -151,7 +163,7 @@ function* deleteProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
       }
     }
 
-    yield put(setLoadingAction("projectMembership_operation", false))
+    yield put(setLoadingAction("projectMembership_operation", false, err))
     yield call(setSubmitting, false)
 
     return false
