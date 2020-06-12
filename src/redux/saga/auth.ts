@@ -7,6 +7,7 @@ import {
   AuthActionTypes,
   ILoginAction,
   ILogoutAction,
+  loginSuccessfulAction,
   logoutAction,
   refreshTokenAction,
   setAuthAction,
@@ -50,6 +51,7 @@ export function* loginSaga(action: ILoginAction) {
     const user = yield call(getCurrentUser)
 
     yield call(success, user)
+    yield put(loginSuccessfulAction(user))
 
     // trigger the refresh mechanism
     yield put(refreshTokenAction())

@@ -1,13 +1,14 @@
 # Todo
   * Alle ToDo als Tickets ins Redmine oder Github legen
+  * createSavedIdeaSaga auf loginSuccessAction umstellen
+  * createSavedProjectSaga auf loginSuccessAction umstellen
+  * alle Ausgaben mit übersetztem Datum prüfen und ggf. auf TranslatedHTML umstellen da im englischen Slashes als HTML-Entity übersetzt werden...
   * https://fcp.vrok.de/funds/klimaschulen liefert 404, auch bei Link über den Prozess während ZSDD funktioniert?
   * Projektprofil: In den Textfeldern wird deutsche Sprache nicht erkannt und rot unterkringelt
   * Logo / Bild Platzhalter für Demo
   * Förderantrag nicht einreichbar ohne holder-Daten
   * FundState überall übersetzen
   * "Projektansicht" + "Fördertopfansicht" übersetzen
-  * Mitgliederliste
-  * Bewerbung annehmen
   * einreichen: 2 boxen, eine mit Fördertopf + EInreichtungszeitraum + Warnings, unten eine mit Button
   * Ansicht Mitglieder/Bewerbungen: Keine BEwerbungen von inaktiven Usern anzeigen.
   * set focus on taskpopover input + package first input + resource first input when 

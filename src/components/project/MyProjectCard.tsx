@@ -3,6 +3,7 @@ import { Card, CardBody, CardHeader, Collapse } from "reactstrap"
 
 import { IProject, IProjectMembership, MembershipRole, ProjectState } from "api/schema"
 import Icon from "components/common/Icon"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { useTranslation } from "services/i18n"
 import ProjectStatus from "./ProjectStatus"
 
@@ -60,11 +61,12 @@ const MyProjectCard: React.FC<IProps> = ({ deleteMembership, isSingle = false, m
             {project.name ? project.name : t("project.unnamed")}
           </h3>
           <span>
-            {t("page.projects.index.project.subHeader", // @todo eigene Übersetzung oder key verallgemeinern
-              {
+            <TranslatedHtml content="page.projects.index.project.subHeader"  // HTML because the translated date might contain "&#x2F;"" for slashes
+              // @todo eigene Übersetzung oder key verallgemeinern
+              params={{
                 date: project.createdAt,
                 user: project.createdBy ? project.createdBy.username : t("user.unknown"),
-              })}
+              }} />
             {project.state === ProjectState.DEACTIVATED && (" - " + t("project.state.deactivated"))}
             {project.state === ProjectState.INACTIVE && (" - " + t("project.state.inactive"))}
           </span>
@@ -75,7 +77,7 @@ const MyProjectCard: React.FC<IProps> = ({ deleteMembership, isSingle = false, m
         <CardBody>
           {membership.role === MembershipRole.APPLICANT
             ? <>
-              {t("page.user.projects.applicationOpen")}
+              <TranslatedHtml content="page.user.projects.applicationOpen" />
               <a className="btn btn-inline" onClick={() => confirmDeleteApplication(membership)}
                 title={t("page.user.projects.deleteMyApplication")}>
                 <Icon name="trash" size={24} />

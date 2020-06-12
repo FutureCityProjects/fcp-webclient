@@ -5,6 +5,7 @@ import { Card, CardBody, CardHeader } from "reactstrap"
 import { IProject } from "api/schema"
 import DropdownComponent from "components/common/DropdownComponent"
 import Icon from "components/common/Icon"
+import TranslatedHtml from "components/common/TranslatedHtml"
 import { useTranslation } from "services/i18n"
 import { Routes, routeWithParams } from "services/routes"
 
@@ -34,11 +35,11 @@ const ProjectCard: React.FC<IProps> = ({ project }) => {
             </Link>
           }
         </h3>
-        <span>{t("page.projects.index.project.subHeader",
-          {
+        <span><TranslatedHtml content="page.projects.index.project.subHeader" // HTML because the translated date might contain "&#x2F;"" for slashes
+          params={{
             date: project.createdAt,
-            user: project.createdBy ? project.createdBy.username : t("user.unknown")
-          })}</span>
+            user: project.createdBy ? project.createdBy.username : t("user.unknown"),
+          }} /></span>
       </div>
 
       <DropdownComponent button={<Icon name="user-add" size={24} />} title={t("goto.memberApplication")}>

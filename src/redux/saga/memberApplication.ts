@@ -3,7 +3,7 @@ import { all, call, put, select, takeLatest } from "redux-saga/effects"
 
 import apiClient from "api/client"
 import { IUser, MembershipRole } from "api/schema"
-import { AuthActionTypes, ISetAuthAction } from "redux/actions/auth"
+import { AuthActionTypes, ILoginSuccessfulAction } from "redux/actions/auth"
 import { loadCurrentUserAction } from "redux/actions/currentUser"
 import { ICreateMemberApplicationAction, MemberApplicationActionTypes, resetMemberApplicationAction } from "redux/actions/memberApplication"
 import { loadMyProjectsAction } from "redux/actions/myProjects"
@@ -19,7 +19,7 @@ import { SubmissionError } from "services/submissionError"
 export function* memberApplicationWatcherSaga() {
   yield all([
     takeLatest(MemberApplicationActionTypes.CREATE_MEMBER_APPLICATION, withCallback(createApplicationSaga)),
-    takeLatest(AuthActionTypes.SET_AUTH, createSavedApplicationSaga),
+    takeLatest(AuthActionTypes.LOGIN_SUCCESSFUL, createSavedApplicationSaga),
     takeLatest(RegistrationActionTypes.SET_REGISTERED_USER, postRegistrationSaga),
   ])
 }
@@ -56,12 +56,7 @@ function* createApplicationSaga(action: ICreateMemberApplicationAction) {
  * After the user logged in: check if we have a previously entered but
  * not submitted project, if yes push it to the API now.
  */
-function* createSavedApplicationSaga(action: ISetAuthAction) {
-  // no token -> no successful login -> do nothing
-  if (!action.token) {
-    return
-  }
-
+function* createSavedApplicationSaga(action: ILoginSuccessfulAction) {
   const memberApplication = yield select(selectNewMemberApplication)
   if (!memberApplication) {
     return
@@ -69,14 +64,8 @@ function* createSavedApplicationSaga(action: ISetAuthAction) {
 
   try {
     yield put(setLoadingAction("projectMembership_operation", true))
-    const user: IUser = yield call(getCurrentUser)
-    if (!user) {
-      const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
-      yield put(setLoadingAction("projectMembership_operation", false, err))
-      return null
-    }
 
-    memberApplication.user = user["@id"]
+    memberApplication.user = action.user["@id"]
     memberApplication.role = MembershipRole.APPLICANT
     const savedApplication = yield call(apiClient.createProjectMembership, memberApplication)
 
@@ -85,7 +74,7 @@ function* createSavedApplicationSaga(action: ISetAuthAction) {
     yield put(resetMemberApplicationAction())
 
     // refresh the user to get the new membership
-    yield put(loadCurrentUserAction())
+    yield putWait(loadCurrentUserAction())
 
     // refresh list of projects
     yield put(loadMyProjectsAction())

@@ -1,11 +1,12 @@
 import { ToastOptions } from "react-toastify"
 
-import { ICredentials } from "api/schema"
+import { ICredentials, IUser } from "api/schema"
 import { IWebToken } from "redux/helper/state"
 
 export enum AuthActionTypes {
   LOCAL_STORAGE_CHANGED = "LOCAL_STORAGE_CHANGED",
   LOGIN = "LOGIN",
+  LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL",
   LOGOUT = "LOGOUT",
   REFRESH_TOKEN = "REFRESH_TOKEN",
   SET_AUTH = "SET_AUTH",
@@ -24,6 +25,11 @@ export interface ILoginAction extends IAuthAction {
   actions: any
   credentials: ICredentials
   type: AuthActionTypes.LOGIN
+}
+
+export interface ILoginSuccessfulAction extends IAuthAction {
+  user: IUser
+  type: AuthActionTypes.LOGIN_SUCCESSFUL
 }
 
 export interface ILogoutAction extends IAuthAction {
@@ -57,6 +63,11 @@ export const loginAction = (credentials: ICredentials, actions: any): ILoginActi
   actions,
   credentials,
   type: AuthActionTypes.LOGIN,
+})
+
+export const loginSuccessfulAction = (user: IUser): ILoginSuccessfulAction => ({
+  user,
+  type: AuthActionTypes.LOGIN_SUCCESSFUL,
 })
 
 export const localStorageChangedAction = (): ILocalStorageChangedAction => ({

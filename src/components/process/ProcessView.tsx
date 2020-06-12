@@ -86,7 +86,7 @@ export default function ProcessView({ process, roles }: IProps) {
               ? <span className="text-muted">abgeschlossen</span>
               : <span className="text-warning">inaktiv</span>
             )
-          return <p key={"fund-" + fund.id}>
+          return <div key={"fund-" + fund.id}>
             <h5>
               <Link href={Routes.FUND_PAGE} as={routeWithParams(Routes.FUND_PAGE, { slug: fund.slug || fund.id })}>
                 <a aria-label={t("goto.fundDetails")} title={t("goto.fundDetails")}>
@@ -94,8 +94,8 @@ export default function ProcessView({ process, roles }: IProps) {
                 </a>
               </Link>
             </h5>
-            {stateText}
-          </p>
+            <p>{stateText}</p>
+          </div>
         })}
       </CardBody>
     </Card>
