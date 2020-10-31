@@ -6,6 +6,7 @@ import { includeDefaultNamespaces, withTranslation } from "services/i18n"
 import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
+  className: string
   maxLength?: number
   placeholder?: string
   value: string
@@ -23,7 +24,7 @@ class FormikRTE extends FormikElement<IProps> {
     const labelText = this.labelText()
 
     return (
-      <FormGroup className="form-rte">
+      <FormGroup className={"form-rte " + this.props.className}>
         {labelText.length > 0 && <Label for={field.name}>{labelText}</Label>}
 
         {this.helpElement()}

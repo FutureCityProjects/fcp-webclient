@@ -2,25 +2,29 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Node Dev",
+      "runtimeExecutable": "yarn",
+      "cwd": "${workspaceFolder}",
+      "runtimeArgs": [
+        "dev"
+      ],
+      "env": {
+        "NODE_OPTIONS": "--inspect=0"
+      },
+      "console": "integratedTerminal",
+      "resolveSourceMapLocations": [
+        "${workspaceFolder}/**",
+        "!**/node_modules/**"
+      ]
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Next: Chrome",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Node Dev",
-      "runtimeExecutable": "node",
-      "cwd": "${workspaceFolder}",
-      "runtimeArgs": [
-        "index.js"
-      ],
-      "env": {
-        "NODE_OPTIONS": "--inspect=0"
-      },
-      "console": "integratedTerminal"
     }
   ],
   "compounds": [

@@ -9,4 +9,4 @@ RUN apk add --no-cache git tzdata
 ENV TZ=Europe/Berlin
 
 ENV BASE_URL=http://localhost:3000
-ENV FCP_API_ENTRYPOINT=https://api.fcp.vrok.de
+ENV FCP_API_ENTRYPOINT=https://fccp-backend.zukunftsstadt.de

@@ -144,6 +144,7 @@ export interface IProject extends INumericIdentifierModel {
   "@id"?: string
   applications?: IFundApplication[]
   challenges?: string
+  climateImpact?: IClimateImpact
   contactEmaiL?: string
   contactName?: string
   contactPhone?: string
@@ -195,14 +196,50 @@ export const emptyIdea: IProject = {
 // additional fields required when a user creates a project,
 // are moved to his membership server-side
 export interface IProjectCreation extends IProject {
-  motivation: string,
-  skills: string,
+  motivation: string
+  skills: string
 }
 
 export const emptyProject: IProjectCreation = {
   motivation: "",
   progress: ProjectProgress.CREATING_PROFILE,
   skills: "",
+}
+
+export interface IClimateImpact {
+  emissionAvoidance?: string
+  changeAdaption?: string
+  collaborationImplementation?: string
+  resourceUsageReduction?: boolean
+  usingRenewableResources?: boolean
+  reducingFossilMobility?: boolean
+  adaptingFoodSources?: boolean
+  adaptingPostFossilFinances?: boolean
+  preparingForExtremeWeather?: boolean
+  adaptingResilientBusinessModels?: boolean
+  supportingClimateRelevantPolitics?: boolean
+  educatingClimateKnowledge?: boolean
+  educatingClimateEmpowerment?: boolean
+  supportingCollaboration?: boolean
+  otherClimateImpacts?: boolean
+}
+
+export const emptyClimateImpact: IClimateImpact = {
+  emissionAvoidance: "",
+  changeAdaption: "",
+  collaborationImplementation: "",
+  resourceUsageReduction: false,
+  usingRenewableResources: true,
+  reducingFossilMobility: false,
+  adaptingFoodSources: false,
+  adaptingPostFossilFinances: false,
+  preparingForExtremeWeather: false,
+  adaptingResilientBusinessModels: false,
+  supportingClimateRelevantPolitics: false,
+  educatingClimateKnowledge: false,
+  educatingClimateEmpowerment: false,
+  supportingCollaboration: false,
+  otherClimateImpacts: false,
 }
 
 export interface IProjectTask {

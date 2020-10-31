@@ -182,6 +182,75 @@
           "placeholder": "mindestens 10 Zeichen"
         }
       },
+      "climateImpact": {
+        "adaptingFoodSources": {
+          "help": "",
+          "label": "vegetarische statt tierische Ernährung"
+        },
+        "adaptingPostFossilFinances": {
+          "help": "",
+          "label": "Verschiebung von Finanzströmen von fossilen zu post-fossilen Investitionen"
+        },
+        "adaptingResilientBusinessModels": {
+          "help": "",
+          "label": "Stärkung von klimawandel-resilienten Geschäftsmodellen"
+        },
+        "changeAdaption": {
+          "header": "Anpassung an verändertes Klima",
+          "help": "",
+          "label": "Wie passiert dies im oder durch das Projekt?",
+          "placeholder": ""
+        },
+        "collaborationImplementation": {
+          "header": "Kollaboration, Kommunikation und Anregung zur Mitwirkung",
+          "help": "",
+          "label": "Wie passiert dies im oder durch das Projekt?",
+          "placeholder": ""
+        },
+        "educatingClimateEmpowerment": {
+          "help": "",
+          "label": "Handlungs-Bildung: Befähigung und Ermächtigung zum eigenen Handeln"
+        },
+        "educatingClimateKnowledge": {
+          "help": "",
+          "label": "Wissens-Bildung: Information und Aufklärung"
+        },
+        "emissionAvoidance": {
+          "header": "Vermeidung von CO2-Emissionen",
+          "help": "",
+          "label": "Wie passiert dies im oder durch das Projekt?",
+          "placeholder": ""
+        },
+        "header": "Angaben zum Klima-Einfluss",
+        "otherClimateImpacts": {
+          "help": "",
+          "label": "anderes, nämlich:"
+        },
+        "preparingForExtremeWeather": {
+          "help": "",
+          "label": "Vorbeugen gegenüber Extremwetter: Überhitzung, Stürme, Starkregen, Dürre"
+        },
+        "reducingFossilMobility": {
+          "help": "",
+          "label": "Verringerung fossiler Mobilität"
+        },
+        "resourceUsageReduction": {
+          "help": "",
+          "label": "Verringerung von Energie- und Stoff-Einsatz"
+        },
+        "supportingClimateRelevantPolitics": {
+          "help": "",
+          "label": "Unterstützung klimawandel-relevanter Politiken"
+        },
+        "supportingCollaboration": {
+          "help": "",
+          "label": "Anbahnung von Kooperationen zwischen Menschen oder Organisationen"
+        },
+        "usingRenewableResources": {
+          "help": "",
+          "label": "Einsatz von erneuerbaren Energiequellen statt fossiler Energiequellen"
+        }
+      },
       "create": {
         "motivation": {
           "help": "Was motiviert dich diese Idee umzusetzen?",
@@ -715,6 +784,11 @@
           "intro": "Hier siehst du den Stand des allgemeinen Profils zu deinem Projekt.<br />Hinweis: Die meisten dieser Angaben werden im öffentlichen Profil angezeigt!",
           "title": "Projektprofil"
         },
+        "climateImpact": {
+          "heading": "Das Projekt und der Klimawandel",
+          "intro": "Wie stark wirkt Ihr Projekt auf Klimaschutz, Klimawandelanpassung und Multiplikation in die Gesellschaft?",
+          "title": "Projekt & Klimawandel"
+        },
         "edit": {
           "heading": "Projektprofil bearbeiten",
           "intro": "Hier kannst du das Projektprofil deines Projekt bearbeiten.<br />Hinweis: Die meisten dieser Angaben werden im öffentlichen Profil angezeigt!",
@@ -942,6 +1016,7 @@
     },
     "tableau": {
       "application": "Antrag",
+      "climateChange": "Klimawandel",
       "concretization": "Zuspitzung",
       "idea": "Idee",
       "fund": "Fördertopf",

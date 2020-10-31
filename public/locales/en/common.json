@@ -1,0 +1,92 @@
+{
+  "form": {
+    "project": {
+      "climateImpact": {
+        "adaptingFoodSources": {
+          "help": "",
+          "label": "vegetarian instead of meat"
+        },
+        "adaptingPostFossilFinances": {
+          "help": "",
+          "label": "shifting financial streams from fossil to post-fossil investments"
+        },
+        "adaptingResilientBusinessModels": {
+          "help": "",
+          "label": "strengthening of climate-change-resilient business modells"
+        },
+        "changeAdaption": {
+          "header": "Adapting to changed climate",
+          "help": "",
+          "label": "How will this be done by the project?",
+          "placeholder": ""
+        },
+        "collaborationImplementation": {
+          "header": "collaboration, communication and empowerment to participation",
+          "help": "",
+          "label": "How will this be done by the project?",
+          "placeholder": ""
+        },
+        "educatingClimateEmpowerment": {
+          "help": "",
+          "label": "action education: qualification and empowerment for acting"
+        },
+        "educatingClimateKnowledge": {
+          "help": "",
+          "label": "knowledge education: information and awareness"
+        },
+        "emissionAvoidance": {
+          "header": "Avoiding CO2-emissions",
+          "help": "",
+          "label": "How will this be done by the project?",
+          "placeholder": ""
+        },
+        "header": "Climate Impacts",
+        "otherClimateImpacts": {
+          "help": "",
+          "label": "other impacts:"
+        },
+        "preparingForExtremeWeather": {
+          "help": "",
+          "label": "preparing for extreme weather: heat, storm, flood, drought"
+        },
+        "reducingFossilMobility": {
+          "help": "",
+          "label": "reducing fossil mobility"
+        },
+        "resourceUsageReduction": {
+          "help": "",
+          "label": "reducing energy- and material-usage"
+        },
+        "supportingClimateRelevantPolitics": {
+          "help": "",
+          "label": "upport of climate-change-relevant politics"
+        },
+        "supportingCollaboration": {
+          "help": "",
+          "label": "initiating cooperation between people and organisations"
+        },
+        "usingRenewableResources": {
+          "help": "",
+          "label": "using renewable energy sources instead of fossil sources"
+        }
+      }
+    }
+  },
+  "page": {
+    "projects": {
+      "profile": {
+        "climateImpact": {
+          "heading": "The Project and Climate Change",
+          "intro": "How does your project support climate protection, adaption on climate change and multiplying into society?",
+          "title": "Project & Climate Change"
+        }
+      }
+    }
+  },
+  "project": {
+    "tableau": {
+      "climateChange": "Climate Change",
+      "concretizatiodn": "Impacts"
+    }
+  }
+}

@@ -10,6 +10,8 @@ const dateFormats = require("../src/services/formatDate").formats
 const NextI18Next = require("next-i18next").default;
 
 const dateFormatNames = Object.keys(dateFormats)
+const expires = new Date()
+expires.setMonth(expires.getMonth() + 2)
 
 module.exports = new NextI18Next({
   defaultLanguage: "de",
@@ -37,5 +39,10 @@ module.exports = new NextI18Next({
 
       return value;
     }
+  },
+  detection: {
+    cookieExpirationDate: expires,
+    cookieSameSite: "Lax",
+    cookieSecure: process.env.NODE_ENV === "production"
   },
 });

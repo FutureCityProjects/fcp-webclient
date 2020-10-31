@@ -37,35 +37,15 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
         progress={project.name ? project.profileSelfAssessment : null}
       />
 
-      {!project.applications || project.applications.length === 0
-        ? <ProgressBox
-          icon="pot"
-          title="project.tableau.selectFund"
-          subtitle="project.tableau.fund"
-          active={project.progress !== ProjectProgress.CREATING_PROFILE}
-          href={project.progress === ProjectProgress.CREATING_PROFILE ? null : Routes.PROJECT_SELECT_FUND}
-          as={project.progress === ProjectProgress.CREATING_PROFILE ? null : routeWithParams(Routes.PROJECT_SELECT_FUND, { slug: project.slug || project.id })}
-        />
-        : <ProgressBox
-          icon="pot"
-          title="project.tableau.concretization"
-          subtitle="project.tableau.fund"
-          active={project.progress !== ProjectProgress.CREATING_PROFILE}
-          // @todo support multiple applications, how to store which one is the active application?
-          complete={project.progress !== ProjectProgress.CREATING_PROFILE && project.applications[0].concretizationSelfAssessment === SelfAssessment.COMPLETE}
-          href={project.progress === ProjectProgress.CREATING_PROFILE ? null : {
-            pathname: Routes.PROJECT_CONCRETIZATION,
-            // @todo support multiple applications, how to store which one is the active application?
-            query: { fund: project.applications[0].fund.id }
-          }}
-          as={project.progress === ProjectProgress.CREATING_PROFILE ? null : {
-            pathname: routeWithParams(Routes.PROJECT_CONCRETIZATION, { slug: project.slug || project.id }),
-            // @todo support multiple applications, how to store which one is the active application?
-            query: { fund: project.applications[0].fund.id }
-          }}
-          progress={project.applications[0].concretizationSelfAssessment}
-        />
-      }
+      <ProgressBox
+        complete={false}
+        icon="document"
+        title="project.tableau.concretization"
+        subtitle="project.tableau.climateChange"
+        href={Routes.PROJECT_CLIMATE_IMPACT}
+        as={routeWithParams(Routes.PROJECT_CLIMATE_IMPACT, { slug: project.slug || project.id })}
+        progress={null}
+      />
 
       <ProgressBox
         icon="compasses"

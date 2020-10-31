@@ -1245,6 +1245,13 @@ a.sub-status-card {
   max-width: none;
 }
 
+.climate-impact-form .row {
+  margin-left: 1em;
+}
+.climate-impact-form .form-group label {
+  font-size: 90%;
+}
+
 @import "page-project-resources";
 @import "page-project-timetable";
 @import "page-application-submission";

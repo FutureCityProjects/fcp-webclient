@@ -104,17 +104,21 @@ const RTE: React.FC<IProps> = (props) => {
     }
   }, [])
 
+  // if the element is nested (using an ID like "climateImpact.emissionAvoidance") the dot
+  // would cause errors -> replace
+  const toolbarId = props.id.replaceAll(/\./g, "-")
+
   return <div className={"rte-container " + props.className}
     // do not use .ql-active, it is used internally and would break formatting
     onFocus={(e) => e.target.classList.add("rte-active")}
     onBlur={(e) => e.target.classList.remove("rte-active")}
   >
-    <CustomToolbar id={props.id} t={t} />
+    <CustomToolbar id={toolbarId} t={t} />
     <ReactQuill
       formats={formats}
       modules={{
         toolbar: {
-          container: "#ql-toolbar-" + props.id,
+          container: "#ql-toolbar-" + toolbarId,
         },
       }}
       id={props.id}

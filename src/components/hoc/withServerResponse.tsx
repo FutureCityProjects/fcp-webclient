@@ -10,7 +10,7 @@ interface IProps {
  * We need a way to set the status code / create redirects not only in the getInisialProps
  * @see https://github.com/zeit/next.js/issues/4452
  */
-export default (App) => {
+const withServerResponse = (App) => {
   return class extends React.Component<IProps> {
     public static displayName = "withServerResponse(App)"
 
@@ -51,3 +51,5 @@ export default (App) => {
     }
   }
 }
+
+export default withServerResponse

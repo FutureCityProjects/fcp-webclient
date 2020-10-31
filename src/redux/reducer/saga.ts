@@ -8,7 +8,7 @@ export const initialSagaState: ISagaState = {
   ran: false,
 }
 
-export default (state: ISagaState = initialSagaState, action: SagaAction): ISagaState => {
+const sagaReducer = (state: ISagaState = initialSagaState, action: SagaAction): ISagaState => {
   switch (action.type) {
     case SAGA_STARTED:
       return {
@@ -20,3 +20,5 @@ export default (state: ISagaState = initialSagaState, action: SagaAction): ISaga
       return state
   }
 }
+
+export default sagaReducer
