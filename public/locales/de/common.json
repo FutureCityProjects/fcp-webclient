@@ -922,7 +922,7 @@
         "title": "Benutzerprofil"
       },
       "projects": {
-        "applicationOpen": "Deine Bewerbung als Teammitglied wurde noch nicht akzeptiert. Bitte gedulde dich noch etwas.<br /><strong>Achtung:</strong> Derzeit können noch keine Projekt-Teams gebildet werden. Bitte leg zum Ausprobieren eine eigene Projektidee an, die du dann zum Projekt weiterentwickelst! Die Teilnahme an bestehenden Projekten wird erst mit einem späteren Update der Software möglich sein.",
+        "applicationOpen": "Deine Bewerbung als Teammitglied wurde noch nicht akzeptiert. Bitte gedulde dich noch etwas.",
         "deleteMyApplication": "Bewerbung zurückziehen",
         "title": "Meine Projekte"
       },
