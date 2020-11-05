@@ -6,7 +6,7 @@ import App, { AppProps } from "next/app"
 import { Router } from "next/router"
 import NextNprogress from "nextjs-progressbar"
 import React from "react"
-import IdleTimer from "react-idle-timer"
+import IdleTimer, { EVENTS } from "react-idle-timer"
 import { connect, Provider } from "react-redux"
 import { AnyAction, Dispatch } from "redux"
 
@@ -107,8 +107,7 @@ class FCPApp extends App<Props> {
     // the IdleTimer keeps track of user actions (client-side) and triggers a logout after the
     // configured number of seconds.
     // Default events include mouseMove, touchstart, MSPointerMove - we don't count this as "activity"
-    const activeEvents = ["keydown", "wheel", "DOMMouseScroll", "mouseWheel", "mousedown",
-      "MSPointerDown", "touchmove", "visibilitychange"]
+    const activeEvents: EVENTS[] = ["click", "dblclick", "dragstart", "keydown", "wheel", "mousewheel", "mousedown", "touchmove"]
 
     // NextNprogress gives a visual indication of route changes while pages are loading
     // ToastContainer wraps react-toastify to show small alert popups
