@@ -21,7 +21,7 @@ const ProgressActionIcons: React.FC<IProps> = ({ project }: IProps) => {
         <Icon name="user-multiple" size={24} />
       </a>
     </Link>
-    {/*<Link href="/">
+    {/* <Link href="/">
       <a aria-label="add participants" className="navigation-item">
         <Icon name={"user-multiple"} size={24} />
       </a>

@@ -1,7 +1,7 @@
-export const SAGA_STARTED: string = "Saga: Started"
+export const SAGA_STARTED = "Saga: Started"
 
 export interface ISagaStartedAction {
-  type: string,
+  type: string
 }
 
 export type SagaAction = ISagaStartedAction

@@ -40,11 +40,11 @@ export interface IEntityAction extends IScopeAction {
 }
 
 export interface ILoadByAction extends IEntityAction {
-  criteria: IFilterCriteria,
+  criteria: IFilterCriteria
 }
 
 export interface IModelAction<T> extends IEntityAction {
-  model: T,
+  model: T
 }
 
 export interface IModelFormAction<T> extends IModelAction<T> {
@@ -52,7 +52,7 @@ export interface IModelFormAction<T> extends IModelAction<T> {
 }
 
 export interface ILoadCollectionSuccessAction<T> extends IEntityAction {
-  collection: IHydraCollection<T>,
+  collection: IHydraCollection<T>
 }
 
 export const loadModelAction =

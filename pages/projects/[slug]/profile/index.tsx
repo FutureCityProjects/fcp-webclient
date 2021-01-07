@@ -24,7 +24,7 @@ const mapStateToProps = (state: AppState, { slug }) => ({
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  slug: string,
+  slug: string
 }
 
 const ProjectProfilePage: I18nPage<PageProps> = ({ isMember, project, request, t }) => {

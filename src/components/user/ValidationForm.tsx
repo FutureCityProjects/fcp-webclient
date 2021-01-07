@@ -16,7 +16,7 @@ interface IProps {
 const ValidationForm = ({ bindErrorHandler, id = "", onSubmit, token = "" }: IProps) => {
   const { t } = useTranslation()
 
-  return <Formik<{ id: string, token: string }> initialValues={{ id, token }} onSubmit={onSubmit}>
+  return <Formik<{ id: string; token: string }> initialValues={{ id, token }} onSubmit={onSubmit}>
     {({
       errors,
       handleSubmit,

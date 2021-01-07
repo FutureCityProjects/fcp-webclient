@@ -7,10 +7,10 @@ import { includeDefaultNamespaces, withTranslation } from "services/i18n"
 import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
-  minDate?: Date,
-  maxDate?: Date,
+  minDate?: Date
+  maxDate?: Date
   value: string
-  labels: object,
+  labels: object
 }
 
 class FormikDate extends FormikElement<IProps> {

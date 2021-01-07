@@ -26,11 +26,11 @@ export interface IPlanFunctions {
   removeResourceRequirement: any
   removeTask: any
   removeWorkPackage: any
-  sortResourceRequirements,
-  sortTasks,
-  sortWorkPackages,
-  sumResourceRequirementCosts: any,
-  updateImplementationTime: any,
+  sortResourceRequirements
+  sortTasks
+  sortWorkPackages
+  sumResourceRequirementCosts: any
+  updateImplementationTime: any
   updateResourceRequirement: any
   updateTask: any
   updateWorkPackage: any
@@ -55,6 +55,7 @@ interface IProps {
  * Not as abstract class because of: We strongly recommend against creating your own base
  * component classes. In React components, code reuse is primarily achieved through
  * composition rather than inheritance.
+ *
  * @see https://reactjs.org/docs/react-component.html
  *
  * @todo refactor all the functions to a separate helper in /services

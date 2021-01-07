@@ -2,8 +2,8 @@ import { Router, withRouter } from "next/router"
 import React, { FunctionComponent } from "react"
 
 interface IProps {
-  href: string,
-  router: Router,
+  href: string
+  router: Router
   activeClassName?: string
 }
 

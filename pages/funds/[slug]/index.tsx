@@ -25,7 +25,7 @@ const mapStateToProps = (state: AppState, { id, slug }) => ({
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   fundId: number
-  slug: string,
+  slug: string
 }
 
 const PublicFuncPage: I18nPage<PageProps> = (props: PageProps) => {

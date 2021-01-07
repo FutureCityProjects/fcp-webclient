@@ -29,7 +29,7 @@ const HeaderIconNavigation: React.FC<IProps> = (props) => {
       </AuthElement>
       <li><NavIcon href={Routes.MARKETPLACE} icon="light-bulb" title="goto.marketplace" /></li>
       <li><NavIcon href={Routes.PROCESS_OVERVIEW} icon="info-bubble" title="goto.processOverview" /></li>
-      {/*<li><NavIcon href={Routes.MARKETPLACE} icon="search" title="goto.search" /></li>*/}
+      {/* <li><NavIcon href={Routes.MARKETPLACE} icon="search" title="goto.search" /></li>*/}
 
       <li><DropdownComponent
         className="navigation-item"

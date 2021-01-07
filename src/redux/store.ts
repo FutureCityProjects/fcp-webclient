@@ -12,7 +12,7 @@ import { selectAuthToken } from "./reducer/auth"
 import rootSaga from "./saga"
 
 export type SagaStore = Store<AppState> & {
-  sagaTask?: Task,
+  sagaTask?: Task
 }
 
 let axiosInterceptor = null
@@ -59,6 +59,7 @@ export const makeStore = (initialState: AppState, options: MakeStoreOptions): Sa
 
   /**
    * Connect store and the apiClient to inject the JWT
+   *
    * @todo is there a better place for this?
    */
   axiosInterceptor = apiClient.axios.interceptors.request.use((request: AxiosRequestConfig): AxiosRequestConfig => {

@@ -6,7 +6,7 @@ import WorkPackageCard from "./WorkPackageCard"
 
 interface IProps {
   functions: IPlanFunctions
-  project: IProject,
+  project: IProject
 }
 
 const WordPackageCardContainer: React.FC<IProps> = ({ functions, project }: IProps) => <>

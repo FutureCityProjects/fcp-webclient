@@ -8,7 +8,7 @@ import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
   value: SelfAssessment
-  labels: { [key: number]: string },
+  labels: { [key: number]: string }
 }
 
 class FormikRange extends FormikElement<IProps> {

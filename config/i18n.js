@@ -7,7 +7,7 @@ if (!process.browser) {
 
 const formatDate = require("../src/services/formatDate").formatDate
 const dateFormats = require("../src/services/formatDate").formats
-const NextI18Next = require("next-i18next").default;
+const NextI18Next = require("next-i18next").default
 
 const dateFormatNames = Object.keys(dateFormats)
 
@@ -24,18 +24,18 @@ module.exports = new NextI18Next({
 
       // @todo currency symbol configurable
       if (format === "currency") {
-        return new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(value);
+        return new Intl.NumberFormat(locale, { style: "currency", currency: "EUR" }).format(value)
       }
 
       if (format === "number") {
-        return new Intl.NumberFormat(locale).format(value);
+        return new Intl.NumberFormat(locale).format(value)
       }
 
       if (dateFormatNames.includes(format)) {
         return formatDate(locale, value, format)
       }
 
-      return value;
+      return value
     }
   },
-});
+})

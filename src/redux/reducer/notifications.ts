@@ -4,8 +4,8 @@ import { ToastOptions } from "react-toastify"
 import { NotificationActions, NotificationActionTypes } from "../actions/notifications"
 
 export interface INotification {
-  content: string,
-  id: string,
+  content: string
+  id: string
   options: ToastOptions
 }
 

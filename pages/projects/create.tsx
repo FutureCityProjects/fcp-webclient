@@ -38,7 +38,7 @@ const mapStateToProps = (state: AppState, { inspirationId }) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  inspirationId: any,
+  inspirationId: any
 }
 
 const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {

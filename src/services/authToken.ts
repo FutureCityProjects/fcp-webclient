@@ -7,7 +7,7 @@ export interface IDecodedToken {
   readonly id: number
   readonly username: string
   readonly exp: number
-  readonly roles: UserRole[],
+  readonly roles: UserRole[]
 }
 
 export class AuthToken {

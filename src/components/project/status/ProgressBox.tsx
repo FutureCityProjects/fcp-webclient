@@ -17,9 +17,9 @@ const boxClassName = (active: boolean) => "progress-box" + (active ? "" : " inac
 
 interface IProps {
   active?: boolean
-  as?: string | { pathname: string, query: any }
+  as?: string | { pathname: string; query: any }
   complete?: boolean
-  href?: string | { pathname: string, query: any }
+  href?: string | { pathname: string; query: any }
   icon: string
   progress?: number
   subtitle: string

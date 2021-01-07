@@ -26,7 +26,7 @@ export class SubmissionError extends Error {
  * @param errors (nested) error set
  * @param prefix string
  */
-export const flattenErrors = (errors: any, prefix: string = ""): ISubmissionErrorList => {
+export const flattenErrors = (errors: any, prefix = ""): ISubmissionErrorList => {
   let flattened: ISubmissionErrorList = {}
   Object.keys(errors).forEach((k) => {
     if (typeof errors[k] !== "string") {

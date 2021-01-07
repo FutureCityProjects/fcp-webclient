@@ -23,8 +23,8 @@ import { AUTH_COOKIE_NAME, AUTH_IDLE_TIMEOUT, AUTH_LOCALSTORAGE_NAME } from "../
 import "../styles/index.scss"
 
 type Props = AppProps & ReduxProps & {
-  authStorageChanged: any,
-  isIdle: any,
+  authStorageChanged: any
+  isIdle: any
 }
 
 // extend the default App with properties including the Redux store,

@@ -29,7 +29,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  redirectBack?: string,
+  redirectBack?: string
 }
 
 const LoginPage: I18nPage<PageProps> = (props: PageProps) => {

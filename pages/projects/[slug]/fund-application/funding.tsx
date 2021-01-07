@@ -39,7 +39,7 @@ const mapStateToProps = (state: AppState, { fundId, slug }) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   fundId: number
-  slug: string,
+  slug: string
 }
 
 const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {

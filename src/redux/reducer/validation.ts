@@ -3,7 +3,7 @@ import { Action } from "redux"
 import { ValidationActionTypes } from "redux/actions/validation"
 import { ILoadingSuccessAction } from "redux/helper/actions"
 
-const validationsReducer = (state: boolean = false, action: Action): boolean => {
+const validationsReducer = (state = false, action: Action): boolean => {
   switch (action.type) {
     case "LOADING_VALIDATION_OPERATION_SUCCESS":
       return (action as ILoadingSuccessAction).result

@@ -27,8 +27,8 @@ const mapStateToProps = (state: AppState) => ({
 })
 
 interface IValidation {
-  id: string,
-  token: string,
+  id: string
+  token: string
 }
 
 const connector = connect(mapStateToProps, mapDispatchToProps)

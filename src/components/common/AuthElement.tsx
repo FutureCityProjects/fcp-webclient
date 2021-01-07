@@ -3,7 +3,7 @@ import React, { FunctionComponent } from "react"
 import { UserRole } from "api/schema"
 
 interface IProps {
-  requiredRole: UserRole,
+  requiredRole: UserRole
   roles: string[]
 }
 

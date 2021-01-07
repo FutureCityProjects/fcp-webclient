@@ -10,21 +10,21 @@ export interface IValidationAction {
 }
 
 export interface IConfirmAccountAction extends IValidationAction {
-  actions: any,
+  actions: any
   id: string
   token: string
   type: ValidationActionTypes.CONFIRM_ACCOUNT
 }
 
 export interface IConfirmEmailAction extends IValidationAction {
-  actions: any,
+  actions: any
   id: string
   token: string
   type: ValidationActionTypes.CONFIRM_EMAIL
 }
 
 export interface IResetPasswordAction extends IValidationAction {
-  actions: any,
+  actions: any
   id: string
   password: string
   token: string

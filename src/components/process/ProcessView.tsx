@@ -23,7 +23,7 @@ export default function ProcessView({ process, roles }: IProps) {
       <CardHeader>{process.name}
         <AuthElement requiredRole={UserRole.PROCESS_OWNER} roles={roles}>
           <div role="actions" className="icon-navigation">
-            <Link href={Routes.PROCESS_EDIT} /*as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
+            <Link href={Routes.PROCESS_EDIT} /* as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
               <a aria-label={t("goto.editProcess")} className="navigation-item" title={t("goto.editProcess")}>
                 <Icon name={"pencil"} size={24} />
               </a>

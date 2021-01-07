@@ -4,8 +4,8 @@ import React from "react"
 
 interface IProps {
   as?: string
-  href: string,
-  router: Router,
+  href: string
+  router: Router
   activeClassName?: string
 }
 

@@ -25,7 +25,7 @@ const mapStateToProps = (state: AppState, { id }) => ({
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  id: any,
+  id: any
 }
 
 const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
@@ -36,7 +36,7 @@ const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
   }
 
   if (!request.isLoading && request.loadingError) {
-    let code: number = 500
+    let code = 500
     let error: string = null
     switch (request.loadingError) {
       case REQUEST_ERRORS.BAD_REQUEST:

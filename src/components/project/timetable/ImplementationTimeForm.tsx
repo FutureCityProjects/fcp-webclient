@@ -10,9 +10,9 @@ import { useTranslation } from "services/i18n"
 interface IProps {
   implementationBegin: Date
   implementationTime: number
-  onSubmit: any,
-  toggle: any,
-  modalOpen: boolean,
+  onSubmit: any
+  toggle: any
+  modalOpen: boolean
 }
 
 const ImplementationTimeForm: React.FC<IProps> = (props: IProps) => {

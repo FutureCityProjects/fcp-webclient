@@ -11,7 +11,7 @@ const formats = [
   "link",
 ]
 
-const CustomToolbar = ({ id, t }: { id: string, t: any }) => (
+const CustomToolbar = ({ id, t }: { id: string; t: any }) => (
   <div id={"ql-toolbar-" + id}>
     <span className="ql-formats">
       <select className="ql-size" defaultValue="">

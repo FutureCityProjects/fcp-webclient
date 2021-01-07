@@ -27,7 +27,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
 const UserAdministrationPage: I18nPage<PageProps> = ({ request, users }: PageProps) => {
   if (!request.isLoading && request.loadingError) {
-    let code: number = 500
+    let code = 500
     let error: string = null
     switch (request.loadingError) {
       case REQUEST_ERRORS.BAD_REQUEST:

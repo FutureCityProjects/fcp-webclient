@@ -5,7 +5,7 @@ import { useTranslation } from "services/i18n"
 
 interface IProps {
   as?: string
-  href: string,
+  href: string
   label: string
 }
 

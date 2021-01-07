@@ -14,9 +14,9 @@ const normalizeNullableString = (value: string) => {
 const normalizeString = (value: string) => value === null ? "" : value.trim()
 
 interface INormalizeOptions {
-  strings?: string[],
-  nullableStrings?: string[],
-  numbers?: string[],
+  strings?: string[]
+  nullableStrings?: string[]
+  numbers?: string[]
   nonZeroNumbers?: string[]
 }
 

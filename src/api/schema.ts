@@ -196,8 +196,8 @@ export const emptyIdea: IProject = {
 // additional fields required when a user creates a project,
 // are moved to his membership server-side
 export interface IProjectCreation extends IProject {
-  motivation: string,
-  skills: string,
+  motivation: string
+  skills: string
 }
 
 export const emptyProject: IProjectCreation = {

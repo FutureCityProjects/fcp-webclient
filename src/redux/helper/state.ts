@@ -1,8 +1,8 @@
 import { INumericIdentifierModel, UserRole } from "api/schema"
 
 export interface IRequestState {
-  isLoading: boolean,
-  loadingError: string,
+  isLoading: boolean
+  loadingError: string
 }
 export const initialRequestState: IRequestState = {
   isLoading: false,

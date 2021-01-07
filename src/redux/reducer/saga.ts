@@ -1,7 +1,7 @@
 import { SagaAction, SAGA_STARTED } from "redux/actions/saga"
 
 export interface ISagaState {
-  ran: boolean,
+  ran: boolean
 }
 
 export const initialSagaState: ISagaState = {
