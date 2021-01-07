@@ -76,7 +76,7 @@ export function* logoutSaga(action: ILogoutAction) {
   yield call(removeStorageItem, AUTH_LOCALSTORAGE_NAME)
 
   // @todo get redirect url from store|config|env
-  yield call(Router.push, action.message ? Routes.LOGIN : Routes.HOME)
+  yield call(Router.push, action.message ? Routes.login : Routes.home)
 
   // remove all data from the store. To keep the state consistent we also need  to clear all
   // dependent states, like IDs of all projects shown in the marketplace.

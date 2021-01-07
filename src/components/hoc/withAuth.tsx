@@ -35,11 +35,11 @@ export function withAuth(WrappedComponent: any, requiredRole: UserRole) {
 
         if (ctx.isServer) {
           ctx.res.writeHead(302, {
-            Location: Routes.LOGIN + "?redirectBack=" + ctx.asPath,
+            Location: Routes.login + "?redirectBack=" + ctx.asPath,
           })
           ctx.res.end()
         } else {
-          Router.push(Routes.LOGIN + "?redirectBack=" + ctx.asPath)
+          Router.push(Routes.login + "?redirectBack=" + ctx.asPath)
         }
 
         // important: prevent calling getInitialProps on the

@@ -10,7 +10,7 @@ import { Routes } from "services/routes"
 
 type PageProps = WithTranslation
 
-const FrontPage: I18nPage<PageProps> = ({ t }: PageProps) => {
+const frontPage: I18nPage<PageProps> = ({ t }: PageProps) => {
   return <BaseLayout pageTitle={t("page.index.title")} isFrontPage={true}>
     <div className="home-content">
       <h1 role="heading" aria-level={2} className="title">{t("page.index.heading")}</h1>
@@ -18,7 +18,7 @@ const FrontPage: I18nPage<PageProps> = ({ t }: PageProps) => {
         <TranslatedHtml content={t("page.index.quote")} />
       </span>
 
-      <Link href={Routes.MARKETPLACE}>
+      <Link href={Routes.marketplace}>
         <Button aria-label="marketplace" color="dark">
           <span className="button-title">{t("page.index.buttonTitle")}</span>
           {t("page.index.button")}
@@ -28,8 +28,8 @@ const FrontPage: I18nPage<PageProps> = ({ t }: PageProps) => {
   </BaseLayout>
 }
 
-FrontPage.getInitialProps = async () => ({
+frontPage.getInitialProps = async () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 
-export default withTranslation(includeDefaultNamespaces())(FrontPage)
+export default withTranslation(includeDefaultNamespaces())(frontPage)

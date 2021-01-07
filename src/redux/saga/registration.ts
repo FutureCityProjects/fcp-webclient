@@ -34,7 +34,7 @@ function* registerUserSaga(action: IRegisterUserAction) {
   try {
     yield put(setLoadingAction("user_operation", true))
     // the API uses {{param}} as placeholder while Next uses [param]:
-    const route = Routes.CONFIRM_ACCOUNT.replace(/\[/g, "{{").replace(/\]/g, "}}")
+    const route = Routes.confirmAccount.replace(/\[/g, "{{").replace(/\]/g, "}}")
 
     const registration: IRegistration = {
       validationUrl: BASE_URL + route,

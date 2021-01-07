@@ -38,7 +38,7 @@ const ConfirmEmailChangePage: I18nPage<PageProps> = (props) => {
   const { addNotification, confirmValidation, id, request, result, token } = props
   if (!result) {
     addNotification("message.account.validated")
-    return <Redirect route={Routes.LOGIN} />
+    return <Redirect route={Routes.login} />
   }
 
   const onSubmit = (values: IValidation, actions: any) => {

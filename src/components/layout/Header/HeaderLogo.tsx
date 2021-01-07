@@ -15,7 +15,7 @@ const HeaderLogo: React.FC<IProps> = ({ isFrontPage }) => {
     return <img className="header-logo" src="/assets/img/logo.svg" height="52" alt="PROJEKT.WERK.STADT" />
   }
 
-  return <Link href={Routes.HOME}>
+  return <Link href={Routes.home}>
     <a className="header-logo" title={t("goto.home")}>
       <img src="/assets/img/logo.svg" height="52" alt="PROJEKT.WERK.STADT" />
     </a>

@@ -39,7 +39,7 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
             {t("fundApplication.fund") + ": " + fund.name}
             <div className="icon-navigation">
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
-                <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+                <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
                   <a>{t("goto.myProjects")}</a>
                 </Link>
               </DropdownComponent>
@@ -92,7 +92,7 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
                 <Icon name="save" size={18} />
                 {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
-              <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+              <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
                 <a className="btn btn-light">{t("goto.myProjects")}</a>
               </Link>
             </div>

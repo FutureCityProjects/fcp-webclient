@@ -23,7 +23,7 @@ export default function ProcessView({ process, roles }: IProps) {
       <CardHeader>{process.name}
         <AuthElement requiredRole={UserRole.PROCESS_OWNER} roles={roles}>
           <div role="actions" className="icon-navigation">
-            <Link href={Routes.PROCESS_EDIT} /* as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
+            <Link href={Routes.processEdit} /*as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
               <a aria-label={t("goto.editProcess")} className="navigation-item" title={t("goto.editProcess")}>
                 <Icon name={"pencil"} size={24} />
               </a>
@@ -68,7 +68,7 @@ export default function ProcessView({ process, roles }: IProps) {
         <h3>{t("process.funds")}</h3>
         <AuthElement requiredRole={UserRole.PROCESS_OWNER} roles={roles}>
           <div role="actions" className="icon-navigation">
-            <Link href={Routes.FUND_OVERVIEW}>
+            <Link href={Routes.fundOverview}>
               <a aria-label={t("goto.fundManagement")} className="navigation-item" title={t("goto.fundManagement")}>
                 <Icon name={"pot"} size={24} />
               </a>
@@ -88,7 +88,7 @@ export default function ProcessView({ process, roles }: IProps) {
             )
           return <div key={"fund-" + fund.id}>
             <h5>
-              <Link href={Routes.FUND_PAGE} as={routeWithParams(Routes.FUND_PAGE, { slug: fund.slug || fund.id })}>
+              <Link href={Routes.fundPage} as={routeWithParams(Routes.fundPage, { slug: fund.slug || fund.id })}>
                 <a aria-label={t("goto.fundDetails")} title={t("goto.fundDetails")}>
                   {fund.name}
                 </a>

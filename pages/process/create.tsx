@@ -24,7 +24,7 @@ import { Routes } from "services/routes"
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   onSubmit: (process, actions) => {
     actions.success = () => {
-      Router.push(Routes.PROCESS_OVERVIEW)
+      Router.push(Routes.processOverview)
     }
     dispatch(createModelAction(EntityType.PROCESS, process, actions))
   },
@@ -41,7 +41,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 // @todo move to /management/processes for multi-mandant
 const ProcessCreationPage: I18nPage<PageProps> = ({ onSubmit, process, request, t }) => {
   if (process) {
-    return <Redirect route={Routes.PROCESS_OVERVIEW} />
+    return <Redirect route={Routes.processOverview} />
   }
 
   return <BaseLayout pageTitle={t("page.process.create.title")}>

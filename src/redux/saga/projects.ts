@@ -16,7 +16,7 @@ import {
   updateModelSuccessAction,
 } from "redux/helper/actions"
 import { EntityType } from "redux/reducer/data"
-import { REQUEST_ERRORS } from "services/requestError"
+import { RequestErrors } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
 export function* projectsWatcherSaga() {
@@ -41,7 +41,7 @@ function* loadProjectSaga(action: ILoadByAction) {
       // getProjectBySlug returns undefined when no project with the given slug is found,
       // the request to the collection was still successful -> throw error here
       if (!project) {
-        throw new Error(REQUEST_ERRORS.NOT_FOUND)
+        throw new Error(RequestErrors.notFound)
       }
     } else {
       throw new Error("Unknown criteria when loading project")

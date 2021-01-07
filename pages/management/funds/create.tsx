@@ -19,7 +19,7 @@ import { Routes, routeWithParams } from "services/routes"
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   onSubmit: (fund: IFund, actions) => {
     actions.success = (result) => {
-      Router.push(Routes.FUND_DETAILS, routeWithParams(Routes.FUND_DETAILS, { id: result.id }))
+      Router.push(Routes.fundDetails, routeWithParams(Routes.fundDetails, { id: result.id }))
     }
 
     dispatch(createModelAction(EntityType.FUND, normalizeFund(fund), actions))

@@ -24,8 +24,8 @@ const TargetGroupsView: React.FC<IProps> = (props: IProps) => {
       </div>
       <div className={"icon-navigation"}>
         <Link
-          href={Routes.PROJECT_PLAN_EDIT}
-          as={routeWithParams(Routes.PROJECT_PLAN_EDIT, { slug: project.slug || project.id })}
+          href={Routes.projectPlanEdit}
+          as={routeWithParams(Routes.projectPlanEdit, { slug: project.slug || project.id })}
         >
           <a aria-label={t("goto.editProjectPlan")} className="navigation-item" title={t("goto.editProjectPlan")}>
             <Icon name={"pencil"} size={24} />

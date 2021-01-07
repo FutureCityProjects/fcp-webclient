@@ -43,12 +43,12 @@ const FundManagementCard: React.FC<IProps> = ({ fund }: IProps) => {
       <UncontrolledCollapse toggler={"#toggler-" + fund.id}>
         <CardBody>
           <div role="actions" className="icon-navigation">
-            <Link href={Routes.FUND_DETAILS} as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}>
+            <Link href={Routes.fundDetails} as={routeWithParams(Routes.fundDetails, { id: fund.id })}>
               <a aria-label={t("goto.fundDetails")} className="navigation-item" title={t("goto.fundDetails")}>
                 <Icon name={"search"} size={24} />
               </a>
             </Link>
-            <Link href={Routes.FUND_EDIT} as={routeWithParams(Routes.FUND_EDIT, { id: fund.id })}>
+            <Link href={Routes.fundEdit} as={routeWithParams(Routes.fundEdit, { id: fund.id })}>
               <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                 <Icon name={"pencil"} size={24} />
               </a>

@@ -24,15 +24,15 @@ const ProfileView: React.FC<IProps> = (props: IProps) => {
         <h3>{project.name ? project.name : t("project.unnamed")}</h3>
         <div className={"icon-navigation"}>
           <Link
-            href={Routes.PROJECT_PROFILE_EDIT}
-            as={routeWithParams(Routes.PROJECT_PROFILE_EDIT, { slug: project.slug || project.id })}
+            href={Routes.projectProfileEdit}
+            as={routeWithParams(Routes.projectProfileEdit, { slug: project.slug || project.id })}
           >
             <a className="navigation-item" title={t("goto.editProjectProfile")} aria-label={t("goto.editProjectProfile")}>
               <Icon name={"pencil"} size={24} />
             </a>
           </Link>
           <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
-            <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+            <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
               <a>{t("goto.myProjects")}</a>
             </Link>
           </DropdownComponent>

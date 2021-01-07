@@ -53,11 +53,11 @@ const ProjectApplicationEditPage: I18nPage<PageProps> = ({ isMember, project, re
   const onSubmit = (values, actions) => {
     actions.success = () => {
       Router.push({
-        pathname: Routes.PROJECT_FUND_APPLICATION,
+        pathname: Routes.projectFundApplication,
         // @todo support multiple applications, how to store which one is the active application?
         query: { fund: project.applications[0].fund.id }
       }, {
-        pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }),
+        pathname: routeWithParams(Routes.projectFundApplication, { slug: project.slug || project.id }),
         // @todo support multiple applications, how to store which one is the active application?
         query: { fund: project.applications[0].fund.id }
       })

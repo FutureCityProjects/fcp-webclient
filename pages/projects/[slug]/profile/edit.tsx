@@ -49,8 +49,8 @@ const ProjectProfileEditPage: I18nPage<PageProps> = ({ isMember, project, reques
     actions.success = (result) => {
       // the slug could have changed (or we have none if the title was removed)
       // -> use result instead of the previous project
-      Router.push(Routes.PROJECT_PROFILE,
-        routeWithParams(Routes.PROJECT_PROFILE, { slug: result.slug || result.id }))
+      Router.push(Routes.projectProfile,
+        routeWithParams(Routes.projectProfile, { slug: result.slug || result.id }))
     }
 
     updateProject(values, actions)

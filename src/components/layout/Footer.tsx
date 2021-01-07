@@ -19,11 +19,11 @@ const Footer: React.FC<IProps> = (props: IProps) => {
         {props.isFrontPage && <SocialLinks />}
       </Col>
       <Col className="footer-links">
-        <Link href={Routes.ABOUT} >
+        <Link href={Routes.about} >
           <a title={t("goto.about")}>{t("navigation.about")}</a>
-        </Link> | <Link href={Routes.IMPRINT} >
+        </Link> | <Link href={Routes.imprint} >
           <a>{t("navigation.imprint")}</a>
-        </Link> | <Link href={Routes.DATA_PROTECTION} >
+        </Link> | <Link href={Routes.dataProtection} >
           <a>{t("navigation.dataProtection")}</a>
         </Link>
       </Col>

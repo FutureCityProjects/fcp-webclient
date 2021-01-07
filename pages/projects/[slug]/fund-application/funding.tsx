@@ -74,10 +74,10 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
   const onSubmit = (values, actions) => {
     actions.success = () => {
       Router.push({
-        pathname: Routes.PROJECT_FUND_APPLICATION,
+        pathname: Routes.projectFundApplication,
         query: { fund: fund.id }
       }, {
-        pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }),
+        pathname: routeWithParams(Routes.projectFundApplication, { slug: project.slug || project.id }),
         query: { fund: fund.id }
       })
     }
@@ -98,10 +98,10 @@ const ApplicationFundingPage: I18nPage<PageProps> = (props: PageProps) => {
 
         {(!projectRequest.isLoading && !fundRequest.isLoading) &&
           <Link href={{
-            pathname: Routes.PROJECT_FUND_APPLICATION,
+            pathname: Routes.projectFundApplication,
             query: { fund: fund.id }
           }} as={{
-            pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION, { slug: project.slug || project.id }),
+            pathname: routeWithParams(Routes.projectFundApplication, { slug: project.slug || project.id }),
             query: { fund: fund.id }
           }} >
             <a className="btn btn-secondary btn-sm">{t("goto.projectApplication")}</a>

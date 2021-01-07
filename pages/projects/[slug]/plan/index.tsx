@@ -72,8 +72,8 @@ const ProjectPlanPage: I18nPage<PageProps> = ({ isMember, project, request, t, u
             <p><TranslatedHtml content="page.projects.plan.index.intro" params={{ projectName: project.name }} /></p>
 
             <Link
-              href={Routes.MY_PROJECTS}
-              as={Routes.MY_PROJECTS + "#project-" + project.id}
+              href={Routes.myProjects}
+              as={Routes.myProjects + "#project-" + project.id}
             >
               <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
             </Link>

@@ -64,8 +64,8 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
 
     if (isAuthenticated) {
       actions.success = (res) => {
-        Router.push(Routes.PROJECT_PROFILE_EDIT,
-          routeWithParams(Routes.PROJECT_PROFILE_EDIT, { slug: res.id })
+        Router.push(Routes.projectProfileEdit,
+          routeWithParams(Routes.projectProfileEdit, { slug: res.id })
         )
       }
       createProject(values, actions)
@@ -117,7 +117,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.create.saveViaLogin" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.LOGIN}>
+                <Link href={Routes.login}>
                   <a className="btn btn-primary">{t("goto.login")}</a>
                 </Link>
               </CardText>
@@ -125,7 +125,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.create.saveViaRegistration" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.REGISTRATION}>
+                <Link href={Routes.registration}>
                   <a className="btn btn-primary">{t("goto.registration")}</a>
                 </Link>
               </CardText>

@@ -33,11 +33,11 @@ const SubmissionBox: React.FC<IProps> = ({ project }: IProps) => {
       active={true}
       // @todo link via application ID
       href={{
-        pathname: Routes.PROJECT_FUND_APPLICATION_SUBMISSION,
+        pathname: Routes.projectFundApplicationSubmission,
         query: { fund: application.fund.id }
       }}
       as={{
-        pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION_SUBMISSION, { slug: project.slug || project.id }),
+        pathname: routeWithParams(Routes.projectFundApplicationSubmission, { slug: project.slug || project.id }),
         query: { fund: application.fund.id }
       }}
     />
@@ -63,11 +63,11 @@ const SubmissionBox: React.FC<IProps> = ({ project }: IProps) => {
     active={true}
     // @todo link via application ID
     href={{
-      pathname: Routes.PROJECT_FUND_APPLICATION_SUBMIT,
+      pathname: Routes.projectFundApplicationSubmit,
       query: { fund: application.fund.id }
     }}
     as={{
-      pathname: routeWithParams(Routes.PROJECT_FUND_APPLICATION_SUBMIT, { slug: project.slug || project.id }),
+      pathname: routeWithParams(Routes.projectFundApplicationSubmit, { slug: project.slug || project.id }),
       query: { fund: application.fund.id }
     }}
   />

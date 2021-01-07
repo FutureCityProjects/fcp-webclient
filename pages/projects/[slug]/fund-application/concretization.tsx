@@ -71,7 +71,7 @@ const ProjectConcretizationPage: I18nPage<PageProps> = (props: PageProps) => {
 
   const onSubmit = (application, actions) => {
     actions.success = () => {
-      Router.push(Routes.MY_PROJECTS, Routes.MY_PROJECTS + "#project-" + project.id)
+      Router.push(Routes.myProjects, Routes.myProjects + "#project-" + project.id)
     }
 
     return updateApplication(application, actions)

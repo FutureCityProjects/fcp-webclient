@@ -41,12 +41,12 @@ const ProjectWorkPackages: React.FC<IPlanProps> = ({ functions, project, updateP
       </div>
       <DropdownComponent button={<Icon name="grid" size={26} />}>
         <Link
-          href={Routes.PROJECT_PLAN}
-          as={routeWithParams(Routes.PROJECT_PLAN, { slug: project.slug || project.id })}
+          href={Routes.projectPlan}
+          as={routeWithParams(Routes.projectPlan, { slug: project.slug || project.id })}
         >
           <a>{t("goto.planOverview")}</a>
         </Link>
-        <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+        <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
           <a>{t("goto.myProjects")}</a>
         </Link>
       </DropdownComponent>

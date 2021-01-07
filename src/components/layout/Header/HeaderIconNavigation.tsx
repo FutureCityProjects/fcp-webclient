@@ -22,14 +22,14 @@ const HeaderIconNavigation: React.FC<IProps> = (props) => {
   return <nav role="navigation" className="icon-navigation">
     <ul>
       <AuthElement roles={props.roles} requiredRole={UserRole.PROCESS_OWNER}>
-        <li><NavIcon href={Routes.FUND_OVERVIEW} icon="pot" title="goto.fundManagement" /></li>
+        <li><NavIcon href={Routes.fundOverview} icon="pot" title="goto.fundManagement" /></li>
       </AuthElement>
       <AuthElement roles={props.roles} requiredRole={UserRole.ADMIN}>
-        <li><NavIcon href={Routes.USER_OVERVIEW} icon="user-multiple" title="goto.userManagement" /></li>
+        <li><NavIcon href={Routes.userOverview} icon="user-multiple" title="goto.userManagement" /></li>
       </AuthElement>
-      <li><NavIcon href={Routes.MARKETPLACE} icon="light-bulb" title="goto.marketplace" /></li>
-      <li><NavIcon href={Routes.PROCESS_OVERVIEW} icon="info-bubble" title="goto.processOverview" /></li>
-      {/* <li><NavIcon href={Routes.MARKETPLACE} icon="search" title="goto.search" /></li>*/}
+      <li><NavIcon href={Routes.marketplace} icon="light-bulb" title="goto.marketplace" /></li>
+      <li><NavIcon href={Routes.processOverview} icon="info-bubble" title="goto.processOverview" /></li>
+      {/*<li><NavIcon href={Routes.MARKETPLACE} icon="search" title="goto.search" /></li>*/}
 
       <li><DropdownComponent
         className="navigation-item"
@@ -39,16 +39,16 @@ const HeaderIconNavigation: React.FC<IProps> = (props) => {
         title={t("navigation.user")}
       >
         <AuthElement roles={props.roles} requiredRole={UserRole.USER}>
-          <NavLink href={Routes.USER_PROFILE} label="navigation.userProfile" />
+          <NavLink href={Routes.userProfile} label="navigation.userProfile" />
         </AuthElement>
         <AuthElement roles={props.roles} requiredRole={UserRole.USER}>
-          <NavLink href={Routes.MY_PROJECTS} label="navigation.myProjects" />
+          <NavLink href={Routes.myProjects} label="navigation.myProjects" />
         </AuthElement>
         <AuthElement roles={props.roles} requiredRole={UserRole.USER}>
           <span aria-label={t("navigation.logout")} onClick={props.doLogout}>{t("navigation.logout")}</span>
         </AuthElement>
         <AuthElement roles={props.roles} requiredRole={UserRole.GUEST}>
-          <NavLink href={Routes.LOGIN} label="navigation.login" />
+          <NavLink href={Routes.login} label="navigation.login" />
         </AuthElement>
       </DropdownComponent></li>
     </ul>

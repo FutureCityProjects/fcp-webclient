@@ -6,7 +6,7 @@ import apiClient from "api/client"
 import { addNotificationAction } from "redux/actions/notifications"
 import { IConfirmAccountAction, IConfirmEmailAction, IResetPasswordAction, ValidationActionTypes } from "redux/actions/validation"
 import { loadingSuccessAction, setLoadingAction } from "redux/helper/actions"
-import { REQUEST_ERRORS } from "services/requestError"
+import { RequestErrors } from "services/requestError"
 
 export function* validationWatcherSaga() {
   yield all([
@@ -33,7 +33,7 @@ function* confirmAccountSaga(action: IConfirmAccountAction) {
 
     return true
   } catch (err) {
-    if (err.message === REQUEST_ERRORS.NOT_FOUND) {
+    if (err.message === RequestErrors.notFound) {
       err.message = "validation.account.notFound"
     }
 
@@ -62,7 +62,7 @@ function* confirmEmailSaga(action: IConfirmEmailAction) {
 
     return result
   } catch (err) {
-    if (err.message === REQUEST_ERRORS.NOT_FOUND) {
+    if (err.message === RequestErrors.notFound) {
       err.message = "validation.changeEmail.notFound"
     }
 
@@ -91,7 +91,7 @@ function* confirmPasswordResetSaga(action: IResetPasswordAction) {
 
     return result
   } catch (err) {
-    if (err.message === REQUEST_ERRORS.NOT_FOUND) {
+    if (err.message === RequestErrors.notFound) {
       err.message = "validation.resetPassword.notFound"
     }
 

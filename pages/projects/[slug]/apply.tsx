@@ -106,7 +106,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 ? <CardText className="text-center">
                   <span className="text-danger">{t("page.projects.apply.membershipExists")}</span>
                   <br />
-                  <Link href={Routes.MY_PROJECTS}>
+                  <Link href={Routes.myProjects}>
                     <a className="btn btn-primary">{t("navigation.myProjects")}</a>
                   </Link>
                 </CardText>
@@ -119,12 +119,12 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.apply.applicationCreated" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.MY_PROJECTS}>
+                <Link href={Routes.myProjects}>
                   <a className="btn btn-primary">{t("navigation.myProjects")}</a>
                 </Link>
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.MARKETPLACE}>
+                <Link href={Routes.marketplace}>
                   <a className="btn btn-secondary">{t("goto.marketplace")}</a>
                 </Link>
               </CardText>
@@ -138,7 +138,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.apply.saveViaLogin" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.LOGIN}>
+                <Link href={Routes.login}>
                   <a className="btn btn-primary">{t("goto.login")}</a>
                 </Link>
               </CardText>
@@ -146,7 +146,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.apply.saveViaRegistration" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.REGISTRATION}>
+                <Link href={Routes.registration}>
                   <a className="btn btn-primary">{t("goto.registration")}</a>
                 </Link>
               </CardText>

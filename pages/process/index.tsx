@@ -28,7 +28,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 // @todo move to /management/processes for multi-mandant
 const ProcessDetailPage: I18nPage<PageProps> = ({ process, request, roles, t }) => {
   if (!request.isLoading && !process) {
-    return <Redirect route={Routes.PROCESS_CREATE} />
+    return <Redirect route={Routes.processCreate} />
   }
 
   return <BaseLayout pageTitle={t("page.process.index.title")}>

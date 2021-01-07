@@ -40,7 +40,7 @@ const ProcessEditPage: I18nPage<PageProps> = ({ updateProcess, process, request,
   const onSubmit = (values, actions) => {
     // add another action additionally to the formik defaults (setErrors, setSubmitting, reset, ...)
     actions.success = () => {
-      Router.push(Routes.PROCESS_OVERVIEW)
+      Router.push(Routes.processOverview)
     }
 
     // mark page as submitting so the form is not replaced by the spinner
@@ -49,7 +49,7 @@ const ProcessEditPage: I18nPage<PageProps> = ({ updateProcess, process, request,
   }
 
   if (request.loadingError || !process) {
-    return <Redirect route={Routes.PROCESS_OVERVIEW} />
+    return <Redirect route={Routes.processOverview} />
   }
 
   return <BaseLayout pageTitle={t("page.process.edit.heading")}>

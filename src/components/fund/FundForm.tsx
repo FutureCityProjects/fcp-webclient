@@ -60,12 +60,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.FUND_DETAILS}
-                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                    href={Routes.fundDetails}
+                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.FUND_OVERVIEW}>
+                  : <Link href={Routes.fundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }
@@ -150,12 +150,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.FUND_DETAILS}
-                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                    href={Routes.fundDetails}
+                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.FUND_OVERVIEW}>
+                  : <Link href={Routes.fundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }
@@ -214,12 +214,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.FUND_DETAILS}
-                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                    href={Routes.fundDetails}
+                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.FUND_OVERVIEW}>
+                  : <Link href={Routes.fundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }
@@ -256,12 +256,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.FUND_DETAILS}
-                    as={routeWithParams(Routes.FUND_DETAILS, { id: fund.id })}
+                    href={Routes.fundDetails}
+                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.FUND_OVERVIEW}>
+                  : <Link href={Routes.fundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }

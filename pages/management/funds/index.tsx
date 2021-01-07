@@ -33,7 +33,7 @@ const FundManagementPage: I18nPage<PageProps> = ({ funds, request, t }) => {
         <h1>{t("page.management.funds.index.heading")}</h1>
         <p><TranslatedHtml content="page.management.funds.index.intro" /></p>
 
-        <Link href={Routes.FUND_CREATE}>
+        <Link href={Routes.fundCreate}>
           <Button color="primary">{t("goto.createFund")}</Button>
         </Link>
 

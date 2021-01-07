@@ -14,7 +14,7 @@ import { loadModelAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectById } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
-import { REQUEST_ERRORS } from "services/requestError"
+import { RequestErrors } from "services/requestError"
 
 const mapStateToProps = (state: AppState, { id }) => ({
   // @todo use custom reducer to keep track of the loaded users to know if we loaded with
@@ -25,7 +25,7 @@ const mapStateToProps = (state: AppState, { id }) => ({
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  id: any
+  id: any,
 }
 
 const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
@@ -36,14 +36,14 @@ const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
   }
 
   if (!request.isLoading && request.loadingError) {
-    let code = 500
+    let code: number = 500
     let error: string = null
     switch (request.loadingError) {
-      case REQUEST_ERRORS.BAD_REQUEST:
+      case RequestErrors.badRequest:
         code = 400
         break
 
-      case REQUEST_ERRORS.NOT_FOUND:
+      case RequestErrors.notFound:
         code = 404
         break
 

@@ -18,7 +18,7 @@ import {
 } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
-import { REQUEST_ERRORS } from "services/requestError"
+import { RequestErrors } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 import { getCurrentProcess } from "./currentProcess"
 
@@ -44,7 +44,7 @@ function* loadFundSaga(action: ILoadByAction) {
       // getFundBySlug returns undefined when no fund with the given slug is found,
       // the request to the collection was still successful -> throw error here
       if (!fund) {
-        throw new Error(REQUEST_ERRORS.NOT_FOUND)
+        throw new Error(RequestErrors.notFound)
       }
     } else {
       throw new Error("Unknown criteria when loading fund")

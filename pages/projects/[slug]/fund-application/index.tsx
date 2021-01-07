@@ -82,8 +82,8 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
             <p><TranslatedHtml content="page.projects.fundApplication.index.intro" params={{ projectName: project.name }} /></p>
 
             <Link
-              href={Routes.MY_PROJECTS}
-              as={Routes.MY_PROJECTS + "#project-" + project.id}
+              href={Routes.myProjects}
+              as={Routes.myProjects + "#project-" + project.id}
             >
               <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
             </Link>

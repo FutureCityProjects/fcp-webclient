@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Col, Row } from "reactstrap"
 
 import { useTranslation } from "services/i18n"
-import { REQUEST_ERRORS } from "services/requestError"
+import { RequestErrors } from "services/requestError"
 import { Routes } from "services/routes"
 import BaseLayout from "./BaseLayout"
 
@@ -19,7 +19,7 @@ function ErrorPage({ error, statusCode, title }: IProps) {
 
   statusCode = statusCode || 500
   title = title || `_error:title.${statusCode}`
-  error = error && error !== REQUEST_ERRORS.NOT_FOUND && error !== REQUEST_ERRORS.BAD_REQUEST
+  error = error && error !== RequestErrors.notFound && error !== RequestErrors.badRequest
     ? `_error:${error}`
     : `_error:explanation.${statusCode}`
 
@@ -31,7 +31,7 @@ function ErrorPage({ error, statusCode, title }: IProps) {
           {htmlParser.parse(t(error))}
         </p>
         <p>
-          <Link href={Routes.HOME}>
+          <Link href={Routes.home}>
             <a className="btn btn-primary" title={t("goto.home")}>{t("goto.home")}</a>
           </Link>
         </p>

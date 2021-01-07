@@ -38,7 +38,7 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
   // prevent redirecting to the profile when the state changes while a login is running
   const [loggingIn, setLoggingIn] = useState(false)
   if (!loggingIn && isAuthenticated) {
-    return <Redirect route={Routes.USER_PROFILE} />
+    return <Redirect route={Routes.userProfile} />
   }
 
   const onSubmit = (credentials: ICredentials, actions: any) => {
@@ -60,13 +60,13 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
         // if the user has created a project without a name and is still a member
         // -> directly redirect to the profile
         if (newProject && membership) {
-          Router.push(Routes.PROJECT_PROFILE_EDIT, routeWithParams(Routes.PROJECT_PROFILE_EDIT,
+          Router.push(Routes.projectProfileEdit, routeWithParams(Routes.projectProfileEdit,
             { slug: newProject.id }))
           return
         }
       }
 
-      Router.push(Routes.MY_PROJECTS)
+      Router.push(Routes.myProjects)
     }
 
     setLoggingIn(true)

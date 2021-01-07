@@ -31,8 +31,8 @@ const FinancesView: React.FC<IPlanProps> = (props: IPlanProps) => {
       </div>
       <div className={"icon-navigation"}>
         <Link
-          href={Routes.PROJECT_PLAN_FINANCES}
-          as={routeWithParams(Routes.PROJECT_PLAN_FINANCES, { slug: project.slug || project.id })}
+          href={Routes.projectPlanFinances}
+          as={routeWithParams(Routes.projectPlanFinances, { slug: project.slug || project.id })}
         >
           <a className="navigation-item" aria-label={t("goto.editProjectFinances")} title={t("goto.editProjectFinances")}>
             <Icon name={"pencil"} size={24} />

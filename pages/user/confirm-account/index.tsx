@@ -43,12 +43,12 @@ const ConfirmAccountPage: I18nPage<PageProps> = (props) => {
   // no validation result and/or no notification message
   if (process.browser && result) {
     resetValidation()
-    return <Redirect route={Routes.LOGIN} />
+    return <Redirect route={Routes.login} />
   }
 
   const onSubmit = (values: IValidation, actions: any) => {
     actions.success = () => {
-      Router.push(Routes.LOGIN)
+      Router.push(Routes.login)
     }
     confirmValidation(values.id, values.token, actions)
   }

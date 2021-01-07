@@ -65,8 +65,8 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
 
   const selectFund = (fund, actions) => {
     actions.success = () => {
-      Router.push({ pathname: Routes.PROJECT_CONCRETIZATION, query: { fund: fund.id } },
-        { pathname: routeWithParams(Routes.PROJECT_CONCRETIZATION, { slug: project.slug }), query: { fund: fund.id } })
+      Router.push({ pathname: Routes.projectConcretization, query: { fund: fund.id } },
+        { pathname: routeWithParams(Routes.projectConcretization, { slug: project.slug }), query: { fund: fund.id } })
     }
 
     const application: IFundApplication = {
@@ -93,7 +93,7 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
         {(!projectRequest.isLoading && !fundsRequest.isLoading) && <>
           <PageError error={projectRequest.loadingError || fundsRequest.loadingError} />
 
-          <Link href={Routes.MY_PROJECTS} as={Routes.MY_PROJECTS + "#project-" + project.id}>
+          <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
             <Button color="secondary" className="btn-sm">{t("goto.myProjects")}</Button>
           </Link>
           <br />

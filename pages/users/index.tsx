@@ -14,7 +14,7 @@ import { loadCollectionAction } from "redux/helper/actions"
 import { AppState } from "redux/reducer"
 import { EntityType, selectCollection } from "redux/reducer/data"
 import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i18n"
-import { REQUEST_ERRORS } from "services/requestError"
+import { RequestErrors } from "services/requestError"
 
 const mapStateToProps = (state: AppState) => ({
   // @todo user custom reducer to track users loaded with admin privileges
@@ -27,14 +27,14 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
 const UserAdministrationPage: I18nPage<PageProps> = ({ request, users }: PageProps) => {
   if (!request.isLoading && request.loadingError) {
-    let code = 500
+    let code: number = 500
     let error: string = null
     switch (request.loadingError) {
-      case REQUEST_ERRORS.BAD_REQUEST:
+      case RequestErrors.badRequest:
         code = 400
         break
 
-      case REQUEST_ERRORS.NOT_FOUND:
+      case RequestErrors.notFound:
         code = 404
         break
 

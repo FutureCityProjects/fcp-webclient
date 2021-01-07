@@ -51,8 +51,8 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = ({ isMember, project, reque
 
   const onSubmit = (values, actions) => {
     actions.success = () => {
-      Router.push(Routes.PROJECT_PLAN,
-        routeWithParams(Routes.PROJECT_PLAN, { slug: project.slug || project.id }))
+      Router.push(Routes.projectPlan,
+        routeWithParams(Routes.projectPlan, { slug: project.slug || project.id }))
     }
 
     updateProject(values, actions)

@@ -61,7 +61,7 @@ const MyProjectsPage: I18nPage<PageProps> = (props: PageProps) => {
             : <>
               <PageError error={request.loadingError} />
 
-              {noProjects && <Link href={Routes.MARKETPLACE}>
+              {noProjects && <Link href={Routes.marketplace}>
                 <a className="btn d-block d-flex justify-content-center">
                   <EmptyProjectCard />
                 </a>
