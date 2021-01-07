@@ -1,5 +1,19 @@
 # Todo
+  * schemaänderungen übernehmen
+  * Benutzerprofil (PW ändern, Email ändern, Name ändern, PW vergessen,
+   Konto löschen)
+  * Anzeige Teammitglieder, Mitgliedsverwaltung
+  * Benutzerverwaltung (Admin oder Prozessmanager: Sperren/Löschen,
+  PW-Reset, Statistik)
+  * Neue Icons (Fremde mit Lizenz ersetzen durch eigene, passendere Icons
+  für viele Elemente die jetzt Standards tragen)
+  * Markierung gesperrter Projekte für Team im Client
+  * Auth-Token (Rework mit mehr Sicherheit, Cookie, kein TabÜbergreifender
+  Login)
+  * Application change im client
   * Alle ToDo als Tickets ins Redmine oder Github legen
+  * Next 10
+    * i18n rework?
   * createSavedIdeaSaga auf loginSuccessAction umstellen
   * createSavedProjectSaga auf loginSuccessAction umstellen
   * alle Ausgaben mit übersetztem Datum prüfen und ggf. auf TranslatedHTML umstellen da im englischen Slashes als HTML-Entity übersetzt werden...

@@ -59,7 +59,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
       <Col>
         <h1>{t("page.management.funds.details.heading")}</h1>
         <p><TranslatedHtml content="page.management.funds.details.intro" /></p>
-        <Link href={Routes.FUND_OVERVIEW} >
+        <Link href={Routes.fundOverview} >
           <a className="btn btn-secondary">{t("goto.fundManagement")}</a>
         </Link>
       </Col>
@@ -72,7 +72,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {fund.name}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.FUND_EDIT} as={routeWithParams(Routes.FUND_EDIT, { id: fund.id })}>
+                <Link href={Routes.fundEdit} as={routeWithParams(Routes.fundEdit, { id: fund.id })}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -89,7 +89,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                 )}
               {fund.state === FundState.INACTIVE && <>
                 <br />
-                <Link href={Routes.FUND_ACTIVATE} as={routeWithParams(Routes.FUND_ACTIVATE, { id: fund.id })}>
+                <Link href={Routes.fundActivate} as={routeWithParams(Routes.fundActivate, { id: fund.id })}>
                   <Button color="primary" className="btn-sm">
                     {t("goto.activateFund")}
                   </Button>
@@ -130,8 +130,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {t("page.management.funds.details.fundingHeader")}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.FUND_EDIT}
-                  as={routeWithParams(Routes.FUND_EDIT, { id: fund.id }) + "#form-fund-funding"}>
+                <Link href={Routes.fundEdit}
+                  as={routeWithParams(Routes.fundEdit, { id: fund.id }) + "#form-fund-funding"}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -160,8 +160,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {t("page.management.funds.details.applicationHeader")}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.FUND_EDIT}
-                  as={routeWithParams(Routes.FUND_EDIT, { id: fund.id }) + "#form-fund-application"}>
+                <Link href={Routes.fundEdit}
+                  as={routeWithParams(Routes.fundEdit, { id: fund.id }) + "#form-fund-application"}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -187,8 +187,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                       {c.question}
 
                       <Link href={{
-                        pathname: Routes.CONCRETIZATION_EDIT, query: { concretization: c.id }
-                      }} as={{ pathname: routeWithParams(Routes.CONCRETIZATION_EDIT, { id: fund.id, concretizationId: c.id }), query: { concretization: c.id } }}>
+                        pathname: Routes.concretizationEdit, query: { concretization: c.id }
+                      }} as={{ pathname: routeWithParams(Routes.concretizationEdit, { id: fund.id, concretizationId: c.id }), query: { concretization: c.id } }}>
                         <a className="btn" title={t("goto.editConcretization")}>
                           <Icon name="pencil" size={24} /></a>
                       </Link>
@@ -203,7 +203,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                 </ul>
                 : <p>{t("default.empty")}</p>
               }
-              <Link href={Routes.CONCRETIZATION_CREATE} as={routeWithParams(Routes.CONCRETIZATION_CREATE, { id: fund.id })}>
+              <Link href={Routes.concretizationCreate} as={routeWithParams(Routes.concretizationCreate, { id: fund.id })}>
                 <Button color="primary">{t("form.fund.addConcretization")}</Button>
               </Link>
             </CardBody>
@@ -213,8 +213,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {t("page.management.funds.details.juryHeader")}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.FUND_EDIT}
-                  as={routeWithParams(Routes.FUND_EDIT, { id: fund.id }) + "#form-fund-jury"}>
+                <Link href={Routes.fundEdit}
+                  as={routeWithParams(Routes.fundEdit, { id: fund.id }) + "#form-fund-jury"}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -258,7 +258,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
 
 FundDetailsPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
-  if (typeof query.id === "string" && query.id.match(/^\d+$/)) {
+  if (typeof query.id === "string" && /^\d+$/.exec(query.id)) {
     id = parseInt(query.id, 10)
 
     // @todo we load all funds here, otherwise we would need to keep track if the single

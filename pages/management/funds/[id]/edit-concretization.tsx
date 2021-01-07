@@ -35,7 +35,7 @@ const mapStateToProps = (state: AppState, { id }) => ({
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   concretizationId: number
-  id: number,
+  id: number
 }
 
 const ConcretizationEditPage: I18nPage<PageProps> = ({ concretizationId, fund, request, t, updateConcretization }) => {
@@ -54,8 +54,8 @@ const ConcretizationEditPage: I18nPage<PageProps> = ({ concretizationId, fund, r
 
   const onSubmit = (values: IFundConcretization, actions) => {
     actions.success = () => {
-      Router.push(Routes.FUND_DETAILS,
-        routeWithParams(Routes.FUND_DETAILS, { id: fund.id }) + "#concretizations")
+      Router.push(Routes.fundDetails,
+        routeWithParams(Routes.fundDetails, { id: fund.id }) + "#concretizations")
     }
 
     updateConcretization(values, actions)
@@ -86,7 +86,7 @@ const ConcretizationEditPage: I18nPage<PageProps> = ({ concretizationId, fund, r
 
 ConcretizationEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
-  if (typeof query.id === "string" && query.id.match(/^\d+$/)) {
+  if (typeof query.id === "string" && /^\d+$/.exec(query.id)) {
     id = parseInt(query.id, 10)
 
     // @todo we load all funds here, otherwise we would need to keep track if the single
@@ -98,7 +98,7 @@ ConcretizationEditPage.getInitialProps = ({ store, query }: NextPageContext) => 
   }
 
   let concretizationId: number = null
-  if (typeof query.concretization === "string" && query.concretization.match(/^\d+$/)) {
+  if (typeof query.concretization === "string" && /^\d+$/.exec(query.concretization)) {
     concretizationId = parseInt(query.concretization, 10)
   }
 

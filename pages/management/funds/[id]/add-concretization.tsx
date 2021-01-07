@@ -34,10 +34,10 @@ const mapStateToProps = (state: AppState, { id }) => ({
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  id: number,
+  id: number
 }
 
-const ConcretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, createConcretization }) => {
+const concretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, createConcretization }) => {
   // @todo custom error message "fund not found" etc.
   if (!request.isLoading && !fund) {
     return <StatusCode statusCode={404}>
@@ -47,8 +47,8 @@ const ConcretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, cre
 
   const onSubmit = (values: IFundConcretization, actions) => {
     actions.success = () => {
-      Router.push(Routes.FUND_DETAILS,
-        routeWithParams(Routes.FUND_DETAILS, { id: fund.id }) + "#concretizations")
+      Router.push(Routes.fundDetails,
+        routeWithParams(Routes.fundDetails, { id: fund.id }) + "#concretizations")
     }
 
     values.fund = fund["@id"]
@@ -78,9 +78,9 @@ const ConcretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, cre
   </BaseLayout>
 }
 
-ConcretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext) => {
+concretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
-  if (typeof query.id === "string" && query.id.match(/^\d+$/)) {
+  if (typeof query.id === "string" && /^\d+$/.exec(query.id)) {
     id = parseInt(query.id, 10)
 
     // @todo we load all funds here, otherwise we would need to keep track if the single
@@ -96,7 +96,7 @@ ConcretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext)
 
 export default withAuth(
   connector(
-    withTranslation(includeDefaultNamespaces())(ConcretizationCreationPage),
+    withTranslation(includeDefaultNamespaces())(concretizationCreationPage),
   ),
   UserRole.PROCESS_OWNER,
 )

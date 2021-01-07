@@ -34,9 +34,9 @@ function* loadProcessSaga(action: ILoadByAction) {
 
     let process: IProcess = null
     if (hasProp(action.criteria, "id")) {
-      process = yield call(apiClient.getProcess, action.criteria.id)
+      process = (yield call(apiClient.getProcess, action.criteria.id)) as IProcess
     } else if (hasProp(action.criteria, "slug")) {
-      process = yield call(apiClient.getProcessBySlug, action.criteria.slug)
+      process = (yield call(apiClient.getProcessBySlug, action.criteria.slug)) as IProcess
     } else {
       throw new Error("Unknown criteria when loading process")
     }
@@ -135,9 +135,9 @@ function* deleteProcessSaga(action: IModelFormAction<IProcess>) {
     yield put(setLoadingAction("process_operation", true))
     yield call(apiClient.deleteProcess, action.model)
     yield put(deleteModelSuccessAction(EntityType.PROCESS, action.model))
-    yield put(loadingSuccessAction("process_operation", process))
+    yield put(loadingSuccessAction("process_operation", action.model))
     if (action.scope) {
-      yield put(loadingSuccessAction(action.scope, process))
+      yield put(loadingSuccessAction(action.scope, action.model))
     }
 
     yield call(success)

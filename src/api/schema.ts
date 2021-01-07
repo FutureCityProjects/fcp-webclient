@@ -72,6 +72,7 @@ export enum FundApplicationState {
 
 export interface IFundApplication extends INumericIdentifierModel {
   "@id"?: string
+  active: boolean
   applicationSelfAssessment?: SelfAssessment
   concretizations?: { [id: number]: string }
   concretizationSelfAssessment?: SelfAssessment
@@ -163,7 +164,7 @@ export interface IProject extends INumericIdentifierModel {
   implementationBegin?: Date | string
   implementationTime?: number
   inspiration?: IProject | string
-  isLocked?: boolean
+  locked?: boolean
   memberships?: IProjectMembership[]
   name?: string
   outcome?: string[]
@@ -278,21 +279,20 @@ export enum UserRole {
 
 export interface IUser extends INumericIdentifierModel {
   "@id"?: string
+  active?: boolean
   createdAt?: Date | string
   createdProjects?: IProject[]
   deletedAt?: Date | string
   email?: string
   firstName?: string
   id?: number
-  isActive?: boolean
-  isValidated?: boolean
   lastName?: string
   objectRoles?: IUserObjectRoles[]
   password?: string
   projectMemberships?: IProjectMembership[]
   roles?: UserRole[]
-  salt?: string
   username?: string
+  validated?: boolean
 }
 
 export interface IRegistration extends IUser {
