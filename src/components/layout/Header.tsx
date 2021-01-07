@@ -1,5 +1,5 @@
 import React from "react"
-import {Col, Row} from "reactstrap"
+import { Col, Row } from "reactstrap"
 
 import HeaderIconNavigation from "components/layout/Header/HeaderIconNavigation"
 import HeaderLogo from "components/layout/Header/HeaderLogo"
@@ -12,23 +12,19 @@ interface IProps {
   username: string
 }
 
-export default class Header extends React.Component<IProps> {
-  public render() {
-    return (
-      <header >
-        <Row>
-          <Col><HeaderLogo isFrontPage={this.props.isFrontPage}/></Col>
-          <Col>{!this.props.isFrontPage &&
-          <span role="banner" className="page-title">{this.props.pageTitle}</span>
-          }</Col>
-          <Col><HeaderIconNavigation
-            doLogout={this.props.doLogout}
-            isFrontPage={this.props.isFrontPage}
-            roles={this.props.roles}
-            username={this.props.username}
-          /></Col>
-        </Row>
-      </header>
-    )
-  }
-}
+const Header: React.FC<IProps> = (props: IProps) => <header >
+  <Row>
+    <Col><HeaderLogo isFrontPage={props.isFrontPage} /></Col>
+    <Col>{!props.isFrontPage &&
+      <span role="banner" className="page-title">{props.pageTitle}</span>
+    }</Col>
+    <Col><HeaderIconNavigation
+      doLogout={props.doLogout}
+      isFrontPage={props.isFrontPage}
+      roles={props.roles}
+      username={props.username}
+    /></Col>
+  </Row>
+</header>
+
+export default Header

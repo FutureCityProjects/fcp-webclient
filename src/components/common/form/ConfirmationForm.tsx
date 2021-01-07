@@ -11,7 +11,7 @@ interface IProps {
   onSubmit: any
 }
 
-const ConfirmationForm = ({ buttonLabel, errorPrefix, onSubmit }: IProps) => {
+const ConfirmationForm: React.FC<IProps> = ({ buttonLabel, errorPrefix, onSubmit }: IProps) => {
   const { t } = useTranslation()
 
   return <Formik initialValues={{}} onSubmit={onSubmit}>

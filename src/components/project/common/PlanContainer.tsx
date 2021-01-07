@@ -8,9 +8,9 @@ export interface IPlanFunctions {
   addResourceRequirement: any
   addTask: any
   addWorkPackage: any
-  getIDs: any
+  getIDs: (list: any[]) => string[]
   getImplementationBegin: any
-  getImplementationTime: any
+  getImplementationTime: () => number
   getResourceRequirement: any
   getResourceRequirements: any
   getResourceRequirementSources: any
@@ -20,20 +20,20 @@ export interface IPlanFunctions {
   getTaskResourceRequirements: any
   getWorkPackage: any
   getWorkPackages: any
-  getWorkPackageMonths: any
+  getWorkPackageMonths: (id: string) => number[]
   getWorkPackageTasks: any
   getWorkPackageResourceRequirements: any
-  removeResourceRequirement: any
-  removeTask: any
-  removeWorkPackage: any
+  removeResourceRequirement: (id: string) => void
+  removeTask: (id: string) => void
+  removeWorkPackage: (id: string) => void
   sortResourceRequirements
   sortTasks
   sortWorkPackages
   sumResourceRequirementCosts: any
-  updateImplementationTime: any
-  updateResourceRequirement: any
-  updateTask: any
-  updateWorkPackage: any
+  updateImplementationTime: (implementationTime: number, implementationBegin: Date) => void
+  updateResourceRequirement: (resource: IResourceRequirement) => void
+  updateTask: (task: IProjectTask) => void
+  updateWorkPackage: (wp: IWorkPackage) => void
 }
 
 export interface IPlanProps {
@@ -65,7 +65,7 @@ interface IProps {
 const PlanContainer: React.FC<IProps> = (props: IProps) => {
   const { t } = useTranslation()
   const [project, setProject] = useState(props.project)
-  const getIDs = (list: any[]): string[] => list.map((e) => e.id)
+  const getIDs = (list: any[]): string[] => list.map((e) => e.id as string)
 
   const getTasks = (): IProjectTask[] =>
     project.tasks || []
@@ -82,7 +82,7 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     getTasks().filter((e) => id ? e.workPackage === id : !e.workPackage)
   const getWorkPackageMonths = (id: string) => {
     const tasks = getWorkPackageTasks(id)
-    const months = []
+    const months: number[] = []
     tasks.forEach((e) => months.push(...e.months))
 
     return months
@@ -124,7 +124,7 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     month.setMonth(month.getMonth() + 1, 1)
     return month
   }
-  const getImplementationTime = () => project.implementationTime || 12
+  const getImplementationTime = (): number => project.implementationTime || 12
 
   const addResourceRequirement = (resource: IResourceRequirement) => {
     resource.id = uuidv1()
@@ -151,7 +151,7 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
       .map((e) => e.id === task.id ? { ...e, ...task } : e)
     setProject({ ...project, tasks: updatedTasks })
   }
-  const removeTask = (id: string) => {
+  const removeTask = (id: string): void => {
     const hasReqs = getTaskResourceRequirements(id).length > 0
     if (hasReqs) {
       if (!confirm(t("message.project.confirmDelete.taskWithResourceRequirements"))) {
@@ -169,17 +169,17 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     })
   }
 
-  const addWorkPackage = (wp: IWorkPackage) => {
+  const addWorkPackage = (wp: IWorkPackage): void => {
     wp.id = uuidv1()
     wp.order = getWorkPackages().length + 1
     setProject({ ...project, workPackages: [...getWorkPackages(), wp] })
   }
-  const updateWorkPackage = (wp: IWorkPackage) => {
+  const updateWorkPackage = (wp: IWorkPackage): void => {
     const updatedPackages = getWorkPackages()
       .map((w) => w.id === wp.id ? { ...w, ...wp } : w)
     setProject({ ...project, workPackages: updatedPackages })
   }
-  const removeWorkPackage = (id: string) => {
+  const removeWorkPackage = (id: string): void => {
     const hasTasks = getWorkPackageTasks(id).length > 0
     if (hasTasks) {
       if (!confirm(t("message.project.confirmDelete.workPackageWithTasks"))) {
@@ -205,7 +205,7 @@ const PlanContainer: React.FC<IProps> = (props: IProps) => {
     })
   }
 
-  const updateImplementationTime = (implementationTime: number, implementationBegin: Date) => {
+  const updateImplementationTime = (implementationTime: number, implementationBegin: Date): void => {
     // if the implementationTime is reduced, remove any planned monthe after the new value
     const updatedTasks = getTasks().map((task) => ({
       ...task,

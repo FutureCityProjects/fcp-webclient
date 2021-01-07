@@ -12,16 +12,15 @@ interface IProps {
   fund: IFund
 }
 
-function handleClick(id) {
-  document.getElementById("caret-" + id).classList.toggle("caret-toggled")
-}
+const handleClick = (id: number) =>
+  document.getElementById("caret-" + id.toString()).classList.toggle("caret-toggled")
 
 const FundManagementCard: React.FC<IProps> = ({ fund }: IProps) => {
   const { t } = useTranslation()
 
-  const stateText = fund.state === FundState.ACTIVE
+  const stateText = fund.state === FundState.Active
     ? <span className="text-success">aktiv</span>
-    : (fund.state === FundState.FINISHED
+    : (fund.state === FundState.Finished
       ? <span className="text-muted">abgeschlossen</span>
       : <span className="text-warning">inaktiv</span>
     )
@@ -29,7 +28,7 @@ const FundManagementCard: React.FC<IProps> = ({ fund }: IProps) => {
   return (
     <Card role="fund info" className="collapse-card">
       <CardHeader
-        id={"toggler-" + fund.id}
+        id={"toggler-" + fund.id.toString()}
         className="toggler"
         onClick={() => handleClick(fund.id)}
         aria-expanded="false"
@@ -37,18 +36,18 @@ const FundManagementCard: React.FC<IProps> = ({ fund }: IProps) => {
         <div className="title-section">
           <h3>{fund.name}</h3> {stateText}
         </div>
-        <span id={"caret-" + fund.id} className="caret"><Icon name="caret" size={24} /></span>
+        <span id={"caret-" + fund.id.toString()} className="caret"><Icon name="caret" size={24} /></span>
       </CardHeader>
 
-      <UncontrolledCollapse toggler={"#toggler-" + fund.id}>
+      <UncontrolledCollapse toggler={"#toggler-" + fund.id.toString()}>
         <CardBody>
           <div role="actions" className="icon-navigation">
-            <Link href={Routes.fundDetails} as={routeWithParams(Routes.fundDetails, { id: fund.id })}>
+            <Link href={Routes.FundDetails} as={routeWithParams(Routes.FundDetails, { id: fund.id })}>
               <a aria-label={t("goto.fundDetails")} className="navigation-item" title={t("goto.fundDetails")}>
                 <Icon name={"search"} size={24} />
               </a>
             </Link>
-            <Link href={Routes.fundEdit} as={routeWithParams(Routes.fundEdit, { id: fund.id })}>
+            <Link href={Routes.FundEdit} as={routeWithParams(Routes.FundEdit, { id: fund.id })}>
               <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                 <Icon name={"pencil"} size={24} />
               </a>

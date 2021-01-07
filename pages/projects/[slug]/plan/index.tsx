@@ -33,7 +33,7 @@ import { Routes } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   updateProject: (project, actions) =>
-    dispatch(updateModelAction(EntityType.PROJECT, project, actions))
+    dispatch(updateModelAction(EntityType.Project, project, actions))
 })
 
 const mapStateToProps = (state: AppState, { slug }) => ({
@@ -50,7 +50,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 const ProjectPlanPage: I18nPage<PageProps> = ({ isMember, project, request, t, updateProject }) => {
   // @todo custom error message "project not found or no permission" etc.
   if (!request.isLoading && (!project || project.isLocked
-    || project.progress === ProjectProgress.CREATING_PROFILE
+    || project.progress === ProjectProgress.CreatingProfile
     || !isMember)
   ) {
     return <StatusCode statusCode={404}>
@@ -72,8 +72,8 @@ const ProjectPlanPage: I18nPage<PageProps> = ({ isMember, project, request, t, u
             <p><TranslatedHtml content="page.projects.plan.index.intro" params={{ projectName: project.name }} /></p>
 
             <Link
-              href={Routes.myProjects}
-              as={Routes.myProjects + "#project-" + project.id}
+              href={Routes.MyProjects}
+              as={Routes.MyProjects + "#project-" + project.id.toString()}
             >
               <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
             </Link>
@@ -136,5 +136,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(ProjectPlanPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

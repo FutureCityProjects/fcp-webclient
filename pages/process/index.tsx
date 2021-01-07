@@ -28,7 +28,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 // @todo move to /management/processes for multi-mandant
 const ProcessDetailPage: I18nPage<PageProps> = ({ process, request, roles, t }) => {
   if (!request.isLoading && !process) {
-    return <Redirect route={Routes.processCreate} />
+    return <Redirect route={Routes.ProcessCreate} />
   }
 
   return <BaseLayout pageTitle={t("page.process.index.title")}>
@@ -45,7 +45,7 @@ const ProcessDetailPage: I18nPage<PageProps> = ({ process, request, roles, t }) 
   </BaseLayout>
 }
 
-ProcessDetailPage.getInitialProps = async ({ store }: NextPageContext) => {
+ProcessDetailPage.getInitialProps = ({ store }: NextPageContext) => {
   if (!selectCurrentProcess(store.getState())) {
     store.dispatch(loadCurrentProcessAction())
   }

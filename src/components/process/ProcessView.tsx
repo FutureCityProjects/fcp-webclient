@@ -15,15 +15,15 @@ interface IProps {
   roles: UserRole[]
 }
 
-export default function ProcessView({ process, roles }: IProps) {
+const ProcessView: React.FC<IProps> = ({ process, roles }: IProps) => {
   const { t } = useTranslation()
 
   return <>
     <Card>
       <CardHeader>{process.name}
-        <AuthElement requiredRole={UserRole.PROCESS_OWNER} roles={roles}>
+        <AuthElement requiredRole={UserRole.ProcessOwner} roles={roles}>
           <div role="actions" className="icon-navigation">
-            <Link href={Routes.processEdit} /*as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
+            <Link href={Routes.ProcessEdit} /* as={routeWithParams(Routes.PROCESS_EDIT, {id: process.id})}*/>
               <a aria-label={t("goto.editProcess")} className="navigation-item" title={t("goto.editProcess")}>
                 <Icon name={"pencil"} size={24} />
               </a>
@@ -66,9 +66,9 @@ export default function ProcessView({ process, roles }: IProps) {
     <Card>
       <CardHeader>
         <h3>{t("process.funds")}</h3>
-        <AuthElement requiredRole={UserRole.PROCESS_OWNER} roles={roles}>
+        <AuthElement requiredRole={UserRole.ProcessOwner} roles={roles}>
           <div role="actions" className="icon-navigation">
-            <Link href={Routes.fundOverview}>
+            <Link href={Routes.FundOverview}>
               <a aria-label={t("goto.fundManagement")} className="navigation-item" title={t("goto.fundManagement")}>
                 <Icon name={"pot"} size={24} />
               </a>
@@ -79,16 +79,16 @@ export default function ProcessView({ process, roles }: IProps) {
       <CardBody>
         <p>{t("page.process.index.fundsHelp")}</p>
 
-        {process.funds.filter((fund) => fund.state !== FundState.INACTIVE).map((fund) => {
-          const stateText = fund.state === FundState.ACTIVE
+        {process.funds.filter((fund) => fund.state !== FundState.Inactive).map((fund) => {
+          const stateText = fund.state === FundState.Active
             ? <span className="text-success">aktiv</span>
-            : (fund.state === FundState.FINISHED
+            : (fund.state === FundState.Finished
               ? <span className="text-muted">abgeschlossen</span>
               : <span className="text-warning">inaktiv</span>
             )
-          return <div key={"fund-" + fund.id}>
+          return <div key={"fund-" + fund.id.toString()}>
             <h5>
-              <Link href={Routes.fundPage} as={routeWithParams(Routes.fundPage, { slug: fund.slug || fund.id })}>
+              <Link href={Routes.FundPage} as={routeWithParams(Routes.FundPage, { slug: fund.slug || fund.id })}>
                 <a aria-label={t("goto.fundDetails")} title={t("goto.fundDetails")}>
                   {fund.name}
                 </a>
@@ -101,3 +101,5 @@ export default function ProcessView({ process, roles }: IProps) {
     </Card>
   </>
 }
+
+export default ProcessView

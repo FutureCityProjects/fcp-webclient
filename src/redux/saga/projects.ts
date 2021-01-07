@@ -19,7 +19,7 @@ import { EntityType } from "redux/reducer/data"
 import { RequestErrors } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 
-export function* projectsWatcherSaga() {
+export function* projectsWatcherSaga(): any {
   yield all([
     takeLatest("CREATE_PROJECT", withCallback(createProjectSaga)),
     takeLatest("UPDATE_PROJECT", withCallback(updateProjectSaga)),
@@ -41,13 +41,13 @@ function* loadProjectSaga(action: ILoadByAction) {
       // getProjectBySlug returns undefined when no project with the given slug is found,
       // the request to the collection was still successful -> throw error here
       if (!project) {
-        throw new Error(RequestErrors.notFound)
+        throw new Error(RequestErrors.NotFound)
       }
     } else {
       throw new Error("Unknown criteria when loading project")
     }
 
-    yield put(loadModelSuccessAction(EntityType.PROJECT, project))
+    yield put(loadModelSuccessAction(EntityType.Project, project))
     yield put(loadingSuccessAction("project_loading", project))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, project))
@@ -61,11 +61,11 @@ function* loadProjectSaga(action: ILoadByAction) {
   }
 }
 
-export function* loadProjectCollectionSaga(action: ILoadByAction) {
+export function* loadProjectCollectionSaga(action: ILoadByAction): Generator<any, any, any> {
   try {
     yield put(setLoadingAction("project_collection_loading", true))
     const projects: IHydraCollection<IProject> = yield call(apiClient.getProjects, action.criteria)
-    yield put(loadCollectionSuccessAction(EntityType.PROJECT, projects))
+    yield put(loadCollectionSuccessAction(EntityType.Project, projects))
     yield put(loadingSuccessAction("project_collection_loading", projects))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, projects))
@@ -85,7 +85,7 @@ function* createProjectSaga(action: IModelFormAction<IProject>) {
   try {
     yield put(setLoadingAction("project_operation", true))
     const project: IProject = yield call(apiClient.createProject, action.model)
-    yield put(createModelSuccessAction(EntityType.PROJECT, project))
+    yield put(createModelSuccessAction(EntityType.Project, project))
     yield put(loadingSuccessAction("project_operation", process))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))
@@ -113,7 +113,7 @@ function* updateProjectSaga(action: IModelFormAction<IProject>) {
   try {
     yield put(setLoadingAction("project_operation", true))
     const project: IProject = yield call(apiClient.updateProject, action.model)
-    yield put(updateModelSuccessAction(EntityType.PROJECT, project))
+    yield put(updateModelSuccessAction(EntityType.Project, project))
     yield put(loadingSuccessAction("project_operation", process))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))
@@ -144,7 +144,7 @@ function* deleteProjectSaga(action: IModelFormAction<IProject>) {
   try {
     yield put(setLoadingAction("project_operation", true))
     yield call(apiClient.deleteProject, action.model)
-    yield put(deleteModelSuccessAction(EntityType.PROJECT, action.model))
+    yield put(deleteModelSuccessAction(EntityType.Project, action.model))
     yield put(loadingSuccessAction("project_operation", process))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))

@@ -17,7 +17,7 @@ const TeamToolPage: I18nPage<WithTranslation> = ({ t }) => {
   </BaseLayout>
 }
 
-TeamToolPage.getInitialProps = async () => ({
+TeamToolPage.getInitialProps = () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 

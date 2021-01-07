@@ -15,31 +15,29 @@ import {
 import { clearStoreAction } from "redux/actions/general"
 import { addNotificationAction } from "redux/actions/notifications"
 import { loadingSuccessAction, setLoadingAction } from "redux/helper/actions"
-import { selectAuthExpiresIn, selectAuthToken, selectIsAuthenticated } from "redux/reducer/auth"
+import { selectAuthExpiresIn, selectIsAuthenticated } from "redux/reducer/auth"
 import { AuthToken } from "services/authToken"
-import { getStorageItem, removeStorageItem, setStorageItem } from "services/localStorage"
 import { Routes } from "services/routes"
 import { SubmissionError } from "services/submissionError"
-import { AUTH_COOKIE_NAME, AUTH_LOCALSTORAGE_NAME, AUTH_REFRESH_THRESHOLD } from "../../../config"
+import { AUTH_COOKIE_NAME, AUTH_REFRESH_THRESHOLD } from "../../../config"
 import { getCurrentUser } from "./currentUser"
 
-export function* authWatcherSaga() {
+export function* authWatcherSaga(): any {
   yield all([
-    takeLatest(AuthActionTypes.LOCAL_STORAGE_CHANGED, localStorageChangedSaga),
-    takeLatest(AuthActionTypes.LOGIN, loginSaga),
-    takeEvery(AuthActionTypes.LOGOUT, logoutSaga),
+    takeLatest(AuthActionTypes.Login, loginSaga),
+    takeEvery(AuthActionTypes.Logout, logoutSaga),
 
     // we use takeLatest to allow restart of the countdown when the token was refreshed by another tab
-    takeLatest(AuthActionTypes.REFRESH_TOKEN, refreshTokenSaga),
+    takeLatest(AuthActionTypes.RefreshToken, refreshTokenSaga),
 
-    takeEvery(AuthActionTypes.USER_IS_IDLE, userIsIdleSaga),
+    takeEvery(AuthActionTypes.UserIsIdle, userIsIdleSaga),
   ])
 }
 
 /**
  * exported for the tests
  */
-export function* loginSaga(action: ILoginAction) {
+export function* loginSaga(action: ILoginAction): Generator<any, any, any> {
   const { success, setErrors, setSubmitting } = action.actions
   try {
     yield put(setLoadingAction("login", true))
@@ -70,13 +68,11 @@ export function* loginSaga(action: ILoginAction) {
 /**
  * exported for the tests
  */
-export function* logoutSaga(action: ILogoutAction) {
+export function* logoutSaga(action: ILogoutAction): Generator<any, any, any> {
   yield call(Cookie.remove, AUTH_COOKIE_NAME)
 
-  yield call(removeStorageItem, AUTH_LOCALSTORAGE_NAME)
-
   // @todo get redirect url from store|config|env
-  yield call(Router.push, action.message ? Routes.login : Routes.home)
+  yield call(Router.push, action.message ? Routes.Login : Routes.Home)
 
   // remove all data from the store. To keep the state consistent we also need  to clear all
   // dependent states, like IDs of all projects shown in the marketplace.
@@ -86,8 +82,8 @@ export function* logoutSaga(action: ILogoutAction) {
   yield put(addNotificationAction(action.message || "message.auth.logout", "info", action.options))
 }
 
-export function* refreshTokenSaga() {
-  const expiresIn = yield select(selectAuthExpiresIn)
+export function* refreshTokenSaga(): Generator<any, any, any> {
+  const expiresIn: number = yield select(selectAuthExpiresIn)
 
   // should not happen, because refreshTokenAction() is triggered right after the new token was received,
   // an expired token cannot be refreshed
@@ -97,7 +93,7 @@ export function* refreshTokenSaga() {
 
   if (expiresIn <= AUTH_REFRESH_THRESHOLD) {
     // @todo log warning
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(`WARNING: Token lifetime (${expiresIn} seconds) below refreshThreshold`
       + ` (${AUTH_REFRESH_THRESHOLD} seconds), refreshing now, please check config!`)
 
@@ -129,7 +125,7 @@ export function* refreshTokenSaga() {
  * Try to refresh the auth token, if successful replace the token in the store
  * and trigger the refresh mechanism again
  */
-export function* doRefresh() {
+export function* doRefresh(): Generator<any, any, any> {
   try {
     const newToken = yield call(apiClient.refreshAuthToken)
     yield call(saveToken, newToken)
@@ -138,10 +134,10 @@ export function* doRefresh() {
     // attention: no code after put(), we use takeLatest which cancels the execution when
     // the same refresh saga is started again
   } catch (err) {
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log("WARNING: Token refresh failed, maybe user locked meanwhile, logging out...")
     // @todo log the error, different handling for network error and 401?
-    // tslint:disable-next-line: no-console
+    // eslint-disable-next-line no-console
     console.log(err)
 
     yield put(logoutAction("message.auth.refreshFailed"))
@@ -153,7 +149,7 @@ export function* doRefresh() {
  *
  * @param encodedToken JWT as received from the server
  */
-export function* saveToken(encodedToken: string) {
+export function* saveToken(encodedToken: string): Generator<any, any, any> {
   // save the encoded token in the cookie, this way it is transported to the server if the user
   // hits reload
   yield call(Cookie.set, AUTH_COOKIE_NAME, encodedToken, {
@@ -162,9 +158,6 @@ export function* saveToken(encodedToken: string) {
     // The key "NODE_ENV" under "env" in next.config.js is not allowed.
     secure: process.env.BASE_URL.indexOf("//localhost") === -1 && process.env.CLIENT_ENV === "production",
   })
-
-  // save the token in the localStorage to signal the auth state to other browser tabs
-  yield call(setStorageItem, AUTH_LOCALSTORAGE_NAME, encodedToken)
 
   // save the encoded token (for the Authorization header) together with the decoded expiration time,
   // username & roles
@@ -175,35 +168,9 @@ export function* saveToken(encodedToken: string) {
 /**
  * Logout user after inactivity timeout, see /pages/_app.js
  */
-export function* userIsIdleSaga() {
+export function* userIsIdleSaga(): Generator<any, any, any> {
   const isAuthenticated = yield select(selectIsAuthenticated)
   if (isAuthenticated) {
     yield put(logoutAction("message.auth.idleLogout", { autoClose: false }))
-  }
-}
-
-/**
- * Sync the auth state between multiple open tabs using the localStorage
- */
-export function* localStorageChangedSaga() {
-  const localAuth = yield call(getStorageItem, AUTH_LOCALSTORAGE_NAME)
-  const storeAuth = yield select(selectAuthToken)
-
-  // nothing changed, we probably caused the change ourselves via login/logout in the current tab
-  // @todo event is never triggered in the same tab that changed the storage?
-  if (storeAuth === localAuth) {
-    return
-  }
-
-  if (localAuth) {
-    // do not use call(saveToken, localAuth) as this updates the localStorage again and
-    // setting the cookie is not neccessary as already done in the other tab
-    const auth = new AuthToken(localAuth)
-    yield put(setAuthAction(auth.jwt))
-
-    // restart the refresh mechanism if we received a (new) token
-    yield put(refreshTokenAction())
-  } else if (storeAuth) {
-    yield put(logoutAction("Logout in anderem Browser-Tab"))
   }
 }

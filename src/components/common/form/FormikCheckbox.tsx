@@ -16,6 +16,7 @@ class FormikCheckbox extends FormikElement<IProps> {
   public render = () => {
     // extract all properties not allowed / not needed for the input element so the don't get
     // passed down and appear in the HTML with the rest of the props
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, field, form, help, i18n, id, label, meta, t, tReady, ...props } = this.props
     const labelText = this.labelText()
 

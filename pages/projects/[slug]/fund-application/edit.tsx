@@ -24,7 +24,7 @@ import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   updateProject: (project, actions) =>
-    dispatch(updateModelAction(EntityType.PROJECT, project, actions))
+    dispatch(updateModelAction(EntityType.Project, project, actions))
 })
 
 const mapStateToProps = (state: AppState, { slug }) => ({
@@ -41,8 +41,8 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 const ProjectApplicationEditPage: I18nPage<PageProps> = ({ isMember, project, request, t, updateProject }) => {
   // @todo custom error message "project not found or no permission" etc.
   if (!request.isLoading && (!project || project.isLocked
-    || project.progress === ProjectProgress.CREATING_PROFILE
-    || project.progress === ProjectProgress.CREATING_PLAN
+    || project.progress === ProjectProgress.CreatingProfile
+    || project.progress === ProjectProgress.CreatingPlan
     || !isMember)
   ) {
     return <StatusCode statusCode={404}>
@@ -52,12 +52,12 @@ const ProjectApplicationEditPage: I18nPage<PageProps> = ({ isMember, project, re
 
   const onSubmit = (values, actions) => {
     actions.success = () => {
-      Router.push({
-        pathname: Routes.projectFundApplication,
+      void Router.push({
+        pathname: Routes.ProjectFundApplication,
         // @todo support multiple applications, how to store which one is the active application?
         query: { fund: project.applications[0].fund.id }
       }, {
-        pathname: routeWithParams(Routes.projectFundApplication, { slug: project.slug || project.id }),
+        pathname: routeWithParams(Routes.ProjectFundApplication, { slug: project.slug || project.id }),
         // @todo support multiple applications, how to store which one is the active application?
         query: { fund: project.applications[0].fund.id }
       })
@@ -105,5 +105,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(ProjectApplicationEditPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

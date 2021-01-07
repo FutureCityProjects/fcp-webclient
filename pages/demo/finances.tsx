@@ -9,7 +9,7 @@ import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i1
 
 type PageProps = WithTranslation
 
-const ProjecFinancesPage: I18nPage<PageProps> = () => {
+const ProjectFinancesPage: I18nPage<PageProps> = () => {
   const p1: IProject = {
     createdAt: new Date(),
     delimitation: "Wir grenzen uns von anderen Projekten ab durch ...",
@@ -22,8 +22,8 @@ const ProjecFinancesPage: I18nPage<PageProps> = () => {
       shortDescription: "die Inspiration",
     },
     name: "Testprojekt",
-    profileSelfAssessment: SelfAssessment.MAKING_PROGRESS,
-    progress: ProjectProgress.CREATING_PLAN,
+    profileSelfAssessment: SelfAssessment.MakingProgress,
+    progress: ProjectProgress.CreatingPlan,
     shortDescription: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas",
     slug: "testprojekt",
     resourceRequirements: [
@@ -108,13 +108,14 @@ const ProjecFinancesPage: I18nPage<PageProps> = () => {
     <PlanContainer
       component={ProjectFinances}
       project={p1}
+      // eslint-disable-next-line no-console
       updateProject={(values) => console.log(values)}
     />
   </BaseLayout>
 }
 
-ProjecFinancesPage.getInitialProps = async () => ({
+ProjectFinancesPage.getInitialProps = () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 
-export default withTranslation(includeDefaultNamespaces())(ProjecFinancesPage)
+export default withTranslation(includeDefaultNamespaces())(ProjectFinancesPage)

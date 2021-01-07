@@ -19,10 +19,10 @@ import { Routes, routeWithParams } from "services/routes"
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   onSubmit: (fund: IFund, actions) => {
     actions.success = (result) => {
-      Router.push(Routes.fundDetails, routeWithParams(Routes.fundDetails, { id: result.id }))
+      void Router.push(Routes.FundDetails, routeWithParams(Routes.FundDetails, { id: result.id }))
     }
 
-    dispatch(createModelAction(EntityType.FUND, normalizeFund(fund), actions))
+    dispatch(createModelAction(EntityType.Fund, normalizeFund(fund), actions))
   },
 })
 
@@ -50,5 +50,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(FundCreationPage),
   ),
-  UserRole.PROCESS_OWNER,
+  UserRole.ProcessOwner,
 )

@@ -23,12 +23,12 @@ import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   updateFund: (fund, actions) =>
-    dispatch(updateModelAction(EntityType.FUND, fund, actions)),
+    dispatch(updateModelAction(EntityType.Fund, fund, actions)),
 })
 
 const mapStateToProps = (state: AppState, { id }) => ({
   // @todo don't select any fund, only if it was loaded with PO privileges
-  fund: selectById<IFund>(state, EntityType.FUND, id),
+  fund: selectById<IFund>(state, EntityType.Fund, id),
 
   request: state.requests.fundsLoading,
 })
@@ -38,7 +38,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   id: number
 }
 
-const fundEditPage: I18nPage<PageProps> = ({ fund, request, t, updateFund }) => {
+const FundEditPage: I18nPage<PageProps> = ({ fund, request, t, updateFund }) => {
   // @todo custom error message "fund not found" etc.
   if (!request.isLoading && !fund) {
     return <StatusCode statusCode={404}>
@@ -48,8 +48,8 @@ const fundEditPage: I18nPage<PageProps> = ({ fund, request, t, updateFund }) => 
 
   const onSubmit = (values, actions) => {
     actions.success = () => {
-      Router.push(Routes.fundDetails,
-        routeWithParams(Routes.fundDetails, { id: fund.id }))
+      void Router.push(Routes.FundDetails,
+        routeWithParams(Routes.FundDetails, { id: fund.id }))
     }
 
     updateFund(normalizeFund(values), actions)
@@ -73,7 +73,7 @@ const fundEditPage: I18nPage<PageProps> = ({ fund, request, t, updateFund }) => 
   </BaseLayout>
 }
 
-fundEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
+FundEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
   if (typeof query.id === "string" && /^\d+$/.exec(query.id)) {
     id = parseInt(query.id, 10)
@@ -82,7 +82,7 @@ fundEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
     // requested fund was loaded with PO privileges or was in store from any logged out
     // actions etc. - refactor the reducer to track a single fund for PO management
     if (!selectManagementFundsLoaded(store.getState())) {
-      store.dispatch(loadCollectionAction(EntityType.FUND, {}, "fund_management"))
+      store.dispatch(loadCollectionAction(EntityType.Fund, {}, "fund_management"))
     }
   }
 
@@ -91,7 +91,7 @@ fundEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
 
 export default withAuth(
   connector(
-    withTranslation(includeDefaultNamespaces())(fundEditPage),
+    withTranslation(includeDefaultNamespaces())(FundEditPage),
   ),
-  UserRole.PROCESS_OWNER,
+  UserRole.ProcessOwner,
 )

@@ -23,7 +23,7 @@ const ProjectTimetable: React.FC<IPlanProps> = ({ functions, project, updateProj
     functions.updateTask(task)
   }
 
-  const updateImplementationTime = (values: { implementationBegin: Date, implementationTime: number }) => {
+  const updateImplementationTime = (values: { implementationBegin: Date; implementationTime: number }) => {
     // reset to first day of month
     values.implementationBegin = new Date(values.implementationBegin)
     values.implementationBegin.setMonth(values.implementationBegin.getMonth(), 1)
@@ -51,12 +51,12 @@ const ProjectTimetable: React.FC<IPlanProps> = ({ functions, project, updateProj
       </div>
       <DropdownComponent button={<Icon name="grid" size={26} />}>
         <Link
-          href={Routes.projectPlan}
-          as={routeWithParams(Routes.projectPlan, { slug: project.slug || project.id })}
+          href={Routes.ProjectPlan}
+          as={routeWithParams(Routes.ProjectPlan, { slug: project.slug || project.id })}
         >
           <a>{t("goto.planOverview")}</a>
         </Link>
-        <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+        <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
           <a>{t("goto.myProjects")}</a>
         </Link>
       </DropdownComponent>

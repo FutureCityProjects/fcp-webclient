@@ -22,12 +22,12 @@ import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   createConcretization: (concretization, actions) =>
-    dispatch(createModelAction(EntityType.FUND_CONCRETIZATION, concretization, actions)),
+    dispatch(createModelAction(EntityType.FundConcretization, concretization, actions)),
 })
 
 const mapStateToProps = (state: AppState, { id }) => ({
   // @todo don't select any fund, only if it was loaded with PO privileges
-  fund: selectById<IFund>(state, EntityType.FUND, id),
+  fund: selectById<IFund>(state, EntityType.Fund, id),
 
   request: state.requests.fundsLoading,
 })
@@ -37,7 +37,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   id: number
 }
 
-const concretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, createConcretization }) => {
+const ConcretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, createConcretization }) => {
   // @todo custom error message "fund not found" etc.
   if (!request.isLoading && !fund) {
     return <StatusCode statusCode={404}>
@@ -47,8 +47,8 @@ const concretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, cre
 
   const onSubmit = (values: IFundConcretization, actions) => {
     actions.success = () => {
-      Router.push(Routes.fundDetails,
-        routeWithParams(Routes.fundDetails, { id: fund.id }) + "#concretizations")
+      void Router.push(Routes.FundDetails,
+        routeWithParams(Routes.FundDetails, { id: fund.id }) + "#concretizations")
     }
 
     values.fund = fund["@id"]
@@ -78,7 +78,7 @@ const concretizationCreationPage: I18nPage<PageProps> = ({ fund, request, t, cre
   </BaseLayout>
 }
 
-concretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext) => {
+ConcretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
   if (typeof query.id === "string" && /^\d+$/.exec(query.id)) {
     id = parseInt(query.id, 10)
@@ -87,7 +87,7 @@ concretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext)
     // requested fund was loaded with PO privileges or was in store from any logged out
     // actions etc. - refactor the reducer to track a single fund for PO management
     if (!selectManagementFundsLoaded(store.getState())) {
-      store.dispatch(loadCollectionAction(EntityType.FUND, {}, "fund_management"))
+      store.dispatch(loadCollectionAction(EntityType.Fund, {}, "fund_management"))
     }
   }
 
@@ -96,7 +96,7 @@ concretizationCreationPage.getInitialProps = ({ store, query }: NextPageContext)
 
 export default withAuth(
   connector(
-    withTranslation(includeDefaultNamespaces())(concretizationCreationPage),
+    withTranslation(includeDefaultNamespaces())(ConcretizationCreationPage),
   ),
-  UserRole.PROCESS_OWNER,
+  UserRole.ProcessOwner,
 )

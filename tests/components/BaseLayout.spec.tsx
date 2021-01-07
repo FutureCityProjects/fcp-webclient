@@ -32,7 +32,7 @@ describe("Component:BaseLayout", () => {
   test("renders navigation with login state", () => {
     const token: IWebToken = {
       encoded: "fakeJWT", username: "PeterJackson1",
-      expiresAt: 0, id: 0, roles: [UserRole.USER]
+      expiresAt: 0, id: 0, roles: [UserRole.User]
     }
     const initialstate = {
       ...getInitialState(),

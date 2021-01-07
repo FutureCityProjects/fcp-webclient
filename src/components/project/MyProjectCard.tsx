@@ -8,13 +8,13 @@ import { useTranslation } from "services/i18n"
 import ProjectStatus from "./ProjectStatus"
 
 interface IProps {
-  deleteMembership: any
+  deleteMembership: (membership: IProjectMembership, actions: any) => void
   isSingle?: boolean
   membership: IProjectMembership
   project: IProject
 }
 
-const hashMatchesProject = (project) => {
+const hashMatchesProject = (project: IProject) => {
   if (!process.browser) {
     return false
   }
@@ -23,7 +23,7 @@ const hashMatchesProject = (project) => {
     return false
   }
 
-  return window.location.hash === "#project-" + project.id
+  return window.location.hash === "#project-" + project.id.toString()
 }
 
 const MyProjectCard: React.FC<IProps> = ({ deleteMembership, isSingle = false, membership, project }: IProps) => {
@@ -54,9 +54,9 @@ const MyProjectCard: React.FC<IProps> = ({ deleteMembership, isSingle = false, m
       >
         <div className="title-section">
           <h3
-            className={project.state === ProjectState.DEACTIVATED
-              || project.state === ProjectState.INACTIVE
-              || membership.role === MembershipRole.APPLICANT ? t("text-muted") : ""}
+            className={project.state === ProjectState.Deactivated
+              || project.state === ProjectState.Inactive
+              || membership.role === MembershipRole.Applicant ? t("text-muted") : ""}
           >
             {project.name ? project.name : t("project.unnamed")}
           </h3>
@@ -67,15 +67,15 @@ const MyProjectCard: React.FC<IProps> = ({ deleteMembership, isSingle = false, m
                 date: project.createdAt,
                 user: project.createdBy ? project.createdBy.username : t("user.unknown"),
               }} />
-            {project.state === ProjectState.DEACTIVATED && (" - " + t("project.state.deactivated"))}
-            {project.state === ProjectState.INACTIVE && (" - " + t("project.state.inactive"))}
+            {project.state === ProjectState.Deactivated && (" - " + t("project.state.deactivated"))}
+            {project.state === ProjectState.Inactive && (" - " + t("project.state.inactive"))}
           </span>
         </div>
         <span className={"caret" + (isOpen ? " caret-toggled" : "")}><Icon name="caret" size={24} /></span>
       </CardHeader>
       <Collapse isOpen={isOpen}>
         <CardBody>
-          {membership.role === MembershipRole.APPLICANT
+          {membership.role === MembershipRole.Applicant
             ? <>
               <TranslatedHtml content="page.user.projects.applicationOpen" />
               <a className="btn btn-inline" onClick={() => confirmDeleteApplication(membership)}

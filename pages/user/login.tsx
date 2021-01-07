@@ -38,35 +38,35 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
   // prevent redirecting to the profile when the state changes while a login is running
   const [loggingIn, setLoggingIn] = useState(false)
   if (!loggingIn && isAuthenticated) {
-    return <Redirect route={Routes.userProfile} />
+    return <Redirect route={Routes.UserProfile} />
   }
 
   const onSubmit = (credentials: ICredentials, actions: any) => {
     actions.success = (user: IUser) => {
       if (redirectBack) {
-        Router.push(redirectBack)
+        void Router.push(redirectBack)
         return
       }
 
       if (user.createdProjects) {
         const newProject = user.createdProjects
-          .filter((p) => p.progress === ProjectProgress.CREATING_PROFILE && !p.name)
+          .filter((p) => p.progress === ProjectProgress.CreatingProfile && !p.name)
           .shift()
 
         const membership = newProject && user.projectMemberships
-          .filter((m) => (m.project as IProject).id === newProject.id && m.role !== MembershipRole.APPLICANT)
+          .filter((m) => (m.project as IProject).id === newProject.id && m.role !== MembershipRole.Applicant)
           .shift()
 
         // if the user has created a project without a name and is still a member
         // -> directly redirect to the profile
         if (newProject && membership) {
-          Router.push(Routes.projectProfileEdit, routeWithParams(Routes.projectProfileEdit,
+          void Router.push(Routes.ProjectProfileEdit, routeWithParams(Routes.ProjectProfileEdit,
             { slug: newProject.id }))
           return
         }
       }
 
-      Router.push(Routes.myProjects)
+      void Router.push(Routes.MyProjects)
     }
 
     setLoggingIn(true)
@@ -88,7 +88,7 @@ const LoginPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout>
 }
 
-LoginPage.getInitialProps = async ({ query }: NextPageContext) => ({
+LoginPage.getInitialProps = ({ query }: NextPageContext) => ({
   namespacesRequired: includeDefaultNamespaces(),
   redirectBack: query.redirectBack,
 })

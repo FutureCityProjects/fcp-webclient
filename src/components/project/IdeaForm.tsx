@@ -27,7 +27,7 @@ interface IProps {
   idea: IProject
 }
 
-const IdeaForm = ({ onSubmit, idea }: IProps) => {
+const IdeaForm: React.FC<IProps> = ({ onSubmit, idea }: IProps) => {
   const { t } = useTranslation()
 
   return <Formik<IProject>

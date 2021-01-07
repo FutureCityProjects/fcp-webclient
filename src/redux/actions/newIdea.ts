@@ -1,9 +1,9 @@
 import { IProject } from "api/schema"
 
 export enum NewIdeaActionTypes {
-  CREATE_IDEA = "CREATE_IDEA",
-  SET_NEW_IDEA = "SET_NEW_IDEA",
-  RESET_NEW_IDEA = "RESET_NEW_IDEA",
+  CreateIdea = "CREATE_IDEA",
+  SetNewIdea = "SET_NEW_IDEA",
+  ResetNewIdea = "RESET_NEW_IDEA",
 }
 
 export interface INewIdeaAction {
@@ -12,17 +12,17 @@ export interface INewIdeaAction {
 
 export interface ISetNewIdeaAction extends INewIdeaAction {
   idea: IProject
-  type: NewIdeaActionTypes.SET_NEW_IDEA
+  type: NewIdeaActionTypes.SetNewIdea
 }
 
 export interface ICreateIdeaAction extends INewIdeaAction {
   actions: any
   idea: IProject
-  type: NewIdeaActionTypes.CREATE_IDEA
+  type: NewIdeaActionTypes.CreateIdea
 }
 
 export interface IResetNewIdeaAction extends INewIdeaAction {
-  type: NewIdeaActionTypes.RESET_NEW_IDEA
+  type: NewIdeaActionTypes.ResetNewIdea
 }
 
 export type NewIdeaActions =
@@ -32,15 +32,15 @@ export type NewIdeaActions =
 
 export const setNewIdeaAction = (idea: IProject): ISetNewIdeaAction => ({
   idea,
-  type: NewIdeaActionTypes.SET_NEW_IDEA,
+  type: NewIdeaActionTypes.SetNewIdea,
 })
 
-export const createIdeaAction = (idea: IProject, actions: any): ICreateIdeaAction => ({
+export const createIdeaAction = (idea: IProject, actions: Record<string, unknown>): ICreateIdeaAction => ({
   actions,
   idea,
-  type: NewIdeaActionTypes.CREATE_IDEA,
+  type: NewIdeaActionTypes.CreateIdea,
 })
 
 export const resetNewIdeaAction = (): IResetNewIdeaAction => ({
-  type: NewIdeaActionTypes.RESET_NEW_IDEA,
+  type: NewIdeaActionTypes.ResetNewIdea,
 })

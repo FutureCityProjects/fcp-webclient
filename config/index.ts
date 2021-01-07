@@ -18,13 +18,6 @@ export const AUTH_COOKIE_NAME = process.env.AUTH_COOKIE_NAME
   ? process.env.AUTH_COOKIE_NAME
   : "fcp.authToken"
 
-// name of the localStorage item that is used to sync the auth between browser tabs,
-// should be individualized to prevent problems when a user accesses two different
-// FCP instances
-export const AUTH_LOCALSTORAGE_NAME = process.env.AUTH_LOCALSTORAGE_NAME
-  ? process.env.AUTH_LOCALSTORAGE_NAME
-  : "fcp.authToken"
-
 // number of seconds before the JWT expires the app will try to refresh is,
 // must be below the JWT TTL, should account for network delay and [-3,+3] secs. randomization
 export const AUTH_REFRESH_THRESHOLD: number = process.env.AUTH_REFRESH_THRESHOLD

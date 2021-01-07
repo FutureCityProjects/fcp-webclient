@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { ReactElement, useState } from "react"
 
 import { IWorkPackage } from "api/schema"
 import Icon from "components/common/Icon"
@@ -21,7 +21,7 @@ const WorkPackageRows: React.FC<IProps> = (props: IProps) => {
 
   const implementationTime = functions.getImplementationTime()
   const workPackageMonths = (wp: IWorkPackage) => {
-    const cols = []
+    const cols: ReactElement[] = []
     for (let i = 0; i < implementationTime; i++) {
       cols.push(<td key={i} className={functions.getWorkPackageMonths(wp.id).includes(i + 1) ? "active" : ""} />)
     }

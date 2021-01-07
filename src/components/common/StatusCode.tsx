@@ -1,14 +1,18 @@
-import PropTypes from "prop-types"
-import React from "react"
+import React, { ReactChild } from "react"
 
 import ServerResponseContext from "components/hoc/ServerResponseContext"
+
+type IProps = {
+  children?: React.ReactChildren | ReactChild
+  statusCode: number
+}
 
 /**
  * Allows to set a status code from the render() function for SSR.
  */
-export default function StatusCode({ statusCode, children }) {
+const StatusCode: React.FC<IProps> = ({ statusCode, children }: IProps) => {
   if (process.browser) {
-    return children
+    return <>{children}</>
   }
 
   return (
@@ -21,11 +25,4 @@ export default function StatusCode({ statusCode, children }) {
   )
 }
 
-StatusCode.propTypes = {
-  children: PropTypes.any,
-  statusCode: PropTypes.number.isRequired,
-}
-
-StatusCode.defaultProps = {
-  children: null,
-}
+export default StatusCode

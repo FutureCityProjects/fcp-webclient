@@ -5,10 +5,10 @@ import { AppState } from "redux/reducer"
 const newIdeaReducer =
   (state: IProject = emptyIdea, action: NewIdeaActions): IProject => {
     switch (action.type) {
-      case NewIdeaActionTypes.SET_NEW_IDEA:
+      case NewIdeaActionTypes.SetNewIdea:
         return action.idea
 
-      case NewIdeaActionTypes.RESET_NEW_IDEA:
+      case NewIdeaActionTypes.ResetNewIdea:
         return emptyIdea
 
       default:

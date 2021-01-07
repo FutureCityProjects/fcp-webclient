@@ -5,10 +5,10 @@ import { AppState } from "redux/reducer"
 const newProjectReducer =
   (state: IProjectCreation = emptyProject, action: NewProjectActions): IProjectCreation => {
     switch (action.type) {
-      case NewProjectActionTypes.SET_NEW_PROJECT:
+      case NewProjectActionTypes.SetNewProject:
         return action.project
 
-      case NewProjectActionTypes.RESET_NEW_PROJECT:
+      case NewProjectActionTypes.ResetNewProject:
         return emptyProject
 
       default:

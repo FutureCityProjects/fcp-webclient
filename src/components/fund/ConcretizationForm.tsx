@@ -14,7 +14,7 @@ interface IProps {
   concretization?: IFundConcretization
 }
 
-const ConcretizationForm = ({ onSubmit, concretization = {
+const ConcretizationForm: React.FC<IProps> = ({ onSubmit, concretization = {
   description: "",
   maxLength: 280,
   question: ""

@@ -1,7 +1,7 @@
 export enum RequestErrors {
-  accessDenied = "Access Denied",
-  badRequest = "Bad Request",
-  notFound = "Not Found",
+  AccessDenied = "Access Denied",
+  BadRequest = "Bad Request",
+  NotFound = "Not Found",
 }
 
 export class RequestError extends Error { }

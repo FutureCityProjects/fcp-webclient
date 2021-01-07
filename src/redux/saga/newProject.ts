@@ -16,11 +16,11 @@ import { selectNewProject } from "redux/reducer/newProject"
 import { getCurrentProcess } from "redux/saga/currentProcess"
 import { SubmissionError } from "services/submissionError"
 
-export function* newProjectWatcherSaga() {
+export function* newProjectWatcherSaga(): any {
   yield all([
-    takeLatest(NewProjectActionTypes.CREATE_NEW_PROJECT, withCallback(createProjectSaga)),
-    takeLatest(AuthActionTypes.SET_AUTH, createSavedProjectSaga),
-    takeLatest(RegistrationActionTypes.SET_REGISTERED_USER, postRegistrationSaga),
+    takeLatest(NewProjectActionTypes.CreateNewProject, withCallback(createProjectSaga)),
+    takeLatest(AuthActionTypes.SetAuth, createSavedProjectSaga),
+    takeLatest(RegistrationActionTypes.SetRegisteredUser, postRegistrationSaga),
   ])
 }
 
@@ -33,7 +33,7 @@ function* createProjectSaga(action: ICreateProjectAction) {
   yield put(setLoadingAction("project_operation", true))
   const process: IProcess = yield call(getCurrentProcess)
   if (!process) {
-    const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+    const err = yield select((s: AppState) => s.requests.processLoading.loadingError as string)
     yield put(setLoadingAction("project_operation", false, err))
     return null
   }
@@ -41,7 +41,7 @@ function* createProjectSaga(action: ICreateProjectAction) {
   // inject the current process, it's required
   action.project.process = process["@id"]
 
-  const project = yield putWait(createModelAction(EntityType.PROJECT, action.project, action.actions))
+  const project: IProject = yield putWait(createModelAction(EntityType.Project, action.project, action.actions))
 
   // refresh the user to get the new membership
   yield putWait(loadCurrentUserAction())
@@ -62,7 +62,7 @@ function* createSavedProjectSaga(action: ISetAuthAction) {
     return
   }
 
-  const newProject = yield select(selectNewProject)
+  const newProject: IProject = yield select(selectNewProject)
   if (!newProject) {
     return
   }
@@ -71,7 +71,7 @@ function* createSavedProjectSaga(action: ISetAuthAction) {
     yield put(setLoadingAction("project_operation", true))
     const process: IProcess = yield call(getCurrentProcess)
     if (!process) {
-      const err = yield select((s) => s.currentProcess.request.loadingError)
+      const err = yield select((s) => s.currentProcess.request.loadingError) // @todo gibt es currentProcess überhaupt (noch)?
       yield put(setLoadingAction("project_operation", false, err))
       return null
     }
@@ -115,15 +115,11 @@ function* postRegistrationSaga(action: ISetRegisteredUserAction) {
     return
   }
 
-  const createdProjects = action.user.createdProjects
-
-  for (const key in createdProjects) {
-    if (createdProjects.hasOwnProperty(key)) {
-      if (createdProjects[key].progress === ProjectProgress.CREATING_PROFILE) {
-        yield put(addNotificationAction("message.project.newProjectSaved", "success"))
-        yield put(resetNewProjectAction())
-        yield put(createModelSuccessAction(EntityType.PROJECT, createdProjects[key], "new_project"))
-      }
+  for (const project of action.user.createdProjects) {
+    if (project.progress === ProjectProgress.CreatingProfile) {
+      yield put(addNotificationAction("message.project.newProjectSaved", "success"))
+      yield put(resetNewProjectAction())
+      yield put(createModelSuccessAction(EntityType.Project, project, "new_project"))
     }
   }
 }

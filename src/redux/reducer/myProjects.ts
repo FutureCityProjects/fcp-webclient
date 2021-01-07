@@ -6,9 +6,9 @@ import { AppState } from "redux/reducer"
 import { selectCurrentUser } from "./auth"
 import { EntityType, selectCollectionByIds } from "./data"
 
-type myProjectsState = number[]
+type MyProjectsState = number[]
 
-const myProjectsReducer = (state: myProjectsState = null, action: Action): myProjectsState => {
+const myProjectsReducer = (state: MyProjectsState = null, action: Action): MyProjectsState => {
   switch (action.type) {
     // Storing the IDs of my projects is redundant as we can determine them from the current users
     // memberships. But we need a way to determine if the projects in the central data state were
@@ -23,9 +23,9 @@ const myProjectsReducer = (state: myProjectsState = null, action: Action): myPro
   }
 }
 
-type selectableFundsState = number[]
+type SelectableFundsState = number[]
 
-const selectableFundsReducer = (state: selectableFundsState = null, action: Action): selectableFundsState => {
+const selectableFundsReducer = (state: SelectableFundsState = null, action: Action): SelectableFundsState => {
   switch (action.type) {
     case "LOADING_SELECTABLE_FUNDS_SUCCESS":
       const funds: IHydraCollection<IFund> = (action as ILoadingSuccessAction).result
@@ -81,7 +81,7 @@ export const selectMyProjects = (state: AppState): IProject[] => {
     return []
   }
 
-  return selectCollectionByIds<IProject>(state, EntityType.PROJECT, state.myProjects.projects)
+  return selectCollectionByIds<IProject>(state, EntityType.Project, state.myProjects.projects)
 }
 
 /**
@@ -99,7 +99,7 @@ export const selectMyProjectsLoaded = (state: AppState): boolean =>
  * @param identifier
  * @param state
  * @returns null when the user has no own projects or when they weren't loaded yet, else
- *    the project matching by ID or slug
+ * the project matching by ID or slug
  */
 export const selectMyProjectByIdentifier = (state: AppState, identifier: string | number): IProject => {
   const projects = selectMyProjects(state)
@@ -122,7 +122,7 @@ export const selectIsProjectOwner = (state: AppState, identifier: string | numbe
   }
 
   return memberships
-    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role === MembershipRole.OWNER)
+    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role === MembershipRole.Owner)
     .length > 0
 }
 
@@ -138,7 +138,7 @@ export const selectIsProjectMember = (state: AppState, identifier: string | numb
   }
 
   return memberships
-    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role !== MembershipRole.APPLICANT)
+    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role !== MembershipRole.Applicant)
     .length > 0
 }
 
@@ -154,6 +154,6 @@ export const selectIsProjectApplicant = (state: AppState, identifier: string | n
   }
 
   return memberships
-    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role === MembershipRole.APPLICANT)
+    .filter((m: IProjectMembership) => (m.project as IProject).id === project.id && m.role === MembershipRole.Applicant)
     .length > 0
 }

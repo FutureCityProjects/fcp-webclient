@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik"
 import Link from "next/link"
-import React from "react"
+import React, { ReactElement } from "react"
 import { Button, Card, CardBody, CardHeader, Col, Row, Spinner } from "reactstrap"
 
 import { IProject } from "api/schema"
@@ -16,7 +16,7 @@ interface IProps {
   project: IProject
 }
 
-const ApplicationDataForm = ({ onSubmit, project }: IProps) => {
+const ApplicationDataForm = ({ onSubmit, project }: IProps): ReactElement => {
   const { t } = useTranslation()
 
   return <Card className="body-card">
@@ -38,17 +38,17 @@ const ApplicationDataForm = ({ onSubmit, project }: IProps) => {
                 : <a onClick={() => handleSubmit()} className="navigation-item" aria-label={t("form.saveChanges")} title={t("form.saveChanges")}><Icon name="save" size={24} /></a>}
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 <Link href={{
-                  pathname: Routes.projectFundApplication,
+                  pathname: Routes.ProjectFundApplication,
                   // @todo support multiple applications, how to store which one is the active application?
                   query: { fund: project.applications[0].fund.id }
                 }} as={{
-                  pathname: routeWithParams(Routes.projectFundApplication, { slug: project.slug || project.id }),
+                  pathname: routeWithParams(Routes.ProjectFundApplication, { slug: project.slug || project.id }),
                   // @todo support multiple applications, how to store which one is the active application?
                   query: { fund: project.applications[0].fund.id }
                 }} >
                   <a>{t("goto.projectApplication")}</a>
                 </Link>
-                <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+                <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
                   <a>{t("goto.myProjects")}</a>
                 </Link>
               </DropdownComponent>
@@ -144,11 +144,11 @@ const ApplicationDataForm = ({ onSubmit, project }: IProps) => {
                 {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
               <Link href={{
-                pathname: Routes.projectFundApplication,
+                pathname: Routes.ProjectFundApplication,
                 // @todo support multiple applications, how to store which one is the active application?
                 query: { fund: project.applications[0].fund.id }
               }} as={{
-                pathname: routeWithParams(Routes.projectFundApplication, { slug: project.slug || project.id }),
+                pathname: routeWithParams(Routes.ProjectFundApplication, { slug: project.slug || project.id }),
                 // @todo support multiple applications, how to store which one is the active application?
                 query: { fund: project.applications[0].fund.id }
               }} >

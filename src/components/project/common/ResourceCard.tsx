@@ -66,9 +66,9 @@ const ResourceCard: React.FC<IProps> = (props: IProps) => {
                 name="sourceType"
                 options={{
                   [t("form.project.resourceRequirement.sourceType.placeholder")]: "",
-                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_OWN_FUNDS)]: ResourceSourceType.SOURCE_TYPE_OWN_FUNDS,
-                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_FUNDING)]: ResourceSourceType.SOURCE_TYPE_FUNDING,
-                  [t("resourceRequirement.sourceType." + ResourceSourceType.SOURCE_TYPE_PROCEEDS)]: ResourceSourceType.SOURCE_TYPE_PROCEEDS,
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.OwnFunds)]: ResourceSourceType.OwnFunds,
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.Funding)]: ResourceSourceType.Funding,
+                  [t("resourceRequirement.sourceType." + ResourceSourceType.Proceeds)]: ResourceSourceType.Proceeds,
                 }}
                 value={values.sourceType}
               />

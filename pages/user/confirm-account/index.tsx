@@ -43,12 +43,12 @@ const ConfirmAccountPage: I18nPage<PageProps> = (props) => {
   // no validation result and/or no notification message
   if (process.browser && result) {
     resetValidation()
-    return <Redirect route={Routes.login} />
+    return <Redirect route={Routes.Login} />
   }
 
   const onSubmit = (values: IValidation, actions: any) => {
     actions.success = () => {
-      Router.push(Routes.login)
+      void Router.push(Routes.Login)
     }
     confirmValidation(values.id, values.token, actions)
   }
@@ -86,8 +86,8 @@ const ConfirmAccountPage: I18nPage<PageProps> = (props) => {
 
 ConfirmAccountPage.getInitialProps = ({ query, store }: NextPageContext) => {
   const token: string = typeof query.token === "string" ? query.token : null
-  const id: string = typeof query.id === "string" && query.id.toString().match(/^\d+$/)
-    ? query.id.toString()
+  const id: string = typeof query.id === "string" && /^\d+$/.exec(query.id)
+    ? query.id
     : null
 
   if (token && id) {

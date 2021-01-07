@@ -4,12 +4,12 @@ import { IWebToken } from "redux/helper/state"
 import { AppState } from "redux/reducer"
 import { EntityType, selectById } from "./data"
 
-const tokenReducer = (state: IWebToken = null, action: AuthActions) => {
+const tokenReducer = (state: IWebToken = null, action: AuthActions): IWebToken => {
   switch (action.type) {
-    case AuthActionTypes.SET_AUTH:
+    case AuthActionTypes.SetAuth:
       return action.token
 
-    case AuthActionTypes.LOGOUT:
+    case AuthActionTypes.Logout:
       return null
 
     default:
@@ -92,5 +92,5 @@ export const selectIsAuthenticated = (state: AppState): boolean =>
  */
 export const selectCurrentUser = (state: AppState): IUser => {
   const id = selectCurrentUserId(state)
-  return id ? selectById(state, EntityType.USER, id) : null
+  return id ? selectById(state, EntityType.User, id) : null
 }

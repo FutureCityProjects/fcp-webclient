@@ -31,11 +31,11 @@ const FundingView: React.FC<IProps> = ({ application, fund, project }: IProps) =
         ? t("default.currency", { value: application.requestedFunding })
         : t("default.empty")}
       <Link href={{
-        pathname: Routes.projectFundingEdit,
+        pathname: Routes.ProjectFundingEdit,
         // @todo support multiple applications, how to store which one is the active application?
         query: { fund: fund.id }
       }} as={{
-        pathname: routeWithParams(Routes.projectFundingEdit, { slug: project.slug || project.id }),
+        pathname: routeWithParams(Routes.ProjectFundingEdit, { slug: project.slug || project.id }),
         // @todo support multiple applications, how to store which one is the active application?
         query: { fund: fund.id }
       }} >

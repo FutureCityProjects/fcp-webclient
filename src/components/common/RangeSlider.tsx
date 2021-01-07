@@ -3,7 +3,7 @@ import Slider from "react-rangeslider"
 
 interface IProps {
   id?: string
-  labels: object
+  labels: Record<string, unknown>
   onChange?: any
   static?: boolean
   value?: number

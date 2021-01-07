@@ -19,8 +19,8 @@ const ImplementationView: React.FC<IPlanProps> = (props: IPlanProps) => {
       </div>
       <div className={"icon-navigation"}>
         <Link
-          href={Routes.projectPlanTimetable}
-          as={routeWithParams(Routes.projectPlanTimetable, { slug: project.slug || project.id })}
+          href={Routes.ProjectPlanTimetable}
+          as={routeWithParams(Routes.ProjectPlanTimetable, { slug: project.slug || project.id })}
         >
           <a className="navigation-item" aria-label={t("goto.editTimetable")} title={t("goto.editTimetable")}>
             <Icon name={"pencil"} size={24} />

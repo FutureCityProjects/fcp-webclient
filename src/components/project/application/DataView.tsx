@@ -24,8 +24,8 @@ const DataView: React.FC<IProps> = (props: IProps) => {
       </div>
       <div className={"icon-navigation"}>
         <Link
-          href={Routes.projectFundApplicationEdit}
-          as={routeWithParams(Routes.projectFundApplicationEdit, { slug: project.slug || project.id })}
+          href={Routes.ProjectFundApplicationEdit}
+          as={routeWithParams(Routes.ProjectFundApplicationEdit, { slug: project.slug || project.id })}
         >
           <a aria-label={t("goto.editApplicationData")} className="navigation-item" title={t("goto.editApplicationData")}>
             <Icon name={"pencil"} size={24} />

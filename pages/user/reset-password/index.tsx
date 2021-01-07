@@ -38,7 +38,7 @@ const ResetPasswordPage: I18nPage<PageProps> = (props) => {
   const { addNotification, confirmValidation, id, request, result, token } = props
   if (!result) {
     addNotification("message.account.validated")
-    return <Redirect route={Routes.login} />
+    return <Redirect route={Routes.Login} />
   }
 
   const onSubmit = (values: IValidation, actions: any) => {
@@ -76,8 +76,8 @@ const ResetPasswordPage: I18nPage<PageProps> = (props) => {
 
 ResetPasswordPage.getInitialProps = ({ query, store }: NextPageContext) => {
   const token: string = typeof query.token === "string" ? query.token : null
-  const id: string = typeof query.id === "string" && query.id.toString().match(/^\d+$/)
-    ? query.id.toString()
+  const id: string = typeof query.id === "string" && /^\d+$/.exec(query.id)
+    ? query.id
     : null
 
   if (token && id) {

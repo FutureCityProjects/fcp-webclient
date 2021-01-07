@@ -12,7 +12,7 @@ const ActiveElement: FunctionComponent<IProps> = ({ router, href, ...props }) =>
 
   const activeClassName = props.activeClassName ? props.activeClassName : "active"
 
-  let className = child.props.className || ""
+  let className: string = child.props.className || ""
 
   // when part of the URL matches: we want dropdowns etc. to be shown as active if a subpage is active,
   // e.g. /users should be active when /users/16 is displayed

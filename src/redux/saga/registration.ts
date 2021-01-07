@@ -22,9 +22,9 @@ import { SubmissionError } from "services/submissionError"
 import { BASE_URL } from "../../../config"
 import { getCurrentProcess } from "./currentProcess"
 
-export function* registrationWatcherSaga() {
+export function* registrationWatcherSaga(): any {
   yield all([
-    takeLatest(RegistrationActionTypes.REGISTER_USER, withCallback(registerUserSaga)),
+    takeLatest(RegistrationActionTypes.RegisterUser, withCallback(registerUserSaga)),
   ])
 }
 
@@ -34,7 +34,7 @@ function* registerUserSaga(action: IRegisterUserAction) {
   try {
     yield put(setLoadingAction("user_operation", true))
     // the API uses {{param}} as placeholder while Next uses [param]:
-    const route = Routes.confirmAccount.replace(/\[/g, "{{").replace(/\]/g, "}}")
+    const route = Routes.ConfirmAccount.replace(/\[/g, "{{").replace(/\]/g, "}}")
 
     const registration: IRegistration = {
       validationUrl: BASE_URL + route,
@@ -50,7 +50,7 @@ function* registerUserSaga(action: IRegisterUserAction) {
     if (newIdea) {
       const process: IProcess = yield call(getCurrentProcess)
       if (!process) {
-        const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+        const err = yield select((s: AppState) => s.requests.processLoading.loadingError as string)
         yield put(setLoadingAction("user_operation", false, err))
         return null
       }
@@ -66,7 +66,7 @@ function* registerUserSaga(action: IRegisterUserAction) {
     if (newProject) {
       const process: IProcess = yield call(getCurrentProcess)
       if (!process) {
-        const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+        const err = yield select((s: AppState) => s.requests.processLoading.loadingError as string)
         yield put(setLoadingAction("user_operation", false, err))
         return null
       }
@@ -80,12 +80,12 @@ function* registerUserSaga(action: IRegisterUserAction) {
     // to add the membership there
     const newMembership = yield select(selectNewMemberApplication)
     if (newMembership) {
-      newMembership.role = MembershipRole.APPLICANT
+      newMembership.role = MembershipRole.Applicant
       registration.projectMemberships.push(newMembership)
     }
 
     const newUser: IUser = yield call(apiClient.registerUser, registration)
-    yield put(createModelSuccessAction(EntityType.USER, newUser))
+    yield put(createModelSuccessAction(EntityType.User, newUser))
     yield put(setLoadingAction("user_operation", false))
     yield put(setRegisteredUserAction(newUser))
     yield call(success)

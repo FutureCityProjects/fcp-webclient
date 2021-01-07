@@ -7,7 +7,7 @@ interface IProps {
   month: number
   active: boolean
   className?: string
-  onClick?: any
+  onClick?: (task: IProjectTask, month: number) => void
 }
 
 const TogglableTaskMonthCell: React.FC<IProps> = (props: IProps) => {

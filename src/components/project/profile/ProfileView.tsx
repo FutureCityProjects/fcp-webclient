@@ -24,15 +24,15 @@ const ProfileView: React.FC<IProps> = (props: IProps) => {
         <h3>{project.name ? project.name : t("project.unnamed")}</h3>
         <div className={"icon-navigation"}>
           <Link
-            href={Routes.projectProfileEdit}
-            as={routeWithParams(Routes.projectProfileEdit, { slug: project.slug || project.id })}
+            href={Routes.ProjectProfileEdit}
+            as={routeWithParams(Routes.ProjectProfileEdit, { slug: project.slug || project.id })}
           >
             <a className="navigation-item" title={t("goto.editProjectProfile")} aria-label={t("goto.editProjectProfile")}>
               <Icon name={"pencil"} size={24} />
             </a>
           </Link>
           <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
-            <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+            <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
               <a>{t("goto.myProjects")}</a>
             </Link>
           </DropdownComponent>
@@ -86,11 +86,11 @@ const ProfileView: React.FC<IProps> = (props: IProps) => {
               <h3>{t("project.profileSelfAssessment")}</h3>
               <RangeSlider
                 labels={{
-                  [SelfAssessment.STARTING]: t("progress.0"),
-                  [SelfAssessment.MAKING_PROGRESS]: t("progress.25"),
-                  [SelfAssessment.HALF_FINISHED]: t("progress.50"),
-                  [SelfAssessment.ALMOST_FINISHED]: t("progress.75"),
-                  [SelfAssessment.COMPLETE]: t("progress.100"),
+                  [SelfAssessment.Starting]: t("progress.0"),
+                  [SelfAssessment.MakingProgress]: t("progress.25"),
+                  [SelfAssessment.HalfFinished]: t("progress.50"),
+                  [SelfAssessment.AlmostFinished]: t("progress.75"),
+                  [SelfAssessment.Complete]: t("progress.100"),
                 }}
                 value={project.profileSelfAssessment}
                 static

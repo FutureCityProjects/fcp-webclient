@@ -8,7 +8,7 @@ import { useTranslation } from "services/i18n"
 
 interface IProps {
   availablePackages: IWorkPackage[]
-  onAssign?: any
+  onAssign?: (task: IProjectTask) => void
   onDelete?: any
   task: IProjectTask
 }
@@ -21,9 +21,9 @@ const TaskCard: React.FC<IProps> = (props: IProps) => {
     <a
       key={workPackage.id}
       onClick={() => onAssign({ ...task, workPackage: workPackage.id })}
-      title={t("project.workPackage.abbreviation") + workPackage.order + ": " + workPackage.name}
+      title={t("project.workPackage.abbreviation") + workPackage.order.toString() + ": " + workPackage.name}
     >
-      {t("project.workPackage.abbreviation") + workPackage.order + ": " + workPackage.name.substr(0, 23)}{workPackage.name.length > 23 && "…"}
+      {t("project.workPackage.abbreviation") + workPackage.order.toString() + ": " + workPackage.name.substr(0, 23)}{workPackage.name.length > 23 && "…"}
     </a>
   )
 

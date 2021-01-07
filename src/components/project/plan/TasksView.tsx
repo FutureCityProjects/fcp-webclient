@@ -28,8 +28,8 @@ const TasksView: React.FC<IPlanProps> = (props: IPlanProps) => {
       <p>
         {t("project.tasks")}: {tasks.length}
         <Link
-          href={Routes.projectPlanTasks}
-          as={routeWithParams(Routes.projectPlanTasks, { slug: project.slug || project.id })}
+          href={Routes.ProjectPlanTasks}
+          as={routeWithParams(Routes.ProjectPlanTasks, { slug: project.slug || project.id })}
         >
           <a className="btn btn-inline" aria-label={t("goto.editProjectTasks")} title={t("goto.editProjectTasks")}>
             <Icon name={"pencil"} size={24} />
@@ -40,8 +40,8 @@ const TasksView: React.FC<IPlanProps> = (props: IPlanProps) => {
       {tasks.length > 1 && <p>
         {t("project.workPackages")}: {workPackages.length}
         <Link
-          href={Routes.projectPlanWorkPackages}
-          as={routeWithParams(Routes.projectPlanWorkPackages, { slug: project.slug || project.id })}
+          href={Routes.ProjectPlanWorkPackages}
+          as={routeWithParams(Routes.ProjectPlanWorkPackages, { slug: project.slug || project.id })}
         >
           <a className="btn btn-inline" aria-label={t("goto.editWorkPackages")} title={t("goto.editWorkPackages")}>
             <Icon name={"pencil"} size={24} />
@@ -52,8 +52,8 @@ const TasksView: React.FC<IPlanProps> = (props: IPlanProps) => {
       {tasks.length > 0 && <>
         {t("project.resourceRequirements")}: {resourceRequirements.length}
         <Link
-          href={Routes.projectPlanResourceRequirements}
-          as={routeWithParams(Routes.projectPlanResourceRequirements, { slug: project.slug || project.id })}
+          href={Routes.ProjectPlanResourceRequirements}
+          as={routeWithParams(Routes.ProjectPlanResourceRequirements, { slug: project.slug || project.id })}
         >
           <a className="btn btn-inline" aria-label={t("goto.editResourceRequirements")} title={t("goto.editResourceRequirements")}>
             <Icon name={"pencil"} size={24} />

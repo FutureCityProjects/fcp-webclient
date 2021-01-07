@@ -75,7 +75,7 @@ const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <blockquote>{ideaCreated.shortDescription}</blockquote>
               </CardText>
               <CardText className="text-center">
-                <Link href={routeWithParams(Routes.createProject, { id: ideaCreated.id })}>
+                <Link href={routeWithParams(Routes.CreateProject, { id: ideaCreated.id })}>
                   <a className="btn btn-primary">{t("goto.newProject")}</a>
                 </Link>
               </CardText>
@@ -83,7 +83,7 @@ const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <Button onClick={resetIdea}>{t("page.ideas.create.addOtherIdea")}</Button>
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.marketplace}>
+                <Link href={Routes.Marketplace}>
                   <a className="btn btn-secondary">{t("goto.marketplace")}</a>
                 </Link>
               </CardText>
@@ -97,7 +97,7 @@ const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.ideas.create.saveViaLogin" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.login}>
+                <Link href={Routes.Login}>
                   <a className="btn btn-primary">{t("goto.login")}</a>
                 </Link>
               </CardText>
@@ -105,7 +105,7 @@ const IdeaCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.ideas.create.saveViaRegistration" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.registration}>
+                <Link href={Routes.Registration}>
                   <a className="btn btn-primary">{t("goto.registration")}</a>
                 </Link>
               </CardText>

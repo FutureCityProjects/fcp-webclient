@@ -23,7 +23,7 @@ import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   updateProject: (project, actions) =>
-    dispatch(updateModelAction(EntityType.PROJECT, project, actions))
+    dispatch(updateModelAction(EntityType.Project, project, actions))
 })
 
 const mapStateToProps = (state: AppState, { slug }) => ({
@@ -40,7 +40,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 const ProjectPlanEditPage: I18nPage<PageProps> = ({ isMember, project, request, t, updateProject }) => {
   // @todo custom error message "project not found or no permission" etc.
   if (!request.isLoading && (!project || project.isLocked
-    || project.progress === ProjectProgress.CREATING_PROFILE
+    || project.progress === ProjectProgress.CreatingProfile
     || !isMember)
   ) {
     return <StatusCode statusCode={404}>
@@ -50,8 +50,8 @@ const ProjectPlanEditPage: I18nPage<PageProps> = ({ isMember, project, request, 
 
   const onSubmit = (values, actions) => {
     actions.success = () => {
-      Router.push(Routes.projectPlan,
-        routeWithParams(Routes.projectPlan, { slug: project.slug || project.id }))
+      void Router.push(Routes.ProjectPlan,
+        routeWithParams(Routes.ProjectPlan, { slug: project.slug || project.id }))
     }
 
     updateProject(values, actions)
@@ -92,5 +92,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(ProjectPlanEditPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

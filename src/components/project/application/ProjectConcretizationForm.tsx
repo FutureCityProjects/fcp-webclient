@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik"
 import Link from "next/link"
-import React from "react"
+import React, { ReactElement } from "react"
 import { Button, Card, CardBody, CardHeader, FormGroup, Spinner } from "reactstrap"
 
 import { IFund, IFundApplication, IProject, SelfAssessment } from "api/schema"
@@ -19,7 +19,7 @@ interface IProps {
   project: IProject
 }
 
-const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IProps) => {
+const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IProps): ReactElement => {
   const { t } = useTranslation()
 
   return <Card>
@@ -39,7 +39,7 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
             {t("fundApplication.fund") + ": " + fund.name}
             <div className="icon-navigation">
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
-                <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+                <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
                   <a>{t("goto.myProjects")}</a>
                 </Link>
               </DropdownComponent>
@@ -65,9 +65,9 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
               translateHelp={false}
               label={concretization.question}
               translateLabel={false}
-              id={"concretizations-" + concretization.id}
+              id={"concretizations-" + concretization.id.toString()}
               key={concretization.id}
-              name={"concretizations." + concretization.id}
+              name={"concretizations." + concretization.id.toString()}
               maxLength={concretization.maxLength}
               placeholder={t("form.fundApplication.concretization.placeholder", { maxLength: concretization.maxLength })}
               value={values.concretizations[concretization.id] || ""}
@@ -78,11 +78,11 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
               label="fundApplication.concretizationSelfAssessment"
               name="concretizationSelfAssessment"
               labels={{
-                [SelfAssessment.STARTING]: t("progress.0"),
-                [SelfAssessment.MAKING_PROGRESS]: t("progress.25"),
-                [SelfAssessment.HALF_FINISHED]: t("progress.50"),
-                [SelfAssessment.ALMOST_FINISHED]: t("progress.75"),
-                [SelfAssessment.COMPLETE]: t("progress.100"),
+                [SelfAssessment.Starting]: t("progress.0"),
+                [SelfAssessment.MakingProgress]: t("progress.25"),
+                [SelfAssessment.HalfFinished]: t("progress.50"),
+                [SelfAssessment.AlmostFinished]: t("progress.75"),
+                [SelfAssessment.Complete]: t("progress.100"),
               }}
               value={values.concretizationSelfAssessment}
             />
@@ -92,7 +92,7 @@ const ProjectConcretizationForm = ({ application, fund, onSubmit, project }: IPr
                 <Icon name="save" size={18} />
                 {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
-              <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+              <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
                 <a className="btn btn-light">{t("goto.myProjects")}</a>
               </Link>
             </div>

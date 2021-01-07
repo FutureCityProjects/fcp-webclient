@@ -12,11 +12,11 @@ import { AnyAction, Dispatch } from "redux"
 
 import ToastContainer from "components/common/ToastContainer"
 import withServerResponse from "components/hoc/withServerResponse"
-import { localStorageChangedAction, setAuthAction, userIsIdleAction } from "redux/actions/auth"
+import { setAuthAction, userIsIdleAction } from "redux/actions/auth"
 import { makeStore } from "redux/store"
 import { AuthToken } from "services/authToken"
 import { appWithTranslation } from "services/i18n"
-import { AUTH_COOKIE_NAME, AUTH_IDLE_TIMEOUT, AUTH_LOCALSTORAGE_NAME } from "../config"
+import { AUTH_COOKIE_NAME, AUTH_IDLE_TIMEOUT } from "../config"
 
 // single point to import (S)CSS for native Next.js support, all other styles (e.g. from
 // node-module) must be loaded there
@@ -67,25 +67,12 @@ class FCPApp extends App<Props> {
 
   constructor(props: Props) {
     super(props)
-    this.syncLocalAuth = this.syncLocalAuth.bind(this)
-  }
-
-  /**
-   * When the element holding the auth token changed trigger an action.
-   *
-   * @param event local storage changed
-   */
-  public syncLocalAuth(event: { key: string }) {
-    if (event.key === AUTH_LOCALSTORAGE_NAME) {
-      this.props.authStorageChanged()
-    }
   }
 
   // called once client-side, not again for client page changes
   // also called server-side
   public componentDidMount() {
     if (process.browser) {
-      window.addEventListener("storage", this.syncLocalAuth)
       // @todo client-initialize action that triggers refreshTokenAction()
       // and adds the eventlistener for the localstorage itself?
 
@@ -94,11 +81,6 @@ class FCPApp extends App<Props> {
       // @see https://github.com/zeit/next.js/issues/3249
       Router.events.on('routeChangeComplete', () => { window.scrollTo(0, 0) })
     }
-  }
-
-  // @todo is this ever called?
-  public componentWillUnmount() {
-    window.removeEventListener("storage", this.syncLocalAuth)
   }
 
   public render() {
@@ -131,7 +113,6 @@ class FCPApp extends App<Props> {
 }
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  authStorageChanged: () => dispatch(localStorageChangedAction()),
   isIdle: () => dispatch(userIsIdleAction()),
 })
 

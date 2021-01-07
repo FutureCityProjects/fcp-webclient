@@ -14,14 +14,14 @@ const MarketPage: I18nPage<PageProps> = () => {
   const i1: IProject = {
     id: 1,
     inspiration: null,
-    progress: ProjectProgress.IDEA,
+    progress: ProjectProgress.Idea,
     shortDescription: "was kurzes",
   }
 
   const i2: IProject = {
     id: 2,
     inspiration: null,
-    progress: ProjectProgress.IDEA,
+    progress: ProjectProgress.Idea,
     shortDescription: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas",
   }
 
@@ -36,8 +36,8 @@ const MarketPage: I18nPage<PageProps> = () => {
       shortDescription: "die Inspiration",
     },
     name: "Testprojekt",
-    profileSelfAssessment: SelfAssessment.MAKING_PROGRESS,
-    progress: ProjectProgress.CREATING_PLAN,
+    profileSelfAssessment: SelfAssessment.MakingProgress,
+    progress: ProjectProgress.CreatingPlan,
     shortDescription: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas",
     slug: "testprojekt",
   }
@@ -53,8 +53,8 @@ const MarketPage: I18nPage<PageProps> = () => {
       shortDescription: "die andere Inspiration",
     },
     name: null,
-    profileSelfAssessment: SelfAssessment.STARTING,
-    progress: ProjectProgress.CREATING_PLAN,
+    profileSelfAssessment: SelfAssessment.Starting,
+    progress: ProjectProgress.CreatingPlan,
     shortDescription: "übernommen von der Projektidee",
     slug: null,
   }

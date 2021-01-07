@@ -8,14 +8,15 @@ import { selectCurrentUserId } from "redux/reducer/auth"
 import { selectCurrentUser } from "redux/reducer/auth"
 import { EntityType } from "redux/reducer/data"
 
-export function* currentUserWatcherSaga() {
-  yield takeLatest(CurrentUserActionTypes.LOAD_CURRENT_USER, withCallback(loadCurrentUserSaga))
+export function* currentUserWatcherSaga(): any {
+  yield takeLatest(CurrentUserActionTypes.LoadCurrentUser, withCallback(loadCurrentUserSaga))
 }
 
 function* loadCurrentUserSaga() {
   const id = yield select(selectCurrentUserId)
   if (id) {
-    return yield putWait(loadModelAction(EntityType.USER, { id }))
+    const user: IUser = yield putWait(loadModelAction(EntityType.User, { id }))
+    return user
   }
 
   yield put(setLoadingAction("user_loading", false, "failure.notLoggedIn"))
@@ -23,10 +24,10 @@ function* loadCurrentUserSaga() {
 }
 
 export function* getCurrentUser(): IUser {
-  const currentUser = yield select(selectCurrentUser)
-  if (currentUser) {
-    return currentUser
+  let currentUser: IUser = yield select(selectCurrentUser)
+  if (!currentUser) {
+    currentUser = yield putWait(loadCurrentUserAction())
   }
 
-  return yield putWait(loadCurrentUserAction())
+  return currentUser
 }

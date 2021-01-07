@@ -18,7 +18,7 @@ import { registrationWatcherSaga } from "./registration"
 import { usersWatcherSaga } from "./users"
 import { validationWatcherSaga } from "./validation"
 
-function* rootSaga() {
+function* rootSaga(): any {
   yield all([
     authWatcherSaga(),
     currentProcessWatcherSaga(),

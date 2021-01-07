@@ -33,7 +33,7 @@ export const Show: FunctionComponent<IProps> = ({ user }) => (
         </tr>
       </tbody>
     </table>
-    <Link href={Routes.userOverview}>
+    <Link href={Routes.UserOverview}>
       <a className="btn btn-primary">
         Back to list
       </a>

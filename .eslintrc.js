@@ -79,14 +79,23 @@ module.exports = {
         }
       }
     ],
-    "@typescript-eslint/naming-convention": "error",
+    "@typescript-eslint/naming-convention": [
+      "warn",
+      {
+        "selector": "function",
+        "format": ["PascalCase", "camelCase"]
+      }
+    ],
     "@typescript-eslint/no-empty-function": "error",
     "@typescript-eslint/no-empty-interface": "error",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-misused-new": "error",
     "@typescript-eslint/no-namespace": "error",
     "@typescript-eslint/no-parameter-properties": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off",
+    "@typescript-eslint/no-shadow": "error",
+    "@typescript-eslint/no-unsafe-call": "off", // @todo
+    "@typescript-eslint/no-unsafe-assignment": "off", // @todo
+    "@typescript-eslint/no-unsafe-member-access": "off", // @todo
     "@typescript-eslint/no-unused-expressions": "error",
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-use-before-define": "off",
@@ -146,12 +155,7 @@ module.exports = {
     "no-fallthrough": "off",
     "no-invalid-this": "off",
     "no-new-wrappers": "error",
-    "no-shadow": [
-      "error",
-      {
-        "hoist": "all"
-      }
-    ],
+    "no-shadow": "off", // using @typescript-eslint/no-shadow instead
     "no-throw-literal": "error",
     "no-trailing-spaces": "error",
     "no-undef-init": "error",

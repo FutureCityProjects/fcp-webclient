@@ -10,7 +10,7 @@ interface IProps extends IBaseFormikProps {
   minDate?: Date
   maxDate?: Date
   value: string
-  labels: object
+  labels: Record<string, unknown>
 }
 
 class FormikDate extends FormikElement<IProps> {

@@ -22,7 +22,7 @@ interface IProps {
 
 // @todo client-side validation function
 
-const FundForm = ({ onSubmit, fund = {
+const FundForm: React.FC<IProps> = ({ onSubmit, fund = {
   briefingDate: null,
   budget: 0,
   criteria: null,
@@ -60,12 +60,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.fundDetails}
-                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
+                    href={Routes.FundDetails}
+                    as={routeWithParams(Routes.FundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.fundOverview}>
+                  : <Link href={Routes.FundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }
@@ -150,12 +150,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.fundDetails}
-                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
+                    href={Routes.FundDetails}
+                    as={routeWithParams(Routes.FundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.fundOverview}>
+                  : <Link href={Routes.FundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }
@@ -214,12 +214,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.fundDetails}
-                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
+                    href={Routes.FundDetails}
+                    as={routeWithParams(Routes.FundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.fundOverview}>
+                  : <Link href={Routes.FundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }
@@ -256,12 +256,12 @@ const FundForm = ({ onSubmit, fund = {
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 {fund.id
                   ? <Link
-                    href={Routes.fundDetails}
-                    as={routeWithParams(Routes.fundDetails, { id: fund.id })}
+                    href={Routes.FundDetails}
+                    as={routeWithParams(Routes.FundDetails, { id: fund.id })}
                   >
                     <a>{t("goto.fundDetails")}</a>
                   </Link>
-                  : <Link href={Routes.fundOverview}>
+                  : <Link href={Routes.FundOverview}>
                     <a>{t("goto.fundManagement")}</a>
                   </Link>
                 }

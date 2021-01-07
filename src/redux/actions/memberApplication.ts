@@ -1,9 +1,9 @@
 import { IProjectMembership } from "api/schema"
 
 export enum MemberApplicationActionTypes {
-  CREATE_MEMBER_APPLICATION = "CREATE_MEMBER_APPLICATION",
-  SET_NEW_MEMBER_APPLICATION = "SET_NEW_MEMBER_APPLICATION",
-  RESET_NEW_MEMBER_APPLICATION = "RESET_NEW_MEMBER_APPLICATION",
+  CreateMemberApplication = "CREATE_MEMBER_APPLICATION",
+  SetNewMemberApplication = "SET_NEW_MEMBER_APPLICATION",
+  ResetNewMemberApplication = "RESET_NEW_MEMBER_APPLICATION",
 }
 
 export interface IMemberApplicationAction {
@@ -12,17 +12,17 @@ export interface IMemberApplicationAction {
 
 export interface ISetMemberApplicationAction extends IMemberApplicationAction {
   application: IProjectMembership
-  type: MemberApplicationActionTypes.SET_NEW_MEMBER_APPLICATION
+  type: MemberApplicationActionTypes.SetNewMemberApplication
 }
 
 export interface ICreateMemberApplicationAction extends IMemberApplicationAction {
   actions: any
   application: IProjectMembership
-  type: MemberApplicationActionTypes.CREATE_MEMBER_APPLICATION
+  type: MemberApplicationActionTypes.CreateMemberApplication
 }
 
 export interface IResetMemberApplicationAction extends IMemberApplicationAction {
-  type: MemberApplicationActionTypes.RESET_NEW_MEMBER_APPLICATION
+  type: MemberApplicationActionTypes.ResetNewMemberApplication
 }
 
 export type MemberApplicationActions =
@@ -32,15 +32,15 @@ export type MemberApplicationActions =
 
 export const setNewMemberApplicationAction = (application: IProjectMembership): ISetMemberApplicationAction => ({
   application,
-  type: MemberApplicationActionTypes.SET_NEW_MEMBER_APPLICATION,
+  type: MemberApplicationActionTypes.SetNewMemberApplication,
 })
 
-export const createMemberApplicationAction = (application: IProjectMembership, actions: any): ICreateMemberApplicationAction => ({
+export const createMemberApplicationAction = (application: IProjectMembership, actions: Record<string, unknown>): ICreateMemberApplicationAction => ({
   actions,
   application,
-  type: MemberApplicationActionTypes.CREATE_MEMBER_APPLICATION,
+  type: MemberApplicationActionTypes.CreateMemberApplication,
 })
 
 export const resetMemberApplicationAction = (): IResetMemberApplicationAction => ({
-  type: MemberApplicationActionTypes.RESET_NEW_MEMBER_APPLICATION,
+  type: MemberApplicationActionTypes.ResetNewMemberApplication,
 })

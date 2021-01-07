@@ -21,15 +21,15 @@ const ProjectCard: React.FC<IProps> = ({ project }) => {
       <div className="title-section">
         <h3>
           {project.name
-            ? <Link href={Routes.projectPage}
-              as={routeWithParams(Routes.projectPage, { slug: project.slug })}
+            ? <Link href={Routes.ProjectPage}
+              as={routeWithParams(Routes.ProjectPage, { slug: project.slug })}
             >
               <a>
                 {project.name}
               </a>
             </Link>
-            : <Link href={Routes.projectPage}
-              as={routeWithParams(Routes.projectPage, { slug: project.id })}
+            : <Link href={Routes.ProjectPage}
+              as={routeWithParams(Routes.ProjectPage, { slug: project.id })}
             >
               <a>{t("project.unnamed")}</a>
             </Link>
@@ -43,8 +43,8 @@ const ProjectCard: React.FC<IProps> = ({ project }) => {
       </div>
 
       <DropdownComponent button={<Icon name="user-add" size={24} />} title={t("goto.memberApplication")}>
-        <Link href={Routes.projectApplication}
-          as={routeWithParams(Routes.projectApplication, { slug: project.slug || project.id })}
+        <Link href={Routes.ProjectApplication}
+          as={routeWithParams(Routes.ProjectApplication, { slug: project.slug || project.id })}
         >
           <a>{t("goto.memberApplication")}</a>
         </Link>

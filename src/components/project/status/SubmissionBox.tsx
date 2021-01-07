@@ -23,7 +23,7 @@ const SubmissionBox: React.FC<IProps> = ({ project }: IProps) => {
 
   // if the current application is submitted always allow to view the submission,
   // regardless of the projects progress
-  if (application.state === FundApplicationState.SUBMITTED) {
+  if (application.state === FundApplicationState.Submitted) {
     return <ProgressBox
       icon="message"
       title="project.tableau.submitApplication"
@@ -33,18 +33,18 @@ const SubmissionBox: React.FC<IProps> = ({ project }: IProps) => {
       active={true}
       // @todo link via application ID
       href={{
-        pathname: Routes.projectFundApplicationSubmission,
+        pathname: Routes.ProjectFundApplicationSubmission,
         query: { fund: application.fund.id }
       }}
       as={{
-        pathname: routeWithParams(Routes.projectFundApplicationSubmission, { slug: project.slug || project.id }),
+        pathname: routeWithParams(Routes.ProjectFundApplicationSubmission, { slug: project.slug || project.id }),
         query: { fund: application.fund.id }
       }}
     />
   }
 
   // not clickable if function not available
-  if (project.progress !== ProjectProgress.SUBMITTING_APPLICATION
+  if (project.progress !== ProjectProgress.SubmittingApplication
   ) {
     return <ProgressBox
       icon="message"
@@ -63,11 +63,11 @@ const SubmissionBox: React.FC<IProps> = ({ project }: IProps) => {
     active={true}
     // @todo link via application ID
     href={{
-      pathname: Routes.projectFundApplicationSubmit,
+      pathname: Routes.ProjectFundApplicationSubmit,
       query: { fund: application.fund.id }
     }}
     as={{
-      pathname: routeWithParams(Routes.projectFundApplicationSubmit, { slug: project.slug || project.id }),
+      pathname: routeWithParams(Routes.ProjectFundApplicationSubmit, { slug: project.slug || project.id }),
       query: { fund: application.fund.id }
     }}
   />

@@ -28,12 +28,12 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
       />
 
       <ProgressBox
-        complete={project.profileSelfAssessment === SelfAssessment.COMPLETE}
+        complete={project.profileSelfAssessment === SelfAssessment.Complete}
         icon="document"
         title="project.tableau.profile"
         subtitle="project.tableau.project"
-        href={Routes.projectProfile}
-        as={routeWithParams(Routes.projectProfile, { slug: project.slug || project.id })}
+        href={Routes.ProjectProfile}
+        as={routeWithParams(Routes.ProjectProfile, { slug: project.slug || project.id })}
         progress={project.name ? project.profileSelfAssessment : null}
       />
 
@@ -42,24 +42,24 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
           icon="pot"
           title="project.tableau.selectFund"
           subtitle="project.tableau.fund"
-          active={project.progress !== ProjectProgress.CREATING_PROFILE}
-          href={project.progress === ProjectProgress.CREATING_PROFILE ? null : Routes.projectSelectFund}
-          as={project.progress === ProjectProgress.CREATING_PROFILE ? null : routeWithParams(Routes.projectSelectFund, { slug: project.slug || project.id })}
+          active={project.progress !== ProjectProgress.CreatingProfile}
+          href={project.progress === ProjectProgress.CreatingProfile ? null : Routes.ProjectSelectFund}
+          as={project.progress === ProjectProgress.CreatingProfile ? null : routeWithParams(Routes.ProjectSelectFund, { slug: project.slug || project.id })}
         />
         : <ProgressBox
           icon="pot"
           title="project.tableau.concretization"
           subtitle="project.tableau.fund"
-          active={project.progress !== ProjectProgress.CREATING_PROFILE}
+          active={project.progress !== ProjectProgress.CreatingProfile}
           // @todo support multiple applications, how to store which one is the active application?
-          complete={project.progress !== ProjectProgress.CREATING_PROFILE && project.applications[0].concretizationSelfAssessment === SelfAssessment.COMPLETE}
-          href={project.progress === ProjectProgress.CREATING_PROFILE ? null : {
-            pathname: Routes.projectConcretization,
+          complete={project.progress !== ProjectProgress.CreatingProfile && project.applications[0].concretizationSelfAssessment === SelfAssessment.Complete}
+          href={project.progress === ProjectProgress.CreatingProfile ? null : {
+            pathname: Routes.ProjectConcretization,
             // @todo support multiple applications, how to store which one is the active application?
             query: { fund: project.applications[0].fund.id }
           }}
-          as={project.progress === ProjectProgress.CREATING_PROFILE ? null : {
-            pathname: routeWithParams(Routes.projectConcretization, { slug: project.slug || project.id }),
+          as={project.progress === ProjectProgress.CreatingProfile ? null : {
+            pathname: routeWithParams(Routes.ProjectConcretization, { slug: project.slug || project.id }),
             // @todo support multiple applications, how to store which one is the active application?
             query: { fund: project.applications[0].fund.id }
           }}
@@ -71,15 +71,15 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
         icon="compasses"
         title="project.tableau.plan"
         subtitle="project.tableau.project"
-        complete={project.progress !== ProjectProgress.CREATING_PROFILE && project.planSelfAssessment === SelfAssessment.COMPLETE}
-        active={project.progress !== ProjectProgress.CREATING_PROFILE}
+        complete={project.progress !== ProjectProgress.CreatingProfile && project.planSelfAssessment === SelfAssessment.Complete}
+        active={project.progress !== ProjectProgress.CreatingProfile}
         progress={project.planSelfAssessment}
-        href={project.progress !== ProjectProgress.CREATING_PROFILE ? Routes.projectPlan : null}
-        as={project.progress !== ProjectProgress.CREATING_PROFILE ? routeWithParams(Routes.projectPlan, { slug: project.slug || project.id }) : null}
+        href={project.progress !== ProjectProgress.CreatingProfile ? Routes.ProjectPlan : null}
+        as={project.progress !== ProjectProgress.CreatingProfile ? routeWithParams(Routes.ProjectPlan, { slug: project.slug || project.id }) : null}
       />
 
-      {project.progress === ProjectProgress.CREATING_PROFILE
-        || project.progress === ProjectProgress.CREATING_PLAN
+      {project.progress === ProjectProgress.CreatingProfile
+        || project.progress === ProjectProgress.CreatingPlan
         || !project.applications
         ? <ProgressBox
           icon="money-bag"
@@ -96,15 +96,15 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
           title="project.tableau.application"
           subtitle="project.tableau.funding"
           // @todo support multiple applications, how to store which one is the active application?
-          complete={project.applications[0].applicationSelfAssessment === SelfAssessment.COMPLETE}
+          complete={project.applications[0].applicationSelfAssessment === SelfAssessment.Complete}
           progress={project.applications[0].applicationSelfAssessment}
           href={{
-            pathname: Routes.projectFundApplication,
+            pathname: Routes.ProjectFundApplication,
             // @todo support multiple applications, how to store which one is the active application?
             query: { fund: project.applications[0].fund.id }
           }}
           as={{
-            pathname: routeWithParams(Routes.projectFundApplication, { slug: project.slug || project.id }),
+            pathname: routeWithParams(Routes.ProjectFundApplication, { slug: project.slug || project.id }),
             // @todo support multiple applications, how to store which one is the active application?
             query: { fund: project.applications[0].fund.id }
           }}
@@ -115,9 +115,9 @@ const ProjectStatus: React.FC<IProps> = (props: IProps) => {
     </div>
 
     <div className="sub-step-container">
-      <ProgressSubBox href={Routes.offlineToolTeam} title={t("project.tableau.teamTool")} />
-      <ProgressSubBox href={Routes.offlineToolProfile} title={t("project.tableau.profileTool")} />
-      <ProgressSubBox href={Routes.offlineToolPlanning} title={t("project.tableau.planTool")} />
+      <ProgressSubBox href={Routes.OfflineToolTeam} title={t("project.tableau.teamTool")} />
+      <ProgressSubBox href={Routes.OfflineToolProfile} title={t("project.tableau.profileTool")} />
+      <ProgressSubBox href={Routes.OfflineToolPlanning} title={t("project.tableau.planTool")} />
     </div>
   </>
 }

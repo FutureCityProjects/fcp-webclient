@@ -10,9 +10,9 @@ interface IProps {
 /**
  * Allows to trigger a redirect from the render() function.
  */
-export default function Redirect({ route }: IProps) {
+const Redirect: React.FC<IProps> = ({ route }: IProps) => {
   if (process.browser) {
-    Router.push(route)
+    void Router.push(route)
     return null
   }
 
@@ -28,3 +28,5 @@ export default function Redirect({ route }: IProps) {
     </ServerResponseContext.Consumer>
   )
 }
+
+export default Redirect

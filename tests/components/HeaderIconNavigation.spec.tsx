@@ -26,7 +26,7 @@ describe("Component:HeaderIconNavigation", () => {
 
     const { queryByText } = render(<HeaderIconNavigation username={loggedInAs}
       doLogout={logout}
-      roles={[UserRole.USER]} />)
+      roles={[UserRole.User]} />)
 
     expect(queryByText("navigation.userProfile")).toBeInTheDocument()
 

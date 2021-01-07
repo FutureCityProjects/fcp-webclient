@@ -8,11 +8,11 @@ import { IConfirmAccountAction, IConfirmEmailAction, IResetPasswordAction, Valid
 import { loadingSuccessAction, setLoadingAction } from "redux/helper/actions"
 import { RequestErrors } from "services/requestError"
 
-export function* validationWatcherSaga() {
+export function* validationWatcherSaga(): any {
   yield all([
-    takeLatest(ValidationActionTypes.CONFIRM_ACCOUNT, withCallback(confirmAccountSaga)),
-    takeLatest(ValidationActionTypes.CONFIRM_EMAIL, withCallback(confirmEmailSaga)),
-    takeLatest(ValidationActionTypes.RESET_PASSWORD, withCallback(confirmPasswordResetSaga)),
+    takeLatest(ValidationActionTypes.ConfirmAccount, withCallback(confirmAccountSaga)),
+    takeLatest(ValidationActionTypes.ConfirmEmail, withCallback(confirmEmailSaga)),
+    takeLatest(ValidationActionTypes.ResetPassword, withCallback(confirmPasswordResetSaga)),
   ])
 }
 
@@ -33,7 +33,7 @@ function* confirmAccountSaga(action: IConfirmAccountAction) {
 
     return true
   } catch (err) {
-    if (err.message === RequestErrors.notFound) {
+    if (err.message === RequestErrors.NotFound) {
       err.message = "validation.account.notFound"
     }
 
@@ -53,7 +53,7 @@ function* confirmAccountSaga(action: IConfirmAccountAction) {
 function* confirmEmailSaga(action: IConfirmEmailAction) {
   try {
     yield put(setLoadingAction("validation_operation", true))
-    const result = yield call(apiClient.confirmValidation, action.id, action.token)
+    const result: boolean = yield call(apiClient.confirmValidation, action.id, action.token)
     yield put(loadingSuccessAction("validation_operation", result))
 
     if (action.actions) {
@@ -62,7 +62,7 @@ function* confirmEmailSaga(action: IConfirmEmailAction) {
 
     return result
   } catch (err) {
-    if (err.message === RequestErrors.notFound) {
+    if (err.message === RequestErrors.NotFound) {
       err.message = "validation.changeEmail.notFound"
     }
 
@@ -82,7 +82,7 @@ function* confirmEmailSaga(action: IConfirmEmailAction) {
 function* confirmPasswordResetSaga(action: IResetPasswordAction) {
   try {
     yield put(setLoadingAction("validation_operation", true))
-    const result = yield call(apiClient.resetPassword, action.id, action.token, action.password)
+    const result: boolean = yield call(apiClient.resetPassword, action.id, action.token, action.password)
     yield put(loadingSuccessAction("validation_operation", result))
 
     if (action.actions) {
@@ -91,7 +91,7 @@ function* confirmPasswordResetSaga(action: IResetPasswordAction) {
 
     return result
   } catch (err) {
-    if (err.message === RequestErrors.notFound) {
+    if (err.message === RequestErrors.NotFound) {
       err.message = "validation.resetPassword.notFound"
     }
 

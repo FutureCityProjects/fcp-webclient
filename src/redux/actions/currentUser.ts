@@ -1,5 +1,5 @@
 export enum CurrentUserActionTypes {
-  LOAD_CURRENT_USER = "LOAD_CURRENT_USER",
+  LoadCurrentUser = "LOAD_CURRENT_USER",
 }
 
 export interface ICurrentUserAction {
@@ -7,11 +7,11 @@ export interface ICurrentUserAction {
 }
 
 export interface ILoadCurrentUserAction extends ICurrentUserAction {
-  type: CurrentUserActionTypes.LOAD_CURRENT_USER
+  type: CurrentUserActionTypes.LoadCurrentUser
 }
 
 export type CurrentUserActions = ILoadCurrentUserAction
 
 export const loadCurrentUserAction = (): ILoadCurrentUserAction => ({
-  type: CurrentUserActionTypes.LOAD_CURRENT_USER,
+  type: CurrentUserActionTypes.LoadCurrentUser,
 })

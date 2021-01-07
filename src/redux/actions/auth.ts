@@ -4,91 +4,82 @@ import { ICredentials, IUser } from "api/schema"
 import { IWebToken } from "redux/helper/state"
 
 export enum AuthActionTypes {
-  LOCAL_STORAGE_CHANGED = "LOCAL_STORAGE_CHANGED",
-  LOGIN = "LOGIN",
-  LOGIN_SUCCESSFUL = "LOGIN_SUCCESSFUL",
-  LOGOUT = "LOGOUT",
-  REFRESH_TOKEN = "REFRESH_TOKEN",
-  SET_AUTH = "SET_AUTH",
-  USER_IS_IDLE = "USER_IS_IDLE",
+  Login = "LOGIN",
+  LoginSuccessful = "LOGIN_SUCCESSFUL",
+  Logout = "LOGOUT",
+  RefreshToken = "REFRESH_TOKEN",
+  SetAuth = "SET_AUTH",
+  UserIsIdle = "USER_IS_IDLE",
 }
 
 export interface IAuthAction {
   type: AuthActionTypes
 }
 
-export interface ILocalStorageChangedAction extends IAuthAction {
-  type: AuthActionTypes.LOCAL_STORAGE_CHANGED
-}
-
 export interface ILoginAction extends IAuthAction {
   actions: any
   credentials: ICredentials
-  type: AuthActionTypes.LOGIN
+  type: AuthActionTypes.Login
 }
 
 export interface ILoginSuccessfulAction extends IAuthAction {
   user: IUser
-  type: AuthActionTypes.LOGIN_SUCCESSFUL
+  type: AuthActionTypes.LoginSuccessful
 }
 
 export interface ILogoutAction extends IAuthAction {
   message?: string
   options?: ToastOptions
-  type: AuthActionTypes.LOGOUT
+  type: AuthActionTypes.Logout
 }
 
 export interface IRefreshTokenAction extends IAuthAction {
-  type: AuthActionTypes.REFRESH_TOKEN
+  type: AuthActionTypes.RefreshToken
 }
 
 export interface ISetAuthAction extends IAuthAction {
-  type: AuthActionTypes.SET_AUTH
+  type: AuthActionTypes.SetAuth
   token: IWebToken
 }
 
 export interface IUserIsIdleAction extends IAuthAction {
-  type: AuthActionTypes.USER_IS_IDLE
+  type: AuthActionTypes.UserIsIdle
 }
 
 export type AuthActions =
-  ILocalStorageChangedAction
-  | ILoginAction
+  ILoginAction
   | ILogoutAction
   | ISetAuthAction
   | IRefreshTokenAction
+  | ISetAuthAction
   | IUserIsIdleAction
 
-export const loginAction = (credentials: ICredentials, actions: any): ILoginAction => ({
+export const loginAction = (credentials: ICredentials, actions: Record<string, unknown>): ILoginAction => ({
   actions,
   credentials,
-  type: AuthActionTypes.LOGIN,
+  type: AuthActionTypes.Login,
 })
 
 export const loginSuccessfulAction = (user: IUser): ILoginSuccessfulAction => ({
   user,
-  type: AuthActionTypes.LOGIN_SUCCESSFUL,
-})
-
-export const localStorageChangedAction = (): ILocalStorageChangedAction => ({
-  type: AuthActionTypes.LOCAL_STORAGE_CHANGED,
+  type: AuthActionTypes.LoginSuccessful,
 })
 
 export const logoutAction = (message?: string, options?: ToastOptions): ILogoutAction => ({
   message,
   options,
-  type: AuthActionTypes.LOGOUT,
+  type: AuthActionTypes.Logout,
 })
 
 export const refreshTokenAction = (): IRefreshTokenAction => ({
-  type: AuthActionTypes.REFRESH_TOKEN,
+  type: AuthActionTypes.RefreshToken,
 })
 
 export const setAuthAction = (token: IWebToken): ISetAuthAction => ({
   token,
-  type: AuthActionTypes.SET_AUTH,
+  type: AuthActionTypes.SetAuth,
 })
 
 export const userIsIdleAction = (): IUserIsIdleAction => ({
-  type: AuthActionTypes.USER_IS_IDLE,
+  type: AuthActionTypes.UserIsIdle,
 })

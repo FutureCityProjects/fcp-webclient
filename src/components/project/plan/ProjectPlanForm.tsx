@@ -56,12 +56,12 @@ const ProjectPlanForm: React.FC<IProps> = (props: IProps) => {
             <div className="icon-navigation">
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 <Link
-                  href={Routes.projectPlan}
-                  as={routeWithParams(Routes.projectPlan, { slug: project.slug || project.id })}
+                  href={Routes.ProjectPlan}
+                  as={routeWithParams(Routes.ProjectPlan, { slug: project.slug || project.id })}
                 >
                   <a>{t("goto.planOverview")}</a>
                 </Link>
-                <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+                <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
                   <a>{t("goto.myProjects")}</a>
                 </Link>
               </DropdownComponent>
@@ -76,8 +76,8 @@ const ProjectPlanForm: React.FC<IProps> = (props: IProps) => {
                     {t("form.saveChanges")} {isSubmitting && <Spinner />}
                   </Button>
                   <Link
-                    href={Routes.projectPlan}
-                    as={routeWithParams(Routes.projectPlan, { slug: project.slug || project.id }) + "#project-" + project.id}
+                    href={Routes.ProjectPlan}
+                    as={routeWithParams(Routes.ProjectPlan, { slug: project.slug || project.id.toString() }) + "#project-" + project.id.toString()}
                   >
                     <a className="btn btn-light">{t("goto.planOverview")}</a>
                   </Link>
@@ -129,8 +129,8 @@ const ProjectPlanForm: React.FC<IProps> = (props: IProps) => {
                 {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
               <Link
-                href={Routes.projectPlan}
-                as={routeWithParams(Routes.projectPlan, { slug: project.slug || project.id }) + "#project-" + project.id}
+                href={Routes.ProjectPlan}
+                as={routeWithParams(Routes.ProjectPlan, { slug: project.slug || project.id.toString() }) + "#project-" + project.id.toString()}
               >
                 <a className="btn btn-light">{t("goto.planOverview")}</a>
               </Link>

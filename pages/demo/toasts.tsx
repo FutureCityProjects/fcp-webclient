@@ -69,7 +69,7 @@ const Page: I18nPage<PageProps> = () => {
   )
 }
 
-Page.getInitialProps = async () => {
+Page.getInitialProps = () => {
   toast("Alles ist ok", { autoClose: false, type: "success" })
   toast("Erste Warnung", { autoClose: false, type: "warning" })
   toast("Alles kaputt", { autoClose: false, type: "error" })

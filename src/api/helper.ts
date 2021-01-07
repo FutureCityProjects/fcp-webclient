@@ -1,6 +1,6 @@
 import { IFund } from "./schema"
 
-const normalizeNumber = (value, zeroAllowed = true): number =>
+const normalizeNumber = (value: number | string, zeroAllowed = true): number | string =>
   value === "" || (!zeroAllowed && value === 0) ? null : value
 
 const normalizeNullableString = (value: string) => {
@@ -20,31 +20,31 @@ interface INormalizeOptions {
   nonZeroNumbers?: string[]
 }
 
-const normalizeObject = (model: any, properties: INormalizeOptions) => {
+const normalizeObject = <T>(model: T, properties: INormalizeOptions): T => {
   if (properties.strings) {
     properties.strings
-      .forEach((property) => model[property] = normalizeString(model[property]))
+      .forEach((property) => model[property] = normalizeString(model[property] as string))
   }
 
   if (properties.nullableStrings) {
     properties.nullableStrings
-      .forEach((property) => model[property] = normalizeNullableString(model[property]))
+      .forEach((property) => model[property] = normalizeNullableString(model[property] as string))
   }
 
   if (properties.numbers) {
     properties.numbers
-      .forEach((property) => model[property] = normalizeNumber(model[property], true))
+      .forEach((property) => model[property] = normalizeNumber(model[property] as number | string, true))
   }
 
   if (properties.nonZeroNumbers) {
     properties.nonZeroNumbers
-      .forEach((property) => model[property] = normalizeNumber(model[property], false))
+      .forEach((property) => model[property] = normalizeNumber(model[property] as number | string, false))
   }
 
   return model
 }
 
-export const normalizeFund = (fund): IFund => normalizeObject(fund, {
+export const normalizeFund = (fund: IFund): IFund => normalizeObject<IFund>(fund, {
   strings: ["description", "imprint", "name", "region", "sponsor",],
-  nonZeroNumbers: ["budget", "maximumGrant", "minimumGrant",]
+  numbers: ["budget", "maximumGrant", "minimumGrant",]
 })

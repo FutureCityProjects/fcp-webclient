@@ -30,7 +30,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 })
 
 const mapStateToProps = (state: AppState, { inspirationId }) => ({
-  inspiration: selectById(state, EntityType.PROJECT, inspirationId),
+  inspiration: selectById(state, EntityType.Project, inspirationId),
   inspirationRequest: state.requests.projectLoading,
   isAuthenticated: selectIsAuthenticated(state),
   project: state.newProject, // do not use selectNewProject(), we want the empty state here,
@@ -64,10 +64,11 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
 
     if (isAuthenticated) {
       actions.success = (res) => {
-        Router.push(Routes.projectProfileEdit,
-          routeWithParams(Routes.projectProfileEdit, { slug: res.id })
+        void Router.push(Routes.ProjectProfileEdit,
+          routeWithParams(Routes.ProjectProfileEdit, { slug: res.id })
         )
       }
+
       createProject(values, actions)
       return
     }
@@ -117,7 +118,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.create.saveViaLogin" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.login}>
+                <Link href={Routes.Login}>
                   <a className="btn btn-primary">{t("goto.login")}</a>
                 </Link>
               </CardText>
@@ -125,7 +126,7 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.create.saveViaRegistration" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.registration}>
+                <Link href={Routes.Registration}>
                   <a className="btn btn-primary">{t("goto.registration")}</a>
                 </Link>
               </CardText>
@@ -139,8 +140,8 @@ const ProjectCreationPage: I18nPage<PageProps> = (props: PageProps) => {
 
 ProjectCreationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const inspirationId = parseInt(query.inspiration as string, 10)
-  if (inspirationId > 0 && !selectById(store.getState(), EntityType.PROJECT, inspirationId)) {
-    store.dispatch(loadModelAction(EntityType.PROJECT, { id: inspirationId }))
+  if (inspirationId > 0 && !selectById(store.getState(), EntityType.Project, inspirationId)) {
+    store.dispatch(loadModelAction(EntityType.Project, { id: inspirationId }))
   }
 
   return { inspirationId, namespacesRequired: includeDefaultNamespaces() }

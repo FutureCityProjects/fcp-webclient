@@ -18,7 +18,7 @@ import {
 import { EntityType } from "redux/reducer/data"
 import { SubmissionError } from "services/submissionError"
 
-export function* processesWatcherSaga() {
+export function* processesWatcherSaga(): any {
   yield all([
     takeLatest("CREATE_PROCESS", withCallback(createProcessSaga)),
     takeLatest("UPDATE_PROCESS", withCallback(updateProcessSaga)),
@@ -41,7 +41,7 @@ function* loadProcessSaga(action: ILoadByAction) {
       throw new Error("Unknown criteria when loading process")
     }
 
-    yield put(loadModelSuccessAction(EntityType.PROCESS, process))
+    yield put(loadModelSuccessAction(EntityType.Process, process))
     yield put(loadingSuccessAction("process_loading", process))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))
@@ -59,7 +59,7 @@ function* loadProcessCollectionSaga(action: ILoadByAction) {
   try {
     yield put(setLoadingAction("process_collection_loading", true))
     const processes: IHydraCollection<IProcess> = yield call(apiClient.getProcesses, action.criteria)
-    yield put(loadCollectionSuccessAction(EntityType.PROCESS, processes))
+    yield put(loadCollectionSuccessAction(EntityType.Process, processes))
     yield put(loadingSuccessAction("process_collection_loading", processes))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, processes))
@@ -78,7 +78,7 @@ function* createProcessSaga(action: IModelFormAction<IProcess>) {
   try {
     yield put(setLoadingAction("process_operation", true))
     const process: IProcess = yield call(apiClient.createProcess, action.model)
-    yield put(createModelSuccessAction(EntityType.PROCESS, process))
+    yield put(createModelSuccessAction(EntityType.Process, process))
     yield put(loadingSuccessAction("process_operation", process))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))
@@ -106,7 +106,7 @@ function* updateProcessSaga(action: IModelFormAction<IProcess>) {
   try {
     yield put(setLoadingAction("process_operation", true))
     const process: IProcess = yield call(apiClient.updateProcess, action.model)
-    yield put(updateModelSuccessAction(EntityType.PROCESS, process))
+    yield put(updateModelSuccessAction(EntityType.Process, process))
     yield put(loadingSuccessAction("process_operation", process))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))
@@ -134,7 +134,7 @@ function* deleteProcessSaga(action: IModelFormAction<IProcess>) {
   try {
     yield put(setLoadingAction("process_operation", true))
     yield call(apiClient.deleteProcess, action.model)
-    yield put(deleteModelSuccessAction(EntityType.PROCESS, action.model))
+    yield put(deleteModelSuccessAction(EntityType.Process, action.model))
     yield put(loadingSuccessAction("process_operation", action.model))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, action.model))

@@ -14,9 +14,9 @@ interface IProps {
 }
 
 const DropdownComponent: React.FC<IProps> = (props) => {
-  const wrappedChildren = React.Children.map(props.children, (child, i) => {
+  const wrappedChildren = React.Children.map(props.children, (child, i: number) => {
     // fix react error: items in a list must have a key
-    const key = has(child, "key") ? `key-${get(child, "key")}` : `index-${i}`
+    const key = has(child, "key") ? `key-${get(child, "key") as string}` : `index-${i}`
 
     return <>{child &&
       <DropdownItem key={key}>

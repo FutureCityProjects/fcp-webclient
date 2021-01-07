@@ -19,7 +19,7 @@ import { RequestErrors } from "services/requestError"
 const mapStateToProps = (state: AppState) => ({
   // @todo user custom reducer to track users loaded with admin privileges
   request: state.requests.usersLoading,
-  users: selectCollection(state, EntityType.USER),
+  users: selectCollection(state, EntityType.User),
 })
 
 const connector = connect(mapStateToProps)
@@ -27,14 +27,14 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation
 
 const UserAdministrationPage: I18nPage<PageProps> = ({ request, users }: PageProps) => {
   if (!request.isLoading && request.loadingError) {
-    let code: number = 500
+    let code = 500
     let error: string = null
     switch (request.loadingError) {
-      case RequestErrors.badRequest:
+      case RequestErrors.BadRequest:
         code = 400
         break
 
-      case RequestErrors.notFound:
+      case RequestErrors.NotFound:
         code = 404
         break
 
@@ -59,11 +59,11 @@ const UserAdministrationPage: I18nPage<PageProps> = ({ request, users }: PagePro
   </BaseLayout>
 }
 
-UserAdministrationPage.getInitialProps = async ({ store }: NextPageContext) => {
+UserAdministrationPage.getInitialProps = ({ store }: NextPageContext) => {
   // @todo custom reducer to track the management list, else
   // only the current user will be shown
-  if (selectCollection(store.getState(), EntityType.USER).length <= 0) {
-    store.dispatch(loadCollectionAction(EntityType.USER, {}, "user_management"))
+  if (selectCollection(store.getState(), EntityType.User).length <= 0) {
+    store.dispatch(loadCollectionAction(EntityType.User, {}, "user_management"))
   }
 
   return { namespacesRequired: includeDefaultNamespaces() }
@@ -73,5 +73,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(UserAdministrationPage),
   ),
-  UserRole.ADMIN,
+  UserRole.Admin,
 )

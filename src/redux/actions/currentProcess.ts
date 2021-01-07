@@ -1,5 +1,5 @@
 export enum CurrentProcessActionTypes {
-  LOAD_CURRENT_PROCESS = "LOAD_CURRENT_PROCESS",
+  LoadCurrentProcess = "LOAD_CURRENT_PROCESS",
 }
 
 export interface ICurrentProcessAction {
@@ -7,11 +7,11 @@ export interface ICurrentProcessAction {
 }
 
 export interface ILoadCurrentProcessAction extends ICurrentProcessAction {
-  type: CurrentProcessActionTypes.LOAD_CURRENT_PROCESS
+  type: CurrentProcessActionTypes.LoadCurrentProcess
 }
 
 export type CurrentProcessActions = ILoadCurrentProcessAction
 
 export const loadCurrentProcessAction = (): ILoadCurrentProcessAction => ({
-  type: CurrentProcessActionTypes.LOAD_CURRENT_PROCESS,
+  type: CurrentProcessActionTypes.LoadCurrentProcess,
 })

@@ -1,5 +1,5 @@
 import { Field, FieldArrayRenderProps, getIn } from "formik"
-import React from "react"
+import React, { ReactElement } from "react"
 import { Button, FormGroup, FormText, Label } from "reactstrap"
 
 import FormikArrayInput from "components/common/form/FormikArrayInput"
@@ -14,7 +14,7 @@ interface IProps extends FieldArrayRenderProps {
 
 const ImpactArray = ({
   push, form, remove, name,
-}: IProps) => {
+}: IProps): ReactElement => {
   const { t } = useTranslation()
   const values = getIn(form, ["values", name])
   const error = getIn(form, ["errors", name])
@@ -35,7 +35,7 @@ const ImpactArray = ({
         <TranslatedHtml content={"_error:" + error} />
       </div>}
 
-      {values && values.length > 0 && values.map((value, index) => (
+      {values && values.length > 0 && values.map((value, index: number) => (
         <div key={index}>
           <Field component={FormikArrayInput}
             name={`${name}.${index}`}

@@ -8,8 +8,8 @@ import { loadModelSuccessAction, setLoadingAction } from "redux/helper/actions"
 import { selectCurrentProcess } from "redux/reducer/data"
 import { EntityType } from "redux/reducer/data"
 
-export function* currentProcessWatcherSaga() {
-  yield takeLatest(CurrentProcessActionTypes.LOAD_CURRENT_PROCESS, withCallback(loadCurrentProcessSaga))
+export function* currentProcessWatcherSaga(): any {
+  yield takeLatest(CurrentProcessActionTypes.LoadCurrentProcess, withCallback(loadCurrentProcessSaga))
 }
 
 function* loadCurrentProcessSaga() {
@@ -17,7 +17,7 @@ function* loadCurrentProcessSaga() {
     yield put(setLoadingAction("process_loading", true))
     const process: IProcess = yield call(apiClient.getCurrentProcess)
     if (process) {
-      yield put(loadModelSuccessAction(EntityType.PROCESS, process))
+      yield put(loadModelSuccessAction(EntityType.Process, process))
     }
     yield put(setLoadingAction("process_loading", false))
 
@@ -29,10 +29,10 @@ function* loadCurrentProcessSaga() {
 }
 
 export function* getCurrentProcess(): IProcess {
-  const process = yield select(selectCurrentProcess)
-  if (process) {
-    return process
+  let process: IProcess = yield select(selectCurrentProcess)
+  if (!process) {
+    process = yield putWait(loadCurrentProcessAction())
   }
 
-  return yield putWait(loadCurrentProcessAction())
+  return process
 }

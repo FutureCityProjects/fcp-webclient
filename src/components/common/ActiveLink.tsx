@@ -14,7 +14,7 @@ const ActiveLink: React.FC<IProps> = ({ router, children, href, ...props }) => {
 
   const activeClassName = props.activeClassName ? props.activeClassName : "active"
 
-  let className = child.props.className || ""
+  let className: string = child.props.className || ""
 
   // when the complete URL matches, we don't want links to be shown as active if only a subpage is active,
   // e.g. /projects should not be active when /projects/own is displayed

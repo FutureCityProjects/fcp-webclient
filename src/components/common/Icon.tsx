@@ -41,7 +41,7 @@ export const Icons: string[] = [
   "work-package",
 ]
 
-const Icon = (props: IProps) => {
+const Icon: React.FC<IProps> = (props: IProps) => {
   const { name, size } = props
   const path = `/assets/icons/${name}.svg`
 

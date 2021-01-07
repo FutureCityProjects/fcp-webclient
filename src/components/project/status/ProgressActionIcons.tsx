@@ -14,14 +14,14 @@ const ProgressActionIcons: React.FC<IProps> = ({ project }: IProps) => {
   const { t } = useTranslation()
 
   return <div role="actions" className="icon-navigation">
-    <Link href={Routes.projectMembers}
-      as={routeWithParams(Routes.projectMembers, { slug: project.slug || project.id })}
+    <Link href={Routes.ProjectMembers}
+      as={routeWithParams(Routes.ProjectMembers, { slug: project.slug || project.id })}
     >
       <a className="navigation-item" title={t("goto.projectMemberships")} aria-label={t("goto.projectMemberships")}>
         <Icon name="user-multiple" size={24} />
       </a>
     </Link>
-    {/*<Link href="/">
+    {/* <Link href="/">
       <a aria-label="add participants" className="navigation-item">
         <Icon name={"user-multiple"} size={24} />
       </a>

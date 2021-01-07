@@ -22,8 +22,8 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = () => {
       shortDescription: "die Inspiration",
     },
     name: "Testprojekt",
-    profileSelfAssessment: SelfAssessment.MAKING_PROGRESS,
-    progress: ProjectProgress.CREATING_PLAN,
+    profileSelfAssessment: SelfAssessment.MakingProgress,
+    progress: ProjectProgress.CreatingPlan,
     shortDescription: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas",
     slug: "testprojekt",
     tasks: [
@@ -81,12 +81,13 @@ const ProjectWorkPackagesPage: I18nPage<PageProps> = () => {
     <PlanContainer
       component={ProjectWorkPackages}
       project={p1}
+      // eslint-disable-next-line no-console
       updateProject={(values) => console.log(values)}
     />
   </BaseLayout>
 }
 
-ProjectWorkPackagesPage.getInitialProps = async () => ({
+ProjectWorkPackagesPage.getInitialProps = () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 

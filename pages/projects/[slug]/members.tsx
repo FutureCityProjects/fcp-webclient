@@ -24,9 +24,9 @@ import { Routes } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   deleteApplication: (application, actions) =>
-    dispatch(deleteModelAction(EntityType.PROJECT_MEMBERSHIP, application, actions)),
+    dispatch(deleteModelAction(EntityType.ProjectMembership, application, actions)),
   updateApplication: (application, actions) =>
-    dispatch(updateModelAction(EntityType.PROJECT_MEMBERSHIP, application, actions)),
+    dispatch(updateModelAction(EntityType.ProjectMembership, application, actions)),
 })
 
 const mapStateToProps = (state: AppState, { slug }) => ({
@@ -55,7 +55,7 @@ const MembersPage: I18nPage<PageProps> = (props: PageProps) => {
   }
 
   const acceptApplication = (application: IProjectMembership) => {
-    updateApplication({ ...application, role: MembershipRole.MEMBER }, {})
+    updateApplication({ ...application, role: MembershipRole.Member }, {})
 
     return false
   }
@@ -76,8 +76,8 @@ const MembersPage: I18nPage<PageProps> = (props: PageProps) => {
           : <>
             <p><TranslatedHtml content="page.projects.members.intro" params={{ projectName: project.name }} /></p>
             <Link
-              href={Routes.myProjects}
-              as={Routes.myProjects + "#project-" + project.id}
+              href={Routes.MyProjects}
+              as={Routes.MyProjects + "#project-" + project.id.toString()}
             >
               <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
             </Link>
@@ -96,12 +96,12 @@ const MembersPage: I18nPage<PageProps> = (props: PageProps) => {
         .map((membership) => <Col key={membership["@id"]}>
           <Card className="body-card">
             <CardHeader>
-              <h3>{(membership.user as IUser).username} {membership.role !== MembershipRole.MEMBER && <>
+              <h3>{(membership.user as IUser).username} {membership.role !== MembershipRole.Member && <>
                 <span className="small">({t("project.membership." + membership.role)})</span>
               </>}
               </h3>
               {isOwner && <div role="actions" className="icon-navigation">
-                {membership.role === MembershipRole.APPLICANT && <>
+                {membership.role === MembershipRole.Applicant && <>
                   <a
                     aria-label={t("page.projects.members.acceptApplication")}
                     className="navigation-item"
@@ -149,5 +149,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(MembersPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

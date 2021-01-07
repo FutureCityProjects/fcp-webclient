@@ -22,7 +22,7 @@ import { Routes } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   deleteMembership: (membership: IProjectMembership, actions: any) =>
-    dispatch(deleteModelAction(EntityType.PROJECT_MEMBERSHIP, membership, actions)),
+    dispatch(deleteModelAction(EntityType.ProjectMembership, membership, actions)),
 })
 
 const mapStateToProps = (state: AppState) => ({
@@ -61,7 +61,7 @@ const MyProjectsPage: I18nPage<PageProps> = (props: PageProps) => {
             : <>
               <PageError error={request.loadingError} />
 
-              {noProjects && <Link href={Routes.marketplace}>
+              {noProjects && <Link href={Routes.Marketplace}>
                 <a className="btn d-block d-flex justify-content-center">
                   <EmptyProjectCard />
                 </a>
@@ -88,5 +88,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(MyProjectsPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

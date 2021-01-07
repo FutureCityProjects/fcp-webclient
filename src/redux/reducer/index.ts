@@ -39,8 +39,8 @@ export type AppState = ReturnType<typeof appReducer>
  * @param AppState state
  * @param Action action
  */
-export default function rootReducer(state: AppState, action: Action) {
-  if (action.type === GeneralActionTypes.CLEAR_STORE) {
+export default (state: AppState, action: Action): AppState => {
+  if (action.type === GeneralActionTypes.ClearStore) {
     return appReducer(undefined, action)
   }
 

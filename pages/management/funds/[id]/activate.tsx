@@ -28,7 +28,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 
 const mapStateToProps = (state: AppState, { id }) => ({
   // @todo don't select any fund, only if it was loaded with PO privileges
-  fund: selectById<IFund>(state, EntityType.FUND, id),
+  fund: selectById<IFund>(state, EntityType.Fund, id),
 
   request: state.requests.fundsLoading,
 })
@@ -38,7 +38,7 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   id: number
 }
 
-const fundEditPage: I18nPage<PageProps> = ({ activateFund, id, fund, request, t, }) => {
+const FundActivationPage: I18nPage<PageProps> = ({ activateFund, id, fund, request, t, }) => {
   // @todo custom error message "fund not found" etc.
   if (!request.isLoading && !fund) {
     return <StatusCode statusCode={404}>
@@ -48,8 +48,8 @@ const fundEditPage: I18nPage<PageProps> = ({ activateFund, id, fund, request, t,
 
   const onSubmit = (_values, actions) => {
     actions.success = () => {
-      Router.push(Routes.fundDetails,
-        routeWithParams(Routes.fundDetails, { id: fund.id }))
+      void Router.push(Routes.FundDetails,
+        routeWithParams(Routes.FundDetails, { id: fund.id }))
     }
 
     activateFund(fund, actions)
@@ -62,8 +62,8 @@ const fundEditPage: I18nPage<PageProps> = ({ activateFund, id, fund, request, t,
         <p><TranslatedHtml content="page.management.funds.activate.intro" /></p>
 
         <Link
-          href={Routes.fundDetails}
-          as={routeWithParams(Routes.fundDetails, { id })}
+          href={Routes.FundDetails}
+          as={routeWithParams(Routes.FundDetails, { id })}
         >
           <a className="btn btn-secondary btn-sm">{t("goto.fundManagement")}</a>
         </Link>
@@ -86,7 +86,7 @@ const fundEditPage: I18nPage<PageProps> = ({ activateFund, id, fund, request, t,
   </BaseLayout>
 }
 
-fundEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
+FundActivationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   let id: number = null
   if (typeof query.id === "string" && /^\d+$/.exec(query.id)) {
     id = parseInt(query.id, 10)
@@ -95,7 +95,7 @@ fundEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
     // requested fund was loaded with PO privileges or was in store from any logged out
     // actions etc. - refactor the reducer to track a single fund for PO management
     if (!selectManagementFundsLoaded(store.getState())) {
-      store.dispatch(loadCollectionAction(EntityType.FUND, {}, "fund_management"))
+      store.dispatch(loadCollectionAction(EntityType.Fund, {}, "fund_management"))
     }
   }
 
@@ -104,7 +104,7 @@ fundEditPage.getInitialProps = ({ store, query }: NextPageContext) => {
 
 export default withAuth(
   connector(
-    withTranslation(includeDefaultNamespaces())(fundEditPage),
+    withTranslation(includeDefaultNamespaces())(FundActivationPage),
   ),
-  UserRole.PROCESS_OWNER,
+  UserRole.ProcessOwner,
 )

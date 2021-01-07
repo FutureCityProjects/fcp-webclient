@@ -17,7 +17,7 @@ const ImprintPage: I18nPage<WithTranslation> = ({ t }) => {
   </BaseLayout>
 }
 
-ImprintPage.getInitialProps = async () => ({
+ImprintPage.getInitialProps = () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 

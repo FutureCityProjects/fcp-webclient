@@ -13,16 +13,15 @@ interface IProps {
   selectFund: any
 }
 
-function handleClick(id) {
-  document.getElementById("caret-" + id).classList.toggle("caret-toggled")
-}
+const handleClick = (id: number) =>
+  document.getElementById("caret-" + id.toString()).classList.toggle("caret-toggled")
 
 const SelectFundCard: React.FC<IProps> = ({ fund, selectable, selectFund }: IProps) => {
   const { t } = useTranslation()
 
   return <Card role="fund info" className="collapse-card">
     <CardHeader
-      id={"toggler-" + fund.id}
+      id={"toggler-" + fund.id.toString()}
       className="toggler"
       onClick={() => handleClick(fund.id)}
       aria-expanded="false"
@@ -30,10 +29,10 @@ const SelectFundCard: React.FC<IProps> = ({ fund, selectable, selectFund }: IPro
       <div className="title-section">
         <h3>{fund.name}</h3>
       </div>
-      <span id={"caret-" + fund.id} className="caret"><Icon name="caret" size={24} /></span>
+      <span id={"caret-" + fund.id.toString()} className="caret"><Icon name="caret" size={24} /></span>
     </CardHeader>
 
-    <UncontrolledCollapse toggler={"#toggler-" + fund.id}>
+    <UncontrolledCollapse toggler={"#toggler-" + fund.id.toString()}>
       <div className="card-block">
         <Row>
           <Col lg>

@@ -35,7 +35,7 @@ const validate = (values: IProjectMembership) => {
   return errors
 }
 
-const MemberApplicationForm = ({ application, onSubmit }: IProps) => {
+const MemberApplicationForm: React.FC<IProps> = ({ application, onSubmit }: IProps) => {
   const { t } = useTranslation()
 
   return <Formik<IProjectMembership>

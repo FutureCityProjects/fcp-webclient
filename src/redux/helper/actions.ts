@@ -80,7 +80,7 @@ export const loadCollectionSuccessAction =
   })
 
 export const loadModelSuccessAction =
-  (entityType: EntityType, model: any, scope?: string): IModelAction<any> => ({
+  (entityType: EntityType, model: Record<string, unknown>, scope?: string): IModelAction<any> => ({
     entityType,
     model,
     scope,
@@ -88,7 +88,7 @@ export const loadModelSuccessAction =
   })
 
 export const createModelAction =
-  (entityType: EntityType, model: any, actions: any, scope?: string): IModelFormAction<any> => ({
+  (entityType: EntityType, model: Record<string, unknown>, actions: Record<string, unknown>, scope?: string): IModelFormAction<any> => ({
     actions,
     entityType,
     model,
@@ -97,7 +97,7 @@ export const createModelAction =
   })
 
 export const createModelSuccessAction =
-  (entityType: EntityType, model: any, scope?: string): IModelAction<any> => ({
+  (entityType: EntityType, model: Record<string, unknown>, scope?: string): IModelAction<any> => ({
     entityType,
     model,
     scope,
@@ -105,7 +105,7 @@ export const createModelSuccessAction =
   })
 
 export const updateModelAction =
-  (entityType: EntityType, model: any, actions: any, scope?: string): IModelFormAction<any> => ({
+  (entityType: EntityType, model: Record<string, unknown>, actions: Record<string, unknown>, scope?: string): IModelFormAction<any> => ({
     actions,
     entityType,
     model,
@@ -114,7 +114,7 @@ export const updateModelAction =
   })
 
 export const updateModelSuccessAction =
-  (entityType: EntityType, model: any, scope?: string): IModelAction<any> => ({
+  (entityType: EntityType, model: Record<string, unknown>, scope?: string): IModelAction<any> => ({
     entityType,
     model,
     scope,
@@ -122,7 +122,7 @@ export const updateModelSuccessAction =
   })
 
 export const deleteModelAction =
-  (entityType: EntityType, model: any, actions?: any, scope?: string): IModelFormAction<any> => ({
+  (entityType: EntityType, model: Record<string, unknown>, actions?: Record<string, unknown>, scope?: string): IModelFormAction<any> => ({
     actions: actions || {},
     entityType,
     model,
@@ -131,7 +131,7 @@ export const deleteModelAction =
   })
 
 export const deleteModelSuccessAction =
-  (entityType: EntityType, model: any, scope?: string): IModelAction<any> => ({
+  (entityType: EntityType, model: Record<string, unknown>, scope?: string): IModelAction<any> => ({
     entityType,
     model,
     scope,

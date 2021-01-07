@@ -18,7 +18,7 @@ import {
 import { EntityType } from "redux/reducer/data"
 import { SubmissionError } from "services/submissionError"
 
-export function* usersWatcherSaga() {
+export function* usersWatcherSaga(): any {
   yield all([
     takeLatest("CREATE_USER", withCallback(createUserSaga)),
     takeLatest("UPDATE_USER", withCallback(updateUserSaga)),
@@ -40,7 +40,7 @@ function* loadUserSaga(action: ILoadByAction) {
       throw new Error("Unknown criteria when loading user")
     }
 
-    yield put(loadModelSuccessAction(EntityType.USER, user))
+    yield put(loadModelSuccessAction(EntityType.User, user))
     yield put(loadingSuccessAction("user_loading", user))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, user))
@@ -58,7 +58,7 @@ function* loadUserCollectionSaga(action: ILoadByAction) {
   try {
     yield put(setLoadingAction("user_collection_loading", true))
     const users: IHydraCollection<IUser> = yield call(apiClient.getUsers, action.criteria)
-    yield put(loadCollectionSuccessAction(EntityType.USER, users, action.scope))
+    yield put(loadCollectionSuccessAction(EntityType.User, users, action.scope))
     yield put(loadingSuccessAction("user_collection_loading", users))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, users))
@@ -76,7 +76,7 @@ function* createUserSaga(action: IModelFormAction<IUser>) {
   try {
     yield put(setLoadingAction("user_operation", true))
     const user: IUser = yield call(apiClient.createUser, action.model)
-    yield put(createModelSuccessAction(EntityType.USER, user))
+    yield put(createModelSuccessAction(EntityType.User, user))
     yield put(setLoadingAction("user_operation", false))
     if (action.scope) {
       yield put(setLoadingAction(action.scope, false))
@@ -104,7 +104,7 @@ function* updateUserSaga(action: IModelFormAction<IUser>) {
   try {
     yield put(setLoadingAction("user_operation", true))
     const user: IUser = yield call(apiClient.updateUser, action.model)
-    yield put(updateModelSuccessAction(EntityType.USER, user))
+    yield put(updateModelSuccessAction(EntityType.User, user))
     yield put(setLoadingAction("user_operation", false))
     if (action.scope) {
       yield put(setLoadingAction(action.scope, false))
@@ -132,7 +132,7 @@ function* deleteUserSaga(action: IModelFormAction<IUser>) {
   try {
     yield put(setLoadingAction("user_operation", true))
     yield call(apiClient.deleteUser, action.model)
-    yield put(deleteModelSuccessAction(EntityType.USER, action.model))
+    yield put(deleteModelSuccessAction(EntityType.User, action.model))
     yield put(setLoadingAction("user_operation", false))
     if (action.scope) {
       yield put(setLoadingAction(action.scope, false))

@@ -1,9 +1,7 @@
 import React from "react"
 
-export default class PageBody extends React.Component {
-  public render() {
-    return (
-      <main className="container" role="main">{this.props.children}</main>
-    )
-  }
-}
+const PageBody: React.FC = (props: any) => <main className="container" role="main">
+  {props.children}
+</main>
+
+export default PageBody

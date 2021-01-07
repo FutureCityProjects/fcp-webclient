@@ -13,12 +13,12 @@ import {
 import { EntityType } from "redux/reducer/data"
 import { SubmissionError } from "services/submissionError"
 
-export function* fundApplicationsWatcherSaga() {
+export function* fundApplicationsWatcherSaga(): any {
   yield all([
     takeLatest("CREATE_FUNDAPPLICATION", withCallback(createFundApplicationSaga)),
     takeLatest("UPDATE_FUNDAPPLICATION", withCallback(updateFundApplicationSaga)),
     takeLatest("DELETE_FUNDAPPLICATION", withCallback(deleteFundApplicationSaga)),
-    takeLatest(MyProjectsActionTypes.SUBMIT_APPLICATION, withCallback(submitFundApplicationSaga)),
+    takeLatest(MyProjectsActionTypes.SubmitApplication, withCallback(submitFundApplicationSaga)),
   ])
 }
 
@@ -30,7 +30,7 @@ function* createFundApplicationSaga(action: IModelFormAction<IFundApplication>) 
 
     // reload the project to have a consistent model in the store, instead of integrating the
     // application manually, this also sets the request scope isLoading to false
-    yield putWait(loadModelAction(EntityType.PROJECT, { id: (fundApplication.project as IProject).id }, "fundApplication_operation"))
+    yield putWait(loadModelAction(EntityType.Project, { id: (fundApplication.project as IProject).id }, "fundApplication_operation"))
 
     yield call(success, fundApplication)
 
@@ -57,7 +57,7 @@ function* updateFundApplicationSaga(action: IModelFormAction<IFundApplication>) 
 
     // reload the project to have a consistent model in the store, instead of integrating the
     // application manually, this also sets the request scope isLoading to false
-    yield putWait(loadModelAction(EntityType.PROJECT, { id: (fundApplication.project as IProject).id }, "fundApplication_operation"))
+    yield putWait(loadModelAction(EntityType.Project, { id: (fundApplication.project as IProject).id }, "fundApplication_operation"))
 
     if (success) {
       yield call(success, fundApplication)
@@ -83,7 +83,7 @@ function* deleteFundApplicationSaga(action: IModelFormAction<IFundApplication>) 
   try {
     yield put(setLoadingAction("fundApplication_operation", true))
     yield call(apiClient.deleteFundApplication, action.model)
-    yield put(deleteModelSuccessAction(EntityType.FUND_APPLICATION, action.model, action.scope))
+    yield put(deleteModelSuccessAction(EntityType.FundApplication, action.model, action.scope))
     yield put(setLoadingAction("fundApplication_operation", false))
     yield call(success)
 
@@ -110,7 +110,7 @@ function* submitFundApplicationSaga(action: ISubmitFundApplicationAction) {
 
     // reload the project to have a consistent model in the store, instead of integrating the
     // application manually, this also sets the request scope isLoading to false
-    yield putWait(loadModelAction(EntityType.PROJECT, { id: (fundApplication.project as IProject).id }, "fundApplication_operation"))
+    yield putWait(loadModelAction(EntityType.Project, { id: (fundApplication.project as IProject).id }, "fundApplication_operation"))
 
     if (success) {
       yield call(success, fundApplication)

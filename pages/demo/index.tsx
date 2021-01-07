@@ -81,7 +81,7 @@ const Page: I18nPage<PageProps> = () => {
   )
 }
 
-Page.getInitialProps = async () => {
+Page.getInitialProps = () => {
   return {
     namespacesRequired: includeDefaultNamespaces(),
   }

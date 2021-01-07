@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import React from "react"
+import React, { ReactElement } from "react"
 import { Button, FormGroup, Spinner } from "reactstrap"
 
 import { IUser } from "api/schema"
@@ -70,7 +70,7 @@ interface IProps {
   onSubmit: any
 }
 
-const RegistrationForm = ({ onSubmit }: IProps) => {
+const RegistrationForm = ({ onSubmit }: IProps): ReactElement => {
   const { t } = useTranslation()
 
   return <Formik<IRegistrationData>

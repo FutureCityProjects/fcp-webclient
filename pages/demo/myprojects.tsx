@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { WithTranslation } from "next-i18next"
 import React from "react"
 
@@ -22,8 +23,8 @@ const MyProjectsPage: I18nPage<PageProps> = () => {
       shortDescription: "die Inspiration",
     },
     name: "Testprojekt",
-    profileSelfAssessment: SelfAssessment.MAKING_PROGRESS,
-    progress: ProjectProgress.CREATING_PLAN,
+    profileSelfAssessment: SelfAssessment.MakingProgress,
+    progress: ProjectProgress.CreatingPlan,
     shortDescription: "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat mas",
     slug: "testprojekt",
   }
@@ -40,14 +41,14 @@ const MyProjectsPage: I18nPage<PageProps> = () => {
       shortDescription: "die andere Inspiration",
     },
     name: null,
-    profileSelfAssessment: SelfAssessment.STARTING,
-    progress: ProjectProgress.CREATING_PLAN,
+    profileSelfAssessment: SelfAssessment.Starting,
+    progress: ProjectProgress.CreatingPlan,
     shortDescription: "übernommen von der Projektidee",
     slug: null,
   }
 
   const membership: IProjectMembership = {
-    role: MembershipRole.MEMBER,
+    role: MembershipRole.Member,
   }
 
   return (
@@ -59,7 +60,7 @@ const MyProjectsPage: I18nPage<PageProps> = () => {
 
 }
 
-MyProjectsPage.getInitialProps = async () => ({
+MyProjectsPage.getInitialProps = () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 

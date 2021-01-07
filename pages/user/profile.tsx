@@ -53,5 +53,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(ProfilePage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

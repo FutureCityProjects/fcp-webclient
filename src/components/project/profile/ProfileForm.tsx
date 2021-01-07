@@ -67,12 +67,12 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
             <div className="icon-navigation">
               <DropdownComponent className="navigation-item" button={<Icon name="grid" size={24} />}>
                 <Link
-                  href={Routes.projectProfile}
-                  as={routeWithParams(Routes.projectProfile, { slug: project.slug || project.id })}
+                  href={Routes.ProjectProfile}
+                  as={routeWithParams(Routes.ProjectProfile, { slug: project.slug || project.id })}
                 >
                   <a>{t("goto.profileOverview")}</a>
                 </Link>
-                <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+                <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
                   <a>{t("goto.myProjects")}</a>
                 </Link>
               </DropdownComponent>
@@ -147,11 +147,11 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
                   label="project.profileSelfAssessment"
                   name="profileSelfAssessment"
                   labels={{
-                    [SelfAssessment.STARTING]: t("progress.0"),
-                    [SelfAssessment.MAKING_PROGRESS]: t("progress.25"),
-                    [SelfAssessment.HALF_FINISHED]: t("progress.50"),
-                    [SelfAssessment.ALMOST_FINISHED]: t("progress.75"),
-                    [SelfAssessment.COMPLETE]: t("progress.100"),
+                    [SelfAssessment.Starting]: t("progress.0"),
+                    [SelfAssessment.MakingProgress]: t("progress.25"),
+                    [SelfAssessment.HalfFinished]: t("progress.50"),
+                    [SelfAssessment.AlmostFinished]: t("progress.75"),
+                    [SelfAssessment.Complete]: t("progress.100"),
                   }}
                   value={values.profileSelfAssessment}
                 />
@@ -163,8 +163,8 @@ const ProfileForm: React.FC<IProps> = (props: IProps) => {
                 {t("form.saveChanges")} {isSubmitting && <Spinner />}
               </Button>
               <Link
-                href={Routes.projectProfile}
-                as={routeWithParams(Routes.projectProfile, { slug: project.slug || project.id })}
+                href={Routes.ProjectProfile}
+                as={routeWithParams(Routes.ProjectProfile, { slug: project.slug || project.id })}
               >
                 <a className="btn btn-light">{t("goto.profileOverview")}</a>
               </Link>

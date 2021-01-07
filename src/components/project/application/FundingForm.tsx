@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import React from "react"
+import React, { ReactElement } from "react"
 import { Button, Spinner } from "reactstrap"
 
 import { IFundApplication } from "api/schema"
@@ -13,7 +13,7 @@ interface IProps {
   onSubmit: any
 }
 
-const FundingForm = ({ application, onSubmit }: IProps) => {
+const FundingForm = ({ application, onSubmit }: IProps): ReactElement => {
   const { t } = useTranslation()
 
   return <Formik<IFundApplication> initialValues={application} onSubmit={onSubmit}>

@@ -32,103 +32,103 @@ describe("setLoadingAction", () => {
 
 describe("loadCollectionAction", () => {
   it("creates an action", () => {
-    const action = loadCollectionAction(EntityType.USER, { id: 12 }, "current_user")
+    const action = loadCollectionAction(EntityType.User, { id: 12 }, "current_user")
     expect(action.type).toBe("LOAD_USER_COLLECTION")
     expect(action.criteria).toStrictEqual({ id: 12 })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("loadCollectionSuccessAction", () => {
   it("creates an action", () => {
-    const action = loadCollectionSuccessAction(EntityType.USER, { "@context": "user" }, "current_user")
+    const action = loadCollectionSuccessAction(EntityType.User, { "@context": "user" }, "current_user")
     expect(action.type).toBe("LOAD_USER_COLLECTION_SUCCESS")
     expect(action.collection).toStrictEqual({ "@context": "user" })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("loadModelAction", () => {
   it("creates an action", () => {
-    const action = loadModelAction(EntityType.USER, { id: 12 }, "current_user")
+    const action = loadModelAction(EntityType.User, { id: 12 }, "current_user")
     expect(action.type).toBe("LOAD_USER")
     expect(action.criteria).toStrictEqual({ id: 12 })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("loadModelSuccessAction", () => {
   it("creates an action", () => {
-    const action = loadModelSuccessAction(EntityType.USER, { id: 12 }, "current_user")
+    const action = loadModelSuccessAction(EntityType.User, { id: 12 }, "current_user")
     expect(action.type).toBe("LOAD_USER_SUCCESS")
     expect(action.model).toStrictEqual({ id: 12 })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("createModelAction", () => {
   it("creates an action", () => {
-    const action = createModelAction(EntityType.USER, { id: 12 }, { success: true }, "current_user")
+    const action = createModelAction(EntityType.User, { id: 12 }, { success: true }, "current_user")
     expect(action.type).toBe("CREATE_USER")
     expect(action.model).toStrictEqual({ id: 12 })
     expect(action.actions).toStrictEqual({ success: true })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("createModelSuccessAction", () => {
   it("creates an action", () => {
-    const action = createModelSuccessAction(EntityType.USER, { id: 12 }, "current_user")
+    const action = createModelSuccessAction(EntityType.User, { id: 12 }, "current_user")
     expect(action.type).toBe("CREATE_USER_SUCCESS")
     expect(action.model).toStrictEqual({ id: 12 })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("updateModelAction", () => {
   it("creates an action", () => {
-    const action = updateModelAction(EntityType.USER, { id: 12 }, { success: true }, "current_user")
+    const action = updateModelAction(EntityType.User, { id: 12 }, { success: true }, "current_user")
     expect(action.type).toBe("UPDATE_USER")
     expect(action.model).toStrictEqual({ id: 12 })
     expect(action.actions).toStrictEqual({ success: true })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("updateModelSuccessAction", () => {
   it("creates an action", () => {
-    const action = updateModelSuccessAction(EntityType.USER, { id: 12 }, "current_user")
+    const action = updateModelSuccessAction(EntityType.User, { id: 12 }, "current_user")
     expect(action.type).toBe("UPDATE_USER_SUCCESS")
     expect(action.model).toStrictEqual({ id: 12 })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("deleteModelAction", () => {
   it("creates an action", () => {
-    const action = deleteModelAction(EntityType.USER, { id: 12 }, { success: true }, "current_user")
+    const action = deleteModelAction(EntityType.User, { id: 12 }, { success: true }, "current_user")
     expect(action.type).toBe("DELETE_USER")
     expect(action.model).toStrictEqual({ id: 12 })
     expect(action.actions).toStrictEqual({ success: true })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })
 
 describe("deleteModelSuccessAction", () => {
   it("creates an action", () => {
-    const action = deleteModelSuccessAction(EntityType.USER, { id: 12 }, "current_user")
+    const action = deleteModelSuccessAction(EntityType.User, { id: 12 }, "current_user")
     expect(action.type).toBe("DELETE_USER_SUCCESS")
     expect(action.model).toStrictEqual({ id: 12 })
-    expect(action.entityType).toBe(EntityType.USER)
+    expect(action.entityType).toBe(EntityType.User)
     expect(action.scope).toBe("current_user")
   })
 })

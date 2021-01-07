@@ -22,8 +22,8 @@ const PublicProfile: React.FC<IProps> = ({ project }: IProps) => {
         {project.shortDescription}
         <div className={"icon-navigation"}>
           <DropdownComponent button={<Icon name="user-add" size={36} />}>
-            <Link href={Routes.projectApplication}
-              as={routeWithParams(Routes.projectApplication, { slug: project.slug || project.id })}
+            <Link href={Routes.ProjectApplication}
+              as={routeWithParams(Routes.ProjectApplication, { slug: project.slug || project.id })}
             >
               <a>{t("goto.memberApplication")}</a>
             </Link>

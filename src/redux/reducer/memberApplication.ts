@@ -7,10 +7,10 @@ const emptyApplication = { motivation: "", skills: "" }
 const memberApplicationReducer =
   (state: IProjectMembership = emptyApplication, action: MemberApplicationActions): IProjectMembership => {
     switch (action.type) {
-      case MemberApplicationActionTypes.SET_NEW_MEMBER_APPLICATION:
+      case MemberApplicationActionTypes.SetNewMemberApplication:
         return action.application
 
-      case MemberApplicationActionTypes.RESET_NEW_MEMBER_APPLICATION:
+      case MemberApplicationActionTypes.ResetNewMemberApplication:
         return emptyApplication
 
       default:

@@ -22,7 +22,7 @@ import { Routes } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   updateProcess: (process, actions) =>
-    dispatch(updateModelAction(EntityType.PROCESS, process, actions))
+    dispatch(updateModelAction(EntityType.Process, process, actions))
 })
 
 const mapStateToProps = (state: AppState) => ({
@@ -40,7 +40,7 @@ const ProcessEditPage: I18nPage<PageProps> = ({ updateProcess, process, request,
   const onSubmit = (values, actions) => {
     // add another action additionally to the formik defaults (setErrors, setSubmitting, reset, ...)
     actions.success = () => {
-      Router.push(Routes.processOverview)
+      void Router.push(Routes.ProcessOverview)
     }
 
     // mark page as submitting so the form is not replaced by the spinner
@@ -49,7 +49,7 @@ const ProcessEditPage: I18nPage<PageProps> = ({ updateProcess, process, request,
   }
 
   if (request.loadingError || !process) {
-    return <Redirect route={Routes.processOverview} />
+    return <Redirect route={Routes.ProcessOverview} />
   }
 
   return <BaseLayout pageTitle={t("page.process.edit.heading")}>
@@ -66,7 +66,7 @@ const ProcessEditPage: I18nPage<PageProps> = ({ updateProcess, process, request,
   </BaseLayout>
 }
 
-ProcessEditPage.getInitialProps = async ({ store }: NextPageContext) => {
+ProcessEditPage.getInitialProps = ({ store }: NextPageContext) => {
   if (!selectCurrentProcess(store.getState())) {
     store.dispatch(loadCurrentProcessAction())
   }
@@ -78,5 +78,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(ProcessEditPage),
   ),
-  UserRole.PROCESS_OWNER,
+  UserRole.ProcessOwner,
 )

@@ -30,7 +30,7 @@ export const flattenErrors = (errors: any, prefix = ""): ISubmissionErrorList =>
   let flattened: ISubmissionErrorList = {}
   Object.keys(errors).forEach((k) => {
     if (typeof errors[k] !== "string") {
-      const newPrefix = k.match(/^\d+$/)
+      const newPrefix = /^\d+$/.exec(k)
         ? prefix
         : prefix ? prefix + "." + k : k
 

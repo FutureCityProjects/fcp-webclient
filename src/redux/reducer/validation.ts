@@ -6,9 +6,9 @@ import { ILoadingSuccessAction } from "redux/helper/actions"
 const validationsReducer = (state = false, action: Action): boolean => {
   switch (action.type) {
     case "LOADING_VALIDATION_OPERATION_SUCCESS":
-      return (action as ILoadingSuccessAction).result
+      return (action as ILoadingSuccessAction).result as boolean
 
-    case ValidationActionTypes.RESET_VALIDATION_RESULT:
+    case ValidationActionTypes.ResetValidationResult:
       return false
 
     default:

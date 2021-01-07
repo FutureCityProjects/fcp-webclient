@@ -31,7 +31,7 @@ const RegistrationPage: I18nPage<PageProps> = ({ isAuthenticated, registerUser, 
   const [registered, setRegistered] = useState(false)
 
   if (isAuthenticated) {
-    return <Redirect route={Routes.userProfile} />
+    return <Redirect route={Routes.UserProfile} />
   }
 
   const onSubmit = (user: IUser, actions: any) => {
@@ -62,7 +62,7 @@ const RegistrationPage: I18nPage<PageProps> = ({ isAuthenticated, registerUser, 
                 <TranslatedHtml content="page.user.register.userCreated" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.login}>
+                <Link href={Routes.Login}>
                   <a className="btn btn-primary">{t("goto.login")}</a>
                 </Link>
               </CardText>

@@ -23,12 +23,12 @@ import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   deleteConcretization: (concretization) =>
-    dispatch(deleteModelAction(EntityType.FUND_CONCRETIZATION, concretization, {}))
+    dispatch(deleteModelAction(EntityType.FundConcretization, concretization, {}))
 })
 
 const mapStateToProps = (state: AppState, { id }) => ({
   // @todo don't select any fund, only if it was loaded with PO privileges
-  fund: selectById<IFund>(state, EntityType.FUND, id),
+  fund: selectById<IFund>(state, EntityType.Fund, id),
 
   request: state.requests.fundsLoading,
 })
@@ -59,7 +59,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
       <Col>
         <h1>{t("page.management.funds.details.heading")}</h1>
         <p><TranslatedHtml content="page.management.funds.details.intro" /></p>
-        <Link href={Routes.fundOverview} >
+        <Link href={Routes.FundOverview} >
           <a className="btn btn-secondary">{t("goto.fundManagement")}</a>
         </Link>
       </Col>
@@ -72,7 +72,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {fund.name}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.fundEdit} as={routeWithParams(Routes.fundEdit, { id: fund.id })}>
+                <Link href={Routes.FundEdit} as={routeWithParams(Routes.FundEdit, { id: fund.id })}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -81,15 +81,15 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             </CardHeader>
             <CardBody>
               <h5>{t("fund.state")}</h5>
-              {fund.state === FundState.ACTIVE
+              {fund.state === FundState.Active
                 ? <span className="text-success">{t("fund.states.active")}</span>
-                : (fund.state === FundState.FINISHED
+                : (fund.state === FundState.Finished
                   ? <span className="text-muted">{t("fund.states.finished")}</span>
                   : <span className="text-warning">{t("fund.states.inactive")}</span>
                 )}
-              {fund.state === FundState.INACTIVE && <>
+              {fund.state === FundState.Inactive && <>
                 <br />
-                <Link href={Routes.fundActivate} as={routeWithParams(Routes.fundActivate, { id: fund.id })}>
+                <Link href={Routes.FundActivate} as={routeWithParams(Routes.FundActivate, { id: fund.id })}>
                   <Button color="primary" className="btn-sm">
                     {t("goto.activateFund")}
                   </Button>
@@ -130,8 +130,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {t("page.management.funds.details.fundingHeader")}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.fundEdit}
-                  as={routeWithParams(Routes.fundEdit, { id: fund.id }) + "#form-fund-funding"}>
+                <Link href={Routes.FundEdit}
+                  as={routeWithParams(Routes.FundEdit, { id: fund.id }) + "#form-fund-funding"}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -160,8 +160,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {t("page.management.funds.details.applicationHeader")}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.fundEdit}
-                  as={routeWithParams(Routes.fundEdit, { id: fund.id }) + "#form-fund-application"}>
+                <Link href={Routes.FundEdit}
+                  as={routeWithParams(Routes.FundEdit, { id: fund.id }) + "#form-fund-application"}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -187,8 +187,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                       {c.question}
 
                       <Link href={{
-                        pathname: Routes.concretizationEdit, query: { concretization: c.id }
-                      }} as={{ pathname: routeWithParams(Routes.concretizationEdit, { id: fund.id, concretizationId: c.id }), query: { concretization: c.id } }}>
+                        pathname: Routes.ConcretizationEdit, query: { concretization: c.id }
+                      }} as={{ pathname: routeWithParams(Routes.ConcretizationEdit, { id: fund.id, concretizationId: c.id }), query: { concretization: c.id } }}>
                         <a className="btn" title={t("goto.editConcretization")}>
                           <Icon name="pencil" size={24} /></a>
                       </Link>
@@ -203,7 +203,7 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
                 </ul>
                 : <p>{t("default.empty")}</p>
               }
-              <Link href={Routes.concretizationCreate} as={routeWithParams(Routes.concretizationCreate, { id: fund.id })}>
+              <Link href={Routes.ConcretizationCreate} as={routeWithParams(Routes.ConcretizationCreate, { id: fund.id })}>
                 <Button color="primary">{t("form.fund.addConcretization")}</Button>
               </Link>
             </CardBody>
@@ -213,8 +213,8 @@ const FundDetailsPage: I18nPage<PageProps> = ({ deleteConcretization, fund, requ
             <CardHeader>
               {t("page.management.funds.details.juryHeader")}
               <div role="actions" className="icon-navigation">
-                <Link href={Routes.fundEdit}
-                  as={routeWithParams(Routes.fundEdit, { id: fund.id }) + "#form-fund-jury"}>
+                <Link href={Routes.FundEdit}
+                  as={routeWithParams(Routes.FundEdit, { id: fund.id }) + "#form-fund-jury"}>
                   <a aria-label={t("goto.editFund")} className="navigation-item" title={t("goto.editFund")}>
                     <Icon name={"pencil"} size={24} />
                   </a>
@@ -265,7 +265,7 @@ FundDetailsPage.getInitialProps = ({ store, query }: NextPageContext) => {
     // requested fund was loaded with PO privileges or was in store from any logged out
     // actions etc. - refactor the reducer to track a single fund for PO management
     if (!selectManagementFundsLoaded(store.getState())) {
-      store.dispatch(loadCollectionAction(EntityType.FUND, {}, "fund_management"))
+      store.dispatch(loadCollectionAction(EntityType.Fund, {}, "fund_management"))
     }
   }
 
@@ -276,5 +276,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(FundDetailsPage),
   ),
-  UserRole.PROCESS_OWNER,
+  UserRole.ProcessOwner,
 )

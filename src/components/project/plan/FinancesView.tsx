@@ -15,13 +15,13 @@ const FinancesView: React.FC<IPlanProps> = (props: IPlanProps) => {
   const resourceRequirements = functions.getResourceRequirements()
   const totalSum = resourceRequirements.length && functions.sumResourceRequirementCosts(resourceRequirements)
   const fundingSum = resourceRequirements.length && functions.sumResourceRequirementCosts(
-    functions.getResourceRequirementsBySourceType(ResourceSourceType.SOURCE_TYPE_FUNDING)
+    functions.getResourceRequirementsBySourceType(ResourceSourceType.Funding)
   )
   const ownCosts = resourceRequirements.length && functions.sumResourceRequirementCosts(
-    functions.getResourceRequirementsBySourceType(ResourceSourceType.SOURCE_TYPE_OWN_FUNDS)
+    functions.getResourceRequirementsBySourceType(ResourceSourceType.OwnFunds)
   )
   const proceeds = resourceRequirements.length && functions.sumResourceRequirementCosts(
-    functions.getResourceRequirementsBySourceType(ResourceSourceType.SOURCE_TYPE_PROCEEDS)
+    functions.getResourceRequirementsBySourceType(ResourceSourceType.Proceeds)
   )
 
   return <Card className="body-card">
@@ -31,8 +31,8 @@ const FinancesView: React.FC<IPlanProps> = (props: IPlanProps) => {
       </div>
       <div className={"icon-navigation"}>
         <Link
-          href={Routes.projectPlanFinances}
-          as={routeWithParams(Routes.projectPlanFinances, { slug: project.slug || project.id })}
+          href={Routes.ProjectPlanFinances}
+          as={routeWithParams(Routes.ProjectPlanFinances, { slug: project.slug || project.id })}
         >
           <a className="navigation-item" aria-label={t("goto.editProjectFinances")} title={t("goto.editProjectFinances")}>
             <Icon name={"pencil"} size={24} />

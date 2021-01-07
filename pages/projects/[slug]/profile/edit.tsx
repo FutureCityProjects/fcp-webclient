@@ -23,7 +23,7 @@ import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   updateProject: (project, actions) =>
-    dispatch(updateModelAction(EntityType.PROJECT, project, actions))
+    dispatch(updateModelAction(EntityType.Project, project, actions))
 })
 
 const mapStateToProps = (state: AppState, { slug }) => ({
@@ -49,8 +49,8 @@ const ProjectProfileEditPage: I18nPage<PageProps> = ({ isMember, project, reques
     actions.success = (result) => {
       // the slug could have changed (or we have none if the title was removed)
       // -> use result instead of the previous project
-      Router.push(Routes.projectProfile,
-        routeWithParams(Routes.projectProfile, { slug: result.slug || result.id }))
+      void Router.push(Routes.ProjectProfile,
+        routeWithParams(Routes.ProjectProfile, { slug: result.slug || result.id }))
     }
 
     updateProject(values, actions)
@@ -88,5 +88,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(ProjectProfileEditPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

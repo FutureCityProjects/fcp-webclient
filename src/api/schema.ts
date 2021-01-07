@@ -1,9 +1,9 @@
 export enum SelfAssessment {
-  STARTING = 0,
-  MAKING_PROGRESS = 25,
-  HALF_FINISHED = 50,
-  ALMOST_FINISHED = 75,
-  COMPLETE = 100,
+  Starting = 0,
+  MakingProgress = 25,
+  HalfFinished = 50,
+  AlmostFinished = 75,
+  Complete = 100,
 }
 
 export interface ICredentials {
@@ -25,14 +25,14 @@ export interface IHydraCollection<T> {
   "hydra:lastPage"?: number
   "hydra:member"?: T[]
   "hydra:nextPage"?: string
-  "hydra:search"?: object
+  "hydra:search"?: Record<string, unknown>
   "hydra:totalItems"?: number
 }
 
 export enum FundState {
-  ACTIVE = "active",
-  FINISHED = "finished",
-  INACTIVE = "inactive",
+  Active = "active",
+  Finished = "finished",
+  Inactive = "inactive",
 }
 
 export interface IFund extends INumericIdentifierModel {
@@ -65,14 +65,14 @@ export interface IFund extends INumericIdentifierModel {
 }
 
 export enum FundApplicationState {
-  CONCRETIZATION = "concretization",
-  DETAILING = "detailing",
-  SUBMITTED = "submitted",
+  Concretization = "concretization",
+  Detailing = "detailing",
+  Submitted = "submitted",
 }
 
 export interface IFundApplication extends INumericIdentifierModel {
   "@id"?: string
-  active: boolean
+  active?: boolean
   applicationSelfAssessment?: SelfAssessment
   concretizations?: { [id: number]: string }
   concretizationSelfAssessment?: SelfAssessment
@@ -127,18 +127,18 @@ export interface IProcess extends INumericIdentifierModel {
 }
 
 export enum ProjectProgress {
-  IDEA = "idea",
-  CREATING_PROFILE = "creating_profile",
-  CREATING_PLAN = "creating_plan",
-  CREATING_APPLICATION = "creating_application",
-  SUBMITTING_APPLICATION = "submitting_application",
-  APPLICATION_SUBMITTED = "application_submitted",
+  Idea = "idea",
+  CreatingProfile = "creating_profile",
+  CreatingPlan = "creating_plan",
+  CreatingApplication = "creating_application",
+  SubmittingApplication = "submitting_application",
+  ApplicationSubmitted = "application_submitted",
 }
 
 export enum ProjectState {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  DEACTIVATED = "deactivated",
+  Active = "active",
+  Inactive = "inactive",
+  Deactivated = "deactivated",
 }
 
 export interface IProject extends INumericIdentifierModel {
@@ -189,7 +189,7 @@ export interface IProject extends INumericIdentifierModel {
 }
 
 export const emptyIdea: IProject = {
-  progress: ProjectProgress.IDEA,
+  progress: ProjectProgress.Idea,
   shortDescription: "",
 }
 
@@ -202,7 +202,7 @@ export interface IProjectCreation extends IProject {
 
 export const emptyProject: IProjectCreation = {
   motivation: "",
-  progress: ProjectProgress.CREATING_PROFILE,
+  progress: ProjectProgress.CreatingProfile,
   skills: "",
 }
 
@@ -228,18 +228,18 @@ export interface IWorkPackage {
 }
 
 export enum ResourceCostType {
-  COST_TYPE_ADMINISTRATIVE = "administrative",
-  COST_TYPE_INVESTMENT = "investment",
-  COST_TYPE_MATERIAL = "material",
-  COST_TYPE_PERSONNEL = "personnel",
-  COST_TYPE_RENT = "rent",
-  COST_TYPE_TRAVELING = "traveling",
+  Administrative = "administrative",
+  Investment = "investment",
+  Material = "material",
+  Personnel = "personnel",
+  Rent = "rent",
+  Traveling = "traveling",
 }
 
 export enum ResourceSourceType {
-  SOURCE_TYPE_FUNDING = "funding",
-  SOURCE_TYPE_OWN_FUNDS = "own_funds",
-  SOURCE_TYPE_PROCEEDS = "proceeds",
+  Funding = "funding",
+  OwnFunds = "own_funds",
+  Proceeds = "proceeds",
 }
 
 export interface IResourceRequirement {
@@ -253,12 +253,12 @@ export interface IResourceRequirement {
 }
 
 export enum MembershipRole {
-  APPLICANT = "applicant",
-  MEMBER = "member",
-  OWNER = "owner",
+  Applicant = "applicant",
+  Member = "member",
+  Owner = "owner",
 }
 
-export interface IProjectMembership {
+export interface IProjectMembership extends INumericIdentifierModel {
   "@id"?: string
   motivation?: string
   project?: IProject | string
@@ -269,12 +269,12 @@ export interface IProjectMembership {
 }
 
 export enum UserRole {
-  ADMIN = "ROLE_ADMIN",
-  PROCESS_OWNER = "ROLE_PROCESS_OWNER",
-  USER = "ROLE_USER",
+  Admin = "ROLE_ADMIN",
+  ProcessOwner = "ROLE_PROCESS_OWNER",
+  User = "ROLE_USER",
 
   // @todo should not be an allowed role for any actions, added here for authenticated links
-  GUEST = "ROLE_GUEST",
+  Guest = "ROLE_GUEST",
 }
 
 export interface IUser extends INumericIdentifierModel {
@@ -299,16 +299,16 @@ export interface IRegistration extends IUser {
   validationUrl: string
 }
 
-export enum OBJECT_ROLES {
-  ROLE_JURY_MEMBER = "juryMember",
-  ROLE_PROCESS_OWNER = "processOwner",
+export enum ObjectRoles {
+  JuryMember = "juryMember",
+  ProcessOwner = "processOwner",
 }
 
 export interface IUserObjectRoles {
   "@id"?: string
   objectId?: number
   objectType?: string
-  role?: OBJECT_ROLES
+  role?: ObjectRoles
   user?: IUser
 }
 

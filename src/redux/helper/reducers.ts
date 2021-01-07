@@ -14,9 +14,10 @@ import {
   IRequestState,
 } from "./state"
 
-export const scopedRequestReducer = (scope: string) => {
+type IRequestActions = ISetLoadingAction | ILoadingSuccessAction
+export const scopedRequestReducer = (scope: string): (stete: IRequestState, action: IRequestActions) => IRequestState => {
   const requestReducer =
-    (state: IRequestState = initialRequestState, action: ISetLoadingAction | ILoadingSuccessAction) => {
+    (state: IRequestState = initialRequestState, action: IRequestActions) => {
       switch (action.type) {
         case "SET_LOADING_" + scope.toUpperCase():
           return {
@@ -36,7 +37,7 @@ export const scopedRequestReducer = (scope: string) => {
   return requestReducer
 }
 
-export function scopedObjectReducer<T extends INumericIdentifierModel>(entityType: EntityType) {
+export const scopedObjectReducer = <T extends INumericIdentifierModel>(entityType: EntityType): (state: IIndexedCollectionState<T>, action: IEntityAction) => IIndexedCollectionState<T> => {
   const objectReducer = (
     state: IIndexedCollectionState<T> = initialIndexedCollectionState,
     action: IEntityAction,
@@ -53,7 +54,7 @@ export function scopedObjectReducer<T extends INumericIdentifierModel>(entityTyp
       case `DELETE_${entityType.toUpperCase()}_SUCCESS`:
         const deletedModel = (action as IModelAction<T>).model
         const reduced: IIndexedCollectionState<T> = {}
-        Object.values(state).forEach((value) => {
+        Object.values(state).forEach((value: T) => {
           if (value.id === deletedModel.id) { return }
           reduced[value.id] = value
         })

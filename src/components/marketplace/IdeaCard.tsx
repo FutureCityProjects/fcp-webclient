@@ -19,7 +19,7 @@ const ProjectIdeaCard: React.FC<IProps> = ({ project }) => {
     <CardHeader>
       <h3>{t("page.projects.index.idea.header")}</h3>
       <DropdownComponent button={<Icon name="hand" size={24} />} title={t("goto.newProject")}>
-        <Link href={routeWithParams(Routes.createProject, { id: project.id })}>
+        <Link href={routeWithParams(Routes.CreateProject, { id: project.id })}>
           <a>{t("goto.newProject")}</a>
         </Link>
       </DropdownComponent>

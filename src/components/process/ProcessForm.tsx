@@ -16,7 +16,7 @@ interface IProps {
   process?: IProcess
 }
 
-const ProcessForm = ({ onSubmit, process = {
+const ProcessForm: React.FC<IProps> = ({ onSubmit, process = {
   criteria: null,
   description: "",
   goals: [],

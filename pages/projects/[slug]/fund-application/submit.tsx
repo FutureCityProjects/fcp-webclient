@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
 })
 
 const mapStateToProps = (state: AppState, { fundId, slug }) => ({
-  fund: selectById<IFund>(state, EntityType.FUND, fundId),
+  fund: selectById<IFund>(state, EntityType.Fund, fundId),
   fundRequest: state.requests.fundLoading,
   isMember: selectIsProjectMember(state, slug),
   isOwner: selectIsProjectOwner(state, slug),
@@ -50,8 +50,8 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
 
   // @todo custom error message "project not found or no permission" etc.
   if (!projectRequest.isLoading && (!project || project.isLocked
-    || project.progress === ProjectProgress.CREATING_PROFILE
-    || project.progress === ProjectProgress.CREATING_PLAN
+    || project.progress === ProjectProgress.CreatingProfile
+    || project.progress === ProjectProgress.CreatingPlan
     || !isMember)
   ) {
     return <StatusCode statusCode={404}>
@@ -59,7 +59,7 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
     </StatusCode>
   }
 
-  if (!fundRequest.isLoading && (!fund || fund.state !== FundState.ACTIVE)) {
+  if (!fundRequest.isLoading && (!fund || fund.state !== FundState.Active)) {
     // @todo custom message: fund not found or not active (edit of concretizations not permitted)
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={fundRequest.loadingError} />
@@ -76,7 +76,7 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
 
   const onSubmit = (_values, actions) => {
     actions.success = () => {
-      Router.push(Routes.myProjects, Routes.myProjects + "#project-" + project.id)
+      void Router.push(Routes.MyProjects, Routes.MyProjects + "#project-" + project.id.toString())
     }
 
     submitApplication(fundApplication, actions)
@@ -125,8 +125,8 @@ const SubmitApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
           : <>
             <p><TranslatedHtml content="page.projects.fundApplication.submit.intro" params={{ projectName: project.name }} /></p>
             <Link
-              href={Routes.myProjects}
-              as={Routes.myProjects + "#project-" + project.id}
+              href={Routes.MyProjects}
+              as={Routes.MyProjects + "#project-" + project.id.toString()}
             >
               <a className="btn btn-secondary btn-sm">{t("goto.myProjects")}</a>
             </Link>
@@ -179,12 +179,12 @@ SubmitApplicationPage.getInitialProps = ({ store, query }: NextPageContext) => {
   }
 
   let fundId: number = null
-  if (typeof query.fund === "string" && query.fund.match(/^\d+$/)) {
+  if (typeof query.fund === "string" && /^\d+$/.exec(query.fund)) {
     fundId = parseInt(query.fund, 10)
   }
 
-  if (fundId && !selectById(state, EntityType.FUND, fundId)) {
-    store.dispatch(loadModelAction(EntityType.FUND, { id: fundId }))
+  if (fundId && !selectById(state, EntityType.Fund, fundId)) {
+    store.dispatch(loadModelAction(EntityType.Fund, { id: fundId }))
   }
 
   return { slug, fundId, namespacesRequired: includeDefaultNamespaces() }
@@ -194,5 +194,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(SubmitApplicationPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

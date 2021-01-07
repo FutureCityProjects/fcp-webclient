@@ -8,17 +8,16 @@ import { ICreateIdeaAction, NewIdeaActionTypes, resetNewIdeaAction } from "redux
 import { addNotificationAction } from "redux/actions/notifications"
 import { ISetRegisteredUserAction, RegistrationActionTypes } from "redux/actions/registration"
 import { createModelAction, setLoadingAction } from "redux/helper/actions"
-import { AppState } from "redux/reducer"
 import { EntityType } from "redux/reducer/data"
 import { selectNewIdea } from "redux/reducer/newIdea"
 import { SubmissionError } from "services/submissionError"
 import { getCurrentProcess } from "./currentProcess"
 
-export function* newIdeaWatcherSaga() {
+export function* newIdeaWatcherSaga(): any {
   yield all([
-    takeLatest(NewIdeaActionTypes.CREATE_IDEA, withCallback(createIdeaSaga)),
-    takeLatest(AuthActionTypes.SET_AUTH, createSavedIdeaSaga),
-    takeLatest(RegistrationActionTypes.SET_REGISTERED_USER, postRegistrationSaga),
+    takeLatest(NewIdeaActionTypes.CreateIdea, withCallback(createIdeaSaga)),
+    takeLatest(AuthActionTypes.SetAuth, createSavedIdeaSaga),
+    takeLatest(RegistrationActionTypes.SetRegisteredUser, postRegistrationSaga),
   ])
 }
 
@@ -32,7 +31,7 @@ function* createIdeaSaga(action: ICreateIdeaAction) {
 
   const process: IProcess = yield call(getCurrentProcess)
   if (!process) {
-    const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+    const err = yield select((s) => s.requests.processLoading.loadingError as string)
     yield put(setLoadingAction("project_operation", false, err))
     return null
   }
@@ -40,7 +39,8 @@ function* createIdeaSaga(action: ICreateIdeaAction) {
   // inject the current process, it's required
   action.idea.process = process["@id"]
 
-  return yield putWait(createModelAction(EntityType.PROJECT, action.idea, action.actions))
+  const idea: IProject = yield putWait(createModelAction(EntityType.Project, action.idea, action.actions))
+  return idea
 }
 
 /**
@@ -63,7 +63,7 @@ function* createSavedIdeaSaga(action: ISetAuthAction) {
     yield put(setLoadingAction("project_operation", true))
     const process: IProcess = yield call(getCurrentProcess)
     if (!process) {
-      const err = yield select((s) => s.currentProcess.request.loadingError)
+      const err = yield select((s) => s.currentProcess.request.loadingError as string)
       yield put(setLoadingAction("project_operation", false, err))
       return null
     }
@@ -101,15 +101,10 @@ function* postRegistrationSaga(action: ISetRegisteredUserAction) {
     return
   }
 
-  const createdProjects = action.user.createdProjects
-
-  for (const key in createdProjects) {
-    if (createdProjects.hasOwnProperty(key)) {
-      const project = createdProjects[key]
-      if (project.progress === ProjectProgress.IDEA) {
-        yield put(addNotificationAction("message.project.ideaSaved", "success"))
-        yield put(resetNewIdeaAction())
-      }
+  for (const project of action.user.createdProjects) {
+    if (project.progress === ProjectProgress.Idea) {
+      yield put(addNotificationAction("message.project.ideaSaved", "success"))
+      yield put(resetNewIdeaAction())
     }
   }
 }

@@ -16,11 +16,11 @@ export const intitialNotificationState: NotificationState = []
 const notificationReducer =
   (state: NotificationState = intitialNotificationState, action: NotificationActions): NotificationState => {
     switch (action.type) {
-      case NotificationActionTypes.ADD_NOTIFICATION:
+      case NotificationActionTypes.AddNotification:
         const id: string = uniqueId()
         return [...state, { content: action.content, id, options: action.options }]
 
-      case NotificationActionTypes.REMOVE_NOTIFICATION:
+      case NotificationActionTypes.RemoveNotification:
         return state.filter((element) => element.id !== action.id)
 
       default:

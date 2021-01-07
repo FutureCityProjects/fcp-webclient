@@ -16,7 +16,7 @@ import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i1
 
 const mapStateToProps = (state: AppState, { id, slug }) => ({
   project: id
-    ? selectById(state, EntityType.PROJECT, id)
+    ? selectById(state, EntityType.Project, id)
     : selectProjectBySlug(state, slug),
   request: state.requests.projectLoading,
 })
@@ -30,8 +30,8 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
 const ProjectPage: I18nPage<PageProps> = ({ project, request, t }) => {
   if (!request.isLoading) {
     if (!project
-      || project.state === ProjectState.DEACTIVATED
-      || project.progress === ProjectProgress.IDEA
+      || project.state === ProjectState.Deactivated
+      || project.progress === ProjectProgress.Idea
     ) {
       return <StatusCode statusCode={404}>
         <ErrorPage statusCode={404} error={request.loadingError} />
@@ -62,14 +62,14 @@ ProjectPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const slug: string = typeof query.slug === "string" ? query.slug : null
   let id: number = null
 
-  if (slug.match(/^\d+$/)) {
+  if (/^\d+$/.exec(slug)) {
     id = parseInt(slug, 10)
 
-    if (!selectById(store.getState(), EntityType.PROJECT, id)) {
-      store.dispatch(loadModelAction(EntityType.PROJECT, { id }))
+    if (!selectById(store.getState(), EntityType.Project, id)) {
+      store.dispatch(loadModelAction(EntityType.Project, { id }))
     }
   } else if (slug && !selectProjectBySlug(store.getState(), slug)) {
-    store.dispatch(loadModelAction(EntityType.PROJECT, { slug }))
+    store.dispatch(loadModelAction(EntityType.Project, { slug }))
   }
 
   return { id, slug, namespacesRequired: includeDefaultNamespaces() }

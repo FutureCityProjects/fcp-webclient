@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import React from "react"
+import React, { ReactElement } from "react"
 import { Button, FormGroup, Spinner } from "reactstrap"
 
 import { IProjectCreation } from "api/schema"
@@ -35,7 +35,7 @@ const validate = (values: IProjectCreation) => {
   return errors
 }
 
-const ProjectCreationForm = ({ onSubmit, project }: IProps) => {
+const ProjectCreationForm = ({ onSubmit, project }: IProps): ReactElement => {
   const { t } = useTranslation()
 
   return <Formik<IProjectCreation>

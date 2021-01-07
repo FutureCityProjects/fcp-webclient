@@ -1,8 +1,8 @@
 export enum ValidationActionTypes {
-  CONFIRM_ACCOUNT = "CONFIRM_ACCOUNT",
-  CONFIRM_EMAIL = "CONFIRM_EMAIL",
-  RESET_PASSWORD = "RESET_PASSWORD",
-  RESET_VALIDATION_RESULT = "RESET_VALIDATION_RESULT",
+  ConfirmAccount = "CONFIRM_ACCOUNT",
+  ConfirmEmail = "CONFIRM_EMAIL",
+  ResetPassword = "RESET_PASSWORD",
+  ResetValidationResult = "RESET_VALIDATION_RESULT",
 }
 
 export interface IValidationAction {
@@ -13,14 +13,14 @@ export interface IConfirmAccountAction extends IValidationAction {
   actions: any
   id: string
   token: string
-  type: ValidationActionTypes.CONFIRM_ACCOUNT
+  type: ValidationActionTypes.ConfirmAccount
 }
 
 export interface IConfirmEmailAction extends IValidationAction {
   actions: any
   id: string
   token: string
-  type: ValidationActionTypes.CONFIRM_EMAIL
+  type: ValidationActionTypes.ConfirmEmail
 }
 
 export interface IResetPasswordAction extends IValidationAction {
@@ -28,11 +28,11 @@ export interface IResetPasswordAction extends IValidationAction {
   id: string
   password: string
   token: string
-  type: ValidationActionTypes.RESET_PASSWORD
+  type: ValidationActionTypes.ResetPassword
 }
 
 export interface IResetValidationResultAction extends IValidationAction {
-  type: ValidationActionTypes.RESET_VALIDATION_RESULT
+  type: ValidationActionTypes.ResetValidationResult
 }
 
 export type ValidationActions =
@@ -41,29 +41,29 @@ export type ValidationActions =
   | IResetPasswordAction
   | IResetValidationResultAction
 
-export const confirmAccountAction = (id: string, token: string, actions: any): IConfirmAccountAction => ({
+export const confirmAccountAction = (id: string, token: string, actions: Record<string, unknown>): IConfirmAccountAction => ({
   actions,
   id,
   token,
-  type: ValidationActionTypes.CONFIRM_ACCOUNT,
+  type: ValidationActionTypes.ConfirmAccount,
 })
 
-export const confirmEmailAction = (id: string, token: string, actions: any): IConfirmEmailAction => ({
+export const confirmEmailAction = (id: string, token: string, actions: Record<string, unknown>): IConfirmEmailAction => ({
   actions,
   id,
   token,
-  type: ValidationActionTypes.CONFIRM_EMAIL,
+  type: ValidationActionTypes.ConfirmEmail,
 })
 
 export const resetPasswordAction =
-  (id: string, token: string, password: string, actions: any): IResetPasswordAction => ({
+  (id: string, token: string, password: string, actions: Record<string, unknown>): IResetPasswordAction => ({
     actions,
     id,
     password,
     token,
-    type: ValidationActionTypes.RESET_PASSWORD,
+    type: ValidationActionTypes.ResetPassword,
   })
 
 export const resetValidationResultAction = (): IResetValidationResultAction => ({
-  type: ValidationActionTypes.RESET_VALIDATION_RESULT,
+  type: ValidationActionTypes.ResetValidationResult,
 })

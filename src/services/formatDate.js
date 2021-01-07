@@ -1,6 +1,7 @@
 // use JS instead of TS because this file is used by the non-transpiled server.js
 dateFns = require("date-fns")
 
+/*
 const intlFormats = {
   date: { day: "2-digit", month: "2-digit", year: "numeric" },
   longDate: { day: "numeric", month: "long", year: "numeric", weekday: "long" },
@@ -8,6 +9,7 @@ const intlFormats = {
     day: "numeric", month: "long", year: "numeric", weekday: "long", hour: "2-digit", minute: "2-digit"
   }
 }
+*/
 
 const formats = {
   date: "P",

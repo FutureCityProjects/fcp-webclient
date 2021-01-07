@@ -18,6 +18,7 @@ class FormikArrayInput extends FormikElement<IProps> {
   public render = () => {
     // extract all properties not allowed / not needed for the input element so the don't get
     // passed down and appear in the HTML
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { children, field, form, i18n, id, meta, onRemove, placeholder, t, tReady, type, ...props } = this.props
 
     return <InputGroup>

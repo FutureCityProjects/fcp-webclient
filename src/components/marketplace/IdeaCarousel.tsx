@@ -28,26 +28,24 @@ interface IProps {
   projects: IProject[]
 }
 
-export default class IdeaCarousel extends React.Component<IProps> {
-  public render() {
-    const projects = this.props.projects
+const IdeaCarousel: React.FC<IProps> = ({ projects }: IProps) => {
+  const wrappedProjects = projects.map((project) => <IdeaCard key={project.id} project={project} />)
 
-    const wrappedProjects = projects.map((project) => <IdeaCard key={project.id} project={project} />)
-
-    return <Carousel
-      autoPlay={true}
-      autoPlaySpeed={5000}
-      centerMode
-      draggable={true}
-      infinite={true}
-      keyBoardControl={true}
-      renderButtonGroupOutside={true}
-      responsive={responsive}
-      ssr={true}
-      swipeable={true}
-    >
-      {wrappedProjects}
-      <EmptyIdeaCard />
-    </Carousel >
-  }
+  return <Carousel
+    autoPlay={true}
+    autoPlaySpeed={5000}
+    centerMode
+    draggable={true}
+    infinite={true}
+    keyBoardControl={true}
+    renderButtonGroupOutside={true}
+    responsive={responsive}
+    ssr={true}
+    swipeable={true}
+  >
+    {wrappedProjects}
+    <EmptyIdeaCard />
+  </Carousel >
 }
+
+export default IdeaCarousel

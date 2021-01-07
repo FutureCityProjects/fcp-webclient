@@ -1,4 +1,4 @@
-import React from "react"
+import React, { ReactElement } from "react"
 import { Table } from "reactstrap"
 
 import { IProject } from "api/schema"
@@ -22,7 +22,7 @@ const ProjectScheduleTable: React.FC<IProps> = (props: IProps) => {
   const implementationBegin = functions.getImplementationBegin()
 
   const taskMonthCols = (task) => {
-    const cols = []
+    const cols: ReactElement[] = []
 
     for (let i = 0; i < implementationTime; i++) {
       const currentMonth = new Date(implementationBegin)

@@ -22,14 +22,14 @@ import { RequestErrors } from "services/requestError"
 import { SubmissionError } from "services/submissionError"
 import { getCurrentProcess } from "./currentProcess"
 
-export function* fundsWatcherSaga() {
+export function* fundsWatcherSaga(): any {
   yield all([
     takeLatest("CREATE_FUND", withCallback(createFundSaga)),
     takeLatest("UPDATE_FUND", withCallback(updateFundSaga)),
     takeLatest("DELETE_FUND", withCallback(deleteFundSaga)),
     takeLatest("LOAD_FUND", withCallback(loadFundSaga)),
     takeLatest("LOAD_FUND_COLLECTION", withCallback(loadFundCollectionSaga)),
-    takeLatest(FundManagementActionTypes.ACTIVATE_FUND, withCallback(activateFundSaga)),
+    takeLatest(FundManagementActionTypes.ActivateFund, withCallback(activateFundSaga)),
   ])
 }
 
@@ -44,13 +44,13 @@ function* loadFundSaga(action: ILoadByAction) {
       // getFundBySlug returns undefined when no fund with the given slug is found,
       // the request to the collection was still successful -> throw error here
       if (!fund) {
-        throw new Error(RequestErrors.notFound)
+        throw new Error(RequestErrors.NotFound)
       }
     } else {
       throw new Error("Unknown criteria when loading fund")
     }
 
-    yield put(loadModelSuccessAction(EntityType.FUND, fund))
+    yield put(loadModelSuccessAction(EntityType.Fund, fund))
 
     yield put(loadingSuccessAction("fund_loading", fund))
     if (action.scope) {
@@ -64,11 +64,11 @@ function* loadFundSaga(action: ILoadByAction) {
   }
 }
 
-export function* loadFundCollectionSaga(action: ILoadByAction) {
+export function* loadFundCollectionSaga(action: ILoadByAction): Generator<any, IHydraCollection<IFund>, IHydraCollection<IFund>> {
   try {
     yield put(setLoadingAction("fund_collection_loading", true))
     const funds: IHydraCollection<IFund> = yield call(apiClient.getFunds, action.criteria)
-    yield put(loadCollectionSuccessAction(EntityType.FUND, funds))
+    yield put(loadCollectionSuccessAction(EntityType.Fund, funds))
 
     yield put(loadingSuccessAction("fund_collection_loading", funds))
     if (action.scope) {
@@ -88,7 +88,7 @@ function* createFundSaga(action: IModelFormAction<IFund>) {
 
   const process: IProcess = yield call(getCurrentProcess)
   if (!process) {
-    const err = yield select((s: AppState) => s.requests.processLoading.loadingError)
+    const err = yield select((s: AppState) => s.requests.processLoading.loadingError as string)
     yield put(setLoadingAction("fund_operation", false, err))
     return null
   }
@@ -99,7 +99,7 @@ function* createFundSaga(action: IModelFormAction<IFund>) {
   try {
     yield put(setLoadingAction("fund_operation", true))
     const fund: IFund = yield call(apiClient.createFund, action.model)
-    yield put(createModelSuccessAction(EntityType.FUND, fund, action.scope))
+    yield put(createModelSuccessAction(EntityType.Fund, fund, action.scope))
     yield put(setLoadingAction("fund_operation", false))
     yield call(success, fund)
 
@@ -123,7 +123,7 @@ function* updateFundSaga(action: IModelFormAction<IFund>) {
   try {
     yield put(setLoadingAction("fund_operation", true))
     const fund: IFund = yield call(apiClient.updateFund, action.model)
-    yield put(updateModelSuccessAction(EntityType.FUND, fund, action.scope))
+    yield put(updateModelSuccessAction(EntityType.Fund, fund, action.scope))
     yield put(setLoadingAction("fund_operation", false))
     yield call(success, fund)
 
@@ -147,7 +147,7 @@ function* deleteFundSaga(action: IModelFormAction<IFund>) {
   try {
     yield put(setLoadingAction("fund_operation", true))
     yield call(apiClient.deleteFund, action.model)
-    yield put(deleteModelSuccessAction(EntityType.FUND, action.model, action.scope))
+    yield put(deleteModelSuccessAction(EntityType.Fund, action.model, action.scope))
     yield put(setLoadingAction("fund_operation", false))
     yield call(success)
 
@@ -171,7 +171,7 @@ function* activateFundSaga(action: IActivateFundAction) {
   try {
     yield put(setLoadingAction("fund_operation", true))
     const fund: IFund = yield call(apiClient.acitvateFund, action.fund)
-    yield put(updateModelSuccessAction(EntityType.FUND, fund))
+    yield put(updateModelSuccessAction(EntityType.Fund, fund))
     yield put(setLoadingAction("fund_operation", false))
     yield call(success, fund)
 

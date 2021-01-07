@@ -9,8 +9,8 @@ import { selectMyProjectIDs } from "redux/reducer/myProjects"
 import { getCurrentUser } from "./currentUser"
 import { loadProjectCollectionSaga } from "./projects"
 
-export function* myProjectsWatcherSaga() {
-  yield takeLatest(MyProjectsActionTypes.LOAD_MY_PROJECTS, withCallback(loadMyProjectsSaga))
+export function* myProjectsWatcherSaga(): any {
+  yield takeLatest(MyProjectsActionTypes.LoadMyProjects, withCallback(loadMyProjectsSaga))
 }
 
 function* loadMyProjectsSaga() {
@@ -37,5 +37,5 @@ function* loadMyProjectsSaga() {
   // it works in the marketplace.ts? Too many putWaits before for getting the current user?
   // return yield putWait(loadCollectionAction(Scope.PROJECT, "my_projects", { id: myProjectIds }))
   return yield call(loadProjectCollectionSaga,
-    loadCollectionAction(EntityType.PROJECT, { id: myProjectIds }, "my_projects"))
+    loadCollectionAction(EntityType.Project, { id: myProjectIds }, "my_projects"))
 }

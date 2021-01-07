@@ -10,8 +10,8 @@ import { validateTask } from "services/validation"
 
 interface IProps {
   task: IProjectTask
-  onDelete: any
-  onUpdate: any
+  onDelete: (id: string) => void
+  onUpdate: (task: IProjectTask) => void
 }
 
 const ProjectTaskCard: React.FC<IProps> = ({ task, onDelete, onUpdate }: IProps) => {

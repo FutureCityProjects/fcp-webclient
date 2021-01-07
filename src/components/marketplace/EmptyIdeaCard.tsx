@@ -14,7 +14,7 @@ const EmptyIdeaCard: React.FC = () => {
     </CardHeader>
 
     <CardBody>
-      <Link href={Routes.createIdea}>
+      <Link href={Routes.CreateIdea}>
         <Button color="primary">
           <span className="button-title">{t("goto.newIdea")}</span>
         </Button>

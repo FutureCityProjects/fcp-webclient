@@ -17,17 +17,17 @@ const TotalSumCard: React.FC<IProps> = (props: IProps) => {
   const sum = functions.sumResourceRequirementCosts(resourceRequirements)
   const fundingSum = showFinances
     ? functions.sumResourceRequirementCosts(
-      functions.getResourceRequirementsBySourceType(ResourceSourceType.SOURCE_TYPE_FUNDING)
+      functions.getResourceRequirementsBySourceType(ResourceSourceType.Funding)
     )
     : null
   const ownCosts = showFinances
     ? functions.sumResourceRequirementCosts(
-      functions.getResourceRequirementsBySourceType(ResourceSourceType.SOURCE_TYPE_OWN_FUNDS)
+      functions.getResourceRequirementsBySourceType(ResourceSourceType.OwnFunds)
     )
     : null
   const proceeds = showFinances
     ? functions.sumResourceRequirementCosts(
-      functions.getResourceRequirementsBySourceType(ResourceSourceType.SOURCE_TYPE_PROCEEDS)
+      functions.getResourceRequirementsBySourceType(ResourceSourceType.Proceeds)
     )
     : null
   const restSum = showFinances

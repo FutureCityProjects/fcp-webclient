@@ -20,12 +20,12 @@ const mapStateToProps = (state: AppState, { id }) => ({
   // @todo use custom reducer to keep track of the loaded users to know if we loaded with
   // admin privileges or if the user was in state from a public page etc.
   request: state.requests.userLoading,
-  user: selectById(state, EntityType.USER, id),
+  user: selectById(state, EntityType.User, id),
 })
 
 const connector = connect(mapStateToProps)
 type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
-  id: any,
+  id: any
 }
 
 const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
@@ -36,14 +36,14 @@ const UserDetailPage: I18nPage<PageProps> = ({ id, request, user }) => {
   }
 
   if (!request.isLoading && request.loadingError) {
-    let code: number = 500
+    let code = 500
     let error: string = null
     switch (request.loadingError) {
-      case RequestErrors.badRequest:
+      case RequestErrors.BadRequest:
         code = 400
         break
 
-      case RequestErrors.notFound:
+      case RequestErrors.NotFound:
         code = 404
         break
 
@@ -68,8 +68,8 @@ UserDetailPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const id = parseInt(query.id as string, 10)
 
   // @todo use custom reducer to keep track of users loaded with admin privileges
-  if (id > 0 && !selectById(store.getState(), EntityType.USER, id)) {
-    store.dispatch(loadModelAction(EntityType.USER, { id }, "user_management"))
+  if (id > 0 && !selectById(store.getState(), EntityType.User, id)) {
+    store.dispatch(loadModelAction(EntityType.User, { id }, "user_management"))
   }
 
   return { id, namespacesRequired: includeDefaultNamespaces() }
@@ -79,5 +79,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(UserDetailPage),
   ),
-  UserRole.ADMIN,
+  UserRole.Admin,
 )

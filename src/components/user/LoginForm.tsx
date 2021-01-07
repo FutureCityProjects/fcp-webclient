@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import React from "react"
+import React, { ReactElement } from "react"
 import { Button, FormGroup, Spinner } from "reactstrap"
 
 import { ICredentials } from "api/schema"
@@ -16,7 +16,7 @@ interface IProps {
 const LoginForm = ({ onSubmit, credentials = {
   password: "",
   username: "",
-} }: IProps) => {
+} }: IProps): ReactElement => {
   const { t } = useTranslation()
 
   return <Formik<ICredentials> initialValues={credentials} onSubmit={onSubmit}>

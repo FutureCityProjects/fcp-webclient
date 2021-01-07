@@ -21,40 +21,40 @@ export class HydraClient {
     this.axios = axios.create({
       baseURL,
       headers: {
-        "Accept": LD_MIME_TYPE,
-        "Content-Type": LD_MIME_TYPE,
+        "accept": LD_MIME_TYPE,
+        "content-type": LD_MIME_TYPE,
       },
     })
   }
 
-  public get = (url: string, params: object = {}, config: AxiosRequestConfig = {}) => {
+  public get = (url: string, params: Record<string, unknown> = {}, config: AxiosRequestConfig = {}): Promise<any> => {
     config.method = "get"
     config.params = params
 
     return this.request(url, config)
   }
 
-  public post = (url: string, data: object, config: AxiosRequestConfig = {}) => {
+  public post = (url: string, data: unknown, config: AxiosRequestConfig = {}): Promise<any> => {
     config.method = "post"
     config.data = JSON.stringify(data)
 
     return this.request(url, config)
   }
 
-  public put = (url: string, data: object, config: AxiosRequestConfig = {}) => {
+  public put = (url: string, data: Record<string, unknown>, config: AxiosRequestConfig = {}): Promise<any> => {
     config.method = "put"
     config.data = JSON.stringify(data)
 
     return this.request(url, config)
   }
 
-  public delete = (url: string, config: AxiosRequestConfig = {}) => {
+  public delete = (url: string, config: AxiosRequestConfig = {}): Promise<any> => {
     config.method = "delete"
 
     return this.request(url, config)
   }
 
-  public request = (url: string, config: AxiosRequestConfig = {}) => {
+  public request = (url: string, config: AxiosRequestConfig = {}): Promise<any> => {
     const axiosConfig = {
       ...config,
       url,
@@ -65,11 +65,11 @@ export class HydraClient {
       // @todo we don't want to flatten nested documents, some properties are only readable
       // as subresource, remove the normalize completely?
       // .then((response: AxiosResponse) => this.normalize(response.data))
-      .then((response: AxiosResponse) => response.data)
+      .then((response: AxiosResponse) => response.data as unknown)
       .catch(this.handleError)
   }
 
-  protected normalize = (data: any) => {
+  protected normalize = (data: Record<string, any>): any => {
     if (hasProp(data, "hydra:member")) {
       // Normalize items in collections
       data["hydra:member"] = data["hydra:member"].map((item: any) => this.normalize(item))
@@ -85,7 +85,7 @@ export class HydraClient {
     )
   }
 
-  protected handleError = (err: AxiosError) => {
+  protected handleError = (err: AxiosError): void => {
     if (err.response) {
       const json = err.response.data
       const msg = json["hydra:description"] || json.message || err.response.statusText
@@ -113,7 +113,7 @@ export class HydraClient {
     throw new RequestError("failure.sendingRequest")
   }
 
-  private addViolationToErrors = (violation: IViolation, errors: any, pathList: string[]): object | string => {
+  private addViolationToErrors = (violation: IViolation, errors: any, pathList: string[]): Record<string, unknown> | string => {
     if (pathList.length) {
       const prop = pathList.shift()
       const res = this.addViolationToErrors(violation, errors ? errors[prop] : null, pathList)
@@ -153,7 +153,7 @@ export class HydraClient {
       baseProp = baseProp.substring(0, arrayStart)
       pathList.push(baseProp)
 
-      let matches
+      let matches: RegExpExecArray
       do {
         matches = arrayPropRegex.exec(path)
         if (matches) {

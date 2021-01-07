@@ -1,5 +1,5 @@
 import { Field, Form, Formik } from "formik"
-import React, { useEffect } from "react"
+import React, { ReactElement, useEffect } from "react"
 import { Button, Card, CardBody, CardHeader, FormGroup, Spinner } from "reactstrap"
 
 import FormikInput from "components/common/form/FormikInput"
@@ -13,7 +13,7 @@ interface IProps {
   token?: string
 }
 
-const ValidationForm = ({ bindErrorHandler, id = "", onSubmit, token = "" }: IProps) => {
+const ValidationForm = ({ bindErrorHandler, id = "", onSubmit, token = "" }: IProps): ReactElement => {
   const { t } = useTranslation()
 
   return <Formik<{ id: string; token: string }> initialValues={{ id, token }} onSubmit={onSubmit}>

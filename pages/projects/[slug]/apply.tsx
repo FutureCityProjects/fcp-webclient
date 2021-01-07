@@ -33,7 +33,7 @@ const mapStateToProps = (state: AppState, { id, slug }) => ({
   isAuthenticated: selectIsAuthenticated(state),
   myProjectIds: selectMyProjectIDs(state),
   project: id
-    ? selectById(state, EntityType.PROJECT, id)
+    ? selectById(state, EntityType.Project, id)
     : selectProjectBySlug(state, slug),
   request: state.requests.projectLoading,
   application: state.memberApplication, // do not use selectNewMemberApplication(), we want the empty state here,
@@ -52,7 +52,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
   const [applicationCreated, setApplicationCreated] = useState(false)
 
   // @todo custom error message "project not found" etc.
-  if (!project && !request.isLoading || project.state === ProjectState.DEACTIVATED || project.progress === ProjectProgress.IDEA) {
+  if (!project && !request.isLoading || project.state === ProjectState.Deactivated || project.progress === ProjectProgress.Idea) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={request.loadingError} />
     </StatusCode>
@@ -106,7 +106,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 ? <CardText className="text-center">
                   <span className="text-danger">{t("page.projects.apply.membershipExists")}</span>
                   <br />
-                  <Link href={Routes.myProjects}>
+                  <Link href={Routes.MyProjects}>
                     <a className="btn btn-primary">{t("navigation.myProjects")}</a>
                   </Link>
                 </CardText>
@@ -119,12 +119,12 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.apply.applicationCreated" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.myProjects}>
+                <Link href={Routes.MyProjects}>
                   <a className="btn btn-primary">{t("navigation.myProjects")}</a>
                 </Link>
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.marketplace}>
+                <Link href={Routes.Marketplace}>
                   <a className="btn btn-secondary">{t("goto.marketplace")}</a>
                 </Link>
               </CardText>
@@ -138,7 +138,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.apply.saveViaLogin" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.login}>
+                <Link href={Routes.Login}>
                   <a className="btn btn-primary">{t("goto.login")}</a>
                 </Link>
               </CardText>
@@ -146,7 +146,7 @@ const ProjectApplicationPage: I18nPage<PageProps> = (props: PageProps) => {
                 <TranslatedHtml content="page.projects.apply.saveViaRegistration" />
               </CardText>
               <CardText className="text-center">
-                <Link href={Routes.registration}>
+                <Link href={Routes.Registration}>
                   <a className="btn btn-primary">{t("goto.registration")}</a>
                 </Link>
               </CardText>
@@ -162,14 +162,14 @@ ProjectApplicationPage.getInitialProps = ({ store, query }: NextPageContext) => 
   const slug: string = typeof query.slug === "string" ? query.slug : null
   let id: number = null
 
-  if (slug.match(/^\d+$/)) {
+  if (/^\d+$/.exec(slug)) {
     id = parseInt(slug, 10)
 
-    if (!selectById(store.getState(), EntityType.PROJECT, id)) {
-      store.dispatch(loadModelAction(EntityType.PROJECT, { id }))
+    if (!selectById(store.getState(), EntityType.Project, id)) {
+      store.dispatch(loadModelAction(EntityType.Project, { id }))
     }
   } else if (slug && !selectProjectBySlug(store.getState(), slug)) {
-    store.dispatch(loadModelAction(EntityType.PROJECT, { slug }))
+    store.dispatch(loadModelAction(EntityType.Project, { slug }))
   }
 
   // fetch the user now, we want to check if he is already a member of the selected project

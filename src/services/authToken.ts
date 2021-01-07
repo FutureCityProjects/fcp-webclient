@@ -17,7 +17,7 @@ export class AuthToken {
     this.decodedToken = { username: "", exp: 0, id: null, roles: [] }
     try {
       if (token) { this.decodedToken = jwtDecode(token) }
-      // tslint:disable-next-line: no-empty
+      // eslint-disable-next-line no-empty
     } catch (e) { }
   }
 
@@ -33,7 +33,7 @@ export class AuthToken {
     return !this.isExpired
   }
 
-  get authorizationString() {
+  get authorizationString(): string {
     return `Bearer ${this.token}`
   }
 

@@ -12,7 +12,7 @@ const AuthElement: FunctionComponent<IProps> = ({ children, requiredRole, roles 
     return <>{children}</>
   }
 
-  if (requiredRole === UserRole.GUEST && !roles.includes(UserRole.USER)) {
+  if (requiredRole === UserRole.Guest && !roles.includes(UserRole.User)) {
     return <>{children}</>
   }
 

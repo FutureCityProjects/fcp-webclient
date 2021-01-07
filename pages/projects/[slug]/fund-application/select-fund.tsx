@@ -25,7 +25,7 @@ import { Routes, routeWithParams } from "services/routes"
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
   createApplication: (application, actions) => {
-    dispatch(createModelAction(EntityType.FUND_APPLICATION, application, actions))
+    dispatch(createModelAction(EntityType.FundApplication, application, actions))
   },
 })
 
@@ -35,7 +35,7 @@ const mapStateToProps = (state: AppState, { slug }) => ({
   fundsRequest: state.requests.fundsLoading,
   isMember: selectIsProjectMember(state, slug),
   isOwner: selectIsProjectOwner(state, slug),
-  selectableFunds: selectCollectionByIds(state, EntityType.FUND, state.myProjects.selectableFunds || []),
+  selectableFunds: selectCollectionByIds(state, EntityType.Fund, state.myProjects.selectableFunds || []),
 })
 
 const connector = connect(mapStateToProps, mapDispatchToProps)
@@ -48,7 +48,7 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
 
   // @todo custom error message "project not found or no permission" etc.
   if (!projectRequest.isLoading && (!project || project.isLocked
-    || project.progress === ProjectProgress.CREATING_PROFILE
+    || project.progress === ProjectProgress.CreatingProfile
     || !isMember)
   ) {
     return <StatusCode statusCode={404}>
@@ -57,7 +57,7 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
   }
 
   // @todo Fehlermeldung "Projekt deaktiviert"
-  if (project && project.state === ProjectState.DEACTIVATED) {
+  if (project && project.state === ProjectState.Deactivated) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={projectRequest.loadingError} />
     </StatusCode>
@@ -65,8 +65,8 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
 
   const selectFund = (fund, actions) => {
     actions.success = () => {
-      Router.push({ pathname: Routes.projectConcretization, query: { fund: fund.id } },
-        { pathname: routeWithParams(Routes.projectConcretization, { slug: project.slug }), query: { fund: fund.id } })
+      void Router.push({ pathname: Routes.ProjectConcretization, query: { fund: fund.id } },
+        { pathname: routeWithParams(Routes.ProjectConcretization, { slug: project.slug }), query: { fund: fund.id } })
     }
 
     const application: IFundApplication = {
@@ -93,7 +93,7 @@ const FundSelectionPage: I18nPage<PageProps> = (props: PageProps) => {
         {(!projectRequest.isLoading && !fundsRequest.isLoading) && <>
           <PageError error={projectRequest.loadingError || fundsRequest.loadingError} />
 
-          <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+          <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
             <Button color="secondary" className="btn-sm">{t("goto.myProjects")}</Button>
           </Link>
           <br />
@@ -130,7 +130,7 @@ FundSelectionPage.getInitialProps = ({ store, query }: NextPageContext) => {
 
   if (state.myProjects.selectableFunds === null) {
     // @todo filter for active only, no need to fetch finished/paused funds
-    store.dispatch(loadCollectionAction(EntityType.FUND, {}, "selectable_funds"))
+    store.dispatch(loadCollectionAction(EntityType.Fund, {}, "selectable_funds"))
   }
 
   return { slug, namespacesRequired: includeDefaultNamespaces() }
@@ -140,5 +140,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(FundSelectionPage),
   ),
-  UserRole.USER,
+  UserRole.User,
 )

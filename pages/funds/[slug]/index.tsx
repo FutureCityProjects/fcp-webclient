@@ -17,7 +17,7 @@ import { I18nPage, includeDefaultNamespaces, withTranslation } from "services/i1
 
 const mapStateToProps = (state: AppState, { id, slug }) => ({
   fund: id
-    ? selectById<IFund>(state, EntityType.FUND, id)
+    ? selectById<IFund>(state, EntityType.Fund, id)
     : selectFundBySlug(state, slug),
   request: state.requests.fundLoading,
 })
@@ -28,11 +28,11 @@ type PageProps = ConnectedProps<typeof connector> & WithTranslation & {
   slug: string
 }
 
-const PublicFuncPage: I18nPage<PageProps> = (props: PageProps) => {
+const PublicFundPage: I18nPage<PageProps> = (props: PageProps) => {
   const { fund, request, t } = props
 
   // @todo custom error message "project not found or no permission" etc.
-  if (!request.isLoading && (!fund || fund.state === FundState.INACTIVE)) {
+  if (!request.isLoading && (!fund || fund.state === FundState.Inactive)) {
     return <StatusCode statusCode={404}>
       <ErrorPage statusCode={404} error={request.loadingError} />
     </StatusCode>
@@ -51,21 +51,21 @@ const PublicFuncPage: I18nPage<PageProps> = (props: PageProps) => {
   </BaseLayout >
 }
 
-PublicFuncPage.getInitialProps = ({ store, query }: NextPageContext) => {
+PublicFundPage.getInitialProps = ({ store, query }: NextPageContext) => {
   const slug: string = typeof query.slug === "string" ? query.slug : null
   let id: number = null
 
-  if (slug.match(/^\d+$/)) {
+  if (/^\d+$/.exec(slug)) {
     id = parseInt(slug, 10)
 
-    if (!selectById(store.getState(), EntityType.FUND, id)) {
-      store.dispatch(loadModelAction(EntityType.PROJECT, { id }))
+    if (!selectById(store.getState(), EntityType.Fund, id)) {
+      store.dispatch(loadModelAction(EntityType.Project, { id }))
     }
   } else if (slug && !selectFundBySlug(store.getState(), slug)) {
-    store.dispatch(loadModelAction(EntityType.FUND, { slug }))
+    store.dispatch(loadModelAction(EntityType.Fund, { slug }))
   }
 
   return { id, slug, namespacesRequired: includeDefaultNamespaces() }
 }
 
-export default connector(withTranslation(includeDefaultNamespaces())(PublicFuncPage))
+export default connector(withTranslation(includeDefaultNamespaces())(PublicFundPage))

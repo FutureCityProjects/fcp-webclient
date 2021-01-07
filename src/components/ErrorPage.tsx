@@ -13,13 +13,13 @@ interface IProps {
   title?: string
 }
 
-function ErrorPage({ error, statusCode, title }: IProps) {
+const ErrorPage: React.FC<IProps> = ({ error, statusCode, title }: IProps) => {
   const { t } = useTranslation()
   const htmlParser = new Parser()
 
   statusCode = statusCode || 500
   title = title || `_error:title.${statusCode}`
-  error = error && error !== RequestErrors.notFound && error !== RequestErrors.badRequest
+  error = error && error !== RequestErrors.NotFound && error !== RequestErrors.BadRequest
     ? `_error:${error}`
     : `_error:explanation.${statusCode}`
 
@@ -31,7 +31,7 @@ function ErrorPage({ error, statusCode, title }: IProps) {
           {htmlParser.parse(t(error))}
         </p>
         <p>
-          <Link href={Routes.home}>
+          <Link href={Routes.Home}>
             <a className="btn btn-primary" title={t("goto.home")}>{t("goto.home")}</a>
           </Link>
         </p>

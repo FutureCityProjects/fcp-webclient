@@ -1,10 +1,10 @@
-import { IProjectTask, IWorkPackage } from "api/schema"
+import { IProjectTask, IResourceRequirement, IWorkPackage } from "api/schema"
 
 export interface IValidationErrors {
   [key: string]: string
 }
 
-export const validateResourceRequirement = (values: any) => {
+export const validateResourceRequirement = (values: IResourceRequirement): IValidationErrors => {
   const errors: IValidationErrors = {}
 
   const description = values.description.trim()
@@ -27,7 +27,7 @@ export const validateResourceRequirement = (values: any) => {
   return errors
 }
 
-export const validateTask = (values: IProjectTask) => {
+export const validateTask = (values: IProjectTask): IValidationErrors => {
   const errors: IValidationErrors = {}
 
   const description = values.description.trim()
@@ -42,7 +42,7 @@ export const validateTask = (values: IProjectTask) => {
   return errors
 }
 
-export const validateWorkPackage = (values: IWorkPackage) => {
+export const validateWorkPackage = (values: IWorkPackage): IValidationErrors => {
   const errors: IValidationErrors = {}
 
   const description = values.description ? values.description.trim() : ""

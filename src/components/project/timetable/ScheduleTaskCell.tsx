@@ -7,7 +7,7 @@ import { useTranslation } from "services/i18n"
 
 interface IProps {
   availablePackages: IWorkPackage[]
-  onAssign?: any
+  onAssign?: (task: IProjectTask) => void
   task: IProjectTask
 }
 

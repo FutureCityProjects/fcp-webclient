@@ -14,8 +14,7 @@ import authReducer from "redux/reducer/auth"
 import { loginSaga, logoutSaga, saveToken } from "redux/saga/auth"
 import { getCurrentUser } from "redux/saga/currentUser"
 import { AuthToken } from "services/authToken"
-import { removeStorageItem, setStorageItem } from "services/localStorage"
-import { AUTH_COOKIE_NAME, AUTH_LOCALSTORAGE_NAME } from "../../../config"
+import { AUTH_COOKIE_NAME } from "../../../config"
 
 describe("Auth:loginSaga", () => {
   const credentials = { username: "test@example.net", password: "secret" }
@@ -37,7 +36,6 @@ describe("Auth:loginSaga", () => {
 
         // mock those calls, they would error server-side
         [matchers.call.fn(Cookie.set), true],
-        [matchers.call.fn(setStorageItem), true],
         [matchers.call.fn(getCurrentUser), null],
       ])
       .put(setLoadingAction("login", true))
@@ -105,10 +103,8 @@ describe("Auth:saveTokenSaga", () => {
       .provide([
         // mock those calls, they would error server-side
         [matchers.call.fn(Cookie.set), true],
-        [matchers.call.fn(setStorageItem), true],
       ])
       .call(Cookie.set, AUTH_COOKIE_NAME, token, { sameSite: "lax", secure: false })
-      .call(setStorageItem, AUTH_LOCALSTORAGE_NAME, token)
       .put(setAuthAction(jwt.jwt))
       .run()
   })
@@ -121,11 +117,9 @@ describe("Auth:logoutSaga", () => {
       .provide([
         // mock those calls, they would error server-side
         [matchers.call.fn(Cookie.remove), true],
-        [matchers.call.fn(removeStorageItem), true],
         [matchers.call.fn(Router.push), true],
       ])
       .call(Cookie.remove, AUTH_COOKIE_NAME)
-      .call(removeStorageItem, AUTH_LOCALSTORAGE_NAME)
       .call(Router.push, "/")
       .run()
   })

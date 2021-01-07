@@ -13,9 +13,9 @@ interface IProps {
 const PublicFundView: React.FC<IProps> = ({ fund }: IProps) => {
   const { t } = useTranslation()
 
-  const stateText = fund.state === FundState.ACTIVE
+  const stateText = fund.state === FundState.Active
     ? <span className="text-success">aktiv</span>
-    : (fund.state === FundState.FINISHED
+    : (fund.state === FundState.Finished
       ? <span className="text-muted">abgeschlossen</span>
       : <span className="text-warning">inaktiv</span>
     )

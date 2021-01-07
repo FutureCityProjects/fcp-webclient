@@ -17,7 +17,7 @@ const DataProtectionPage: I18nPage<WithTranslation> = ({ t }) => {
   </BaseLayout>
 }
 
-DataProtectionPage.getInitialProps = async () => ({
+DataProtectionPage.getInitialProps = () => ({
   namespacesRequired: includeDefaultNamespaces(),
 })
 

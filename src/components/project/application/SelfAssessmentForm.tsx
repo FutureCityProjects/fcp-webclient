@@ -43,11 +43,11 @@ const SelfAssessmentForm: React.FC<IProps> = (props: IProps) => {
               label=""
               name="applicationSelfAssessment"
               labels={{
-                [SelfAssessment.STARTING]: t("progress.0"),
-                [SelfAssessment.MAKING_PROGRESS]: t("progress.25"),
-                [SelfAssessment.HALF_FINISHED]: t("progress.50"),
-                [SelfAssessment.ALMOST_FINISHED]: t("progress.75"),
-                [SelfAssessment.COMPLETE]: t("progress.100"),
+                [SelfAssessment.Starting]: t("progress.0"),
+                [SelfAssessment.MakingProgress]: t("progress.25"),
+                [SelfAssessment.HalfFinished]: t("progress.50"),
+                [SelfAssessment.AlmostFinished]: t("progress.75"),
+                [SelfAssessment.Complete]: t("progress.100"),
               }}
               value={values.applicationSelfAssessment}
             />

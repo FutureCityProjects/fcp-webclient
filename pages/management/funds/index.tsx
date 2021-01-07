@@ -33,7 +33,7 @@ const FundManagementPage: I18nPage<PageProps> = ({ funds, request, t }) => {
         <h1>{t("page.management.funds.index.heading")}</h1>
         <p><TranslatedHtml content="page.management.funds.index.intro" /></p>
 
-        <Link href={Routes.fundCreate}>
+        <Link href={Routes.FundCreate}>
           <Button color="primary">{t("goto.createFund")}</Button>
         </Link>
 
@@ -52,9 +52,9 @@ const FundManagementPage: I18nPage<PageProps> = ({ funds, request, t }) => {
   </BaseLayout>
 }
 
-FundManagementPage.getInitialProps = async ({ store }: NextPageContext) => {
+FundManagementPage.getInitialProps = ({ store }: NextPageContext) => {
   if (!selectManagementFundsLoaded(store.getState())) {
-    store.dispatch(loadCollectionAction(EntityType.FUND, {}, "fund_management"))
+    store.dispatch(loadCollectionAction(EntityType.Fund, {}, "fund_management"))
   }
 
   return { namespacesRequired: includeDefaultNamespaces() }
@@ -64,5 +64,5 @@ export default withAuth(
   connector(
     withTranslation(includeDefaultNamespaces())(FundManagementPage),
   ),
-  UserRole.PROCESS_OWNER,
+  UserRole.ProcessOwner,
 )

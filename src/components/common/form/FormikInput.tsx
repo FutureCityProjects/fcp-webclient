@@ -18,8 +18,9 @@ class FormikInput extends FormikElement<IProps> {
   public render = () => {
     // extract all properties not allowed / not needed for the input element so the don't get
     // passed down and appear in the HTML
-    const { children, field, form, help, id, i18n, label, meta, noGroup = false,
-      placeholder, t, tReady, type, value, ...props } = this.props
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { children, field, form, help, id, i18n, label, meta, noGroup = false, tReady,
+      placeholder, t, type, value, ...props } = this.props
     const labelText = this.labelText()
 
     const element = <>

@@ -20,7 +20,7 @@ import { selectMyMemberships } from "redux/reducer/myProjects"
 import { SubmissionError } from "services/submissionError"
 import { getCurrentUser } from "./currentUser"
 
-export function* projectMembershipsWatcherSaga() {
+export function* projectMembershipsWatcherSaga(): any {
   yield all([
     takeLatest("CREATE_PROJECTMEMBERSHIP", withCallback(createProjectMembershipSaga)),
     takeLatest("UPDATE_PROJECTMEMBERSHIP", withCallback(updateProjectMembershipSaga)),
@@ -34,7 +34,7 @@ function* createProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
   try {
     yield put(setLoadingAction("projectMembership_operation", true))
     const projectMembership: IProjectMembership = yield call(apiClient.createProjectMembership, action.model)
-    yield put(createModelSuccessAction(EntityType.PROJECT_MEMBERSHIP, projectMembership))
+    yield put(createModelSuccessAction(EntityType.ProjectMembership, projectMembership))
     yield put(loadingSuccessAction("projectMembership_operation", process))
     if (action.scope) {
       yield put(loadingSuccessAction(action.scope, process))
@@ -49,7 +49,7 @@ function* createProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
       yield put(loadMyProjectsAction())
     } else {
       // only refresh the project, e.g. the owner created a new membership
-      yield put(loadModelAction(EntityType.PROJECT, { id: (action.model.project as IProject).id }, action.scope))
+      yield put(loadModelAction(EntityType.Project, { id: (action.model.project as IProject).id }, action.scope))
     }
 
     return projectMembership
@@ -72,11 +72,11 @@ function* updateProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
   try {
     yield put(setLoadingAction("projectMembership_operation", true))
     const projectMembership: IProjectMembership = yield call(apiClient.updateProjectMembership, action.model)
-    yield put(updateModelSuccessAction(EntityType.PROJECT_MEMBERSHIP, projectMembership))
+    yield put(updateModelSuccessAction(EntityType.ProjectMembership, projectMembership))
 
     // refresh the project (using the updated membership, the original may not contain the project),
     // this also sets the loadingSuccess
-    yield put(loadModelAction(EntityType.PROJECT, { id: (projectMembership.project as IProject).id }, action.scope))
+    yield put(loadModelAction(EntityType.Project, { id: (projectMembership.project as IProject).id }, action.scope))
 
     if (setSubmitting) {
       yield call(setSubmitting, false)
@@ -123,7 +123,7 @@ function* deleteProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
     yield put(setLoadingAction("projectMembership_operation", true))
     yield call(apiClient.deleteProjectMembership, action.model)
 
-    yield put(deleteModelSuccessAction(EntityType.PROJECT_MEMBERSHIP, action.model))
+    yield put(deleteModelSuccessAction(EntityType.ProjectMembership, action.model))
 
     // if the membership is actually the currentUser's membership it has no [user] property so
     // we can't compare action.model.user.id to the currentUser.id. We also don't want to assume
@@ -140,7 +140,7 @@ function* deleteProjectMembershipSaga(action: IModelFormAction<IProjectMembershi
       yield put(loadingSuccessAction("projectMembership_operation", true))
     } else {
       // refresh the project, this also sets the loadingSuccess
-      yield put(loadModelAction(EntityType.PROJECT, { id: (action.model.project as IProject).id }, action.scope))
+      yield put(loadModelAction(EntityType.Project, { id: (action.model.project as IProject).id }, action.scope))
     }
 
     if (action.scope) {

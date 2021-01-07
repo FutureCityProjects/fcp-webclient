@@ -8,7 +8,7 @@ import FormikElement, { IBaseFormikProps } from "./FormikElement"
 
 interface IProps extends IBaseFormikProps {
   value: string
-  labels: object
+  labels: Record<string, unknown>
 }
 
 class FormikDate extends FormikElement<IProps> {

@@ -12,7 +12,7 @@ interface IProps extends FieldArrayRenderProps {
   name: string
 }
 
-const CriteriaArray = ({
+const CriteriaArray: React.FC<IProps> = ({
   push, form, remove, name,
 }: IProps) => {
   const { t } = useTranslation()
@@ -34,7 +34,7 @@ const CriteriaArray = ({
         <TranslatedHtml content={"_error:" + error} />
       </div>}
 
-      {values && values.length > 0 && values.map((value, index) => (
+      {values && values.length > 0 && values.map((value, index: number) => (
         <div key={index}>
           <Field component={FormikArrayInput}
             name={`${name}.${index}`}

@@ -33,12 +33,12 @@ const ProjectFinances: React.FC<IPlanProps> = (props: IPlanProps) => {
       </div>
       <DropdownComponent button={<Icon name="grid" size={26} />}>
         <Link
-          href={Routes.projectPlan}
-          as={routeWithParams(Routes.projectPlan, { slug: project.slug || project.id })}
+          href={Routes.ProjectPlan}
+          as={routeWithParams(Routes.ProjectPlan, { slug: project.slug || project.id })}
         >
           <a>{t("goto.planOverview")}</a>
         </Link>
-        <Link href={Routes.myProjects} as={Routes.myProjects + "#project-" + project.id}>
+        <Link href={Routes.MyProjects} as={Routes.MyProjects + "#project-" + project.id.toString()}>
           <a>{t("goto.myProjects")}</a>
         </Link>
       </DropdownComponent>

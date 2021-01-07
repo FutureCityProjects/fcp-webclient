@@ -10,7 +10,7 @@ interface IProps {
 
 export const ListItem: FunctionComponent<IProps> = ({ user }: IProps) => (
   <tr>
-    <th scope="row"><Link href={Routes.userDetails} as={routeWithParams(Routes.userDetails, { id: user.id })}>
+    <th scope="row"><Link href={Routes.UserDetails} as={routeWithParams(Routes.UserDetails, { id: user.id })}>
       <a>
         {user["@id"]}
       </a>
@@ -19,7 +19,7 @@ export const ListItem: FunctionComponent<IProps> = ({ user }: IProps) => (
     <td>{user.roles.join(", ")}</td>
     <td>{user.username}</td>
     <td>
-      <Link href={Routes.userDetails} as={routeWithParams(Routes.userDetails, { id: user.id })}>
+      <Link href={Routes.UserDetails} as={routeWithParams(Routes.UserDetails, { id: user.id })}>
         <a>
           Show
         </a>

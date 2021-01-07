@@ -26,13 +26,13 @@ const SubmissionView: React.FC<IProps> = ({ submission, fund }: IProps) => {
   const unassignedResources = submission.resourceRequirements.filter((res) => unassignedTaskIds.includes(res.task))
 
   const total = sumCosts(submission.resourceRequirements)
-  const fundingSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_FUNDING))
-  const proceedsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_PROCEEDS))
-  const ownCostsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.SOURCE_TYPE_OWN_FUNDS))
+  const fundingSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.Funding))
+  const proceedsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.Proceeds))
+  const ownCostsSum = sumCosts(submission.resourceRequirements.filter((r) => r.sourceType === ResourceSourceType.OwnFunds))
 
   const getWorkPackageMonths = (id: string) => {
     const wpTasks = submission.tasks.filter((task) => task.workPackage === id)
-    const months = []
+    const months: number[] = []
     wpTasks.forEach((e) => months.push(...e.months))
 
     return months

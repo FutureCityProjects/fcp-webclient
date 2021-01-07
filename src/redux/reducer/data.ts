@@ -5,30 +5,30 @@ import { scopedObjectReducer } from "redux/helper/reducers"
 import { AppState } from "redux/reducer"
 
 export enum EntityType {
-  FUND = "fund",
-  FUND_APPLICATION = "fundApplication",
-  FUND_CONCRETIZATION = "fundConcretization",
-  PROCESS = "process",
-  PROJECT = "project",
-  PROJECT_MEMBERSHIP = "projectMembership",
-  USER = "user",
+  Fund = "fund",
+  FundApplication = "fundApplication",
+  FundConcretization = "fundConcretization",
+  Process = "process",
+  Project = "project",
+  ProjectMembership = "projectMembership",
+  User = "user",
 }
 
 export type ScopedModel = IFund | IFundApplication | IProcess | IProject | IUser
 
 export default combineReducers({
-  fund: scopedObjectReducer<IFund>(EntityType.FUND),
-  fundApplication: scopedObjectReducer<IFundApplication>(EntityType.FUND_APPLICATION),
+  fund: scopedObjectReducer<IFund>(EntityType.Fund),
+  fundApplication: scopedObjectReducer<IFundApplication>(EntityType.FundApplication),
 
   // fixes: Property '[Scope.FUND_CONCRETIZATION]' does not exist on type CombinedState
   // and other errors from typescript, we don't need this reducer but also can't use a fake
   // one like (state) => state
-  fundConcretization: scopedObjectReducer<IFundConcretization>(EntityType.FUND_CONCRETIZATION),
+  fundConcretization: scopedObjectReducer<IFundConcretization>(EntityType.FundConcretization),
 
-  process: scopedObjectReducer<IProcess>(EntityType.PROCESS),
-  project: scopedObjectReducer<IProject>(EntityType.PROJECT),
-  projectMembership: scopedObjectReducer<IProjectMembership>(EntityType.PROJECT_MEMBERSHIP),
-  user: scopedObjectReducer<IUser>(EntityType.USER),
+  process: scopedObjectReducer<IProcess>(EntityType.Process),
+  project: scopedObjectReducer<IProject>(EntityType.Project),
+  projectMembership: scopedObjectReducer<IProjectMembership>(EntityType.ProjectMembership),
+  user: scopedObjectReducer<IUser>(EntityType.User),
 })
 
 export const selectCollection = <T extends ScopedModel>(state: AppState, scope: EntityType): T[] =>
@@ -41,17 +41,17 @@ export const selectById = <T extends ScopedModel>(state: AppState, scope: Entity
   state.data[scope][id] as T
 
 export const selectUserByUsername = (state: AppState, username: string): IUser =>
-  selectCollection<IUser>(state, EntityType.USER)
+  selectCollection<IUser>(state, EntityType.User)
     .filter((u) => u.username === username)
     .shift()
 
 export const selectProjectBySlug = (state: AppState, slug: string): IProject =>
-  selectCollection<IProject>(state, EntityType.PROJECT)
+  selectCollection<IProject>(state, EntityType.Project)
     .filter((p) => p.slug === slug)
     .shift()
 
 export const selectFundBySlug = (state: AppState, slug: string): IFund =>
-  selectCollection<IFund>(state, EntityType.FUND)
+  selectCollection<IFund>(state, EntityType.Fund)
     .filter((f) => f.slug === slug)
     .shift()
 
@@ -62,4 +62,4 @@ export const selectFundBySlug = (state: AppState, slug: string): IFund =>
  * @returns IProcess, may be empty
  */
 export const selectCurrentProcess = (state: AppState): IProcess =>
-  selectCollection<IProcess>(state, EntityType.PROCESS).shift()
+  selectCollection<IProcess>(state, EntityType.Process).shift()

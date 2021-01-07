@@ -19,6 +19,7 @@ const GeneralFormError: React.FC<IProps> = ({ errors, excludeFields = [], prefix
     }
 
     if (typeof errors[key] === "string") {
+      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
       generalErrors.push(<TranslatedHtml content={"_error:" + errors[key]} />)
     }
 

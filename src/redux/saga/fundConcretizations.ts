@@ -12,7 +12,7 @@ import { EntityType } from "redux/reducer/data"
 import { selectFundByConcretizationId } from "redux/reducer/fundManagement"
 import { SubmissionError } from "services/submissionError"
 
-export function* fundConcretizationsWatcherSaga() {
+export function* fundConcretizationsWatcherSaga(): any {
   yield all([
     takeLatest("CREATE_FUNDCONCRETIZATION", withCallback(createFundConcretizationSaga)),
     takeLatest("UPDATE_FUNDCONCRETIZATION", withCallback(updateFundConcretizationSaga)),
@@ -29,7 +29,7 @@ function* createFundConcretizationSaga(action: IModelFormAction<IFundConcretizat
 
     // reload the fund to have a consistent model in the store, instead of integrating the
     // concretization manually, this also sets the request scope isLoading to false
-    yield putWait(loadModelAction(EntityType.FUND, { id: (fundConcretization.fund as IFund).id }, "fundConcretization_operation"))
+    yield putWait(loadModelAction(EntityType.Fund, { id: (fundConcretization.fund as IFund).id }, "fundConcretization_operation"))
 
     yield call(success, fundConcretization)
 
@@ -56,7 +56,7 @@ function* updateFundConcretizationSaga(action: IModelFormAction<IFundConcretizat
 
     // reload the fund to have a consistent model in the store, instead of integrating the
     // concretization manually, this also sets the request scope isLoading to false
-    yield putWait(loadModelAction(EntityType.FUND, { id: (fundConcretization.fund as IFund).id }, "fundConcretization_operation"))
+    yield putWait(loadModelAction(EntityType.Fund, { id: (fundConcretization.fund as IFund).id }, "fundConcretization_operation"))
 
     yield call(success, fundConcretization)
 
@@ -84,7 +84,7 @@ function* deleteFundConcretizationSaga(action: IModelFormAction<IFundConcretizat
 
     // reload the fund to have a consistent model in the store, instead of removing the
     // concretization manually, this also sets the request scope isLoading to false
-    yield putWait(loadModelAction(EntityType.FUND, { id: fund.id }, "fundConcretization_operation"))
+    yield putWait(loadModelAction(EntityType.Fund, { id: fund.id }, "fundConcretization_operation"))
 
     if (action.actions && action.actions.success) {
       yield call(action.actions.success)

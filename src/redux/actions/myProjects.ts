@@ -1,8 +1,8 @@
 import { IFundApplication } from "api/schema"
 
 export enum MyProjectsActionTypes {
-  LOAD_MY_PROJECTS = "LOAD_MY_PROJECTS",
-  SUBMIT_APPLICATION = "SUBMIT_APPLICATION",
+  LoadMyProjects = "LOAD_MY_PROJECTS",
+  SubmitApplication = "SUBMIT_APPLICATION",
 }
 
 export interface IMyProjectsAction {
@@ -10,23 +10,23 @@ export interface IMyProjectsAction {
 }
 
 export interface ILoadMyProjectsAction extends IMyProjectsAction {
-  type: MyProjectsActionTypes.LOAD_MY_PROJECTS
+  type: MyProjectsActionTypes.LoadMyProjects
 }
 
 export interface ISubmitFundApplicationAction extends IMyProjectsAction {
   actions: any
   application: IFundApplication
-  type: MyProjectsActionTypes.SUBMIT_APPLICATION
+  type: MyProjectsActionTypes.SubmitApplication
 }
 
 export type MyProjectsActions = ILoadMyProjectsAction | ISubmitFundApplicationAction
 
 export const loadMyProjectsAction = (): ILoadMyProjectsAction => ({
-  type: MyProjectsActionTypes.LOAD_MY_PROJECTS,
+  type: MyProjectsActionTypes.LoadMyProjects,
 })
 
-export const submitFundApplicationAction = (application: IFundApplication, actions: any): ISubmitFundApplicationAction => ({
+export const submitFundApplicationAction = (application: IFundApplication, actions: Record<string, unknown>): ISubmitFundApplicationAction => ({
   actions,
   application,
-  type: MyProjectsActionTypes.SUBMIT_APPLICATION,
+  type: MyProjectsActionTypes.SubmitApplication,
 })

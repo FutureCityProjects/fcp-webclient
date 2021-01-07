@@ -8,7 +8,7 @@ import { EntityType, selectById } from "./data"
 const registrationReducer =
   (state: number = null, action: Action): number => {
     switch (action.type) {
-      case RegistrationActionTypes.SET_REGISTERED_USER:
+      case RegistrationActionTypes.SetRegisteredUser:
         return (action as ISetRegisteredUserAction).user.id
 
       // After the user logged in remove the reference to a previous registration
@@ -28,4 +28,4 @@ export default registrationReducer
  * @returns IUser
  */
 export const selectRegisteredUser = (state: AppState): IUser =>
-  state.registration ? selectById(state, EntityType.USER, state.registration) : null
+  state.registration ? selectById(state, EntityType.User, state.registration) : null

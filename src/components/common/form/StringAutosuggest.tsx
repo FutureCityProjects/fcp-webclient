@@ -27,7 +27,7 @@ const StringAutosuggest: React.FC<IProps> = (props: IProps) => {
     const inputValue = val.trim().toLowerCase()
     const inputLength = inputValue.length
 
-    const res = inputLength === 0
+    const res: string[] = inputLength === 0
       ? options
       : options.filter((o: string) =>
         o.toLowerCase().slice(0, inputLength) === inputValue
@@ -38,7 +38,7 @@ const StringAutosuggest: React.FC<IProps> = (props: IProps) => {
 
   // in case a suggestion is an object we could return its ID etc.
   // we just return the string
-  const getSuggestionValue = (suggestion) => suggestion
+  const getSuggestionValue = (suggestion: string): string => suggestion
 
   // how should the suggestions be shown in the dropdown?
   const renderSuggestion = (suggestion) => <div className="text-left">{suggestion}</div>

@@ -1,7 +1,7 @@
 import { WithTranslation } from "next-i18next"
-import React from "react"
+import React, { ReactElement } from "react"
 
-import { FieldProps } from "formik"
+import { FieldMetaProps, FieldProps } from "formik"
 import { FormText } from "reactstrap"
 import HtmlContent from "../HtmlContent"
 import TranslatedHtml from "../TranslatedHtml"
@@ -17,7 +17,7 @@ export interface IBaseFormikProps extends FieldProps, WithTranslation {
 }
 
 abstract class FormikElement<Props extends IBaseFormikProps> extends React.Component<Props> {
-  protected meta = () => this.props.form.getFieldMeta(this.props.field.name)
+  protected meta = (): FieldMetaProps<unknown> => this.props.form.getFieldMeta(this.props.field.name)
   protected hasError = (): boolean => this.meta().error && typeof this.meta().error === "string"
 
   protected labelText(): string {
@@ -45,11 +45,11 @@ abstract class FormikElement<Props extends IBaseFormikProps> extends React.Compo
     return label
   }
 
-  protected errorElement = () => this.hasError() && <div className="invalid-feedback was-validated">
+  protected errorElement = (): ReactElement => this.hasError() && <div className="invalid-feedback was-validated">
     <TranslatedHtml content={"_error:" + this.meta().error} />
   </div>
 
-  protected helpElement = () => this.props.help && <FormText>
+  protected helpElement = (): ReactElement => this.props.help && <FormText>
     {
       // if the given help was already translated or should not be translated because it is a
       // user-entered string: don't try to translate, this will possibly strip some text if the
